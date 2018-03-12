@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/config/database.php
 /laradock
 /.idea
 /.vscode
