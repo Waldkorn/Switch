@@ -8,6 +8,10 @@
                     <div class="card-body">
                         I'm an example component.
                     </div>
+
+                    <div>
+                        I would like to test something
+                    </div>
                 </div>
             </div>
         </div>
