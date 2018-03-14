@@ -18,3 +18,5 @@ Route::get('/profilepage', "API\ProfileController@view");
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/chatmessages', 'API\ChatmessagesController@get');
