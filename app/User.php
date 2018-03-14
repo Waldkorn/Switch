@@ -26,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function followers()
+{
+    return $this->belongsToMany(User::class, 'followers', 'streamer_id', 'follower_id')->withTimestamps();
+}
+/**
+ * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+ */
+public function followings()
+{
+    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id')->withTimestamps();
+}
 }
