@@ -25,8 +25,12 @@
 				      <span class="navbar-toggler-icon"></span>
 				    </button>
 				    <div class="collapse dropdown-menu pull-menu-right dropdown-menu-right" id="navbarToggleExternalContent" style="right:0;left:auto;background-color:beige">
-			        	<a class="dropdown-item" href="/login">Login</a>
-			        	<a class="dropdown-item" href="/register">Register</a>
+				    	@if(Auth::check())
+				    		<a class="dropdown-item" href="/logout">Logout</a>	        		
+			        	@else
+			        		<a class="dropdown-item" href="/login">Login</a>
+			        		<a class="dropdown-item" href="/register">Register</a>
+			        	@endif
 				    </div>
 				</div>
 			</div>
