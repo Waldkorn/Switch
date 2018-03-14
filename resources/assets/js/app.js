@@ -15,6 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('games', require('./components/games.vue'));
 Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
@@ -22,10 +23,9 @@ Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
 Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
 Vue.component('profilepagemain', require('./components/profilepagemain.vue')); 
 
+Vue.component('chatroom', require('./components/Chatroom.vue'));
+
 
 const app = new Vue({
-    el: '#app',
-    data: {
-    	"hallo" : "hallo"
-    }
+    el: '#app'
 });

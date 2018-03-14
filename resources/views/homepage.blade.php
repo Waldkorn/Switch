@@ -12,9 +12,9 @@
 </head>
 <body>
 
-	<div class="container ml-0 mr-0 pl-0 pr-0" style="max-width: 100%; min-height:100vh; max-height:100vh;">
+	<div id="container" class="container ml-0 mr-0 pl-0 pr-0" style="max-width: 100%; min-height:100vh; max-height:100vh;">
 
-		<nav class="navbar navbar-dark bg-dark" style="color:beige;">
+		<nav id="navbar" class="navbar navbar-dark bg-dark" style="color:beige;">
 
 			<a class="navbar-brand" href="#"><img alt="Switch logo" src="/images/Switch-logo.png" height="56px"></a>
 
@@ -37,17 +37,23 @@
 
 		</nav>
 
-		<div class="row" style="max-width:100%;">
+		<div id="main" class="row mr-0 ml-0" style="max-width:100%;">
 
-			<div class="col-md-8 px-0">
+			<div class="col-md-9 pl-1 pt-1">
 
-				<video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }' style="width: 100%;">
+				<video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
 				    <source src="http://10.0.0.61:8080/hls/test.m3u8" type='application/x-mpegURL'>
 				    <p class="vjs-no-js">
 				    	To view this video please enable JavaScript, and consider upgrading to a web browser that
 				    	<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 				    </p>
 				</video>
+
+			</div>
+
+			<div id="app" class="col-md-3 px-0" style="max-width:100%;" style="background-color:yellow;">
+
+				<chatroom></chatroom>
 
 			</div>
 
