@@ -3,15 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Chatmessage extends Model
 {
 
+	protected $fillable = [
+        'user_id', 'chat_id', 'message'
+    ];
+
     public function user() {
-    	$this->belongsTo(User::class);
+    	 return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function stream() {
-    	$this->belongsTo(Stream::class);
+    	return $this->hasOne(Stream::class);
     }
 }

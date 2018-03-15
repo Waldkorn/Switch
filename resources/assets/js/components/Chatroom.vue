@@ -1,11 +1,23 @@
 <template>
     <div class="chatroom pt-1 pb-1 px-1">
 
-        <div class="chatbox">
+        <div id="chatbox" class="chatbox" style="overflow-y:scroll;">
+            <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages">
+                <div class="card-text" style="margin-bottom: -15px">
+                        <p>
+                            <b>{{ message.user.name }}:</b>
 
+                            {{ message.message }}
+                        </p>
+                </div>
+            </div>
         </div>
 
         <div class="chatfield">
+
+            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" style="height: 100%;">
+
+            </input>
 
         </div>
 
@@ -14,13 +26,49 @@
 
 <script>
     export default {
+        name: 'chatbox',
+        data: function() {
+            return {
+                messages : [],
+                highestid : 0
+            }
+        },
         mounted() {
 
             var viewportHeight = document.getElementById('container').clientHeight;
             var navbarHeight = document.getElementById('navbar').clientHeight;
             document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
+            document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
 
+            setInterval(function() {
+
+                axios.get('/api/chatmessages/' + this.highestid).then(response => {
+                    if (response.data.length != 0) {
+                        this.messages = this.messages.concat(JSON.parse(JSON.stringify(response.data)));
+                        this.highestid = this.messages[this.messages.length - 1].id;
+                    }
+                });
+
+            }.bind(this), 1000);
+
+        },
+        methods: {
+            createChatMessage : function(message) {
+                axios.post('/api/chatmessages/create', {
+                    user_id: 1,
+                    chat_id: 2,
+                    message: document.getElementById('messageField').value
+                })
+                document.getElementById('messageField').value = "";
+            }
+        },
+        updated: function() {
+            this.$nextTick( function() {
+                var div = document.getElementById("chatbox");
+                div.scrollTop = div.scrollHeight - div.clientHeight;
+            })
         }
+
     }
 </script>
 
@@ -35,18 +83,14 @@
         border-left-width: thin;
         border-color: black;
 
+        overflow: hidden;
+
     }
 
     .chatbox {
 
         width: 100%;
         height: 90%;
-
-        float: left;
-
-        border-style: solid;
-        border-width: thin;
-        border-color: black;
 
     }
 
@@ -55,14 +99,19 @@
         width: 100%;
         height: 10%;
 
-        float: left;
-
         border-style: solid;
         border-width: thin;
         border-color: black;
 
     }
 
+    .chatmessages {
 
+        border-style: solid;
+        border-width: thin;
+        border-color: black;
+        border-radius: 2px;
+
+    }
 
 </style>

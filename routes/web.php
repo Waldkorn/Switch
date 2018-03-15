@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
+Route::get('/streampage', function () {
+    return view('streampage');
 });
 
 Auth::routes();

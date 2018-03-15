@@ -51,7 +51,7 @@
 
 			</div>
 
-			<div id="app" class="col-md-3 px-0" style="max-width:100%;" style="background-color:yellow;">
+			<div id="app" class="col-md-3 px-0">
 
 				<chatroom></chatroom>
 
@@ -69,10 +69,11 @@
 
 	<script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
 	<script src="https://unpkg.com/videojs-flash@2.0.0/dist/videojs-flash.min.js"></script>
+
+	<script src="{{ asset('js/app.js') }}"></script>
 	<script>
 		videojs.options.flash.swf = 'https://unpkg.com/videojs-swf@5.4.0/dist/video-js.swf';
 	</script>
-	<script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>

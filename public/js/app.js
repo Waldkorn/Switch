@@ -48070,7 +48070,7 @@ exports = module.exports = __webpack_require__(61)(false);
 
 
 // module
-exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\n    border-left-style: solid;\n    border-left-width: thin;\n    border-color: black;\n}\n.chatbox {\n\n    width: 100%;\n    height: 90%;\n\n    float: left;\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n}\n.chatfield {\n\n    width: 100%;\n    height: 10%;\n\n    float: left;\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n}\n\n\n\n", ""]);
+exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\n    border-left-style: solid;\n    border-left-width: thin;\n    border-color: black;\n\n    overflow: hidden;\n}\n.chatbox {\n\n    width: 100%;\n    height: 90%;\n}\n.chatfield {\n\n    width: 100%;\n    height: 10%;\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n}\n.chatmessages {\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n    border-radius: 2px;\n}\n\n", ""]);
 
 // exports
 
@@ -48438,14 +48438,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'chatbox',
+    data: function data() {
+        return {
+            messages: [],
+            highestid: 0
+        };
+    },
     mounted: function mounted() {
 
         var viewportHeight = document.getElementById('container').clientHeight;
         var navbarHeight = document.getElementById('navbar').clientHeight;
         document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
+        document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
+
+        setInterval(function () {
+            var _this = this;
+
+            axios.get('/api/chatmessages/' + this.highestid).then(function (response) {
+                if (response.data.length != 0) {
+                    _this.messages = _this.messages.concat(JSON.parse(JSON.stringify(response.data)));
+                    _this.highestid = _this.messages[_this.messages.length - 1].id;
+                }
+            });
+        }.bind(this), 1000);
+    },
+
+    methods: {
+        createChatMessage: function createChatMessage(message) {
+            axios.post('/api/chatmessages/create', {
+                user_id: 1,
+                chat_id: 2,
+                message: document.getElementById('messageField').value
+            });
+            document.getElementById('messageField').value = "";
+        }
+    },
+    updated: function updated() {
+        this.$nextTick(function () {
+            var div = document.getElementById("chatbox");
+            div.scrollTop = div.scrollHeight - div.clientHeight;
+        });
     }
+
 });
 
 /***/ }),
@@ -48456,20 +48505,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "chatroom pt-1 pb-1 px-1" }, [
-      _c("div", { staticClass: "chatbox" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "chatfield" })
+  return _c("div", { staticClass: "chatroom pt-1 pb-1 px-1" }, [
+    _c(
+      "div",
+      {
+        staticClass: "chatbox",
+        staticStyle: { "overflow-y": "scroll" },
+        attrs: { id: "chatbox" }
+      },
+      _vm._l(_vm.messages, function(message) {
+        return _c(
+          "div",
+          { staticClass: "chatmessages card mx-1 my-1 py-1 px-1" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "card-text",
+                staticStyle: { "margin-bottom": "-15px" }
+              },
+              [
+                _c("p", [
+                  _c("b", [_vm._v(_vm._s(message.user.name) + ":")]),
+                  _vm._v(
+                    "\n\n                        " +
+                      _vm._s(message.message) +
+                      "\n                    "
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      })
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "chatfield" }, [
+      _c("input", {
+        staticClass: "form-control mt-auto mb-auto",
+        staticStyle: { height: "100%" },
+        attrs: { type: "text", id: "messageField" },
+        on: {
+          keydown: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.createChatMessage($event)
+          }
+        }
+      })
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
