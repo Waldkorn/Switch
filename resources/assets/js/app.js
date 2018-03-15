@@ -16,6 +16,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('games', require('./components/games.vue'));
+Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
 
 const app = new Vue({
     el: '#app',
