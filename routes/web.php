@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/frontpage',"API\FrontpageController@view");
+Route::get('/',"API\FrontpageController@view");
 Route::get('/profilepage', "API\ProfileController@view");
 
 Route::get('/streampage', function () {
