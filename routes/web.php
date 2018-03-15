@@ -13,6 +13,10 @@
 
 Route::get('/',"FrontpageController@view");
 Route::get('/profilepage', "ProfileController@view");
+Route::get('/profilepage/{id}', 'ProfileController@test');
+
+Route::post('/{profileId}/follow', 'ProfileController@follow_user')->name('user.follow');
+Route::post('/{profileId}/unfollow', 'ProfileController@unfollow_user')->name('user.unfollow');
 
 Route::get('/streampage', function () {
     return view('streampage');
