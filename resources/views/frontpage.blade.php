@@ -37,10 +37,8 @@
 <div class="row" style="width:100%;margin:0">
 
 <nowlivebar></nowlivebar>
-<div class="col">
-<frontpagemain></frontpagemain>
-</div>
 
+<frontpagemain></frontpagemain>
 <games></games>
 
 </div>

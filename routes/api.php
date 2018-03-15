@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('/games', "API\GamesController@get");
-Route::get('/frontpage',"API\FrontpageController@view");
-Route::get('/profilepage', "API\ProfileController@view");
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
