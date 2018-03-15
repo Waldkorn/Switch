@@ -1,7 +1,6 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+
+            <div class="col-3">
               <div class="card" style="width: 18rem;">
                 <h3 class="card-title">USERNAME GOES HERE</h3>
                 <img class="card-img-top" src="http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg" alt="hardcoded example">
@@ -12,8 +11,7 @@
                 </div>
               </div>
             </div>
-        </div>
-    </div>
+
 </template>
 
 <script>

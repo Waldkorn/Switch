@@ -12,7 +12,6 @@
 </head>
 <body>
 
-
     <nav class="navbar navbar-dark bg-dark" style="color:beige;">
 
       <a class="navbar-brand" href="#"><img alt="Switch logo" src="/images/Switch-logo.png" height="56px"></a>
@@ -34,15 +33,13 @@
 
 
 <div id="app">
-<div class="row" style="width:100%;margin:0">
+<div class="row" style="width:100%">
 
-<nowlivebar></nowlivebar>
+<profilesidebar></profilesidebar>
 <div class="col">
-<frontpagemain></frontpagemain>
+<profilepagemain></profilepagemain>
+
 </div>
-
-<games></games>
-
 </div>
 
 </div>

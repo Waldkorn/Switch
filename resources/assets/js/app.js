@@ -18,6 +18,10 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('games', require('./components/games.vue'));
 Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
+Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
+Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
+Vue.component('profilepagemain', require('./components/profilepagemain.vue')); 
+
 
 const app = new Vue({
     el: '#app',

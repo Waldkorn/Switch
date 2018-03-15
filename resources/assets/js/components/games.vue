@@ -1,20 +1,20 @@
 <template>
 
-<div class="container-fluid">
-   <div class="row" style="max-height:10px">
-            <div class="d-flex flex-row" v-for="game in games">
-              <div class="p-2">
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" :src="game.image_source" :alt="game.name">
+
+
+          <div class="col-3" style="padding-right:0">
+              <div class="p-2" style="padding:0;margin;0;float:right" v-for="game in games">
+              <div class="card" style="width: 150px;">
+                <img class="card-img-top" :src="game.image_source" :alt="game.name" height="150" width="150">
                 <div class="card-body">
 
-                  <h5 class="card-title">({{game.name}})</h5>
-                  <a href="#" class="btn btn-primary">currently streaming: x</a>
+                  <h6 class="card-title">{{game.name}}</h6>
+                  <a href="#" class="btn btn-primary">number</a>
                 </div>
               </div>
               </div>
-            </div>
-          </div>
+
+
 </div>
 </template>
 
