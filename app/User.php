@@ -29,14 +29,19 @@ class User extends Authenticatable
 
 
     public function followers()
-{
-    return $this->belongsToMany(User::class, 'followers', 'streamer_id', 'follower_id')->withTimestamps();
-}
-/**
- * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
- */
-public function followings()
-{
-    return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id')->withTimestamps();
-}
+    {
+        return $this->belongsToMany(User::class, 'followers', 'streamer_id', 'follower_id')->withTimestamps();
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id')->withTimestamps();
+    }
+
+    public function chatmessages()
+    {
+        return $this->hasMany(Chatmessage::class);
+    }
 }

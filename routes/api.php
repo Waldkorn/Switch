@@ -17,4 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/chatmessages', 'API\ChatmessagesController@get');
+////////////////////////
+// Chatmessage Routes //
+////////////////////////
+
+Route::get('/chatmessages/{highestid}', 'API\ChatmessagesController@get');
+
+Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
