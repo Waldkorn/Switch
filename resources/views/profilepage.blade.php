@@ -14,7 +14,6 @@
 
 @include('layouts.navbar')
 
-
 <div id="app">
   <div class="row" style="width:100%">
 
