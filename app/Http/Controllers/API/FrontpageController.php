@@ -10,7 +10,6 @@ use App\Game;
 class FrontpageController extends Controller
 {
   public function listusers(){
-
-    echo User::get();
+    echo User::limit(10)->get();
   }
 }
