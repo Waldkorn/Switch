@@ -13,7 +13,7 @@
 Auth::routes();
 
 
-Route::get('/',"FrontpageController@view");
+Route::get('/',"ViewController@frontpage");
 
 Route::get('/profilepage/{id}', 'ViewController@profile');
 

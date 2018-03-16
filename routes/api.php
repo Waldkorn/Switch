@@ -24,6 +24,7 @@ Route::get('/test', 'ViewController@test');
 ////////////////////////
 
 Route::get('/games', "API\GamesController@get");
+Route::get('/listusers', "API\FrontpageController@listusers");
 
 ////////////////////////
 // Profilepage Routes //
