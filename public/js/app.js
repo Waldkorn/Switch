@@ -95404,6 +95404,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       games: null
     };
   },
+
   mounted: function mounted() {
     var _this = this;
 
@@ -95516,8 +95517,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 137 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -95533,6 +95536,51 @@ module.exports = Component.exports
 //
 //
 //
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['auth_id', 'profile'],
+
+  data: function data() {
+    return {
+      users: null
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var url = '/api/profilepage/' + this.profile.name;
+    axios.get(url).then(function (response) {
+      _this.users = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    follow: function follow() {
+
+      axios.post('/api/profilepage/follow', {
+        user_id: document.getElementById('follow_btn').value,
+        follower_id: this.auth_id
+      }).then(function (response) {
+        console.log('followed');
+      });
+    },
+
+    unfollow: function unfollow() {
+
+      axios.post('/api/profilepage/unfollow', {
+        user_id: document.getElementById('unfollow_btn').value,
+        unfollower_id: this.auth_id
+      }).then(function (response) {
+        console.log('unfollowed');
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 138 */
@@ -95542,43 +95590,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-3" }, [
-      _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
-        _c("h3", { staticClass: "card-title" }, [_vm._v("USERNAME GOES HERE")]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "card-img-top",
-          attrs: {
-            src:
-              "http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg",
-            alt: "hardcoded example"
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("h5", { staticClass: "card-title" }, [
-            _vm._v("followers: [some number]")
-          ]),
+  return _c(
+    "div",
+    { staticClass: "col-3" },
+    _vm._l(_vm.users, function(user) {
+      return _c(
+        "div",
+        { staticClass: "card", staticStyle: { width: "18rem" } },
+        [
+          _c("h3", { staticClass: "card-title" }, [_vm._v(_vm._s(user.name))]),
           _vm._v(" "),
-          _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
-            _vm._v("FOLLOW USER")
-          ]),
+          _c("img", {
+            staticClass: "card-img-top",
+            attrs: {
+              src:
+                "http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg",
+              alt: "hardcoded example"
+            }
+          }),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("pinned games, maybe social media links, whatever")
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("followers: [some number]")
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "follow_unfollow" } }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { "margin-top": "1rem" },
+                  attrs: { id: "follow_btn", value: user.id },
+                  on: { click: _vm.follow }
+                },
+                [_vm._v("Follow")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { "margin-top": "1rem" },
+                  attrs: { id: "unfollow_btn", value: user.id },
+                  on: { click: _vm.unfollow }
+                },
+                [_vm._v("unfollow")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v("pinned games, maybe social media links, whatever")
+            ])
           ])
-        ])
-      ])
-    ])
-  }
-]
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

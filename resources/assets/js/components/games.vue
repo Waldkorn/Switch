@@ -14,18 +14,18 @@
 </template>
 
 <script>
-    export default {
-      data:function(){
-        return{
-          games : null
-        }
-      },
-        mounted() {
-          axios.get('/api/games').then(response => {
-            this.games = response.data;
-          })
+  export default {
+    data:function(){
+      return{
+        games : null
+      }
+    },
 
-        }
+    mounted() {
+      axios.get('/api/games').then(response => {
+        this.games = response.data;
+      })
 
     }
+  }
 </script>

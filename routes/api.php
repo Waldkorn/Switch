@@ -12,10 +12,26 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/games', "API\GamesController@get");
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/test', 'ViewController@test');
+////////////////////////
+// Frontpage Routes //
+////////////////////////
+
+Route::get('/games', "API\GamesController@get");
+
+////////////////////////
+// Profilepage Routes //
+////////////////////////
+
+Route::get('/profilepage/{name}', "API\ProfileController@get");
+Route::post('/profilepage/follow', 'API\ProfileController@follow_user');
+Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
 
 ////////////////////////
 // Chatmessage Routes //
