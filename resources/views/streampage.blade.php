@@ -32,7 +32,11 @@
 
 			<div id="app" class="col-md-3 px-0">
 
-				<chatroom :user="{{ Auth::user() }}"></chatroom>
+				<chatroom
+				@if (Auth::check())
+					:user="{{ Auth::user() }}"
+				@endif
+				></chatroom>
 
 			</div>
 
