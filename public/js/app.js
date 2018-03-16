@@ -95727,8 +95727,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -95744,7 +95742,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     axios.get('/api/listusers').then(function (response) {
       _this.users = response.data;
-      console.log(response.data);
     });
   }
 });
@@ -95771,25 +95768,33 @@ var render = function() {
         },
         [
           _vm._v(" Some other users\n    "),
-          _vm._v(" "),
-          _vm._l(_vm.users, function(user) {
-            return _c(
-              "div",
-              { staticClass: "container-fluid", staticStyle: { padding: "0" } },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "list-group-item",
-                    attrs: { href: "/profilepage/" + user.name }
-                  },
-                  [_vm._v(_vm._s(user.name))]
-                )
-              ]
-            )
-          })
-        ],
-        2
+          _c(
+            "div",
+            {
+              staticClass: "container-fluid",
+              staticStyle: { padding: "0", "overflow-y": "scroll" }
+            },
+            _vm._l(_vm.users, function(user) {
+              return _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: { padding: "0" }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item",
+                      attrs: { href: "/profilepage/" + user.name }
+                    },
+                    [_vm._v(_vm._s(user.name))]
+                  )
+                ]
+              )
+            })
+          )
+        ]
       )
     ]
   )
