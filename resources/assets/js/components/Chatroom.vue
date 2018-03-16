@@ -3,9 +3,9 @@
 
         <div id="chatbox" class="chatbox" style="overflow-y:scroll;">
             <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages">
-                <div class="card-text" style="margin-bottom: -15px">
+                <div class="card-text" style="margin-bottom: -15px;">
                         <p>
-                            <b>{{ message.user.name }}:</b>
+                            <b v-bind:style="'color:' + activeUsers[ message.user.name ]">{{ message.user.name }}:</b>
 
                             {{ message.message }}
                         </p>
@@ -30,7 +30,10 @@
         data: function() {
             return {
                 messages : [],
-                highestid : 0
+                highestid : 0,
+                activeUsers : [],
+                colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
+                index: 0
             }
         },
         mounted() {
@@ -42,13 +45,13 @@
 
             axios.get('/api/chatmessages/0').then( response => {
                 this.highestid = response.data[response.data.length - 1].id - 5;
-                console.log(this.highestid);
             })
 
             setInterval(function() {
 
                 axios.get('/api/chatmessages/' + this.highestid).then(response => {
                     if (response.data.length != 0) {
+                        this.assignColorToUsers(response.data);
                         this.messages = this.messages.concat(JSON.parse(JSON.stringify(response.data)));
                         this.highestid = this.messages[this.messages.length - 1].id;
                     }
@@ -64,6 +67,19 @@
                     message: document.getElementById('messageField').value
                 })
                 document.getElementById('messageField').value = "";
+            },
+            assignColorToUsers : function(data) {
+                for (var i = 0 ; i < data.length ; i++) 
+                {
+                    if (!(data[i].user.name in this.activeUsers))
+                    {
+                        this.activeUsers[data[i].user.name] = this.colors[this.index];
+                        this.index++;
+                        if (this.index == this.colors.length) {
+                            this.index = 0;
+                        }
+                    }
+                }
             }
         },
         updated: function() {

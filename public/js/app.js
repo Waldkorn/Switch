@@ -96369,7 +96369,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             messages: [],
-            highestid: 0
+            highestid: 0,
+            activeUsers: [],
+            colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
+            index: 0
         };
     },
     mounted: function mounted() {
@@ -96382,7 +96385,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         axios.get('/api/chatmessages/0').then(function (response) {
             _this.highestid = response.data[response.data.length - 1].id - 5;
-            console.log(_this.highestid);
         });
 
         setInterval(function () {
@@ -96390,6 +96392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get('/api/chatmessages/' + this.highestid).then(function (response) {
                 if (response.data.length != 0) {
+                    _this2.assignColorToUsers(response.data);
                     _this2.messages = _this2.messages.concat(JSON.parse(JSON.stringify(response.data)));
                     _this2.highestid = _this2.messages[_this2.messages.length - 1].id;
                 }
@@ -96405,6 +96408,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: document.getElementById('messageField').value
             });
             document.getElementById('messageField').value = "";
+        },
+        assignColorToUsers: function assignColorToUsers(data) {
+            for (var i = 0; i < data.length; i++) {
+                if (!(data[i].user.name in this.activeUsers)) {
+                    this.activeUsers[data[i].user.name] = this.colors[this.index];
+                    this.index++;
+                    if (this.index == this.colors.length) {
+                        this.index = 0;
+                    }
+                }
+            }
         }
     },
     updated: function updated() {
@@ -96446,7 +96460,11 @@ var render = function() {
               },
               [
                 _c("p", [
-                  _c("b", [_vm._v(_vm._s(message.user.name) + ":")]),
+                  _c(
+                    "b",
+                    { style: "color:" + _vm.activeUsers[message.user.name] },
+                    [_vm._v(_vm._s(message.user.name) + ":")]
+                  ),
                   _vm._v(
                     "\n\n                        " +
                       _vm._s(message.message) +
