@@ -15,7 +15,5 @@ class ViewController extends Controller
 
   public function test(){
 
-
-      return Auth::user();
   }
 }
