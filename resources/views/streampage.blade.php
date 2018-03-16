@@ -6,7 +6,7 @@
 
 	<title>Switch</title>
 
-	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+	<link href="{{ asset('css/videojs.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
@@ -40,8 +40,6 @@
 	</div> <!-- container -->
 
 	<!-- vermoedelijk zijn een paar van deze scripts optioneel, moet testen met strema up -->
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<script src="{{ asset('js/app.js') }}"></script>
 
