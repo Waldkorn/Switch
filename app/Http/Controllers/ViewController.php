@@ -8,6 +8,11 @@ use Auth;
 
 class ViewController extends Controller
 {
+
+  public function frontpage(){
+    return view('frontpage');
+  }
+  
   public function profile($name){
     $user = User::where('name',$name)->first();
       return view('profilepage', compact('user'));
