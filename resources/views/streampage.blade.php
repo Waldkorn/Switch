@@ -6,7 +6,7 @@
 
 	<title>Switch</title>
 
-	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+	<link href="{{ asset('css/videojs.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
@@ -32,7 +32,7 @@
 
 			<div id="app" class="col-md-3 px-0">
 
-				<chatroom></chatroom>
+				<chatroom :user="{{ Auth::user() }}"></chatroom>
 
 			</div>
 
@@ -41,18 +41,7 @@
 
 	<!-- vermoedelijk zijn een paar van deze scripts optioneel, moet testen met strema up -->
 
-	<script src="https://unpkg.com/video.js@6.2.5/dist/video.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.8.2/videojs-contrib-hls.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
-	<script src="https://unpkg.com/videojs-flash@2.0.0/dist/videojs-flash.min.js"></script>
-
 	<script src="{{ asset('js/app.js') }}"></script>
-	<script>
-		videojs.options.flash.swf = 'https://unpkg.com/videojs-swf@5.4.0/dist/video-js.swf';
-	</script>
 
 </body>
 </html>
