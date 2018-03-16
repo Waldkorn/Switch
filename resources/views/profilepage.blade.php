@@ -17,9 +17,14 @@
 <div id="app">
   <div class="row" style="width:100%">
 
-    <profilesidebar :auth_id="{{Auth::user()->id}}" :profile="{{$user}}"></profilesidebar>
+  	<div class="col-3">
 
-    <div class="col">
+		<profilesidebar :auth_id="{{Auth::user()->id}}" :profile="{{$user}}"></profilesidebar>
+
+	</div>
+
+
+    <div class="col-9">
 
       <profilepagemain></profilepagemain>
 

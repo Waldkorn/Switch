@@ -1,6 +1,6 @@
 <template>
-  <div class="col-3">
-    <div class="card" style="width: 18rem;"v-for="user in users">
+  <div>
+    <div class="card" style="width: 100%;"v-for="user in users">
       <h3 class="card-title">{{ user.name }}</h3>
       <img class="card-img-top" src="http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg" alt="hardcoded example">
 
