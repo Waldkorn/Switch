@@ -47409,6 +47409,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       games: null
     };
   },
+
   mounted: function mounted() {
     var _this = this;
 
@@ -47550,21 +47551,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       users: null
-
     };
   },
+
   mounted: function mounted() {
     var _this = this;
 
     var url = '/api/profilepage/' + this.profile.name;
-    console.log(url);
     axios.get(url).then(function (response) {
       _this.users = JSON.parse(JSON.stringify(response.data));
     });
   },
 
-  methods: {
 
+  methods: {
     follow: function follow() {
 
       axios.post('/api/profilepage/follow', {
@@ -47576,6 +47576,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     unfollow: function unfollow() {
+
       axios.post('/api/profilepage/unfollow', {
         user_id: document.getElementById('unfollow_btn').value,
         unfollower_id: this.auth_id
@@ -47584,7 +47585,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     }
   }
-
 });
 
 /***/ }),

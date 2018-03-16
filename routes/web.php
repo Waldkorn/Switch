@@ -10,16 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+
 
 Route::get('/',"FrontpageController@view");
-//Route::get('/profilepage', "ViewController@profile");
+
 Route::get('/profilepage/{id}', 'ViewController@profile');
-Route::get('/test', 'ViewController@test');
 
 Route::get('/streampage', function () {
     return view('streampage');
 });
 
-Auth::routes();
 
+Route::get('/test', 'ViewController@test');
 Route::get('/home', 'HomeController@index')->name('home');

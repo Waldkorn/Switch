@@ -23,42 +23,38 @@ export default {
   data:function(){
     return{
       users : null,
-
     }
   },
-    mounted() {
-      var url = '/api/profilepage/'+this.profile.name;
-      console.log(url);
-        axios.get(url).then(response => {
-        this.users = JSON.parse(JSON.stringify(response.data));
 
-      })
+  mounted() {
+    var url = '/api/profilepage/'+this.profile.name;
+    axios.get(url).then(response => {
+    this.users = JSON.parse(JSON.stringify(response.data));
+    })
+  },
 
-    },
-    methods: {
-
+  methods: {
     follow: function() {
 
     axios.post('/api/profilepage/follow', {
        user_id: document.getElementById('follow_btn').value,
        follower_id: this.auth_id
-     }).then(function (response) {
-     console.log('followed');
-    })
-
+     })
+     .then(function (response) {
+        console.log('followed');
+      })
   },
 
     unfollow: function() {
+
       axios.post('/api/profilepage/unfollow', {
-     user_id: document.getElementById('unfollow_btn').value,
-     unfollower_id: this.auth_id
-    })
-    .then(function (response) {
-     console.log('unfollowed');
-    })
-
+      user_id: document.getElementById('unfollow_btn').value,
+      unfollower_id: this.auth_id
+      })
+      .then(function (response) {
+       console.log('unfollowed');
+      })
+    },
   },
-},
-
 }
 </script>
