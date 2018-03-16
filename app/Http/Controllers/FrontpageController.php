@@ -8,6 +8,6 @@ use App\Http\Controllers\Controller;
 class FrontpageController extends Controller
 {
     public function view(){
-      return view('frontpage');
+    	return view('frontpage');
     }
 }

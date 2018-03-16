@@ -32,7 +32,7 @@
 
 			<div id="app" class="col-md-3 px-0">
 
-				<chatroom></chatroom>
+				<chatroom :user="{{ Auth::user() }}"></chatroom>
 
 			</div>
 

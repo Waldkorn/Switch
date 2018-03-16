@@ -40,6 +40,11 @@
             document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
             document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
 
+            axios.get('/api/chatmessages/0').then( response => {
+                this.highestid = response.data[response.data.length - 1].id - 5;
+                console.log(this.highestid);
+            })
+
             setInterval(function() {
 
                 axios.get('/api/chatmessages/' + this.highestid).then(response => {
@@ -50,12 +55,11 @@
                 });
 
             }.bind(this), 1000);
-
         },
         methods: {
             createChatMessage : function(message) {
                 axios.post('/api/chatmessages/create', {
-                    user_id: 1,
+                    user_id: this.user.id,
                     chat_id: 2,
                     message: document.getElementById('messageField').value
                 })
@@ -67,7 +71,8 @@
                 var div = document.getElementById("chatbox");
                 div.scrollTop = div.scrollHeight - div.clientHeight;
             })
-        }
+        },
+        props: [ 'user' ]
 
     }
 </script>

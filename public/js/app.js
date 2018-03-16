@@ -96373,19 +96373,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
+        var _this = this;
 
         var viewportHeight = document.getElementById('container').clientHeight;
         var navbarHeight = document.getElementById('navbar').clientHeight;
         document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
 
+        axios.get('/api/chatmessages/0').then(function (response) {
+            _this.highestid = response.data[response.data.length - 1].id - 5;
+            console.log(_this.highestid);
+        });
+
         setInterval(function () {
-            var _this = this;
+            var _this2 = this;
 
             axios.get('/api/chatmessages/' + this.highestid).then(function (response) {
                 if (response.data.length != 0) {
-                    _this.messages = _this.messages.concat(JSON.parse(JSON.stringify(response.data)));
-                    _this.highestid = _this.messages[_this.messages.length - 1].id;
+                    _this2.messages = _this2.messages.concat(JSON.parse(JSON.stringify(response.data)));
+                    _this2.highestid = _this2.messages[_this2.messages.length - 1].id;
                 }
             });
         }.bind(this), 1000);
@@ -96394,7 +96400,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         createChatMessage: function createChatMessage(message) {
             axios.post('/api/chatmessages/create', {
-                user_id: 1,
+                user_id: this.user.id,
                 chat_id: 2,
                 message: document.getElementById('messageField').value
             });
@@ -96406,7 +96412,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var div = document.getElementById("chatbox");
             div.scrollTop = div.scrollHeight - div.clientHeight;
         });
-    }
+    },
+    props: ['user']
 
 });
 
