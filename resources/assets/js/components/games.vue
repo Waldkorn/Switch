@@ -23,6 +23,7 @@
         mounted() {
           axios.get('/api/games').then(response => {
             this.games = response.data;
+            
           })
 
         }

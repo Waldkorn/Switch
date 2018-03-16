@@ -12,11 +12,9 @@
 */
 
 Route::get('/',"FrontpageController@view");
-Route::get('/profilepage', "ProfileController@view");
-Route::get('/profilepage/{id}', 'ProfileController@test');
-
-Route::post('/{profileId}/follow', 'ProfileController@follow_user')->name('user.follow');
-Route::post('/{profileId}/unfollow', 'ProfileController@unfollow_user')->name('user.unfollow');
+//Route::get('/profilepage', "ViewController@profile");
+Route::get('/profilepage/{id}', 'ViewController@profile');
+Route::get('/test', 'ViewController@test');
 
 Route::get('/streampage', function () {
     return view('streampage');

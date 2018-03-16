@@ -19,11 +19,12 @@ class CreateStreamsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('game_id')->unsigned();
             $table->String('title');
+            $table->boolean('now_live')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('game_id')->references('id')->on('games');
-            
+
         });
     }
 
