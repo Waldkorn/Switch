@@ -47287,6 +47287,9 @@ Vue.component('nowlivebar', __webpack_require__(139));
 Vue.component('frontpagemain', __webpack_require__(142));
 Vue.component('profilepagemain', __webpack_require__(145));
 
+//dashboard//
+Vue.component('dashboardstream', __webpack_require__(160));
+
 Vue.component('chatroom', __webpack_require__(148));
 
 var app = new Vue({
@@ -96688,6 +96691,148 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(161)
+/* template */
+var __vue_template__ = __webpack_require__(162)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboardstream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2d04944d", Component.options)
+  } else {
+    hotAPI.reload("data-v-2d04944d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 161 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['auth_id'],
+
+  data: function data() {
+    return {
+      //user : null
+    };
+  },
+
+  mounted: function mounted() {
+    console.log(this.auth_id);
+    axios.post('/api/dashboardstream', {
+      user_id: this.auth_id
+    }).then(function (response) {
+      console.log(response.data);
+      //this.user = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.auth_id
+
+      }).then(function (response) {
+        console.log(response.data);
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("p", [_vm._v(" your super secret streamkey is ")]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-danger",
+        staticStyle: { "margin-top": "1rem" },
+        attrs: { id: "streamkey_btn" },
+        on: { click: _vm.streamkey }
+      },
+      [_vm._v("Show my streamkey")]
+    ),
+    _c("br"),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "alert alert-success",
+      staticStyle: { display: "none" },
+      attrs: { id: "streamkeymessage", role: "alert" }
+    }),
+    _vm._v(" "),
+    _c("p", [_vm._v(" to stream this and this ")])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2d04944d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

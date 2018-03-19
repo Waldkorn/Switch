@@ -21,7 +21,10 @@ Vue.component('games', require('./components/games.vue'));
 Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
 Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
 Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
-Vue.component('profilepagemain', require('./components/profilepagemain.vue')); 
+Vue.component('profilepagemain', require('./components/profilepagemain.vue'));
+
+//dashboard//
+Vue.component('dashboardstream', require('./components/dashboardstream.vue')); 
 
 Vue.component('chatroom', require('./components/Chatroom.vue'));
 
