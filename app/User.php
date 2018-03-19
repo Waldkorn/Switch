@@ -24,9 +24,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'stream_token'
+        'password', 'remember_token'
     ];
-
+  //streamkey
 
     public function followers()
     {
