@@ -103929,8 +103929,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var navbarHeight = document.getElementById('navbar').clientHeight;
         document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
+        console.log(this.streamer);
 
+<<<<<<< 86be41dcb8db0616b5851e5320a120f33161fc1a
         this.listen();
+=======
+        axios.get('/api/chatmessages/' + this.streamer.stream.id + "/0").then(function (response) {
+            if (response.data != 0) {
+                _this.highestid = response.data[response.data.length - 1].id - 5;
+            }
+        });
+
+        setInterval(function () {
+            var _this2 = this;
+
+            axios.get('/api/chatmessages/' + this.streamer.stream.id + '/' + this.highestid).then(function (response) {
+                if (response.data.length != 0) {
+                    _this2.assignColorToUsers(response.data);
+                    _this2.messages = _this2.messages.concat(JSON.parse(JSON.stringify(response.data)));
+                    _this2.highestid = _this2.messages[_this2.messages.length - 1].id;
+                }
+            });
+        }.bind(this), 1000);
+>>>>>>> API now sends back specific messages belonging to chatroom
     },
 
     methods: {

@@ -44,9 +44,10 @@
             var navbarHeight = document.getElementById('navbar').clientHeight;
             document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
             document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
+            console.log(this.streamer);
 
             this.listen();
-
+            
         },
         methods: {
             createChatMessage : function(message) {

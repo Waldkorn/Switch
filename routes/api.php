@@ -55,7 +55,3 @@ Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
 
 Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
-
-////////////////////////
-// Auth Routes //
-////////////////////////
