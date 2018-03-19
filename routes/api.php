@@ -43,4 +43,4 @@ Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
 ////////////////////////
 
 Route::get('/chatmessages/{streamid}/{highestid}', 'API\ChatmessagesController@get');
-Route::post('/chatmessages/{stream}/create', 'API\ChatmessagesController@create');
+Route::post('/chatmessages/create', 'API\ChatmessagesController@create');

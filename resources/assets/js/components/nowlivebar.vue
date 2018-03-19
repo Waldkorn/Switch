@@ -1,11 +1,18 @@
 <template>
   <div class="col-3" style="padding-left:0;">
     <div class="container-fluid">
-      <a href="/streampage" class="list-group-item">GO TO THE STREAM</a>
-      <a href="#" class="list-group-item"><img src="http://www.onyxtree.com/IMAGE-GRA/Grass-400x100.jpg" class="img-fluid" alt="Responsive image"></a>
-      <a href="#" class="list-group-item"><img src="http://www.onyxtree.com/IMAGE-GRA/Grass-400x100.jpg" class="img-fluid" alt="Responsive image"></a>
-      <a href="#" class="list-group-item"><img src="http://www.onyxtree.com/IMAGE-GRA/Grass-400x100.jpg" class="img-fluid" alt="Responsive image"></a>
+
+      <div class="list-group-item">
+        <h5 class="mb-1">Popular streamers</h5>
+      </div>
+
+      <div class="streamer list-group-item" v-for="user in users" v-bind:class="{ 'list-group-item-primary': user.now_live, 'list-group-item-secondary': !user.now_live }">
+        <div class="d-flex w-100 justify-content-between">
+          <a :href="'/' + user.name">{{ user.name }}</a><small class="text-danger" v-bind:class="{ 'd-none': !user.now_live }">live now</small>
+        </div>
+      </div>
     </div>
+
     <div class=container-fluid style="max-height:500px"> Some other users
       <div class=container-fluid style="padding:0;overflow-y:scroll;">
         <div class="container-fluid" style="padding:0" v-for="user in users">

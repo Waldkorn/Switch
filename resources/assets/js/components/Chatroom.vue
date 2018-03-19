@@ -69,7 +69,7 @@
             createChatMessage : function(message) {
                 axios.post('/api/chatmessages/create', {
                     user_id: this.user.id,
-                    chat_id: 2,
+                    chat_id: this.streamer.stream.id,
                     message: document.getElementById('messageField').value
                 })
                 document.getElementById('messageField').value = "";
