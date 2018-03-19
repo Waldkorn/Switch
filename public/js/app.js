@@ -95539,9 +95539,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_id', 'profile'],
+  props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
 
   data: function data() {
     return {
@@ -95556,6 +95561,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get(url).then(function (response) {
       _this.users = JSON.parse(JSON.stringify(response.data));
     });
+    console.log(this.auth_user.id);
   },
 
 
@@ -95564,9 +95570,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post('/api/profilepage/follow', {
         user_id: document.getElementById('follow_btn').value,
-        follower_id: this.auth_id
+        follower_id: this.auth_user.id
       }).then(function (response) {
-        console.log('followed');
+        document.getElementById('follow_btn').style.display = "none";
+        document.getElementById('followmsg').style.display = "block";
       });
     },
 
@@ -95574,9 +95581,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post('/api/profilepage/unfollow', {
         user_id: document.getElementById('unfollow_btn').value,
-        unfollower_id: this.auth_id
+        unfollower_id: this.auth_user.id
       }).then(function (response) {
-        console.log('unfollowed');
+        document.getElementById('unfollowmsg').style.display = "block";
+        document.getElementById('unfollow_btn').style.display = "none";
       });
     }
   }
@@ -95613,33 +95621,74 @@ var render = function() {
               _vm._v("followers: [some number]")
             ]),
             _vm._v(" "),
-            _c("div", { attrs: { id: "follow_unfollow" } }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  staticStyle: { "margin-top": "1rem" },
-                  attrs: { id: "follow_btn", value: user.id },
-                  on: { click: _vm.follow }
-                },
-                [_vm._v("Follow")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  staticStyle: { "margin-top": "1rem" },
-                  attrs: { id: "unfollow_btn", value: user.id },
-                  on: { click: _vm.unfollow }
-                },
-                [_vm._v("unfollow")]
-              )
-            ]),
+            _vm.loggedin == 1
+              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                  _vm.isfollowing == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          staticStyle: { "margin-top": "1rem" },
+                          attrs: { id: "follow_btn", value: user.id },
+                          on: { click: _vm.follow }
+                        },
+                        [_vm._v("follow")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isfollowing == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          staticStyle: { "margin-top": "1rem" },
+                          attrs: { id: "unfollow_btn", value: user.id },
+                          on: { click: _vm.unfollow }
+                        },
+                        [_vm._v("unfollow")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-success",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "followmsg", role: "alert" }
+                    },
+                    [_vm._v("You are now following " + _vm._s(user.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unfollowmsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer following " + _vm._s(user.name)
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e(),
             _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v("pinned games, maybe social media links, whatever")
-            ])
+            _vm.loggedin == 0
+              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                  _vm._v(
+                    " Please log in or register to follow " +
+                      _vm._s(user.name) +
+                      "\n"
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("pinned games, maybe social media links, whatever")
           ])
         ]
       )
