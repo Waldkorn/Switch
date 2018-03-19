@@ -105905,6 +105905,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 14 */
 /***/ (function(module, exports) {
 
+<<<<<<< fced86052b58ebaaac92ef3017b388ca3537aaed
 	"use strict";
 	var urlStore = {
 	    baseUrl: "https://pusher.com",
@@ -105936,6 +105937,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports["default"] = { buildLogSuffix: buildLogSuffix };
 
+=======
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
+>>>>>>> follow/unfollow buttons show up depending on loggedin and following
 
 /***/ }),
 /* 15 */
@@ -105966,6 +105997,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports["default"] = jsonp;
 
+<<<<<<< fced86052b58ebaaac92ef3017b388ca3537aaed
+=======
+    var url = '/api/profilepage/' + this.profile.name;
+    axios.get(url).then(function (response) {
+      _this.users = JSON.parse(JSON.stringify(response.data));
+    });
+    console.log(this.auth_user.id);
+  },
+>>>>>>> follow/unfollow buttons show up depending on loggedin and following
 
 /***/ }),
 /* 16 */
@@ -106035,6 +106075,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports["default"] = ScriptRequest;
 
+<<<<<<< fced86052b58ebaaac92ef3017b388ca3537aaed
+=======
+      axios.post('/api/profilepage/follow', {
+        user_id: document.getElementById('follow_btn').value,
+        follower_id: this.auth_user.id
+      }).then(function (response) {
+        document.getElementById('follow_btn').style.display = "none";
+        document.getElementById('followmsg').style.display = "block";
+      });
+    },
+>>>>>>> follow/unfollow buttons show up depending on loggedin and following
 
 /***/ }),
 /* 17 */
@@ -106067,11 +106118,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports["default"] = JSONPRequest;
 
+<<<<<<< fced86052b58ebaaac92ef3017b388ca3537aaed
+=======
+      axios.post('/api/profilepage/unfollow', {
+        user_id: document.getElementById('unfollow_btn').value,
+        unfollower_id: this.auth_user.id
+      }).then(function (response) {
+        document.getElementById('unfollowmsg').style.display = "block";
+        document.getElementById('unfollow_btn').style.display = "none";
+      });
+    }
+  }
+});
+>>>>>>> follow/unfollow buttons show up depending on loggedin and following
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< fced86052b58ebaaac92ef3017b388ca3537aaed
 	"use strict";
 	var runtime_1 = __webpack_require__(2);
 	var script_receiver_factory_1 = __webpack_require__(4);
@@ -106100,6 +106165,118 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.__esModule = true;
 	exports["default"] = jsonp;
 
+=======
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.users, function(user) {
+      return _c(
+        "div",
+        { staticClass: "card", staticStyle: { width: "100%" } },
+        [
+          _c("h3", { staticClass: "card-title" }, [_vm._v(_vm._s(user.name))]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "card-img-top",
+            attrs: {
+              src:
+                "http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg",
+              alt: "hardcoded example"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("followers: [some number]")
+            ]),
+            _vm._v(" "),
+            _vm.loggedin == 1
+              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                  _vm.isfollowing == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          staticStyle: { "margin-top": "1rem" },
+                          attrs: { id: "follow_btn", value: user.id },
+                          on: { click: _vm.follow }
+                        },
+                        [_vm._v("follow")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isfollowing == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          staticStyle: { "margin-top": "1rem" },
+                          attrs: { id: "unfollow_btn", value: user.id },
+                          on: { click: _vm.unfollow }
+                        },
+                        [_vm._v("unfollow")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-success",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "followmsg", role: "alert" }
+                    },
+                    [_vm._v("You are now following " + _vm._s(user.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unfollowmsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer following " + _vm._s(user.name)
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.loggedin == 0
+              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                  _vm._v(
+                    " Please log in or register to follow " +
+                      _vm._s(user.name) +
+                      "\n"
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("pinned games, maybe social media links, whatever")
+          ])
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+  }
+}
+>>>>>>> follow/unfollow buttons show up depending on loggedin and following
 
 /***/ }),
 /* 19 */

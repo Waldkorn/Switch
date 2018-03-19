@@ -36,7 +36,6 @@ export default {
     axios.get(url).then(response => {
     this.users = JSON.parse(JSON.stringify(response.data));
     })
-    
   },
 
   methods: {

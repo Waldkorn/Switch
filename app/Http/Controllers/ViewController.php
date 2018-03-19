@@ -40,6 +40,15 @@ class ViewController extends Controller
   public function dashboard(){
      $user = Auth::user();
     return view('dashboard',compact('user'));
+      foreach ($followings as $following){
+            $followed[]=$following;
+          }
+
+      if (in_array($user->id, $followed)) {
+          $isfollowing=1;
+      }
+    }
+      return view('profilepage', compact('user','loggedin','isfollowing'));
   }
 
   public function test(){
@@ -51,13 +60,6 @@ class ViewController extends Controller
   	$streamer = User::where('name', $username)->with('stream.game')->first();
   	$followerCount = $streamer->followers()->count();
     
-  	return view('streampage', compact('streamer', 'followerCount'));
-  }
-
-  public function stream($username) 
-  {
-  	$streamer = User::where('name', $username)->with('stream.game')->first();
-  	$followerCount = $streamer->followers()->count();
   	return view('streampage', compact('streamer', 'followerCount'));
   }
 }
