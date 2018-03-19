@@ -19,12 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/test', 'ViewController@test');
+
+
 ////////////////////////
 // Frontpage Routes //
 ////////////////////////
 
 Route::get('/games', "API\GamesController@get");
 Route::get('/listusers', "API\FrontpageController@listusers");
+
 
 ////////////////////////
 // Profilepage Routes //
@@ -34,10 +37,10 @@ Route::get('/profilepage/{name}', "API\ProfileController@get");
 Route::post('/profilepage/follow', 'API\ProfileController@follow_user');
 Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
 
+
 ////////////////////////
 // Chatmessage Routes //
 ////////////////////////
 
-Route::get('/chatmessages/{highestid}', 'API\ChatmessagesController@get');
-
-Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
+Route::get('/chatmessages/{streamid}/{highestid}', 'API\ChatmessagesController@get');
+Route::post('/chatmessages/{stream}/create', 'API\ChatmessagesController@create');

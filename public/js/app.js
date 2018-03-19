@@ -96489,6 +96489,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'chatbox',
@@ -96501,6 +96502,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             index: 0
         };
     },
+    props: ['user', 'streamer'],
     mounted: function mounted() {
         var _this = this;
 
@@ -96508,15 +96510,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var navbarHeight = document.getElementById('navbar').clientHeight;
         document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
+        console.log(this.streamer);
 
-        axios.get('/api/chatmessages/0').then(function (response) {
-            _this.highestid = response.data[response.data.length - 1].id - 5;
+        axios.get('/api/chatmessages/' + this.streamer.stream.id + "/0").then(function (response) {
+            if (response.data != 0) {
+                _this.highestid = response.data[response.data.length - 1].id - 5;
+            }
         });
 
         setInterval(function () {
             var _this2 = this;
 
-            axios.get('/api/chatmessages/' + this.highestid).then(function (response) {
+            axios.get('/api/chatmessages/' + this.streamer.stream.id + '/' + this.highestid).then(function (response) {
                 if (response.data.length != 0) {
                     _this2.assignColorToUsers(response.data);
                     _this2.messages = _this2.messages.concat(JSON.parse(JSON.stringify(response.data)));
@@ -96552,8 +96557,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var div = document.getElementById("chatbox");
             div.scrollTop = div.scrollHeight - div.clientHeight;
         });
-    },
-    props: ['user']
+    }
 
 });
 
@@ -96585,6 +96589,11 @@ var render = function() {
                 staticStyle: { "margin-bottom": "-15px" }
               },
               [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.streamer.title) +
+                    "\n                "
+                ),
                 _c("p", [
                   _c(
                     "b",
@@ -96592,9 +96601,9 @@ var render = function() {
                     [_vm._v(_vm._s(message.user.name) + ":")]
                   ),
                   _vm._v(
-                    "\n\n                        " +
+                    "\n\n                    " +
                       _vm._s(message.message) +
-                      "\n                    "
+                      "\n                "
                   )
                 ])
               ]

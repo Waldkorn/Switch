@@ -12,9 +12,9 @@ use App\User;
 class ChatmessagesController extends Controller
 {
     
-	public function get($highestid) {
+	public function get($streamid, $highestid) {
 
-		return Chatmessage::with('user')->where('id', '>', $highestid)->get();
+		return Chatmessage::with('user')->where('chat_id', $streamid)->where('id', '>', $highestid)->get();
 
 	}
 

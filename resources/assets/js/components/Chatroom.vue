@@ -4,11 +4,12 @@
         <div id="chatbox" class="chatbox" style="overflow-y:scroll;">
             <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages">
                 <div class="card-text" style="margin-bottom: -15px;">
-                        <p>
-                            <b v-bind:style="'color:' + activeUsers[ message.user.name ]">{{ message.user.name }}:</b>
+                    {{ streamer.title }}
+                    <p>
+                        <b v-bind:style="'color:' + activeUsers[ message.user.name ]">{{ message.user.name }}:</b>
 
-                            {{ message.message }}
-                        </p>
+                        {{ message.message }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -36,20 +37,24 @@
                 index: 0
             }
         },
+        props: [ 'user', 'streamer' ],
         mounted() {
 
             var viewportHeight = document.getElementById('container').clientHeight;
             var navbarHeight = document.getElementById('navbar').clientHeight;
             document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
             document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
+            console.log(this.streamer);
 
-            axios.get('/api/chatmessages/0').then( response => {
-                this.highestid = response.data[response.data.length - 1].id - 5;
+            axios.get('/api/chatmessages/' + this.streamer.stream.id + "/0").then( response => {
+                if (response.data != 0) {
+                    this.highestid = response.data[response.data.length - 1].id - 5;
+                }
             })
 
             setInterval(function() {
 
-                axios.get('/api/chatmessages/' + this.highestid).then(response => {
+                axios.get('/api/chatmessages/' + this.streamer.stream.id + '/' + this.highestid).then(response => {
                     if (response.data.length != 0) {
                         this.assignColorToUsers(response.data);
                         this.messages = this.messages.concat(JSON.parse(JSON.stringify(response.data)));
@@ -58,6 +63,7 @@
                 });
 
             }.bind(this), 1000);
+
         },
         methods: {
             createChatMessage : function(message) {
@@ -87,8 +93,8 @@
                 var div = document.getElementById("chatbox");
                 div.scrollTop = div.scrollHeight - div.clientHeight;
             })
-        },
-        props: [ 'user' ]
+        }
+
 
     }
 </script>
