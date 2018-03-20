@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "a34aabe9caecbe169ef57d4ba99bd5e9",
+=======
+    "content-hash": "0996bed72d2c6b2e7e7f6f545e90128a",
+>>>>>>> 72e4f0fe1588192f7c20e8828de60ed6ca25544f
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -880,7 +884,6 @@
                 "laravel"
             ],
             "time": "2018-03-14T17:29:38+00:00"
-<<<<<<< 91e4cfd734f8c8bf96962d4086b8c6834f69b483
         },
         {
             "name": "laravel/passport",
@@ -950,8 +953,6 @@
                 "passport"
             ],
             "time": "2018-03-15T12:39:02+00:00"
-=======
->>>>>>> added websocket to chatrooms
         },
         {
             "name": "laravel/tinker",
@@ -1072,7 +1073,11 @@
                 "JWS",
                 "jwt"
             ],
+<<<<<<< HEAD
             "time": "2017-09-01T08:23:26+00:00"
+=======
+            "time": "2018-03-14T17:29:38+00:00"
+>>>>>>> 72e4f0fe1588192f7c20e8828de60ed6ca25544f
         },
         {
             "name": "league/event",

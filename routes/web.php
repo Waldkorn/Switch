@@ -24,9 +24,8 @@ Route::get('/{username}', 'ViewController@stream');
 Route::get('/dashboard',"ViewController@dashboard");
 
 
-Route::get('/streampage', function () {
-    return view('streampage');
-});
+
+Route::get('/{username}', 'ViewController@stream');
 
 
 Route::get('/test', 'ViewController@test');
