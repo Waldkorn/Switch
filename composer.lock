@@ -880,7 +880,6 @@
                 "laravel"
             ],
             "time": "2018-03-14T17:29:38+00:00"
-<<<<<<< 91e4cfd734f8c8bf96962d4086b8c6834f69b483
         },
         {
             "name": "laravel/passport",
@@ -950,8 +949,6 @@
                 "passport"
             ],
             "time": "2018-03-15T12:39:02+00:00"
-=======
->>>>>>> added websocket to chatrooms
         },
         {
             "name": "laravel/tinker",
