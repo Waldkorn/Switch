@@ -2,7 +2,7 @@
   <div>
     <div class="card" style="width: 100%;"v-for="user in users">
       <h3 class="card-title">{{ user.name }}</h3>
-      <img class="card-img-top" src="http://www.top13.net/wp-content/uploads/2015/10/perfectly-timed-funny-cat-pictures-5.jpg" alt="hardcoded example">
+      <img class="card-img-top" src="/images/placeholder.jpg" alt="hardcoded example">
 
       <div class="card-body">
         <h5 class="card-title">followers: [some number]</h5>
@@ -36,7 +36,7 @@ export default {
     axios.get(url).then(response => {
     this.users = JSON.parse(JSON.stringify(response.data));
     })
-    
+
   },
 
   methods: {

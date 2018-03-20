@@ -5,7 +5,7 @@
     <title>Switch dash</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+  	<link href="{{ asset('css/videojs.css') }}" rel="stylesheet">
   	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
   </head>
@@ -24,11 +24,10 @@
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
-  {{$auth_id}}
   <div id="app">
-  <div class="tab-pane fade show active" id="stream" role="tabpanel" aria-labelledby="stream-tab"><dashboardstream :auth_id="{{$auth_id}}"></dashboardstream></div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">profile stuff here soon</div>
-  <div class="tab-pane fade" id="channel" role="tabpanel" aria-labelledby="channel-tab">channel settings here</div>
+    <div class="tab-pane fade show active" id="stream" role="tabpanel" aria-labelledby="stream-tab"><dashboardstream :auth_id="{{$auth_id}}"></dashboardstream></div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">profile stuff here soon</div>
+    <div class="tab-pane fade" id="channel" role="tabpanel" aria-labelledby="channel-tab">channel settings here</div>
 </div>
 </div>
 </div>

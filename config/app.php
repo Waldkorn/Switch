@@ -104,7 +104,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY','base64:6PIbx6uurtZTQEZJGFx2vzl+LMidTKBE87XTKAGVKEs='),
+    'key' => env('APP_KEY','base64:o6h0Fb2D1MWgQa4FUQSSRdX0UZgAzsDgNgPQrqIYKM0='),
 
     'cipher' => 'AES-256-CBC',
 
@@ -161,7 +161,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Laravel\Passport\PassportServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class
     ],
 
     /*
