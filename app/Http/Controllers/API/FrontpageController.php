@@ -11,6 +11,8 @@ use Auth;
 class FrontpageController extends Controller
 {
   public function listusers(){
-    echo User::limit(10)->get();
+
+    return User::withCount('followers')->orderBy('now_live', 'DESC')->orderBy('followers_count', 'DESC')->limit(10)->get();
+
   }
 }

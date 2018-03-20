@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chatmessage::class);
     }
+
+    public function stream()
+    {
+        return $this->hasOne(Stream::class, 'user_id', 'id');
+    }
 }
