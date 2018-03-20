@@ -17,6 +17,9 @@ Route::get('/',"ViewController@frontpage");
 
 Route::get('/profilepage/{id}', 'ViewController@profile');
 
+Route::get('/dashboard',"ViewController@dashboard");
+
+
 Route::get('/streampage', function () {
     return view('streampage');
 });

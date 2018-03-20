@@ -12,13 +12,37 @@ class ViewController extends Controller
   public function frontpage(){
     return view('frontpage');
   }
-  
+
   public function profile($name){
+
     $user = User::where('name',$name)->first();
-      return view('profilepage', compact('user'));
+    $authuser = Auth::user();
+    $loggedin = 0;
+    $isfollowing = 0;
+
+    if (Auth::check()){
+      $loggedin=1;
+      $followings = $authuser->followings()->pluck('streamer_id');
+      $followed=array();
+
+      foreach ($followings as $following){
+        $followed[]=$following;
+      }
+
+      if (in_array($user->id, $followed)) {
+        $isfollowing=1;
+      }
+    }
+    return view('profilepage', compact('user','loggedin','isfollowing'));
+  }
+
+
+  public function dashboard(){
+    $auth_id = Auth::user()->id;
+    return view('dashboard',compact('auth_id'));
   }
 
   public function test(){
-
+    return view('test');
   }
 }
