@@ -28,6 +28,7 @@ Route::get('/test', 'ViewController@test');
 ////////////////////////
 
 Route::get('/games', "API\GamesController@get");
+Route::get('/allgames', 'API\GamesController@getall');
 Route::get('/listusers', "API\FrontpageController@listusers");
 
 ////////////////////////
@@ -52,6 +53,8 @@ Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
 
 Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
+
+Route::post('/stream', 'API\StreamController@golive');
 
 ////////////////////////
 // Auth Routes //
