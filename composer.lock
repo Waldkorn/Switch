@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< 05a0aadfbb87e5b6399e1ed61aa005718bfd4f83
     "content-hash": "a34aabe9caecbe169ef57d4ba99bd5e9",
+=======
+    "content-hash": "0996bed72d2c6b2e7e7f6f545e90128a",
+>>>>>>> added websocket to chatrooms
     "packages": [
         {
             "name": "defuse/php-encryption",
