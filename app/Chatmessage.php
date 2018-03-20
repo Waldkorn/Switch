@@ -17,6 +17,6 @@ class Chatmessage extends Model
     }
 
     public function stream() {
-    	return $this->hasOne(Stream::class);
+    	return $this->belongsTo(Stream::class, 'chat_id', 'id');
     }
 }

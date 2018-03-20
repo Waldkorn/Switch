@@ -44,25 +44,8 @@
             var navbarHeight = document.getElementById('navbar').clientHeight;
             document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
             document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
-            console.log(this.streamer);
 
-            axios.get('/api/chatmessages/' + this.streamer.stream.id + "/0").then( response => {
-                if (response.data != 0) {
-                    this.highestid = response.data[response.data.length - 1].id - 5;
-                }
-            })
-
-            setInterval(function() {
-
-                axios.get('/api/chatmessages/' + this.streamer.stream.id + '/' + this.highestid).then(response => {
-                    if (response.data.length != 0) {
-                        this.assignColorToUsers(response.data);
-                        this.messages = this.messages.concat(JSON.parse(JSON.stringify(response.data)));
-                        this.highestid = this.messages[this.messages.length - 1].id;
-                    }
-                });
-
-            }.bind(this), 1000);
+            this.listen();
 
         },
         methods: {
@@ -75,17 +58,21 @@
                 document.getElementById('messageField').value = "";
             },
             assignColorToUsers : function(data) {
-                for (var i = 0 ; i < data.length ; i++) 
+                if (!(data.user.name in this.activeUsers))
                 {
-                    if (!(data[i].user.name in this.activeUsers))
-                    {
-                        this.activeUsers[data[i].user.name] = this.colors[this.index];
-                        this.index++;
-                        if (this.index == this.colors.length) {
-                            this.index = 0;
-                        }
+                    this.activeUsers[data.user.name] = this.colors[this.index];
+                    this.index++;
+                    if (this.index == this.colors.length) {
+                        this.index = 0;
                     }
                 }
+            },
+            listen() {
+                Echo.channel('stream.' + this.streamer.stream.id)
+                    .listen('NewChatmessage', (chatmessage) => {
+                        this.assignColorToUsers(chatmessage);
+                        this.messages = this.messages.concat(chatmessage);
+                    })
             }
         },
         updated: function() {
