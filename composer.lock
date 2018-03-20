@@ -4,17 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "content-hash": "a34aabe9caecbe169ef57d4ba99bd5e9",
-=======
-    "content-hash": "0996bed72d2c6b2e7e7f6f545e90128a",
->>>>>>> 72e4f0fe1588192f7c20e8828de60ed6ca25544f
-=======
+
 
     "content-hash": "0996bed72d2c6b2e7e7f6f545e90128a",
 
->>>>>>> 1350bddc228a9a5b6333b8ad74bf7331ddd190a9
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -959,6 +952,7 @@
                 "passport"
             ],
             "time": "2018-03-15T12:39:02+00:00"
+
         },
         {
             "name": "laravel/passport",
@@ -1028,6 +1022,7 @@
                 "passport"
             ],
             "time": "2018-03-15T12:39:02+00:00"
+
         },
         {
             "name": "laravel/tinker",
@@ -1148,15 +1143,9 @@
                 "JWS",
                 "jwt"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             "time": "2017-09-01T08:23:26+00:00"
-=======
-            "time": "2018-03-14T17:29:38+00:00"
->>>>>>> 72e4f0fe1588192f7c20e8828de60ed6ca25544f
-=======
-            "time": "2017-09-01T08:23:26+00:00"
->>>>>>> 1350bddc228a9a5b6333b8ad74bf7331ddd190a9
+
         },
         {
             "name": "league/event",
