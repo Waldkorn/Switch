@@ -52,5 +52,6 @@ class ViewController extends Controller
   	$followerCount = $streamer->followers()->count();
     
   	return view('streampage', compact('streamer', 'followerCount'));
+
   }
 }

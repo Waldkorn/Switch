@@ -162,6 +162,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+<<<<<<< 2899706479cbd3d23ac5cf2d39447b6008dd96ee
+=======
+
+>>>>>>> passport installed and integrated
     ],
 
     /*
