@@ -17,14 +17,17 @@
 <div id="app">
   <div class="row" style="width:100%">
 
-  	<div class="col-md-3">
-
-		<profilesidebar :auth_id="{{Auth::user()->id}}" :profile="{{$user}}"></profilesidebar>
-
+  	<div class="col-3">
+@if (auth::check())
+		<profilesidebar :auth_user="{{Auth::user()}}" :profile="{{$user}}":loggedin="{{$loggedin}}" :isfollowing="{{$isfollowing}}"></profilesidebar>
+@else
+	<profilesidebar  :profile="{{$user}}" v-bind:loggedin="{{$loggedin}}"></profilesidebar>
+	@endif
 	</div>
 
 
-    <div class="col-md-9">
+    <div class="col-9">
+<div> {{$loggedin}}</div>
 
       <profilepagemain></profilepagemain>
 
