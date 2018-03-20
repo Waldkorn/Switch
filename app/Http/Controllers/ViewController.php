@@ -43,7 +43,6 @@ class ViewController extends Controller
   }
 
   public function test(){
-    $user = Auth::user();
-    return $user;
+    return view('test');
   }
 }
