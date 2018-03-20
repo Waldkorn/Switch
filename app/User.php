@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +25,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'stream_token'
+        'password', 'remember_token'
     ];
-
+  //streamkey
 
     public function followers()
     {
@@ -43,5 +44,10 @@ class User extends Authenticatable
     public function chatmessages()
     {
         return $this->hasMany(Chatmessage::class);
+    }
+
+    public function stream()
+    {
+        return $this->hasOne(Stream::class, 'user_id', 'id');
     }
 }

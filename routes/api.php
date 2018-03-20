@@ -13,18 +13,25 @@ use Illuminate\Http\Request;
 |
 */
 
+
+Auth::routes();
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+})->middleware('auth:api');
+
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     dd($request->user());
+//});
 
 
-Route::get('/test', 'ViewController@test');
 ////////////////////////
 // Frontpage Routes //
 ////////////////////////
 
 Route::get('/games', "API\GamesController@get");
 Route::get('/listusers', "API\FrontpageController@listusers");
+
 
 ////////////////////////
 // Profilepage Routes //
@@ -34,10 +41,21 @@ Route::get('/profilepage/{name}', "API\ProfileController@get");
 Route::post('/profilepage/follow', 'API\ProfileController@follow_user');
 Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
 
+
 ////////////////////////
 // Chatmessage Routes //
 ////////////////////////
 
-Route::get('/chatmessages/{highestid}', 'API\ChatmessagesController@get');
-
+Route::get('/chatmessages/{streamid}/{highestid}', 'API\ChatmessagesController@get');
 Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
+
+////////////////////////
+// Dashboard Routes //
+////////////////////////
+
+Route::post('/dashboardstream', 'API\DashboardController@stream');
+Route::post('/streamkey', 'API\DashboardController@streamkey');
+
+////////////////////////
+// Auth Routes //
+////////////////////////

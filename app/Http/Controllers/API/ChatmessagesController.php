@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Chatmessage;
 use App\User;
+use App\Events\NewChatmessage;
 
 class ChatmessagesController extends Controller
 {
     
-	public function get($highestid) {
+	public function get($streamid, $highestid) {
 
-		return Chatmessage::with('user')->where('id', '>', $highestid)->get();
+		return Chatmessage::with('user')->where('chat_id', $streamid)->where('id', '>', $highestid)->get();
 
 	}
 
@@ -35,6 +36,12 @@ class ChatmessagesController extends Controller
 			'message' => request('message')
 
 		]);
+
+		$chatmessage = Chatmessage::Latest()->first();
+
+		event(new NewChatmessage($chatmessage));
+
+		return $chatmessage;
 
 	}
 
