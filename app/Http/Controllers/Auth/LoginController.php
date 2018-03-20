@@ -28,7 +28,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+     protected function redirectTo()
+ {
+    Auth::user()->createToken('switchuser');
+     return '/';
+ }
 
     /**
      * Create a new controller instance.

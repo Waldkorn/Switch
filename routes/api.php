@@ -13,10 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 Auth::routes();
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
     return $request->user();
-});
+})->middleware('auth:api');
+
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     dd($request->user());
+//});
 
 
 Route::get('/test', 'ViewController@test');
@@ -52,3 +55,7 @@ Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
 
 Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
+
+////////////////////////
+// Auth Routes //
+////////////////////////
