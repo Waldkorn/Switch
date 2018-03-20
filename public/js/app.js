@@ -98950,7 +98950,8 @@ var render = function() {
           _c("p", { staticClass: "card-text" }, [
             _vm._v(
               "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/" +
-                _vm._s(_vm.user.name)
+                _vm._s(_vm.user.name) +
+                "/"
             )
           ]),
           _vm._v(" "),

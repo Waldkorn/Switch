@@ -44,7 +44,7 @@
           <h5 class="card-title">Step Two: setting up a stream</h5>
           <p class="card-text">Once your streaming software is installed and running, it'll have to stream to our server.</p>
 
-          <p class="card-text">In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/{{user.name}}</p>
+          <p class="card-text">In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/{{user.name}}/</p>
           <p class="card-text">And your unique stream key, like this:<img class="card-img-top" src="/images/dashboard/streamsettingsobs.png" alt="OBS stream settings" style="max-width:100%"></p>
 
           <div class='container' style="text-align:center; margin-bottom:1rem">
