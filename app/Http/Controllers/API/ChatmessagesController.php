@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Chatmessage;
 use App\User;
+use App\Events\NewChatmessage;
 
 class ChatmessagesController extends Controller
 {
@@ -35,6 +36,12 @@ class ChatmessagesController extends Controller
 			'message' => request('message')
 
 		]);
+
+		$chatmessage = Chatmessage::Latest()->first();
+
+		event(new NewChatmessage($chatmessage));
+
+		return $chatmessage;
 
 	}
 

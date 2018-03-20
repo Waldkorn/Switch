@@ -50,6 +50,7 @@ class ViewController extends Controller
   {
   	$streamer = User::where('name', $username)->with('stream.game')->first();
   	$followerCount = $streamer->followers()->count();
+    
   	return view('streampage', compact('streamer', 'followerCount'));
   }
 }

@@ -47677,8 +47677,8 @@ window.Pusher = __webpack_require__(130);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     broadcaster: 'pusher',
-    key: Object({"NODE_ENV":"development"}).MIX_PUSHER_APP_KEY,
-    cluster: Object({"NODE_ENV":"development"}).MIX_PUSHER_APP_CLUSTER,
+    key: '8f0d4c8f929781d570a0',
+    cluster: 'eu',
     encrypted: true
 });
 
@@ -103924,31 +103924,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     props: ['user', 'streamer'],
     mounted: function mounted() {
-        var _this = this;
 
         var viewportHeight = document.getElementById('container').clientHeight;
         var navbarHeight = document.getElementById('navbar').clientHeight;
         document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
-        console.log(this.streamer);
 
-        axios.get('/api/chatmessages/' + this.streamer.stream.id + "/0").then(function (response) {
-            if (response.data != 0) {
-                _this.highestid = response.data[response.data.length - 1].id - 5;
-            }
-        });
-
-        setInterval(function () {
-            var _this2 = this;
-
-            axios.get('/api/chatmessages/' + this.streamer.stream.id + '/' + this.highestid).then(function (response) {
-                if (response.data.length != 0) {
-                    _this2.assignColorToUsers(response.data);
-                    _this2.messages = _this2.messages.concat(JSON.parse(JSON.stringify(response.data)));
-                    _this2.highestid = _this2.messages[_this2.messages.length - 1].id;
-                }
-            });
-        }.bind(this), 1000);
+        this.listen();
     },
 
     methods: {
@@ -103961,15 +103943,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.getElementById('messageField').value = "";
         },
         assignColorToUsers: function assignColorToUsers(data) {
-            for (var i = 0; i < data.length; i++) {
-                if (!(data[i].user.name in this.activeUsers)) {
-                    this.activeUsers[data[i].user.name] = this.colors[this.index];
-                    this.index++;
-                    if (this.index == this.colors.length) {
-                        this.index = 0;
-                    }
+            if (!(data.user.name in this.activeUsers)) {
+                this.activeUsers[data.user.name] = this.colors[this.index];
+                this.index++;
+                if (this.index == this.colors.length) {
+                    this.index = 0;
                 }
             }
+        },
+        listen: function listen() {
+            var _this = this;
+
+            Echo.channel('stream.' + this.streamer.stream.id).listen('NewChatmessage', function (chatmessage) {
+                _this.assignColorToUsers(chatmessage);
+                _this.messages = _this.messages.concat(chatmessage);
+            });
         }
     },
     updated: function updated() {

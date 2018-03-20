@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
     "content-hash": "a34aabe9caecbe169ef57d4ba99bd5e9",
     "packages": [
         {
@@ -881,6 +880,7 @@
                 "laravel"
             ],
             "time": "2018-03-14T17:29:38+00:00"
+<<<<<<< 91e4cfd734f8c8bf96962d4086b8c6834f69b483
         },
         {
             "name": "laravel/passport",
@@ -950,6 +950,8 @@
                 "passport"
             ],
             "time": "2018-03-15T12:39:02+00:00"
+=======
+>>>>>>> added websocket to chatrooms
         },
         {
             "name": "laravel/tinker",
