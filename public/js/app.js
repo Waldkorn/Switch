@@ -103109,22 +103109,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
 
   data: function data() {
     return {
-      users: null
+      users: [],
+      profilecontent: [],
+      followers: [],
+      followings: []
     };
   },
 
   mounted: function mounted() {
     var _this = this;
 
+    var contenturl = '/api/profilecontent/' + this.profile.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+
     var url = '/api/profilepage/' + this.profile.name;
     axios.get(url).then(function (response) {
       _this.users = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followersurl = '/api/followers/' + this.profile.name;
+    axios.get(followersurl).then(function (response) {
+      _this.followers = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followingsurl = '/api/following/' + this.profile.name;
+    axios.get(followingsurl).then(function (response) {
+      _this.followings = JSON.parse(JSON.stringify(response.data));
     });
   },
 
@@ -103150,7 +103190,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('unfollowmsg').style.display = "block";
         document.getElementById('unfollow_btn').style.display = "none";
       });
+    },
+
+    togglefollowers: function togglefollowers() {
+      var x = document.getElementById("followerslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+
+    togglefollowings: function togglefollowings() {
+      var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
     }
+
   }
 });
 
@@ -103173,89 +103232,254 @@ var render = function() {
           _vm._v(" "),
           _c("img", {
             staticClass: "card-img-top",
-            attrs: { src: "/images/placeholder.jpg", alt: "hardcoded example" }
+            attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
           }),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v("followers: [some number]")
-            ]),
-            _vm._v(" "),
-            _vm.loggedin == 1
-              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
-                  _vm.isfollowing == 0
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          staticStyle: { "margin-top": "1rem" },
-                          attrs: { id: "follow_btn", value: user.id },
-                          on: { click: _vm.follow }
-                        },
-                        [_vm._v("follow")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isfollowing == 1
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          staticStyle: { "margin-top": "1rem" },
-                          attrs: { id: "unfollow_btn", value: user.id },
-                          on: { click: _vm.unfollow }
-                        },
-                        [_vm._v("unfollow")]
-                      )
-                    : _vm._e(),
+          _c(
+            "div",
+            {
+              staticClass: "btn-group",
+              staticStyle: {
+                padding: "0",
+                width: "100%",
+                border: "0px",
+                "border-radius": "0px"
+              }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: {
+                    width: "50%",
+                    "border-right": "1px",
+                    "border-radius": "0px",
+                    "margin-right": "1px"
+                  },
+                  attrs: { type: "button" },
+                  on: { click: _vm.togglefollowers }
+                },
+                [
+                  _vm._v("Followers"),
                   _c("br"),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-success",
-                      staticStyle: { display: "none" },
-                      attrs: { id: "followmsg", role: "alert" }
-                    },
-                    [_vm._v("You are now following " + _vm._s(user.name))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-danger",
-                      staticStyle: { display: "none" },
-                      attrs: { id: "unfollowmsg", role: "alert" }
-                    },
-                    [
-                      _vm._v(
-                        " You are no longer following " + _vm._s(user.name)
-                      )
-                    ]
-                  )
-                ])
+                  _c("span", { staticClass: "badge badge-light" }, [
+                    _vm._v(" " + _vm._s(_vm.followers.length))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: {
+                    width: "50%",
+                    border: "0px",
+                    "border-radius": "0px"
+                  },
+                  attrs: { type: "button" },
+                  on: { click: _vm.togglefollowings }
+                },
+                [
+                  _vm._v("Following"),
+                  _c("br"),
+                  _c("span", { staticClass: "badge badge-light" }, [
+                    _vm._v(" " + _vm._s(_vm.followings.length))
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _vm.loggedin == 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "container-fluid",
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "follow_unfollow" }
+                  },
+                  [
+                    _vm.isfollowing == 0
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-lg",
+                            attrs: { id: "follow_btn", value: user.id },
+                            on: { click: _vm.follow }
+                          },
+                          [_vm._v("follow")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isfollowing == 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-lg",
+                            attrs: { id: "unfollow_btn", value: user.id },
+                            on: { click: _vm.unfollow }
+                          },
+                          [_vm._v("unfollow")]
+                        )
+                      : _vm._e(),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-success",
+                        staticStyle: { display: "none" },
+                        attrs: { id: "followmsg", role: "alert" }
+                      },
+                      [_vm._v("You are now following " + _vm._s(user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-danger",
+                        staticStyle: { display: "none" },
+                        attrs: { id: "unfollowmsg", role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          " You are no longer following " + _vm._s(user.name)
+                        )
+                      ]
+                    )
+                  ]
+                )
               : _vm._e(),
             _vm._v(" "),
             _vm.loggedin == 0
               ? _c("div", { attrs: { id: "follow_unfollow" } }, [
                   _vm._v(
-                    " Please log in or register to follow " +
-                      _vm._s(user.name) +
-                      "\n"
+                    " Please log in or register to follow " + _vm._s(user.name)
                   )
                 ])
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("pinned games, maybe social media links, whatever")
-          ])
+          _c("div", { staticClass: "card-body" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(_vm.profilecontent.about))
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "list-group",
+              staticStyle: {
+                width: "100%",
+                "max-height": "500px",
+                overflow: "hidden",
+                display: "none"
+              },
+              attrs: { id: "followerslist" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: {
+                    "overflow-y": "scroll",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0"
+                  }
+                },
+                [
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _vm._l(_vm.followers, function(follower) {
+                    return _c(
+                      "a",
+                      {
+                        staticClass: "list-group-item list-group-item-action",
+                        attrs: { href: "/profilepage/" + follower.name }
+                      },
+                      [_vm._v(" " + _vm._s(follower.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "list-group",
+              staticStyle: {
+                width: "100%",
+                "max-height": "500px",
+                overflow: "hidden",
+                display: "none"
+              },
+              attrs: { id: "followingslist" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: {
+                    "overflow-y": "scroll",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0"
+                  }
+                },
+                [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _vm._l(_vm.followings, function(following) {
+                    return _c(
+                      "a",
+                      {
+                        staticClass: "list-group-item list-group-item-action",
+                        attrs: { href: "/profilepage/" + following.name }
+                      },
+                      [_vm._v(" " + _vm._s(following.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          )
         ]
       )
     })
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Followers:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Following:")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -103763,15 +103987,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_id'],
 
   data: function data() {
     return {
-      user: null,
-      games: null
+      user: [],
+      games: []
     };
   },
 
@@ -103789,6 +104015,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+
     streamkey: function streamkey() {
 
       axios.post('/api/streamkey', {
@@ -103810,6 +104037,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     golive: function golive() {
+
       axios.post('/api/stream', {
 
         user_id: this.user.id,
@@ -104203,26 +104431,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_id'],
 
   data: function data() {
     return {
-      user: null,
-      games: null
+      user: [],
+      profilecontent: []
     };
   },
 
@@ -104233,8 +104449,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.user = response.data;
     });
 
-    axios.get('/api/allgames').then(function (response) {
-      _this.games = JSON.parse(JSON.stringify(response.data));
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
     });
   },
 
@@ -104267,8 +104483,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         stream_title: document.getElementById('streamtitle').value,
         game_id: document.getElementById('gameselect').value
 
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
       }).then(function (response) {
-        console.log("you are live!");
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
       });
     }
   }
@@ -104283,203 +104508,75 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-9" }, [
-      _c(
-        "div",
-        {
-          staticClass: "card",
-          staticStyle: {
-            width: "100%",
-            "margin-bottom": "1rem",
-            "text-align": "center"
-          }
-        },
-        [
-          _c("h5", { staticClass: "card-header" }, [_vm._v("Stream Preview")]),
-          _vm._v(" "),
-          _c(
-            "video",
-            {
-              staticClass: "video-js",
-              attrs: {
-                id: "vid1",
-                controls: "",
-                preload: "auto",
-                "data-setup": '{ "aspectRatio": "16:9" }'
-              }
-            },
-            [
-              _c("source", {
-                attrs: {
-                  src:
-                    "http://10.0.0.61:8080/hls/" +
-                    _vm.user.stream_token +
-                    ".m3u8",
-                  type: "application/x-mpegURL"
-                }
-              }),
-              _vm._v(" "),
-              _vm._m(0)
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "card",
-          staticStyle: { width: "100%", "text-align": "center" }
-        },
-        [
-          _c("h5", { staticClass: "card-header" }, [
-            _vm._v("Start streaming?")
-          ]),
-          _vm._v(" "),
-          _c("form", { staticStyle: { "text-align": "left" } }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "gameselect" } }, [_vm._v("Game:")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                { staticClass: "form-control", attrs: { id: "gameselect" } },
-                _vm._l(_vm.games, function(game) {
-                  return _c("option", { domProps: { value: game.id } }, [
-                    _vm._v(_vm._s(game.name))
-                  ])
-                })
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                staticStyle: { "text-align": "center" }
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "btn btn-success",
-                    attrs: { type: "submit" },
-                    on: { click: _vm.golive }
-                  },
-                  [_vm._v("GO LIVE!")]
-                )
-              ]
-            )
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
     _c("div", { staticClass: "col-3" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("h5", { staticClass: "card-header" }, [_vm._v("Getting started")]),
+      _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "Card image cap" }
+        }),
+        _vm._v(" "),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("h5", { staticClass: "card-title" }, [
-            _vm._v("Step one: Streaming software")
+            _vm._v(_vm._s(_vm.user.name))
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v(
-              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
-            )
+          _c("div", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
           ]),
           _vm._v(" "),
-          _c("h5", { staticClass: "card-title" }, [
-            _vm._v("Step Two: setting up a stream")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v(
-              "Once your streaming software is installed and running, it'll have to stream to our server."
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v(
-              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/" +
-                _vm._s(_vm.user.name) +
-                "/"
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "container",
-              staticStyle: { "text-align": "center", "margin-bottom": "1rem" }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "btn btn-danger",
-                  staticStyle: { "margin-top": "1rem", display: "block" },
-                  attrs: { id: "streamkey_btn" },
-                  on: { click: _vm.streamkey }
-                },
-                [_vm._v("Show my streamkey")]
-              ),
+          _c("div", { attrs: { id: "accordion" } }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "div",
                 {
-                  staticClass: "btn btn-danger",
-                  staticStyle: { "margin-top": "1rem", display: "none" },
-                  attrs: { id: "hide_btn" },
-                  on: { click: _vm.hidekey }
+                  staticClass: "collapse",
+                  attrs: {
+                    id: "collapseEdit",
+                    "aria-labelledby": "headingEdit",
+                    "data-parent": "#accordion"
+                  }
                 },
-                [_vm._v("hide streamkey")]
-              ),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "alert alert-danger",
-                staticStyle: { display: "none" },
-                attrs: { id: "streamkeymessage", role: "alert" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("p", { staticClass: "alert alert-danger" }, [
-            _vm._v(
-              "(This is your personal streamkey, never show it to anyone!)"
-            )
-          ]),
-          _vm._v(" "),
-          _c("h5", { staticClass: "card-title" }, [
-            _vm._v("Step Three: connect to the server")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v(
-              "After you've entered your url and streamkey, you can start streaming to our server"
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("You should see a preview of your stream on this page")
-          ]),
-          _vm._v(" "),
-          _c("h5", { staticClass: "card-title" }, [
-            _vm._v("Step Four: Start streaming! ")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v(
-              "finally, choose a title and game, and go live! Your viewers can find your stream on your profile."
-            )
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("form", [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "aboutinput" } }, [
+                          _vm._v("Text")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", id: "aboutinput" },
+                          domProps: { value: _vm.profilecontent.about }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.updateAbout }
+                        },
+                        [_vm._v("Update")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ])
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" })
   ])
 }
 var staticRenderFns = [
@@ -104487,54 +104584,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "vjs-no-js" }, [
-      _vm._v(
-        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
-      ),
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "http://videojs.com/html5-video-support/",
-            target: "_blank"
-          }
-        },
-        [_vm._v("supports HTML5 video")]
-      )
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v("Upload new image")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "streamtitle" } }, [_vm._v("Title:")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          id: "streamtitle",
-          placeholder: "Enter stream title"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "card-text" }, [
-      _vm._v("And your unique stream key, like this:"),
-      _c("img", {
-        staticClass: "card-img-top",
-        staticStyle: { "max-width": "100%" },
-        attrs: {
-          src: "/images/dashboard/streamsettingsobs.png",
-          alt: "OBS stream settings"
-        }
-      })
-    ])
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\n                    Edit about section:\n                  "
+              )
+            ]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

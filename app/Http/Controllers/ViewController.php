@@ -36,11 +36,18 @@ class ViewController extends Controller
     return view('profilepage', compact('user','loggedin','isfollowing'));
   }
 
-
   public function dashboard(){
     $user = Auth::user();
     return view('dashboard',compact('user'));
   }
+
+  public function profiledashboard(){
+        return view('profiledashboard');
+  }
+
+  /*public function channeldashboard(){
+        return view('channeldashboard');
+  }*/
 
   public function test(){
     return view('test');
@@ -53,5 +60,5 @@ class ViewController extends Controller
   	return view('streampage', compact('streamer', 'followerCount'));
   }
 
-  
+
 }
