@@ -28,7 +28,7 @@ class userFactory extends Seeder
           'updated_at' => date('Y-m-d H:i:s'),
     		]);
 
-        DB::table('profilecontent')->insert([
+        DB::table('profilecontents')->insert([
     			'user_id' => $user->id,
     			'about' => 'Hello I am a bot!',
     			'img_url' => '/images/placeholder.jpg',

@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->hasOne(Stream::class, 'user_id', 'id');
     }
 
-    public function profilecontent()
+    public function Profilecontent()
     {
         return $this->hasOne(Profilecontent::class, 'user_id', 'id');
     }
