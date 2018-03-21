@@ -44,5 +44,4 @@ class DashboardController extends Controller
       return $newAbout;
     }
 
-
 }

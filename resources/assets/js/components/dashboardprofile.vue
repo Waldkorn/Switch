@@ -149,6 +149,16 @@ export default {
 
       updateAbout: function() {
 
+        axios.post('/api/profilecontentabout', {
+          about: document.getElementById('aboutinput').value,
+       }).then(response => {
+         this.profilecontent.about = response.data;
+         $('#collapseEdit').collapse("toggle");
+       })
+      },
+
+      updateAbout: function() {
+
         axios.post('/api/updateabout', {
           about: document.getElementById('aboutinput').value,
        }).then(response => {

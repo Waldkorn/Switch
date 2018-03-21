@@ -60,4 +60,14 @@ class ProfileController extends Controller
       $profilecontent = Profilecontent::where('user_id',$user->id)->first();
       return $profilecontent;
     }
+
+    public function followers($username){
+        $user = User::where('name',$username)->firstupdates();
+        return $user->followers()->withCount('followers')->get();
+    }
+
+    public function following($username){
+        $user = User::where('name',$username)->first();
+        return $user->followings()->withCount('followings')->get();
+    }
 }

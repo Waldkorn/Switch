@@ -56,3 +56,13 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
+
+Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
+
+
+Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
+
+
+////////////////////////
+// Auth Routes //
+////////////////////////

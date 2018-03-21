@@ -105625,6 +105625,7 @@ var render = function() {
               )
             ])
           ])
+<<<<<<< HEAD
         ])
       ]
     ),
@@ -105770,6 +105771,344 @@ var render = function() {
                 ])
               ])
             ]),
+=======
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0caa52ba", module.exports)
+  }
+}
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(160)
+/* template */
+var __vue_template__ = __webpack_require__(161)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/profilesidebar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-405fec2c", Component.options)
+  } else {
+    hotAPI.reload("data-v-405fec2c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 160 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
+
+  data: function data() {
+    return {
+      users: [],
+      profilecontent: [],
+      followers: [],
+      followings: []
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var contenturl = '/api/profilecontent/' + this.profile.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var url = '/api/profilepage/' + this.profile.name;
+    axios.get(url).then(function (response) {
+      _this.users = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followersurl = '/api/followers/' + this.profile.name;
+    axios.get(followersurl).then(function (response) {
+      _this.followers = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followingsurl = '/api/following/' + this.profile.name;
+    axios.get(followingsurl).then(function (response) {
+      _this.followings = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    follow: function follow() {
+
+      axios.post('/api/profilepage/follow', {
+        user_id: document.getElementById('follow_btn').value,
+        follower_id: this.auth_user.id
+      }).then(function (response) {
+        document.getElementById('follow_btn').style.display = "none";
+        document.getElementById('followmsg').style.display = "block";
+      });
+    },
+
+    unfollow: function unfollow() {
+
+      axios.post('/api/profilepage/unfollow', {
+        user_id: document.getElementById('unfollow_btn').value,
+        unfollower_id: this.auth_user.id
+      }).then(function (response) {
+        document.getElementById('unfollowmsg').style.display = "block";
+        document.getElementById('unfollow_btn').style.display = "none";
+      });
+    },
+
+    togglefollowers: function togglefollowers() {
+      var x = document.getElementById("followerslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+
+    togglefollowings: function togglefollowings() {
+      var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+  }
+});
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    _vm._l(_vm.users, function(user) {
+      return _c(
+        "div",
+        { staticClass: "card", staticStyle: { width: "100%" } },
+        [
+          _c("h3", { staticClass: "card-title" }, [_vm._v(_vm._s(user.name))]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "card-img-top",
+            attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "btn-group",
+              staticStyle: {
+                padding: "0",
+                width: "100%",
+                border: "0px",
+                "border-radius": "0px"
+              }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: {
+                    width: "50%",
+                    "border-right": "1px",
+                    "border-radius": "0px",
+                    "margin-right": "1px"
+                  },
+                  attrs: { type: "button" },
+                  on: { click: _vm.togglefollowers }
+                },
+                [
+                  _vm._v("Followers"),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "badge badge-light" }, [
+                    _vm._v(" " + _vm._s(_vm.followers.length))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: {
+                    width: "50%",
+                    border: "0px",
+                    "border-radius": "0px"
+                  },
+                  attrs: { type: "button" },
+                  on: { click: _vm.togglefollowings }
+                },
+                [
+                  _vm._v("Following"),
+                  _c("br"),
+                  _c("span", { staticClass: "badge badge-light" }, [
+                    _vm._v(" " + _vm._s(_vm.followings.length))
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _vm.loggedin == 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "container-fluid",
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "follow_unfollow" }
+                  },
+                  [
+                    _vm.isfollowing == 0
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-lg",
+                            attrs: { id: "follow_btn", value: user.id },
+                            on: { click: _vm.follow }
+                          },
+                          [_vm._v("follow")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isfollowing == 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-lg",
+                            attrs: { id: "unfollow_btn", value: user.id },
+                            on: { click: _vm.unfollow }
+                          },
+                          [_vm._v("unfollow")]
+                        )
+                      : _vm._e(),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-success",
+                        staticStyle: { display: "none" },
+                        attrs: { id: "followmsg", role: "alert" }
+                      },
+                      [_vm._v("You are now following " + _vm._s(user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-danger",
+                        staticStyle: { display: "none" },
+                        attrs: { id: "unfollowmsg", role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          " You are no longer following " + _vm._s(user.name)
+                        )
+                      ]
+                    )
+                  ]
+                )
+              : _vm._e(),
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
             _vm._v(" "),
             _c("div", { staticClass: "modal-footer" }, [
               _c(
@@ -105790,6 +106129,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
+<<<<<<< HEAD
                     "\n                        Save Changes\n                    "
                   )
                 ]
@@ -105800,6 +106140,137 @@ var render = function() {
       ]
     )
   ])
+=======
+                    " Please log in or register to follow " + _vm._s(user.name)
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(_vm.profilecontent.about))
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "list-group",
+              staticStyle: {
+                width: "100%",
+                "max-height": "500px",
+                overflow: "hidden",
+                display: "none"
+              },
+              attrs: { id: "followerslist" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: {
+                    "overflow-y": "scroll",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0"
+                  }
+                },
+                [
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _vm._l(_vm.followers, function(follower) {
+                    return _c(
+                      "a",
+                      {
+                        staticClass: "list-group-item list-group-item-action",
+                        attrs: { href: "/profilepage/" + follower.name }
+                      },
+                      [_vm._v(" " + _vm._s(follower.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "list-group",
+              staticStyle: {
+                width: "100%",
+                "max-height": "500px",
+                overflow: "hidden",
+                display: "none"
+              },
+              attrs: { id: "followingslist" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: {
+                    "overflow-y": "scroll",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0"
+                  }
+                },
+                [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _vm._l(_vm.followings, function(following) {
+                    return _c(
+                      "a",
+                      {
+                        staticClass: "list-group-item list-group-item-action",
+                        attrs: { href: "/profilepage/" + following.name }
+                      },
+                      [_vm._v(" " + _vm._s(following.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          )
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Followers:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Following:")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+  }
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
 }
 <<<<<<< HEAD
 var staticRenderFns = [
@@ -106562,6 +107033,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
@@ -106691,18 +107163,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         prepareComponent: function prepareComponent() {
             this.getTokens();
             this.getScopes();
+=======
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
 
             $('#modal-create-token').on('shown.bs.modal', function () {
                 $('#create-token-name').focus();
             });
         },
 
+<<<<<<< HEAD
 
         /**
          * Get all of the personal access tokens for the user.
          */
         getTokens: function getTokens() {
             var _this = this;
+=======
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      user: [],
+      games: []
+    };
+  },
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
 
             axios.get('/oauth/personal-access-tokens').then(function (response) {
                 _this.tokens = response.data;
@@ -106721,6 +107206,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             });
         },
 
+<<<<<<< HEAD
+=======
+  methods: {
+
+    streamkey: function streamkey() {
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
 
         /**
          * Show the form for creating new tokens.
@@ -106736,7 +107227,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         store: function store() {
             var _this3 = this;
 
+<<<<<<< HEAD
             this.accessToken = null;
+=======
+    golive: function golive() {
+
+      axios.post('/api/stream', {
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
 
             this.form.errors = [];
 
@@ -107367,21 +107864,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+<<<<<<< HEAD
     mounted: function mounted() {
         console.log('Component mounted.');
+=======
+
+  data: function data() {
+    return {
+      user: [],
+      profilecontent: []
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/user').then(function (response) {
+      _this.user = response.data;
+    });
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
     }
 });
 
@@ -107397,6 +107947,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _vm._m(0)
 }
 var staticRenderFns = [
@@ -107421,12 +107972,122 @@ var staticRenderFns = [
             _c("div", [
               _vm._v(
                 "\n                    I would like to test something\n                "
+=======
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "Card image cap" }
+        }),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.user.name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "accordion" } }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "collapse",
+                  attrs: {
+                    id: "collapseEdit",
+                    "aria-labelledby": "headingEdit",
+                    "data-parent": "#accordion"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("form", [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "aboutinput" } }, [
+                          _vm._v("Text")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", id: "aboutinput" },
+                          domProps: { value: _vm.profilecontent.about }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.updateAbout }
+                        },
+                        [_vm._v("Update")]
+                      )
+                    ])
+                  ])
+                ]
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
               )
             ])
           ])
         ])
       ])
+<<<<<<< HEAD
     ])
+=======
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" })
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v("Upload new image")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\n                    Edit about section:\n                  "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+>>>>>>> dashboard sections are now individual pages, users can edit the about section
   }
 ]
 render._withStripped = true

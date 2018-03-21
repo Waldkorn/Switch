@@ -16,9 +16,12 @@ Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
 Route::get('/profilepage/{username}',"ViewController@profile");
 
-////////////////
-// Dashboards //
-////////////////
+Route::get('/profilepage/{username}', 'ViewController@profile');
+//Route::get('/dashboard',"ViewController@dashboard");
+Route::get('/streamdashboard',"ViewController@streamdashboard");
+Route::get('/profiledashboard',"ViewController@profiledashboard");
+//Route::get('/channeldashboard',"ViewController@channeldashboard");
+
 
 Route::get('/dashboard',"ViewController@dashboard");
 
@@ -41,8 +44,4 @@ Route::get('/dashboard',"ViewController@dashboard");
 Route::get('/test', 'ViewController@test');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-<<<<<<< HEAD
-
-=======
->>>>>>> edited profilecontent migration and seeders, now works
 Route::get('/{username}', 'ViewController@stream');
