@@ -40,6 +40,8 @@ Vue.component('profilepagemain', require('./components/profilepagemain.vue'));
 
 //dashboard//
 Vue.component('dashboardstream', require('./components/dashboardstream.vue'));
+Vue.component('dashboardprofile', require('./components/dashboardprofile.vue'));
+
 
 Vue.component('chatroom', require('./components/Chatroom.vue'));
 
