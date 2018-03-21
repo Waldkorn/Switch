@@ -20,7 +20,7 @@ Route::get('/profilepage/{username}', 'ViewController@profile');
 //Route::get('/dashboard',"ViewController@dashboard");
 Route::get('/streamdashboard',"ViewController@streamdashboard");
 Route::get('/profiledashboard',"ViewController@profiledashboard");
-//Route::get('/channeldashboard',"ViewController@channeldashboard");
+Route::get('/channeldashboard',"ViewController@channeldashboard");
 
 
 Route::get('/dashboard',"ViewController@dashboard");
