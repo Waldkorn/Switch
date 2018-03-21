@@ -64,6 +64,17 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'profileimage' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/profile',
+        ],
+
+        'offlineimage' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/offline',
+        ],
+
+
     ],
 
 ];
