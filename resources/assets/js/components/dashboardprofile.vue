@@ -79,7 +79,7 @@ export default {
     mounted() {
       axios.get('/api/user').then(response => {
         this.user = response.data;
-        
+
       });
 
       axios.get('/api/allgames').then(response => {

@@ -26,7 +26,7 @@
 <div class="tab-content" id="myTabContent">
   <div id="app">
     <div class="tab-pane fade show active" id="stream" role="tabpanel" aria-labelledby="stream-tab"><dashboardstream :auth_id="{{$auth_id}}"></dashboardstream></div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">profile stuff here soon</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"><dashboardprofile></dashboardprofile></div>
     <div class="tab-pane fade" id="channel" role="tabpanel" aria-labelledby="channel-tab">channel settings here</div>
 </div>
 </div>
