@@ -23967,6 +23967,7 @@ module.exports = function normalizeComponent (
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */(function(global) {var win;
 
 if (typeof window !== "undefined") {
@@ -23982,6 +23983,313 @@ if (typeof window !== "undefined") {
 module.exports = win;
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+=======
+"use strict";
+
+
+var bind = __webpack_require__(45);
+var isBuffer = __webpack_require__(112);
+
+/*global toString:true*/
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = merge(result[key], val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim
+};
+
+>>>>>>> edited profilecontent migration and seeders, now works
 
 /***/ }),
 /* 4 */
@@ -29031,8 +29339,13 @@ module.exports = exports['default'];
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
 var normalizeHeaderName = __webpack_require__(237);
+=======
+var utils = __webpack_require__(3);
+var normalizeHeaderName = __webpack_require__(114);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -47347,6 +47660,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
 var settle = __webpack_require__(238);
 var buildURL = __webpack_require__(240);
@@ -47354,6 +47668,15 @@ var parseHeaders = __webpack_require__(241);
 var isURLSameOrigin = __webpack_require__(242);
 var createError = __webpack_require__(50);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(243);
+=======
+var utils = __webpack_require__(3);
+var settle = __webpack_require__(115);
+var buildURL = __webpack_require__(117);
+var parseHeaders = __webpack_require__(118);
+var isURLSameOrigin = __webpack_require__(119);
+var createError = __webpack_require__(48);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(120);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -47716,8 +48039,13 @@ module.exports = Cancel;
 /* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(176);
 module.exports = __webpack_require__(330);
+=======
+__webpack_require__(52);
+module.exports = __webpack_require__(182);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 
 /***/ }),
@@ -47757,6 +48085,7 @@ Vue.component('profilepagemain', __webpack_require__(263));
 Vue.component('stream', __webpack_require__(309));
 
 //dashboard//
+<<<<<<< HEAD
 Vue.component('dashboard', __webpack_require__(289));
 Vue.component('dashboardstream', __webpack_require__(298));
 Vue.component('dashboardprofile', __webpack_require__(301));
@@ -47764,6 +48093,12 @@ Vue.component('dashboardprofile', __webpack_require__(301));
 Vue.component('chatroom', __webpack_require__(304));
 
 Vue.component('streams', __webpack_require__(286));
+=======
+Vue.component('dashboardstream', __webpack_require__(171));
+Vue.component('dashboardprofile', __webpack_require__(174));
+
+Vue.component('chatroom', __webpack_require__(177));
+>>>>>>> edited profilecontent migration and seeders, now works
 
 var app = new Vue({
     el: '#app',
@@ -83580,10 +83915,17 @@ module.exports = __webpack_require__(234);
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
 var bind = __webpack_require__(47);
 var Axios = __webpack_require__(236);
 var defaults = __webpack_require__(23);
+=======
+var utils = __webpack_require__(3);
+var bind = __webpack_require__(45);
+var Axios = __webpack_require__(113);
+var defaults = __webpack_require__(22);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 /**
  * Create an instance of Axios
@@ -83666,10 +84008,17 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
+<<<<<<< HEAD
 var defaults = __webpack_require__(23);
 var utils = __webpack_require__(4);
 var InterceptorManager = __webpack_require__(245);
 var dispatchRequest = __webpack_require__(246);
+=======
+var defaults = __webpack_require__(22);
+var utils = __webpack_require__(3);
+var InterceptorManager = __webpack_require__(122);
+var dispatchRequest = __webpack_require__(123);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 /**
  * Create a new instance of Axios
@@ -83752,7 +84101,11 @@ module.exports = Axios;
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -83832,7 +84185,11 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -83905,7 +84262,11 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -83965,7 +84326,11 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -84083,7 +84448,11 @@ module.exports = btoa;
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -84143,7 +84512,11 @@ module.exports = (
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 function InterceptorManager() {
   this.handlers = [];
@@ -84202,12 +84575,21 @@ module.exports = InterceptorManager;
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
 var transformData = __webpack_require__(247);
 var isCancel = __webpack_require__(51);
 var defaults = __webpack_require__(23);
 var isAbsoluteURL = __webpack_require__(248);
 var combineURLs = __webpack_require__(249);
+=======
+var utils = __webpack_require__(3);
+var transformData = __webpack_require__(124);
+var isCancel = __webpack_require__(49);
+var defaults = __webpack_require__(22);
+var isAbsoluteURL = __webpack_require__(125);
+var combineURLs = __webpack_require__(126);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -84295,7 +84677,11 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
+<<<<<<< HEAD
 var utils = __webpack_require__(4);
+=======
+var utils = __webpack_require__(3);
+>>>>>>> edited profilecontent migration and seeders, now works
 
 /**
  * Transform the data for a request or a response
@@ -100665,6 +101051,13 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
+=======
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(135)
+}
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(258)
@@ -101405,6 +101798,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
+=======
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(141)
+}
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(270)
@@ -101867,6 +102267,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
+=======
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(146)
+}
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(290)
@@ -103713,10 +104120,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(305)
 }
+=======
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(307)
@@ -104470,10 +104880,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(313)
 }
+=======
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(315)
@@ -105388,6 +105801,7 @@ var render = function() {
     )
   ])
 }
+<<<<<<< HEAD
 var staticRenderFns = [
   function() {
     var _vm = this
@@ -105406,6 +105820,94 @@ var staticRenderFns = [
         _c("th")
       ])
     ])
+=======
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(163)
+/* template */
+var __vue_template__ = __webpack_require__(164)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-64aabce8", Component.options)
+  } else {
+    hotAPI.reload("data-v-64aabce8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 163 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      games: null,
+      users: null
+    };
+>>>>>>> edited profilecontent migration and seeders, now works
   },
   function() {
     var _vm = this
@@ -105438,7 +105940,89 @@ var staticRenderFns = [
       _c("strong", [_vm._v("Whoops!")]),
       _vm._v(" Something went wrong!")
     ])
+<<<<<<< HEAD
   },
+=======
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-64aabce8", module.exports)
+  }
+}
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(166)
+/* template */
+var __vue_template__ = __webpack_require__(167)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/frontpagemain.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0d70c4ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-0d70c4ea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 166 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 167 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+>>>>>>> edited profilecontent migration and seeders, now works
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -105486,10 +106070,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(318)
 }
+=======
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(320)
@@ -105807,10 +106394,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+<<<<<<< HEAD
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(323)
 }
+=======
+>>>>>>> edited profilecontent migration and seeders, now works
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(325)
@@ -106600,9 +107190,15 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
+<<<<<<< HEAD
 var __vue_script__ = __webpack_require__(328)
 /* template */
 var __vue_template__ = __webpack_require__(329)
+=======
+var __vue_script__ = __webpack_require__(175)
+/* template */
+var __vue_template__ = __webpack_require__(176)
+>>>>>>> edited profilecontent migration and seeders, now works
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106619,7 +107215,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< HEAD
 Component.options.__file = "resources/assets/js/components/test.vue"
+=======
+Component.options.__file = "resources/assets/js/components/dashboardprofile.vue"
+>>>>>>> edited profilecontent migration and seeders, now works
 
 /* hot reload */
 if (false) {(function () {
@@ -106628,9 +107228,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< HEAD
     hotAPI.createRecord("data-v-bd7c2fae", Component.options)
   } else {
     hotAPI.reload("data-v-bd7c2fae", Component.options)
+=======
+    hotAPI.createRecord("data-v-1fc4342c", Component.options)
+  } else {
+    hotAPI.reload("data-v-1fc4342c", Component.options)
+>>>>>>> edited profilecontent migration and seeders, now works
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -106641,6 +107247,7 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 328 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106744,6 +107351,9 @@ module.exports = Component.exports
 
 /***/ }),
 /* 335 */
+=======
+/* 175 */
+>>>>>>> edited profilecontent migration and seeders, now works
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106776,7 +107386,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 336 */
+=======
+/* 176 */
+>>>>>>> edited profilecontent migration and seeders, now works
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106823,6 +107437,277 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
   }
 }
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(178)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(180)
+/* template */
+var __vue_template__ = __webpack_require__(181)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Chatroom.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-14a1cfea", Component.options)
+  } else {
+    hotAPI.reload("data-v-14a1cfea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(179);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(14)("4b800605", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(13)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\n    border-left-style: solid;\n    border-left-width: thin;\n    border-color: black;\n\n    overflow: hidden;\n}\n.chatbox {\n\n    width: 100%;\n    height: 90%;\n}\n.chatfield {\n\n    width: 100%;\n    height: 10%;\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n}\n.chatmessages {\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n    border-radius: 2px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 180 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'chatbox',
+    data: function data() {
+        return {
+            messages: [],
+            highestid: 0,
+            activeUsers: [],
+            colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
+            index: 0
+        };
+    },
+    props: ['user', 'streamer'],
+    mounted: function mounted() {
+
+        var viewportHeight = document.getElementById('container').clientHeight;
+        var navbarHeight = document.getElementById('navbar').clientHeight;
+        document.getElementById('main').style.minHeight = viewportHeight - navbarHeight + "px";
+        document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
+
+        this.listen();
+    },
+
+    methods: {
+        createChatMessage: function createChatMessage(message) {
+            axios.post('/api/chatmessages/create', {
+                user_id: this.user.id,
+                chat_id: this.streamer.stream.id,
+                message: document.getElementById('messageField').value
+            });
+            document.getElementById('messageField').value = "";
+        },
+        assignColorToUsers: function assignColorToUsers(data) {
+            if (!(data.user.name in this.activeUsers)) {
+                this.activeUsers[data.user.name] = this.colors[this.index];
+                this.index++;
+                if (this.index == this.colors.length) {
+                    this.index = 0;
+                }
+            }
+        },
+        listen: function listen() {
+            var _this = this;
+
+            Echo.channel('stream.' + this.streamer.stream.id).listen('NewChatmessage', function (chatmessage) {
+                _this.assignColorToUsers(chatmessage);
+                _this.messages = _this.messages.concat(chatmessage);
+            });
+        }
+    },
+    updated: function updated() {
+        this.$nextTick(function () {
+            var div = document.getElementById("chatbox");
+            div.scrollTop = div.scrollHeight - div.clientHeight;
+        });
+    }
+
+});
+
+/***/ }),
+/* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "chatroom pt-1 pb-1 px-1" }, [
+    _c(
+      "div",
+      {
+        staticClass: "chatbox",
+        staticStyle: { "overflow-y": "scroll" },
+        attrs: { id: "chatbox" }
+      },
+      _vm._l(_vm.messages, function(message) {
+        return _c(
+          "div",
+          { staticClass: "chatmessages card mx-1 my-1 py-1 px-1" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "card-text",
+                staticStyle: { "margin-bottom": "-15px" }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.streamer.title) +
+                    "\n                "
+                ),
+                _c("p", [
+                  _c(
+                    "b",
+                    { style: "color:" + _vm.activeUsers[message.user.name] },
+                    [_vm._v(_vm._s(message.user.name) + ":")]
+                  ),
+                  _vm._v(
+                    "\n\n                    " +
+                      _vm._s(message.message) +
+                      "\n                "
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      })
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "chatfield" }, [
+      _c("input", {
+        staticClass: "form-control mt-auto mb-auto",
+        staticStyle: { height: "100%" },
+        attrs: { type: "text", id: "messageField" },
+        on: {
+          keydown: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.createChatMessage($event)
+          }
+        }
+      })
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-14a1cfea", module.exports)
+  }
+}
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -41,5 +41,8 @@ Route::get('/dashboard',"ViewController@dashboard");
 Route::get('/test', 'ViewController@test');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+<<<<<<< HEAD
 
+=======
+>>>>>>> edited profilecontent migration and seeders, now works
 Route::get('/{username}', 'ViewController@stream');
