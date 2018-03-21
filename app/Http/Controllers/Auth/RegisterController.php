@@ -80,10 +80,10 @@ class RegisterController extends Controller
         ]);
 
         $stream = Profilecontent::create([
-          'name' => '',
-          'user_id' => $user->id,
+
           'about' =>'No desciption available',
-          'img_url'=>'/images/placeholder.jpg'
+          'img_url'=>'/images/placeholder.jpg',
+          'user_id' => $user->id
         ]);
 
         return $user;

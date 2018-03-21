@@ -11,7 +11,7 @@ class ProfilecontentTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('profilecontent')->insert([
+      DB::table('profilecontents')->insert([
 
                 [
                     'user_id' => '1',
