@@ -3,8 +3,36 @@
     <div class="col-3">
       <div class="card" style="width: 18rem;">
           <img class="card-img-top" :src="profilecontent.img_url" alt="Card image cap">
-          <div class="card-img-overlay"><h5 class="card-title">Upload new image</h5></div>
+          <div class="card-img-overlay"><h5 class="card-title" ></h5></div>
           <div class="card-body">
+            <div id="accordion">
+              <div class="card">
+
+            <div class="card-header" id="headingEdit">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
+                  Upload new image
+                </button>
+              </h5>
+            </div>
+            <div id="collapseImage" class="collapse" aria-labelledby="headingImage" data-parent="#accordion">
+              <div class="card-body">
+
+                <form action="/uploadimage" method="POST" enctype="multipart/form-data">
+                   <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
+                  <div class="form-group">
+                    <label for="profileimage">Example file input</label>
+                    <input type="file" class="form-control-file" id="profileimage" name="profileimage">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
             <h5 class="card-title">{{user.name}}</h5>
             <div class="card-text">{{profilecontent.about}}</div>
 
@@ -61,7 +89,8 @@ export default {
     data:function(){
       return{
           user : [],
-          profilecontent : []
+          profilecontent : [],
+          csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
       }
     },
 
@@ -117,6 +146,7 @@ export default {
          $('#collapseEdit').collapse("toggle");
        })
       },
+
     }
   }
 </script>

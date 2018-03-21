@@ -104431,6 +104431,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -104438,7 +104466,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       user: [],
-      profilecontent: []
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content
     };
   },
 
@@ -104496,6 +104525,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('#collapseEdit').collapse("toggle");
       });
     }
+
   }
 });
 
@@ -104518,6 +104548,59 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
+          _c("div", { attrs: { id: "accordion" } }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "collapse",
+                  attrs: {
+                    id: "collapseImage",
+                    "aria-labelledby": "headingImage",
+                    "data-parent": "#accordion"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: {
+                          action: "/uploadimage",
+                          method: "POST",
+                          enctype: "multipart/form-data"
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_token",
+                            id: "csrf-token"
+                          },
+                          domProps: { value: _vm.csrftoken }
+                        }),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Upload")]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
           _c("h5", { staticClass: "card-title" }, [
             _vm._v(_vm._s(_vm.user.name))
           ]),
@@ -104528,7 +104611,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { attrs: { id: "accordion" } }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(1),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "div",
@@ -104585,7 +104668,48 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-img-overlay" }, [
-      _c("h5", { staticClass: "card-title" }, [_vm._v("Upload new image")])
+      _c("h5", { staticClass: "card-title" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseImage",
+                "aria-expanded": "false",
+                "aria-controls": "collapseImage"
+              }
+            },
+            [_vm._v("\n                Upload new image\n              ")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "profileimage" } }, [
+        _vm._v("Example file input")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control-file",
+        attrs: { type: "file", id: "profileimage", name: "profileimage" }
+      })
     ])
   },
   function() {
