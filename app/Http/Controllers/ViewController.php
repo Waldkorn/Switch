@@ -45,9 +45,9 @@ class ViewController extends Controller
         return view('profiledashboard');
   }
 
-  /*public function channeldashboard(){
+  public function channeldashboard(){
         return view('channeldashboard');
-  }*/
+  }
 
   public function test(){
     return view('test');

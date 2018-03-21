@@ -11,21 +11,25 @@
   </head>
   <body>
 @include('layouts.navbar')
-<div class="container-fluid">
 
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-stream-tab" data-toggle="tab" href="#nav-stream" role="tab" aria-controls="nav-stream" aria-selected="true">Home</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-    <a class="nav-item nav-link" id="nav-channel-tab" data-toggle="tab" href="#nav-channel" role="tab" aria-controls="nav-channel" aria-selected="false">Contact</a>
-  </div>
+<ul class="nav nav-pills nav-fill navbar-dark bg-dark">
+  <li class="nav-item">
+    <a class="nav-link active" href="/streamdashboard" style="background-color:#dc3545">Stream</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/profiledashboard" style="color:#dc3545">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/channeldashboard" style="color:#dc3545">Channel</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#" style="color:#dc3545">schedule</a>
+  </li>
+</ul>
 
-  <div class="tab-content" id="nav-tabContent">
-    <div id="app">
-      <div class="tab-pane fade show active" id="nav-stream" role="tabpanel" aria-labelledby="nav-stream-tab"><dashboardstream></dashboardstream></div>
-      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><dashboardprofile></dashboardprofile></div>
-      <div class="tab-pane fade" id="nav-channel" role="tabpanel" aria-labelledby="nav-channel-tab">channel settings here</div>
-    </div>
-  </div>
+<div class="container-fluid" id="app">
+
+  <dashboardstream></dashboardstream>
 </div>
 
 	<script src="{{ asset('js/app.js') }}"></script>
