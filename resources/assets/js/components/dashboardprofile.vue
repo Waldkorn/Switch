@@ -18,24 +18,13 @@
             <div id="collapseImage" class="collapse" aria-labelledby="headingImage" data-parent="#accordion">
               <div class="card-body">
                 <form action="/uploadimage" enctype="multipart/form-data" method="POST" >
-
-
                   <div class="form-group">
                     <label for="profileimage">Example file input</label>
                     <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
                     <input type="file" class="form-control-file" id="profileimage" name="profileimage">
                   </div>
                   <button type="submit" class="btn btn-primary">Upload</button>
-                </form>
-                <form action="/uploadimage" method="POST" enctype="multipart/form-data">
-
-
-                  <div class="form-group">
-                    <label for="profileimage">Example file input</label>
-                    <input type="file" class="form-control-file" id="profileimage" name="profileimage">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Upload</button>
-                </form>
+              </form>
 
               </div>
             </div>
@@ -156,18 +145,6 @@ export default {
          $('#collapseEdit').collapse("toggle");
        })
       },
-
-      updateAbout: function() {
-
-        axios.post('/api/updateabout', {
-          about: document.getElementById('aboutinput').value,
-       }).then(response => {
-         this.profilecontent.about = response.data;
-         $('#collapseEdit').collapse("toggle");
-       })
-      },
-
-
     }
   }
 </script>
