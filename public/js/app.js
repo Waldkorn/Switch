@@ -23875,6 +23875,115 @@ module.exports = win;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24181,115 +24290,6 @@ module.exports = {
   extend: extend,
   trim: trim
 };
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),
@@ -29030,7 +29030,7 @@ module.exports = exports['default'];
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var normalizeHeaderName = __webpack_require__(114);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -47318,7 +47318,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var settle = __webpack_require__(115);
 var buildURL = __webpack_require__(117);
 var parseHeaders = __webpack_require__(118);
@@ -47566,7 +47566,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(52);
-module.exports = __webpack_require__(179);
+module.exports = __webpack_require__(182);
 
 
 /***/ }),
@@ -47606,8 +47606,9 @@ Vue.component('profilepagemain', __webpack_require__(168));
 
 //dashboard//
 Vue.component('dashboardstream', __webpack_require__(171));
+Vue.component('dashboardprofile', __webpack_require__(174));
 
-Vue.component('chatroom', __webpack_require__(174));
+Vue.component('chatroom', __webpack_require__(177));
 
 var app = new Vue({
     el: '#app'
@@ -83430,7 +83431,7 @@ module.exports = __webpack_require__(111);
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var bind = __webpack_require__(45);
 var Axios = __webpack_require__(113);
 var defaults = __webpack_require__(22);
@@ -83517,7 +83518,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(22);
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var InterceptorManager = __webpack_require__(122);
 var dispatchRequest = __webpack_require__(123);
 
@@ -83602,7 +83603,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -83682,7 +83683,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -83755,7 +83756,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -83815,7 +83816,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -83933,7 +83934,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -83993,7 +83994,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -84052,7 +84053,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var transformData = __webpack_require__(124);
 var isCancel = __webpack_require__(49);
 var defaults = __webpack_require__(22);
@@ -84145,7 +84146,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 /**
  * Transform the data for a request or a response
@@ -100519,7 +100520,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(135)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(138)
 /* template */
@@ -101568,7 +101569,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(141)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(143)
 /* template */
@@ -101889,7 +101890,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(146)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(148)
 /* template */
@@ -102676,7 +102677,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(151)
 /* template */
@@ -102769,7 +102770,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(154)
 /* template */
@@ -102898,7 +102899,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(157)
 /* template */
@@ -103037,7 +103038,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(160)
 /* template */
@@ -103108,22 +103109,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
 
   data: function data() {
     return {
-      users: null
+      users: [],
+      profilecontent: [],
+      followers: [],
+      followings: []
     };
   },
 
   mounted: function mounted() {
     var _this = this;
 
+    var contenturl = '/api/profilecontent/' + this.profile.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+
     var url = '/api/profilepage/' + this.profile.name;
     axios.get(url).then(function (response) {
       _this.users = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followersurl = '/api/followers/' + this.profile.name;
+    axios.get(followersurl).then(function (response) {
+      _this.followers = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followingsurl = '/api/following/' + this.profile.name;
+    axios.get(followingsurl).then(function (response) {
+      _this.followings = JSON.parse(JSON.stringify(response.data));
     });
   },
 
@@ -103149,7 +103190,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('unfollowmsg').style.display = "block";
         document.getElementById('unfollow_btn').style.display = "none";
       });
+    },
+
+    togglefollowers: function togglefollowers() {
+      var x = document.getElementById("followerslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+
+    togglefollowings: function togglefollowings() {
+      var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
     }
+
   }
 });
 
@@ -103172,89 +103232,254 @@ var render = function() {
           _vm._v(" "),
           _c("img", {
             staticClass: "card-img-top",
-            attrs: { src: "/images/placeholder.jpg", alt: "hardcoded example" }
+            attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
           }),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v("followers: [some number]")
-            ]),
-            _vm._v(" "),
-            _vm.loggedin == 1
-              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
-                  _vm.isfollowing == 0
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success",
-                          staticStyle: { "margin-top": "1rem" },
-                          attrs: { id: "follow_btn", value: user.id },
-                          on: { click: _vm.follow }
-                        },
-                        [_vm._v("follow")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isfollowing == 1
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          staticStyle: { "margin-top": "1rem" },
-                          attrs: { id: "unfollow_btn", value: user.id },
-                          on: { click: _vm.unfollow }
-                        },
-                        [_vm._v("unfollow")]
-                      )
-                    : _vm._e(),
+          _c(
+            "div",
+            {
+              staticClass: "btn-group",
+              staticStyle: {
+                padding: "0",
+                width: "100%",
+                border: "0px",
+                "border-radius": "0px"
+              }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: {
+                    width: "50%",
+                    "border-right": "1px",
+                    "border-radius": "0px",
+                    "margin-right": "1px"
+                  },
+                  attrs: { type: "button" },
+                  on: { click: _vm.togglefollowers }
+                },
+                [
+                  _vm._v("Followers"),
                   _c("br"),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-success",
-                      staticStyle: { display: "none" },
-                      attrs: { id: "followmsg", role: "alert" }
-                    },
-                    [_vm._v("You are now following " + _vm._s(user.name))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-danger",
-                      staticStyle: { display: "none" },
-                      attrs: { id: "unfollowmsg", role: "alert" }
-                    },
-                    [
-                      _vm._v(
-                        " You are no longer following " + _vm._s(user.name)
-                      )
-                    ]
-                  )
-                ])
+                  _c("span", { staticClass: "badge badge-light" }, [
+                    _vm._v(" " + _vm._s(_vm.followers.length))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  staticStyle: {
+                    width: "50%",
+                    border: "0px",
+                    "border-radius": "0px"
+                  },
+                  attrs: { type: "button" },
+                  on: { click: _vm.togglefollowings }
+                },
+                [
+                  _vm._v("Following"),
+                  _c("br"),
+                  _c("span", { staticClass: "badge badge-light" }, [
+                    _vm._v(" " + _vm._s(_vm.followings.length))
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _vm.loggedin == 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "container-fluid",
+                    staticStyle: { "text-align": "center" },
+                    attrs: { id: "follow_unfollow" }
+                  },
+                  [
+                    _vm.isfollowing == 0
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-lg",
+                            attrs: { id: "follow_btn", value: user.id },
+                            on: { click: _vm.follow }
+                          },
+                          [_vm._v("follow")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isfollowing == 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-lg",
+                            attrs: { id: "unfollow_btn", value: user.id },
+                            on: { click: _vm.unfollow }
+                          },
+                          [_vm._v("unfollow")]
+                        )
+                      : _vm._e(),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-success",
+                        staticStyle: { display: "none" },
+                        attrs: { id: "followmsg", role: "alert" }
+                      },
+                      [_vm._v("You are now following " + _vm._s(user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-danger",
+                        staticStyle: { display: "none" },
+                        attrs: { id: "unfollowmsg", role: "alert" }
+                      },
+                      [
+                        _vm._v(
+                          " You are no longer following " + _vm._s(user.name)
+                        )
+                      ]
+                    )
+                  ]
+                )
               : _vm._e(),
             _vm._v(" "),
             _vm.loggedin == 0
               ? _c("div", { attrs: { id: "follow_unfollow" } }, [
                   _vm._v(
-                    " Please log in or register to follow " +
-                      _vm._s(user.name) +
-                      "\n"
+                    " Please log in or register to follow " + _vm._s(user.name)
                   )
                 ])
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("pinned games, maybe social media links, whatever")
-          ])
+          _c("div", { staticClass: "card-body" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(_vm.profilecontent.about))
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "list-group",
+              staticStyle: {
+                width: "100%",
+                "max-height": "500px",
+                overflow: "hidden",
+                display: "none"
+              },
+              attrs: { id: "followerslist" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: {
+                    "overflow-y": "scroll",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0"
+                  }
+                },
+                [
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _vm._l(_vm.followers, function(follower) {
+                    return _c(
+                      "a",
+                      {
+                        staticClass: "list-group-item list-group-item-action",
+                        attrs: { href: "/profilepage/" + follower.name }
+                      },
+                      [_vm._v(" " + _vm._s(follower.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "list-group",
+              staticStyle: {
+                width: "100%",
+                "max-height": "500px",
+                overflow: "hidden",
+                display: "none"
+              },
+              attrs: { id: "followingslist" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: {
+                    "overflow-y": "scroll",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0"
+                  }
+                },
+                [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _vm._l(_vm.followings, function(following) {
+                    return _c(
+                      "a",
+                      {
+                        staticClass: "list-group-item list-group-item-action",
+                        attrs: { href: "/profilepage/" + following.name }
+                      },
+                      [_vm._v(" " + _vm._s(following.name))]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          )
         ]
       )
     })
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Followers:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Following:")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -103269,7 +103494,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(163)
 /* template */
@@ -103476,7 +103701,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(166)
 /* template */
@@ -103562,7 +103787,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(169)
 /* template */
@@ -103648,7 +103873,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(172)
 /* template */
@@ -103762,15 +103987,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_id'],
 
   data: function data() {
     return {
-      user: null,
-      games: null
+      user: [],
+      games: []
     };
   },
 
@@ -103788,6 +104015,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+
     streamkey: function streamkey() {
 
       axios.post('/api/streamkey', {
@@ -103809,6 +104037,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     golive: function golive() {
+
       axios.post('/api/stream', {
 
         user_id: this.user.id,
@@ -104099,15 +104328,320 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(175)
+/* template */
+var __vue_template__ = __webpack_require__(176)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/dashboardprofile.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1fc4342c", Component.options)
+  } else {
+    hotAPI.reload("data-v-1fc4342c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      user: [],
+      profilecontent: []
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/user').then(function (response) {
+      _this.user = response.data;
+    });
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "Card image cap" }
+        }),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.user.name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "accordion" } }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "collapse",
+                  attrs: {
+                    id: "collapseEdit",
+                    "aria-labelledby": "headingEdit",
+                    "data-parent": "#accordion"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("form", [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "aboutinput" } }, [
+                          _vm._v("Text")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", id: "aboutinput" },
+                          domProps: { value: _vm.profilecontent.about }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.updateAbout }
+                        },
+                        [_vm._v("Update")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" })
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v("Upload new image")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\n                    Edit about section:\n                  "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1fc4342c", module.exports)
+  }
+}
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(175)
+  __webpack_require__(178)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(177)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(178)
+var __vue_template__ = __webpack_require__(181)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -104146,13 +104680,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(176);
+var content = __webpack_require__(179);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -104172,7 +104706,7 @@ if(false) {
 }
 
 /***/ }),
-/* 176 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)(false);
@@ -104186,7 +104720,7 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
-/* 177 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104278,7 +104812,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 178 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104360,7 +104894,7 @@ if (false) {
 }
 
 /***/ }),
-/* 179 */
+/* 182 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

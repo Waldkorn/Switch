@@ -17,13 +17,23 @@ class userFactory extends Seeder
 	        $u->chatmessages()->save(factory(App\Chatmessage::class)->make());
     	});
 
-    	foreach(App\User::all() as $user) 
+    	foreach(App\User::all() as $user)
     	{
 
     		DB::table('streams')->insert([
     			'user_id' => $user->id,
     			'game_id' => '2',
-    			'title' => 'I am streaming minecraft!'
+    			'title' => 'I am streaming minecraft!',
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s'),
+    		]);
+
+        DB::table('profilecontents')->insert([
+    			'user_id' => $user->id,
+    			'about' => 'Hello I am a bot!',
+    			'img_url' => '/images/placeholder.jpg',
+          'created_at' => date('Y-m-d H:i:s'),
+          'updated_at' => date('Y-m-d H:i:s'),
     		]);
 
     	}

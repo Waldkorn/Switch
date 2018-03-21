@@ -41,6 +41,9 @@ Route::get('/listusers', "API\FrontpageController@listusers");
 Route::get('/profilepage/{name}', "API\ProfileController@get");
 Route::post('/profilepage/follow', 'API\ProfileController@follow_user');
 Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
+Route::get('/profilecontent/{username}', 'API\ProfileController@getcontent');
+Route::get('/followers/{username}', 'API\ProfileController@followers');
+Route::get('/following/{username}', 'API\ProfileController@following');
 
 
 ////////////////////////
@@ -58,6 +61,12 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 
 Route::post('/stream', 'API\StreamController@golive');
+
+Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
+
+
+Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
+
 
 ////////////////////////
 // Auth Routes //

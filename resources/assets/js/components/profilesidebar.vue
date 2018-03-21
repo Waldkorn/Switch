@@ -2,23 +2,45 @@
   <div>
     <div class="card" style="width: 100%;"v-for="user in users">
       <h3 class="card-title">{{ user.name }}</h3>
-      <img class="card-img-top" src="/images/placeholder.jpg" alt="hardcoded example">
+      <img class="card-img-top" :src="profilecontent.img_url" alt="hardcoded example">
+
+      <div class="btn-group" style="padding:0;width:100%;border:0px;border-radius:0px">
+        <button type="button" class="btn btn-primary" v-on:click="togglefollowers" style="width:50%;border-right:1px;border-radius:0px;margin-right:1px">Followers<br> <span class="badge badge-light"> {{followers.length}}</span></button>
+        <button type="button" class="btn btn-primary" v-on:click="togglefollowings" style="width:50%;border:0px;border-radius:0px">Following<br><span class="badge badge-light"> {{followings.length}}</span></button>
+      </div>
+
+      <div class="row">
+        <div class="container-fluid" id="follow_unfollow" v-if="loggedin == 1" style="text-align:center">
+          <button class="btn btn-success btn-lg" id="follow_btn" v-on:click="follow" :value="user.id" v-if="isfollowing == 0">follow</button>
+          <button class="btn btn-danger btn-lg"id="unfollow_btn" v-on:click="unfollow" :value="user.id" v-if="isfollowing == 1">unfollow</button><br>
+          <div class="alert alert-success" id="followmsg" role="alert" style="display:none">You are now following {{user.name}}</div>
+          <div class="alert alert-danger" id="unfollowmsg" role="alert" style="display:none"> You are no longer following {{user.name}}</div>
+        </div>
+        <div id="follow_unfollow" v-if="loggedin == 0" > Please log in or register to follow {{user.name}}</div>
+      </div>
 
       <div class="card-body">
-        <h5 class="card-title">followers: [some number]</h5>
-        <div id="follow_unfollow" v-if="loggedin == 1" >
-        <button class="btn btn-success" id="follow_btn"style="margin-top:1rem" v-on:click="follow" :value="user.id" v-if="isfollowing == 0">follow</button>
-        <button class="btn btn-danger"id="unfollow_btn" style="margin-top:1rem" v-on:click="unfollow" :value="user.id" v-if="isfollowing == 1">unfollow</button><br>
-        <div class="alert alert-success" id="followmsg" role="alert" style="display:none">You are now following {{user.name}}</div>
-        <div class="alert alert-danger" id="unfollowmsg" role="alert" style="display:none"> You are no longer following {{user.name}}</div>
+        <h3 class="card-title"> About: </h3>
+        <h5 class="card-text">{{profilecontent.about}}</h5>
       </div>
-        <div id="follow_unfollow" v-if="loggedin == 0" > Please log in or register to follow {{user.name}}
-</div>
-    </div>
-        <p class="card-text">pinned games, maybe social media links, whatever</p>
+
+      <div class="list-group" id="followerslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
+        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">
+          <p class="list-group-item list-group-item-dark"><strong>Followers:</strong></p>
+          <a v-for="follower in followers" :href="'/profilepage/' + follower.name" class="list-group-item list-group-item-action" > {{follower.name}}</a>
+        </div>
       </div>
+
+      <div class="list-group" id="followingslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
+        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">
+          <p class="list-group-item list-group-item-dark"><strong>Following:</strong></p>
+          <a v-for="following in followings" :href="'/profilepage/' + following.name" class="list-group-item list-group-item-action" > {{following.name}}</a>
+        </div>
+      </div>
+
     </div>
   </div>
+
 </template>
 
 <script>
@@ -27,15 +49,35 @@ export default {
 
   data:function(){
     return{
-      users : null,
+      users : [],
+      profilecontent : [],
+      followers : [],
+      followings : [],
     }
   },
 
   mounted() {
+    var contenturl = '/api/profilecontent/'+this.profile.name;
+    axios.get(contenturl).then(response => {
+    this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+
     var url = '/api/profilepage/'+this.profile.name;
     axios.get(url).then(response => {
     this.users = JSON.parse(JSON.stringify(response.data));
-    })
+    });
+
+    var followersurl = '/api/followers/'+this.profile.name;
+    axios.get(followersurl).then(response => {
+    this.followers = JSON.parse(JSON.stringify(response.data));
+
+    });
+
+    var followingsurl = '/api/following/'+this.profile.name;
+    axios.get(followingsurl).then(response => {
+    this.followings = JSON.parse(JSON.stringify(response.data));
+
+    });
 
   },
 
@@ -49,7 +91,6 @@ export default {
      .then(function (response) {
         document.getElementById('follow_btn').style.display = "none";
         document.getElementById('followmsg').style.display = "block";
-
       })
   },
 
@@ -58,12 +99,30 @@ export default {
       axios.post('/api/profilepage/unfollow', {
       user_id: document.getElementById('unfollow_btn').value,
       unfollower_id: this.auth_user.id
-      })
-      .then(function (response) {
+      }).then(function (response) {
         document.getElementById('unfollowmsg').style.display = "block";
         document.getElementById('unfollow_btn').style.display = "none";
       })
     },
+
+    togglefollowers: function() {
+      var x = document.getElementById("followerslist");
+      if (x.style.display === "none") {
+           x.style.display = "block";
+      } else {
+           x.style.display = "none";
+      }
+    },
+
+    togglefollowings: function() {
+      var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+           x.style.display = "block";
+      } else {
+           x.style.display = "none";
+      }
+    },
+
   },
 }
 </script>

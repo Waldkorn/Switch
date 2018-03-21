@@ -12,7 +12,9 @@
 		    </button>
 		    <div class="collapse dropdown-menu pull-menu-right dropdown-menu-right" id="navbarToggleExternalContent" style="right:0;left:auto;background-color:beige">
 		    	@if(Auth::check())
-					<a class="dropdown-item" href="/dashboard">Dashboard</a>
+					<a class="dropdown-item" href="/streamdashboard">Stream</a>
+					<a class="dropdown-item" href="/profiledashboard">Profile Options</a>
+					<a class="dropdown-item" href="/channeldashboard">Channel Settings</a>
 		    		<a class="dropdown-item" href="/logout">Logout</a>
 		    	@else
 			    	<a class="dropdown-item" href="/login">Login</a>
