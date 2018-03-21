@@ -13,6 +13,21 @@
 
 @include('layouts.navbar')
 
+<ul class="nav nav-pills nav-fill navbar-dark bg-dark">
+  <li class="nav-item">
+    <a class="nav-link" href="/streamdashboard" style="color:#dc3545">Stream</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/profiledashboard" style="background-color:#dc3545">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/channeldashboard" style="color:#dc3545">Channel</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">schedule</a>
+  </li>
+</ul>
+
   <div class="container-fluid">
 
     <div id="app">
