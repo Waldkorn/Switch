@@ -37,10 +37,17 @@ class ViewController extends Controller
   }
 
 
-  public function dashboard(){
-    $auth_id = Auth::user()->id;
-    return view('dashboard',compact('auth_id'));
+  public function streamdashboard(){
+        return view('streamdashboard');
   }
+
+  public function profiledashboard(){
+        return view('profiledashboard');
+  }
+
+  /*public function channeldashboard(){
+        return view('channeldashboard');
+  }*/
 
   public function test(){
     return view('test');
@@ -54,5 +61,5 @@ class ViewController extends Controller
   	return view('streampage', compact('streamer', 'followerCount'));
   }
 
-  
+
 }
