@@ -1,11 +1,53 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-@section('content')
+	<title>Switch</title>
+
+	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #c6c8ca;
+    }
+    #email:hover {
+      border: 2px solid #dc3545;
+    }
+    #email:focus {
+      box-shadow: 0 0 3pt 2pt #dc3545;
+      outline: none;
+      border: none;
+    }
+    #password:hover {
+      border: 2px solid #dc3545;
+    }
+    #password:focus {
+      box-shadow: 0 0 3pt 2pt #dc3545;
+      outline: none;
+      border: none;
+    }
+    .card-body{
+      background-color:white;
+      color: #343a40;
+    }
+    .card-header{
+      text-align: center;
+      background-color:#343a40;
+      color: #f5f5dc;
+    }
+  </style>
+</head>
+<body>
+
+  @include('layouts.navbar')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="card" style="margin-top:1rem">
+                <div class="card-header"><h3 class="mb-1" >{{ __('Login') }}</h3></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -51,11 +93,11 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-danger">
                                     {{ __('Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ route('password.request') }}" style="color:#dc3545">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                             </div>
@@ -66,4 +108,6 @@
         </div>
     </div>
 </div>
-@endsection
+	<script src="{{ asset('js/app.js') }}"></script>
+</body>
+</html>
