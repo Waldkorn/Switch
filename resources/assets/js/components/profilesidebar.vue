@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class="card" style="width: 100%;"v-for="user in users">
-      <h3 class="card-title">{{ user.name }}</h3>
+    <div class="card" style="width: 100%;border-radius: 0px 0px 0.25rem 0rem;border:0px">
+      <h3 class="card-title" style="margin:0;padding:0.5rem">{{ user.name }}</h3>
       <img class="card-img-top" :src="profilecontent.img_url" alt="hardcoded example">
 
       <div class="btn-group" style="padding:0;width:100%;border:0px;border-radius:0px">
-        <button type="button" class="btn btn-primary" v-on:click="togglefollowers" style="width:50%;border-right:1px;border-radius:0px;margin-right:1px">Followers<br> <span class="badge badge-light"> {{followers.length}}</span></button>
-        <button type="button" class="btn btn-primary" v-on:click="togglefollowings" style="width:50%;border:0px;border-radius:0px">Following<br><span class="badge badge-light"> {{followings.length}}</span></button>
+        <button type="button" class="btn btn-danger" v-on:click="togglefollowers" style="width:50%;border-right:1px;border-radius:0px;margin-right:1px">Followers<br> <span class="badge badge-light"> {{followers.length}}</span></button>
+        <button type="button" class="btn btn-danger" v-on:click="togglefollowings" style="width:50%;border:0px;border-radius:0px">Following<br><span class="badge badge-light"> {{followings.length}}</span></button>
       </div>
-
-      <div class="row">
+      <br>
+      <div class="container-fluid">
         <div class="container-fluid" id="follow_unfollow" v-if="loggedin == 1" style="text-align:center">
           <button class="btn btn-success btn-lg" id="follow_btn" v-on:click="follow" :value="user.id" v-if="isfollowing == 0">follow</button>
           <button class="btn btn-danger btn-lg"id="unfollow_btn" v-on:click="unfollow" :value="user.id" v-if="isfollowing == 1">unfollow</button><br>
@@ -19,7 +19,7 @@
         <div id="follow_unfollow" v-if="loggedin == 0" > Please log in or register to follow {{user.name}}</div>
       </div>
 
-      <div class="card-body">
+      <div class="card-body"><hr>
         <h3 class="card-title"> About: </h3>
         <h5 class="card-text">{{profilecontent.about}}</h5>
       </div>
@@ -45,14 +45,15 @@
 
 <script>
 export default {
-  props: ['auth_user','profile','loggedin','isfollowing'],
+  props: ['profile','loggedin','isfollowing'],
 
   data:function(){
     return{
-      users : [],
+      user : [],
       profilecontent : [],
       followers : [],
       followings : [],
+      auth : [],
     }
   },
 
@@ -64,7 +65,8 @@ export default {
 
     var url = '/api/profilepage/'+this.profile.name;
     axios.get(url).then(response => {
-    this.users = JSON.parse(JSON.stringify(response.data));
+    this.user = JSON.parse(JSON.stringify(response.data));
+
     });
 
     var followersurl = '/api/followers/'+this.profile.name;
@@ -78,11 +80,16 @@ export default {
     this.followings = JSON.parse(JSON.stringify(response.data));
 
     });
+
+    axios.get('/api/user').then(response => {
+    this.auth_user = response.data;
+
+    });
   },
 
   methods: {
     follow: function() {
-
+      console.log(document.getElementById('follow_btn').value);
     axios.post('/api/profilepage/follow', {
        user_id: document.getElementById('follow_btn').value,
        follower_id: this.auth_user.id

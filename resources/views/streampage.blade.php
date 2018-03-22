@@ -8,7 +8,48 @@
 
 	<link href="{{ asset('css/videojs.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<style>
+	body {
+		background-color: #c6c8ca;
+	}
+	.navbar-toggler:hover {
+	border: 2px solid #dc3545;
+	}
+	.navbar-toggler:focus {
+	box-shadow: 0 0 3pt 2pt #dc3545;
+	outline: none;
+	border: none;
+	}
+	#navbar{
+	padding-right:0;
+	color:#f5f5dc;
 
+	}
+
+	#navbarToggleExternalContent{
+	margin-top:0.9rem;
+	background-color: #343a40;
+	right:0;left:auto;
+	border:0;
+	border-radius: 0px 0px 0.25rem 0.25rem;
+	}
+
+	#navbardropdown{
+	background-color: #343a40;
+	color: #f5f5dc;
+	border-top:1px;
+	}
+	#navbardropdown:hover {
+			text-decoration: underline;
+			background-color: #343a40;
+			color: #f5f5dc;
+			border-top:1px;
+	}
+
+	hr {
+	border-color:#dc3545;
+	}
+	</style>
 </head>
 <body>
 
@@ -33,7 +74,8 @@
 						        </li>
 						    </ul>
 						</div>
-						<div class="card-body">
+						<div class="card-body" style="text-align:center">
+							@if ($streamer->now_live == 1)
 						 	<video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
 						    	<source src="http://10.0.0.61:8080/hls/{{ $streamer->stream_token }}.m3u8" type='application/x-mpegURL'>
 							    <p class="vjs-no-js">
@@ -41,11 +83,14 @@
 							    	<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 							    </p>
 							</video>
+							@else
+							<img alt="{{$streamer->name}} is offline, sorry!" src="/images/offline.png" >
+							@endif
 						 </div>
 					</div>
 
 
-		
+
 
 				</div>
 
