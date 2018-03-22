@@ -46,18 +46,14 @@
       border: none;
     }
     .card-body{
-
       background-color:white;
       color: #343a40;
-
-
     }
     .card-header{
       text-align: center;
       background-color:#343a40;
       color: #f5f5dc;
     }
-
   </style>
 </head>
 <body>
