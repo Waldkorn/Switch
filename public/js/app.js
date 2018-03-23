@@ -102984,6 +102984,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -103010,49 +103012,53 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-3", staticStyle: { "padding-right": "0" } },
+    {
+      staticClass: "col-md-5 d-flex flex-wrap justify-content-end",
+      staticStyle: { "padding-right": "0" }
+    },
     _vm._l(_vm.games, function(game) {
       return _c(
         "div",
-        { staticClass: "p-2", staticStyle: { padding: "0", float: "right" } },
+        {
+          staticClass: "p-1",
+          staticStyle: { padding: "0", margin: "0", float: "right" }
+        },
         [
-          _c(
-            "div",
-            {
-              staticClass: "card",
-              staticStyle: { width: "150px", color: "#343a40" }
-            },
-            [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: {
-                  src: game.image_source,
-                  alt: game.name,
-                  height: "150",
-                  width: "150"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "card-body",
-                  staticStyle: { "text-align": "center" }
-                },
-                [
+          _c("a", { attrs: { href: "/game/" + game.name } }, [
+            _c(
+              "div",
+              {
+                staticClass: "card",
+                staticStyle: { width: "175px", height: "100%" }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: game.image_source,
+                    alt: game.name,
+                    height: "150",
+                    width: "150"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
                   _c("h6", { staticClass: "card-title" }, [
                     _vm._v(_vm._s(game.name))
                   ]),
                   _vm._v(" "),
                   _c(
-                    "a",
-                    { staticClass: "btn btn-danger", attrs: { href: "#" } },
-                    [_vm._v("number")]
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      staticStyle: { position: "absolute", bottom: "10px" }
+                    },
+                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
                   )
-                ]
-              )
-            ]
-          )
+                ])
+              ]
+            )
+          ])
         ]
       )
     })
@@ -103612,6 +103618,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< 1768cf1b5e77ff40b714cabac5bc2ceda2b1c9f3
+=======
+//
+//
+//
+//
+>>>>>>> solved merge conflicts
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -103635,7 +103648,91 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< 1768cf1b5e77ff40b714cabac5bc2ceda2b1c9f3
 module.exports={render:function(){},staticRenderFns:[]}
+=======
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "col-md-2 pt-1", staticStyle: { padding: "0" } },
+    [
+      _c(
+        "div",
+        { staticClass: "container-fluid px-0" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user) {
+            return _c(
+              "div",
+              {
+                staticClass: "streamer list-group-item",
+                class: {
+                  "list-group-item": user.now_live,
+                  "list-group-item-secondary": !user.now_live
+                },
+                staticStyle: {
+                  "background-color": "#343a40",
+                  "border-radius": "0px 0px 0rem 0rem"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "d-flex w-100 justify-content-between" },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#f5f5dc" },
+                        attrs: { href: "/" + user.name }
+                      },
+                      [_vm._v(_vm._s(user.name))]
+                    ),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "text-danger",
+                        class: { "d-none": !user.now_live }
+                      },
+                      [_vm._v("live now")]
+                    )
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+>>>>>>> solved merge conflicts
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -104003,6 +104100,212 @@ var staticRenderFns = [
         ]
       )
     ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-304d74d2", module.exports)
+  }
+}
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(175)
+/* template */
+var __vue_template__ = __webpack_require__(176)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\dashboardstream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-081f7f0d", Component.options)
+  } else {
+    hotAPI.reload("data-v-081f7f0d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: 'stream',
+	props: ['streamer', 'followercount', 'viewers']
+});
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-9 pl-1 pt-1",
+      staticStyle: { "overflow-y": "scroll" }
+    },
+    [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
+            _c("li", { staticClass: "nav-item px-1" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link active", attrs: { href: "#" } },
+                [_vm._v(_vm._s(_vm.streamer.name))]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item px-1" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link active", attrs: { href: "#" } },
+                [
+                  _vm._v("viewers "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.viewers.length))
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item px-1" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link active", attrs: { href: "#" } },
+                [
+                  _vm._v("followers "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.followercount))
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.streamer.nowLive
+          ? _c("div", { staticClass: "card-body" }, [_vm._m(0)])
+          : _c("div", { staticClass: "card-body" }, [
+              _c("img", {
+                attrs: { src: "/images/offline.png", alt: "streamer offline" }
+              })
+            ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "video",
+      {
+        staticClass: "video-js",
+        attrs: {
+          id: "vid1",
+          controls: "",
+          preload: "auto",
+          "data-setup": '{ "aspectRatio": "16:9" }'
+        }
+      },
+      [
+        _vm._v(" \".m3u8\" type='application/x-mpegURL'>\n\t\t\t    "),
+        _c("p", { staticClass: "vjs-no-js" }, [
+          _vm._v(
+            "\n\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t    \t"
+          ),
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "http://videojs.com/html5-video-support/",
+                target: "_blank"
+              }
+            },
+            [_vm._v("supports HTML5 video")]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

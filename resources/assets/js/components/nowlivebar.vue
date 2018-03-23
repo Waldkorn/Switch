@@ -1,6 +1,7 @@
 <template>
-  <div class="col-md-2 pt-1" style="padding-left:0;">
-    <div class="container-fluid">
+  <div class="col-md-2 pt-1" style="padding:0;">
+    <div class="container-fluid px-0">
+
       <div class="list-group-item" style="background-color:#f5f5dc;border-radius: 0px 0px 0rem 0rem;border:0px">
         <h4 class="mb-1" >Popular streamers</h4>
       </div>
@@ -11,6 +12,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 <script>
 
