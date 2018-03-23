@@ -16,7 +16,7 @@
 			        </li>
 			    </ul>
 			</div>
-			<div class="card-body">
+			<div class="card-body" v-if="streamer.nowLive">
 			 	<video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
 			    	<source src="http://10.0.0.61:8080/hls/" + streamer.stream_token + ".m3u8" type='application/x-mpegURL'>
 				    <p class="vjs-no-js">
@@ -24,6 +24,9 @@
 				    	<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 				    </p>
 				</video>
+			 </div>
+			 <div class="card-body" v-else>
+			 	<img src="/images/offline.png" alt="streamer offline">
 			 </div>
 		</div>
 
