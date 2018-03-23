@@ -12,15 +12,14 @@
 */
 Auth::routes();
 
+
+Route::post('/uploadimage','UploadController@updateimage');
+
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
 Route::get('/profilepage/{username}',"ViewController@profile");
 
-Route::get('/profilepage/{username}', 'ViewController@profile');
-//Route::get('/dashboard',"ViewController@dashboard");
-Route::get('/streamdashboard',"ViewController@streamdashboard");
-Route::get('/profiledashboard',"ViewController@profiledashboard");
-Route::get('/channeldashboard',"ViewController@channeldashboard");
+Route::get('/test',"ViewController@test");
 
 Route::get('/streampage', function () {
     return view('streampage');
