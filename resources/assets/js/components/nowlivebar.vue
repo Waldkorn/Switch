@@ -1,7 +1,6 @@
 <template>
-  <div class="col-3" style="padding:0">
-    <div class="container-fluid" style="padding:0">
-
+  <div class="col-md-2 pt-1" style="padding-left:0;">
+    <div class="container-fluid">
       <div class="list-group-item" style="background-color:#f5f5dc;border-radius: 0px 0px 0rem 0rem;border:0px">
         <h4 class="mb-1" >Popular streamers</h4>
       </div>
@@ -12,17 +11,6 @@
         </div>
       </div>
     </div>
-
-    <div class=container-fluid style="max-height:500px;padding:0;border-radius: 0px 0px 0rem 0rem;"> <div class="list-group-item" style="background-color:#f5f5dc;border:0px;border-radius: 0px 0px 0rem 0rem;">
-      <h4 class="mb-1" >Some other users</h4>
-    </div>
-      <div class=container-fluid style="padding:0;overflow-y:hidden;border-radius: 0px 0px 0.25rem 0rem;">
-        <div class="container-fluid" style="padding:0" v-for="user in users">
-          <a :href="'/profilepage/'  + user.name" class="list-group-item" style="color:#f5f5dc;background-color:#343a40;border-radius: 0px;">{{user.name}}</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 <script>
 

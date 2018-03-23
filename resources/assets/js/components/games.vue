@@ -8,7 +8,7 @@
           <h6 class="card-title">{{game.name}}</h6>
           <a href="#" class="btn btn-danger">number</a>
         </div>
-      </div>
+      </a>
     </div>
 </div>
 </template>
@@ -20,12 +20,10 @@
         games : null
       }
     },
-
     mounted() {
       axios.get('/api/games').then(response => {
         this.games = response.data;
       })
-
     }
   }
 </script>

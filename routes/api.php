@@ -15,11 +15,6 @@ use Illuminate\Http\Request;
 
 Auth::routes();
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
@@ -70,3 +65,4 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 ////////////////////////
 // Auth Routes //
 ////////////////////////
+

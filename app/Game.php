@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Stream;
+
 class Game extends Model
 {
-    public function stream()
+    public function streams()
     {
-    	return $this->belongsTo(Stream::class, 'game_id', 'id');
+    	return $this->hasMany(Stream::class);
     }
 }
