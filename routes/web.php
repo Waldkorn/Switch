@@ -13,8 +13,8 @@
 Auth::routes();
 
 Route::get('/',"ViewController@frontpage");
-
 Route::get('/game/{gamename}', 'ViewController@game');
+Route::get('/profilepage/{username}',"ViewController@profile");
 
 Route::get('/profilepage/{username}', 'ViewController@profile');
 //Route::get('/dashboard',"ViewController@dashboard");
