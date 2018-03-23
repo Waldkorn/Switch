@@ -103465,6 +103465,8 @@ var render = function() {
             attrs: { id: "followerslist" }
           },
           [
+            _vm._m(0),
+            _vm._v(" "),
             _c(
               "div",
               {
@@ -103476,21 +103478,16 @@ var render = function() {
                   padding: "0"
                 }
               },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.followers, function(follower) {
-                  return _c(
-                    "a",
-                    {
-                      staticClass: "list-group-item list-group-item-action",
-                      attrs: { href: "/profilepage/" + follower.name }
-                    },
-                    [_vm._v(" " + _vm._s(follower.name))]
-                  )
-                })
-              ],
-              2
+              _vm._l(_vm.followers, function(follower) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { href: "/profilepage/" + follower.name }
+                  },
+                  [_vm._v(" " + _vm._s(follower.name))]
+                )
+              })
             )
           ]
         ),
@@ -103508,6 +103505,8 @@ var render = function() {
             attrs: { id: "followingslist" }
           },
           [
+            _vm._m(1),
+            _vm._v(" "),
             _c(
               "div",
               {
@@ -103519,21 +103518,16 @@ var render = function() {
                   padding: "0"
                 }
               },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._l(_vm.followings, function(following) {
-                  return _c(
-                    "a",
-                    {
-                      staticClass: "list-group-item list-group-item-action",
-                      attrs: { href: "/profilepage/" + following.name }
-                    },
-                    [_vm._v(" " + _vm._s(following.name))]
-                  )
-                })
-              ],
-              2
+              _vm._l(_vm.followings, function(following) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { href: "/profilepage/" + following.name }
+                  },
+                  [_vm._v(" " + _vm._s(following.name))]
+                )
+              })
             )
           ]
         )

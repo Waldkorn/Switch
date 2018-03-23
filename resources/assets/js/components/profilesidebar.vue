@@ -25,15 +25,15 @@
       </div>
 
       <div class="list-group" id="followerslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
-        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">
-          <p class="list-group-item list-group-item-dark"><strong>Followers:</strong></p>
+        <p class="list-group-item list-group-item-dark"><strong>Followers:</strong></p>
+        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">     
           <a v-for="follower in followers" :href="'/profilepage/' + follower.name" class="list-group-item list-group-item-action" > {{follower.name}}</a>
         </div>
       </div>
 
       <div class="list-group" id="followingslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
+        <p class="list-group-item list-group-item-dark"><strong>Following:</strong></p>
         <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">
-          <p class="list-group-item list-group-item-dark"><strong>Following:</strong></p>
           <a v-for="following in followings" :href="'/profilepage/' + following.name" class="list-group-item list-group-item-action" > {{following.name}}</a>
         </div>
       </div>
