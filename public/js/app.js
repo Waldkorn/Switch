@@ -112094,6 +112094,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c(
     "div",
 <<<<<<< HEAD
@@ -112110,12 +112111,198 @@ var render = function() {
         },
         [
           _c("a", { attrs: { href: "/game/" + game.name } }, [
+=======
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "card",
+        staticStyle: {
+          width: "100%",
+          "border-radius": "0px 0px 0.25rem 0rem",
+          border: "0px"
+        }
+      },
+      [
+        _c(
+          "h3",
+          {
+            staticClass: "card-title",
+            staticStyle: { margin: "0", padding: "0.5rem" }
+          },
+          [_vm._v(_vm._s(_vm.user.name))]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group",
+            staticStyle: {
+              padding: "0",
+              width: "100%",
+              border: "0px",
+              "border-radius": "0px"
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  "border-right": "1px",
+                  "border-radius": "0px",
+                  "margin-right": "1px"
+                },
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowers }
+              },
+              [
+                _vm._v("Followers"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followers.length))
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  border: "0px",
+                  "border-radius": "0px"
+                },
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowings }
+              },
+              [
+                _vm._v("Following"),
+                _c("br"),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followings.length))
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "container-fluid" }, [
+          _vm.loggedin == 1
+            ? _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: { "text-align": "center" },
+                  attrs: { id: "follow_unfollow" }
+                },
+                [
+                  _vm.isfollowing == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-lg",
+                          attrs: { id: "follow_btn", value: _vm.user.id },
+                          on: { click: _vm.follow }
+                        },
+                        [_vm._v("follow")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isfollowing == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-lg",
+                          attrs: { id: "unfollow_btn", value: _vm.user.id },
+                          on: { click: _vm.unfollow }
+                        },
+                        [_vm._v("unfollow")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-success",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "followmsg", role: "alert" }
+                    },
+                    [_vm._v("You are now following " + _vm._s(_vm.user.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unfollowmsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer following " + _vm._s(_vm.user.name)
+                      )
+                    ]
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                _vm._v(
+                  " Please log in or register to follow " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
+            },
+            attrs: { id: "followerslist" }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+>>>>>>> minor graphic update
             _c(
               "div",
               {
                 staticClass: "card",
                 staticStyle: { width: "175px", height: "100%" }
               },
+<<<<<<< HEAD
               [
                 _c("img", {
                   staticClass: "card-img-top",
@@ -112161,6 +112348,38 @@ var staticRenderFns = []
           _vm._v(" "),
           _vm._l(_vm.users, function(user) {
             return _c(
+=======
+              _vm._l(_vm.followers, function(follower) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { href: "/profilepage/" + follower.name }
+                  },
+                  [_vm._v(" " + _vm._s(follower.name))]
+                )
+              })
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
+            },
+            attrs: { id: "followingslist" }
+          },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+>>>>>>> minor graphic update
               "div",
               {
                 staticClass: "streamer list-group-item",
@@ -112173,6 +112392,7 @@ var staticRenderFns = []
                   "border-radius": "0px 0px 0rem 0rem"
                 }
               },
+<<<<<<< HEAD
               [
                 _c(
                   "div",
@@ -112197,6 +112417,18 @@ var staticRenderFns = []
                   ]
                 )
               ]
+=======
+              _vm._l(_vm.followings, function(following) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { href: "/profilepage/" + following.name }
+                  },
+                  [_vm._v(" " + _vm._s(following.name))]
+                )
+              })
+>>>>>>> minor graphic update
             )
           })
         ],
