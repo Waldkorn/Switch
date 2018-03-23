@@ -102962,6 +102962,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -102969,7 +102970,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       games: null
     };
   },
-
   mounted: function mounted() {
     var _this = this;
 
@@ -104608,7 +104608,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     uploadimage: function uploadimage() {
       var formData = new FormData();
       formData.append("profileimage", document.getElementById('profileimage').files[0]);
-      console.log(formData);
       axios.post('/api/uploadimage', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
         console.log('file sent');
       });
@@ -104651,7 +104650,16 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
-                    _c("form", [
+                    _c("form", { attrs: { enctype: "multipart/form-data" } }, [
+                      _c("input", {
+                        attrs: {
+                          type: "hidden",
+                          name: "_token",
+                          id: "csrf-token"
+                        },
+                        domProps: { value: _vm.csrftoken }
+                      }),
+                      _vm._v(" "),
                       _vm._m(2),
                       _vm._v(" "),
                       _c(
@@ -104772,7 +104780,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "profileimage" } }, [
-        _vm._v("Choose your profile picture:")
+        _vm._v("Example file input")
       ]),
       _vm._v(" "),
       _c("input", {
