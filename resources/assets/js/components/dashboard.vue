@@ -161,7 +161,6 @@ export default {
 
     data:function(){
       return{
-          user : [],
           profilecontent : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
@@ -171,14 +170,9 @@ export default {
 
       }
     },
-
+    props: ['user'],
     mounted() {
-      axios.get('/api/user').then(response => {
-        this.user = response.data;
-
-      });
-
-      axios.get('/api/profilecontent').then(response => {
+        axios.get('/api/profilecontent').then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/allgames').then(response => {
