@@ -172,7 +172,9 @@ export default {
     },
     props: ['user'],
     mounted() {
-        axios.get('/api/profilecontent').then(response => {
+      console.log(this.user);
+       var contenturl = 'api/profilecontent/'+this.user.name;
+      axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/allgames').then(response => {
