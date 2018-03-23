@@ -47616,7 +47616,8 @@ Vue.component('streams', __webpack_require__(185));
 var app = new Vue({
     el: '#app',
     data: {
-        viewers: []
+        viewers: [],
+        darkmode: false
     },
     methods: {
         setUsers: function setUsers(users) {
@@ -47631,6 +47632,9 @@ var app = new Vue({
                     this.viewers.splice(i, 1);
                 }
             }
+        },
+        toggleDarkMode: function toggleDarkMode() {
+            this.darkmode = !this.darkmode;
         }
     }
 });
@@ -104226,10 +104230,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'stream',
-	props: ['streamer', 'followers', 'viewers'],
+	props: ['streamer', 'followers', 'viewers', 'darkmode'],
 	data: function data() {
 		return {
 			watchstream: true,
@@ -104252,6 +104259,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.watchstream = false;
 			this.watchviewers = false;
 			this.watchfollowers = true;
+		},
+		toggleDarkMode: function toggleDarkMode() {
+			this.$emit('darkmode');
 		}
 	}
 });
@@ -104271,16 +104281,27 @@ var render = function() {
       staticStyle: { "overflow-y": "scroll" }
     },
     [
-      _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card", class: { "bg-dark": _vm.darkmode } }, [
         _c("div", { staticClass: "card-header" }, [
           _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
             _c(
               "li",
-              { staticClass: "nav-item px-1", on: { click: _vm.showstream } },
+              {
+                staticClass: "nav-item px-1",
+                class: { "bg-dark": _vm.darkmode },
+                on: { click: _vm.showstream }
+              },
               [
                 _c(
                   "a",
-                  { staticClass: "nav-link active", attrs: { href: "#" } },
+                  {
+                    staticClass: "nav-link active",
+                    class: {
+                      "bg-secondary": _vm.darkmode,
+                      "border-secondary": _vm.darkmode
+                    },
+                    attrs: { href: "#" }
+                  },
                   [_vm._v(_vm._s(_vm.streamer.name))]
                 )
               ]
@@ -104288,11 +104309,22 @@ var render = function() {
             _vm._v(" "),
             _c(
               "li",
-              { staticClass: "nav-item px-1", on: { click: _vm.showviewers } },
+              {
+                staticClass: "nav-item px-1",
+                class: { "bg-dark": _vm.darkmode },
+                on: { click: _vm.showviewers }
+              },
               [
                 _c(
                   "a",
-                  { staticClass: "nav-link active", attrs: { href: "#" } },
+                  {
+                    staticClass: "nav-link active",
+                    class: {
+                      "bg-secondary": _vm.darkmode,
+                      "border-secondary": _vm.darkmode
+                    },
+                    attrs: { href: "#" }
+                  },
                   [
                     _vm._v("viewers "),
                     _c("small", { staticClass: "text-muted" }, [
@@ -104307,12 +104339,20 @@ var render = function() {
               "li",
               {
                 staticClass: "nav-item px-1",
+                class: { "bg-dark": _vm.darkmode },
                 on: { click: _vm.showfollowers }
               },
               [
                 _c(
                   "a",
-                  { staticClass: "nav-link active", attrs: { href: "#" } },
+                  {
+                    staticClass: "nav-link active",
+                    class: {
+                      "bg-secondary": _vm.darkmode,
+                      "border-secondary": _vm.darkmode
+                    },
+                    attrs: { href: "#" }
+                  },
                   [
                     _vm._v("followers "),
                     _c("small", { staticClass: "text-muted" }, [
@@ -104321,7 +104361,19 @@ var render = function() {
                   ]
                 )
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "ml-auto" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-dark",
+                  attrs: { type: "button" },
+                  on: { click: _vm.toggleDarkMode }
+                },
+                [_vm._v("Dark mode")]
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -104371,13 +104423,23 @@ var render = function() {
                 "div",
                 { staticClass: "list-group" },
                 _vm._l(_vm.viewers, function(viewer) {
-                  return _c("div", { staticClass: "list-group-item" }, [
-                    _c(
-                      "a",
-                      { attrs: { href: "/profilepage/" + viewer.name } },
-                      [_vm._v(_vm._s(viewer.name))]
-                    )
-                  ])
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "list-group-item",
+                      class: {
+                        "bg-secondary": _vm.darkmode,
+                        "border-secondary": _vm.darkmode
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { attrs: { href: "/profilepage/" + viewer.name } },
+                        [_vm._v(_vm._s(viewer.name))]
+                      )
+                    ]
+                  )
                 })
               )
             ])
@@ -104410,13 +104472,23 @@ var render = function() {
                 "div",
                 { staticClass: "list-group" },
                 _vm._l(_vm.followers, function(follower) {
-                  return _c("div", { staticClass: "list-group-item" }, [
-                    _c(
-                      "a",
-                      { attrs: { href: "/profilepage/" + follower.name } },
-                      [_vm._v(_vm._s(follower.name))]
-                    )
-                  ])
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "list-group-item",
+                      class: {
+                        "bg-secondary": _vm.darkmode,
+                        "border-secondary": _vm.darkmode
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { attrs: { href: "/profilepage/" + follower.name } },
+                        [_vm._v(_vm._s(follower.name))]
+                      )
+                    ]
+                  )
                 })
               )
             ])
@@ -105491,7 +105563,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             loggedIn: false
         };
     },
-    props: ['user', 'streamer', 'viewers'],
+    props: ['user', 'streamer', 'viewers', 'darkmode'],
     mounted: function mounted() {
         var _this = this;
 
@@ -105509,17 +105581,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
         Echo.join('StreamPresence.' + this.streamer.stream.id).here(function (users) {
-            // this.viewers = users;
             _this.$emit('user-list', users);
         }).joining(function (user) {
-            // this.viewers.push(JSON.parse(JSON.stringify(user)));
             _this.$emit('user-joined', user);
         }).leaving(function (user) {
-            // for (var i = 0 ; i < viewers.length ; i++) {
-            //     if(viewers[i].id == user.id) {
-            //         viewers.splice(i, 1);
-            //     }
-            // }
             _this.$emit('user-left', user);
         });
     },
@@ -105568,75 +105633,97 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "chatroom pt-1 pb-1 px-1" }, [
-    _c(
-      "div",
-      {
-        staticClass: "chatbox",
-        staticStyle: { "overflow-y": "scroll" },
-        attrs: { id: "chatbox" }
-      },
-      _vm._l(_vm.messages, function(message) {
-        return _c(
-          "div",
-          { staticClass: "chatmessages card mx-1 my-1 py-1 px-1" },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "card-text",
-                staticStyle: { "margin-bottom": "-15px" }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.streamer.title) +
-                    "\n                "
-                ),
-                _c("p", [
-                  _c(
-                    "b",
-                    { style: "color:" + _vm.activeUsers[message.user.name] },
-                    [_vm._v(_vm._s(message.user.name) + ":")]
-                  ),
-                  _vm._v(
-                    "\n\n                    " +
-                      _vm._s(message.message) +
-                      "\n                "
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      })
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "chatfield", attrs: { id: "chatfield" } }, [
-      _vm.loggedIn
-        ? _c("input", {
-            staticClass: "form-control mt-auto mb-auto",
-            staticStyle: { height: "100%" },
-            attrs: { type: "text", id: "messageField" },
-            on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.createChatMessage($event)
+  return _c(
+    "div",
+    {
+      staticClass: "chatroom pt-1 pb-1 px-1",
+      class: { "bg-dark": _vm.darkmode, "bg-secondary": _vm.darkmode }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "chatbox",
+          class: { "bg-dark": _vm.darkmode, "border-secondary": _vm.darkmode },
+          staticStyle: { "overflow-y": "scroll" },
+          attrs: { id: "chatbox" }
+        },
+        _vm._l(_vm.messages, function(message) {
+          return _c(
+            "div",
+            {
+              staticClass: "chatmessages card mx-1 my-1 py-1 px-1",
+              class: {
+                "bg-secondary": _vm.darkmode,
+                "border-secondary": _vm.darkmode
               }
-            }
-          })
-        : _c("input", {
-            staticClass: "form-control mt-auto mb-auto",
-            staticStyle: { height: "100%" },
-            attrs: { disabled: "", value: "Please log in to chat" }
-          })
-    ])
-  ])
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "card-text",
+                  staticStyle: { "margin-bottom": "-15px" }
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.streamer.title) +
+                      "\n                "
+                  ),
+                  _c("p", [
+                    _c(
+                      "b",
+                      { style: "color:" + _vm.activeUsers[message.user.name] },
+                      [_vm._v(_vm._s(message.user.name) + ":")]
+                    ),
+                    _vm._v(
+                      "\n\n                    " +
+                        _vm._s(message.message) +
+                        "\n                "
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        })
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "chatfield", attrs: { id: "chatfield" } }, [
+        _vm.loggedIn
+          ? _c("input", {
+              staticClass: "form-control mt-auto mb-auto",
+              class: {
+                "bg-secondary": _vm.darkmode,
+                "border-secondary": _vm.darkmode
+              },
+              staticStyle: { height: "100%" },
+              attrs: { type: "text", id: "messageField" },
+              on: {
+                keydown: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.createChatMessage($event)
+                }
+              }
+            })
+          : _c("input", {
+              staticClass: "form-control mt-auto mb-auto",
+              class: {
+                "bg-secondary": _vm.darkmode,
+                "border-secondary": _vm.darkmode
+              },
+              staticStyle: { height: "100%" },
+              attrs: { disabled: "", value: "Please log in to chat" }
+            })
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

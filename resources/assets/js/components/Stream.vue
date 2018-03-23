@@ -2,18 +2,21 @@
 
 	<div class="col-md-9 pl-1 pt-1" style="overflow-y:scroll;">
 
-		<div class="card">
+		<div class="card" v-bind:class="{ 'bg-dark': darkmode }">
 			<div class="card-header">
 			    <ul class="nav nav-tabs card-header-tabs">
-			        <li class="nav-item px-1" v-on:click="showstream">
-			        	<a class="nav-link active" href="#">{{ streamer.name}}</a>
+			        <li class="nav-item px-1" v-on:click="showstream" v-bind:class="{ 'bg-dark': darkmode }">
+			        	<a class="nav-link active" href="#" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">{{ streamer.name}}</a>
 			        </li>
-			    	<li class="nav-item px-1" v-on:click="showviewers">
-			        	<a class="nav-link active" href="#">viewers <small class="text-muted">{{ viewers.length }}</small></a>
+			    	<li class="nav-item px-1" v-on:click="showviewers" v-bind:class="{ 'bg-dark': darkmode }">
+			        	<a class="nav-link active" href="#" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">viewers <small class="text-muted">{{ viewers.length }}</small></a>
 			        </li>
-			        <li class="nav-item px-1" v-on:click="showfollowers">
-			        	<a class="nav-link active" href="#">followers <small class="text-muted">{{ followers.length }}</small></a>
+			        <li class="nav-item px-1" v-on:click="showfollowers" v-bind:class="{ 'bg-dark': darkmode }">
+			        	<a class="nav-link active" href="#" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">followers <small class="text-muted">{{ followers.length }}</small></a>
 			        </li>
+			        <li class="ml-auto">
+				        <button type="button" class="btn btn-dark" v-on:click="toggleDarkMode">Dark mode</button>
+				    </li>
 			    </ul>
 			</div>
 			<div v-show="watchstream">
@@ -36,7 +39,7 @@
 						Watching now
 					</h1>
 					<div class="list-group">
-						<div class="list-group-item" v-for="viewer in viewers">
+						<div class="list-group-item" v-for="viewer in viewers" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 							<a :href="'/profilepage/' + viewer.name">{{viewer.name}}</a>
 						</div>
 					</div>				
@@ -48,7 +51,7 @@
 						{{ streamer.name }}'s followers
 					</h1>
 					<div class="list-group">
-						<div class="list-group-item" v-for="follower in followers">
+						<div class="list-group-item" v-for="follower in followers" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 							<a :href="'/profilepage/' + follower.name">{{follower.name}}</a>
 						</div>
 					</div>				
@@ -63,7 +66,7 @@
 <script>
 	export default {
 		name: 'stream',
-		props: ['streamer', 'followers', 'viewers'],
+		props: ['streamer', 'followers', 'viewers', 'darkmode'],
 		data: function() {
 			return {
 				watchstream: true,
@@ -86,6 +89,9 @@
 				this.watchstream = false;
 				this.watchviewers = false;
 				this.watchfollowers = true;
+			},
+			toggleDarkMode: function() {
+				this.$emit('darkmode');
 			}
 		}
 	}

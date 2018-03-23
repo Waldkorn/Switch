@@ -1,8 +1,8 @@
 <template>
-    <div class="chatroom pt-1 pb-1 px-1">
+    <div class="chatroom pt-1 pb-1 px-1" v-bind:class="{ 'bg-dark': darkmode, 'bg-secondary': darkmode }">
 
-        <div id="chatbox" class="chatbox" style="overflow-y:scroll;">
-            <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages">
+        <div id="chatbox" class="chatbox" style="overflow-y:scroll;" v-bind:class="{ 'bg-dark': darkmode, 'border-secondary': darkmode }">
+            <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
                 <div class="card-text" style="margin-bottom: -15px;">
                     {{ streamer.title }}
                     <p>
@@ -14,11 +14,11 @@
             </div>
         </div>
 
-        <div id="chatfield" class="chatfield">
+        <div id="chatfield" class="chatfield" >
 
-            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height: 100%;">
+            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height: 100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
-            <input disabled v-else class="form-control mt-auto mb-auto" value="Please log in to chat" style="height:100%;">
+            <input disabled v-else class="form-control mt-auto mb-auto" value="Please log in to chat" style="height:100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
         </div>
 
@@ -38,7 +38,7 @@
                 loggedIn: false
             }
         },
-        props: [ 'user', 'streamer', 'viewers' ],
+        props: [ 'user', 'streamer', 'viewers', 'darkmode' ],
         mounted() {
 
             var viewportHeight = document.getElementById('container').clientHeight;
@@ -56,19 +56,12 @@
 
             Echo.join('StreamPresence.' + this.streamer.stream.id)
             .here((users) => {
-                // this.viewers = users;
                 this.$emit('user-list', users);
             })
             .joining((user) => {
-                // this.viewers.push(JSON.parse(JSON.stringify(user)));
                 this.$emit('user-joined', user);
             })
             .leaving((user) => {
-                // for (var i = 0 ; i < viewers.length ; i++) {
-                //     if(viewers[i].id == user.id) {
-                //         viewers.splice(i, 1);
-                //     }
-                // }
                 this.$emit('user-left', user);
             })
         },
