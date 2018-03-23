@@ -22,7 +22,7 @@ Route::get('/streamdashboard',"ViewController@streamdashboard");
 Route::get('/profiledashboard',"ViewController@profiledashboard");
 Route::get('/channeldashboard',"ViewController@channeldashboard");
 
-Route::post('/uploadimage','UploadController@updateimage');
+
 
 
 
