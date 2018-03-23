@@ -18,10 +18,7 @@
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-
-///////////
-// Views //
-///////////
+Route::post('/uploadimage','UploadController@updateimage');
 
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
@@ -42,8 +39,12 @@ Route::get('/channeldashboard',"ViewController@channeldashboard");
 
 Route::post('/uploadimage','UploadController@updateimage');
 
-////////////
-// Stream //
-////////////
+Route::get('/test',"ViewController@test");
 
+
+
+
+
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/{username}', 'ViewController@stream');
