@@ -113406,7 +113406,33 @@ var render = function() {
           },
           [
             _vm.streamer.now_live
-              ? _c("div", { staticClass: "card-body" }, [_vm._m(0)])
+              ? _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "video",
+                    {
+                      staticClass: "video-js",
+                      attrs: {
+                        id: "vid1",
+                        controls: "",
+                        preload: "auto",
+                        "data-setup": '{ "aspectRatio": "16:9" }'
+                      }
+                    },
+                    [
+                      _c("source", {
+                        attrs: {
+                          src:
+                            "http://10.0.0.61:8080/hls/" +
+                            _vm.streamer.stream_token +
+                            ".m3u8",
+                          type: "application/x-mpegURL"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]
+                  )
+                ])
               : _c("div", { staticClass: "card-body" }, [
                   _c("img", {
                     attrs: {
@@ -113765,7 +113791,32 @@ var render = function() {
   )
 >>>>>>> Users can now see how many people are viewing
 }
+<<<<<<< HEAD
 var staticRenderFns = []
+=======
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "http://videojs.com/html5-video-support/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("supports HTML5 video")]
+      )
+    ])
+  }
+]
+>>>>>>> minor bugfix
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -114061,7 +114112,207 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _vm._m(0)
+=======
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-9" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: {
+            width: "100%",
+            "margin-bottom": "1rem",
+            "text-align": "center"
+          }
+        },
+        [
+          _c("h5", { staticClass: "card-header" }, [_vm._v("Stream Preview")]),
+          _vm._v(" "),
+          _c(
+            "video",
+            {
+              staticClass: "video-js",
+              attrs: {
+                id: "vid1",
+                controls: "",
+                preload: "auto",
+                "data-setup": '{ "aspectRatio": "16:9" }'
+              }
+            },
+            [
+              _c("source", {
+                attrs: {
+                  src:
+                    "http://10.0.0.61:8080/hls/" +
+                    _vm.user.stream_token +
+                    ".m3u8",
+                  type: "application/x-mpegURL"
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: { width: "100%", "text-align": "center" }
+        },
+        [
+          _c("h5", { staticClass: "card-header" }, [
+            _vm._v("Start streaming?")
+          ]),
+          _vm._v(" "),
+          _c("form", { staticStyle: { "text-align": "left" } }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "gameselect" } }, [_vm._v("Game:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                { staticClass: "form-control", attrs: { id: "gameselect" } },
+                _vm._l(_vm.games, function(game) {
+                  return _c("option", { domProps: { value: game.id } }, [
+                    _vm._v(_vm._s(game.name))
+                  ])
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-group",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "submit" },
+                    on: { click: _vm.golive }
+                  },
+                  [_vm._v("GO LIVE!")]
+                )
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("h5", { staticClass: "card-header" }, [_vm._v("Getting started")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step one: Streaming software")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
+            )
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step Two: setting up a stream")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "Once your streaming software is installed and running, it'll have to stream to our server."
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "container",
+              staticStyle: { "text-align": "center", "margin-bottom": "1rem" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { "margin-top": "1rem", display: "block" },
+                  attrs: { id: "streamkey_btn" },
+                  on: { click: _vm.streamkey }
+                },
+                [_vm._v("Show my streamkey")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { "margin-top": "1rem", display: "none" },
+                  attrs: { id: "hide_btn" },
+                  on: { click: _vm.hidekey }
+                },
+                [_vm._v("hide streamkey")]
+              ),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "alert alert-danger",
+                staticStyle: { display: "none" },
+                attrs: { id: "streamkeymessage", role: "alert" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "alert alert-danger" }, [
+            _vm._v(
+              "(This is your personal streamkey, never show it to anyone!)"
+            )
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step Three: connect to the server")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "After you've entered your url and streamkey, you can start streaming to our server"
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("You should see a preview of your stream on this page")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step Four: Start streaming! ")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "finally, choose a title and game, and go live! Your viewers can find your stream on your profile."
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+>>>>>>> minor bugfix
 }
 var staticRenderFns = [
   function() {
