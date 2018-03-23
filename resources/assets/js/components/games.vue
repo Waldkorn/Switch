@@ -1,7 +1,7 @@
 <template>
   <div class="col-3" style="padding-right:0">
     <div class="p-2" style="padding:0;margin;0;float:right" v-for="game in games">
-      <div class="card" style="width: 150px;color:#343a40"> 
+      <div class="card" style="width: 150px;color:#343a40">
         <img class="card-img-top" :src="game.image_source" :alt="game.name" height="150" width="150">
 
         <div class="card-body" style="text-align:center">
@@ -10,6 +10,7 @@
         </div>
       </a>
     </div>
+</div>
 </div>
 </template>
 
