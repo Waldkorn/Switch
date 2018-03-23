@@ -16,15 +16,15 @@ Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
 Route::get('/profilepage/{username}',"ViewController@profile");
 
-Route::get('/profilepage/{username}', 'ViewController@profile');
-//Route::get('/dashboard',"ViewController@dashboard");
+////////////////
+// Dashboards //
+////////////////
+
 Route::get('/streamdashboard',"ViewController@streamdashboard");
 Route::get('/profiledashboard',"ViewController@profiledashboard");
 Route::get('/channeldashboard',"ViewController@channeldashboard");
 
 
-
-Route::get('/dashboard',"ViewController@dashboard");
 
 //////////////////
 // Image upload //
