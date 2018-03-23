@@ -104932,6 +104932,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -104997,15 +104999,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.profilecontent.about = response.data;
         $('#collapseEdit').collapse("toggle");
       });
-    },
-
-    uploadimage: function uploadimage() {
-      var formData = new FormData();
-      formData.append("profileimage", document.getElementById('profileimage').files[0]);
-      axios.post('/api/uploadimage', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
-        console.log('file sent');
-      });
     }
+
   }
 });
 
@@ -105044,28 +105039,50 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
-                    _c("form", { attrs: { enctype: "multipart/form-data" } }, [
-                      _c("input", {
+                    _c(
+                      "form",
+                      {
                         attrs: {
-                          type: "hidden",
-                          name: "_token",
-                          id: "csrf-token"
-                        },
-                        domProps: { value: _vm.csrftoken }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" },
-                          on: { click: _vm.uploadimage }
-                        },
-                        [_vm._v("Upload")]
-                      )
-                    ])
+                          action: "/uploadimage",
+                          enctype: "multipart/form-data",
+                          method: "POST"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "profileimage" } }, [
+                            _vm._v("Example file input")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_token",
+                              id: "csrf-token"
+                            },
+                            domProps: { value: _vm.csrftoken }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control-file",
+                            attrs: {
+                              type: "file",
+                              id: "profileimage",
+                              name: "profileimage"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Upload")]
+                        )
+                      ]
+                    )
                   ])
                 ]
               )
@@ -105082,7 +105099,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { attrs: { id: "accordion" } }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "div",
@@ -105167,21 +105184,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "profileimage" } }, [
-        _vm._v("Example file input")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control-file",
-        attrs: { type: "file", id: "profileimage", name: "profileimage" }
-      })
-    ])
   },
   function() {
     var _vm = this
