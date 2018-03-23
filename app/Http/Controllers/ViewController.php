@@ -40,7 +40,8 @@ class ViewController extends Controller
 
 
   public function streamdashboard(){
-        return view('streamdashboard');
+    $user = Auth::user();
+    return view('streamdashboard', compact('user'));
   }
 
   public function profiledashboard(){
