@@ -47566,7 +47566,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(52);
-module.exports = __webpack_require__(188);
+module.exports = __webpack_require__(182);
 
 
 /***/ }),
@@ -47603,36 +47603,15 @@ Vue.component('profilesidebar', __webpack_require__(159));
 Vue.component('nowlivebar', __webpack_require__(162));
 Vue.component('frontpagemain', __webpack_require__(165));
 Vue.component('profilepagemain', __webpack_require__(168));
-Vue.component('stream', __webpack_require__(171));
 
 //dashboard//
-Vue.component('dashboardstream', __webpack_require__(174));
-Vue.component('dashboardprofile', __webpack_require__(177));
+Vue.component('dashboardstream', __webpack_require__(171));
+Vue.component('dashboardprofile', __webpack_require__(174));
 
-Vue.component('chatroom', __webpack_require__(180));
-
-Vue.component('streams', __webpack_require__(185));
+Vue.component('chatroom', __webpack_require__(177));
 
 var app = new Vue({
-    el: '#app',
-    data: {
-        viewers: []
-    },
-    methods: {
-        setUsers: function setUsers(users) {
-            this.viewers = users;
-        },
-        addUser: function addUser(user) {
-            this.viewers.push(JSON.parse(JSON.stringify(user)));
-        },
-        removeUser: function removeUser(user) {
-            for (var i = 0; i < this.viewers.length; i++) {
-                if (this.viewers[i].id == user.id) {
-                    this.viewers.splice(i, 1);
-                }
-            }
-        }
-    }
+    el: '#app'
 });
 
 /***/ }),
@@ -47658,9 +47637,9 @@ __webpack_require__(68);
  */
 
 try {
-    window.$ = window.jQuery = __webpack_require__(44);
+  window.$ = window.jQuery = __webpack_require__(44);
 
-    __webpack_require__(109);
+  __webpack_require__(109);
 } catch (e) {}
 
 /**
@@ -47682,9 +47661,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -47698,10 +47677,10 @@ if (token) {
 window.Pusher = __webpack_require__(130);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
-    broadcaster: 'pusher',
-    key: '8f0d4c8f929781d570a0',
-    cluster: 'eu',
-    encrypted: true
+  broadcaster: 'pusher',
+  key: '8f0d4c8f929781d570a0',
+  cluster: 'eu',
+  encrypted: true
 });
 
 /***/ }),
@@ -100551,7 +100530,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-3f99fc75"
+var __vue_scopeId__ = "data-v-5d1d7d82"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -100562,7 +100541,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\passport\\Clients.vue"
+Component.options.__file = "resources/assets/js/components/passport/Clients.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -100571,9 +100550,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3f99fc75", Component.options)
+    hotAPI.createRecord("data-v-5d1d7d82", Component.options)
   } else {
-    hotAPI.reload("data-v-3f99fc75", Component.options)
+    hotAPI.reload("data-v-5d1d7d82", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -100594,13 +100573,13 @@ var content = __webpack_require__(136);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("a44a1dd2", content, false, {});
+var update = __webpack_require__(14)("2a28cc49", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f99fc75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f99fc75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -100618,7 +100597,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-3f99fc75] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -101577,7 +101556,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3f99fc75", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5d1d7d82", module.exports)
   }
 }
 
@@ -101600,7 +101579,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-0b76a99a"
+var __vue_scopeId__ = "data-v-2ee9fe67"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -101611,7 +101590,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\passport\\AuthorizedClients.vue"
+Component.options.__file = "resources/assets/js/components/passport/AuthorizedClients.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -101620,9 +101599,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0b76a99a", Component.options)
+    hotAPI.createRecord("data-v-2ee9fe67", Component.options)
   } else {
-    hotAPI.reload("data-v-0b76a99a", Component.options)
+    hotAPI.reload("data-v-2ee9fe67", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -101643,13 +101622,13 @@ var content = __webpack_require__(142);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("437dd684", content, false, {});
+var update = __webpack_require__(14)("10846595", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -101667,7 +101646,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-0b76a99a] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -101898,7 +101877,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0b76a99a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2ee9fe67", module.exports)
   }
 }
 
@@ -101921,7 +101900,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-50e40461"
+var __vue_scopeId__ = "data-v-89c53f18"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -101932,7 +101911,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\passport\\PersonalAccessTokens.vue"
+Component.options.__file = "resources/assets/js/components/passport/PersonalAccessTokens.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -101941,9 +101920,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-50e40461", Component.options)
+    hotAPI.createRecord("data-v-89c53f18", Component.options)
   } else {
-    hotAPI.reload("data-v-50e40461", Component.options)
+    hotAPI.reload("data-v-89c53f18", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -101964,13 +101943,13 @@ var content = __webpack_require__(147);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("174f2f0a", content, false, {});
+var update = __webpack_require__(14)("4e7bd74e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -101988,7 +101967,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-50e40461] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -102689,7 +102668,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-50e40461", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-89c53f18", module.exports)
   }
 }
 
@@ -102719,7 +102698,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\test.vue"
+Component.options.__file = "resources/assets/js/components/test.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -102728,9 +102707,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-dc63952e", Component.options)
+    hotAPI.createRecord("data-v-bd7c2fae", Component.options)
   } else {
-    hotAPI.reload("data-v-dc63952e", Component.options)
+    hotAPI.reload("data-v-bd7c2fae", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -102782,7 +102761,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-dc63952e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-bd7c2fae", module.exports)
   }
 }
 
@@ -102812,7 +102791,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -102821,9 +102800,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
+    hotAPI.createRecord("data-v-7168fb6a", Component.options)
   } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
+    hotAPI.reload("data-v-7168fb6a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -102911,7 +102890,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
   }
 }
 
@@ -102941,7 +102920,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\games.vue"
+Component.options.__file = "resources/assets/js/components/games.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -102950,9 +102929,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2da7ad7a", Component.options)
+    hotAPI.createRecord("data-v-0caa52ba", Component.options)
   } else {
-    hotAPI.reload("data-v-2da7ad7a", Component.options)
+    hotAPI.reload("data-v-0caa52ba", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -102968,7 +102947,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -103011,53 +102989,49 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "col-md-5 d-flex flex-wrap justify-content-end",
-      staticStyle: { "padding-right": "0" }
-    },
+    { staticClass: "col-3", staticStyle: { "padding-right": "0" } },
     _vm._l(_vm.games, function(game) {
       return _c(
         "div",
-        {
-          staticClass: "p-1",
-          staticStyle: { padding: "0", margin: "0", float: "right" }
-        },
+        { staticClass: "p-2", staticStyle: { padding: "0", float: "right" } },
         [
-          _c("a", { attrs: { href: "/game/" + game.name } }, [
-            _c(
-              "div",
-              {
-                staticClass: "card",
-                staticStyle: { width: "175px", height: "100%" }
-              },
-              [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: game.image_source,
-                    alt: game.name,
-                    height: "150",
-                    width: "150"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card",
+              staticStyle: { width: "150px", color: "#343a40" }
+            },
+            [
+              _c("img", {
+                staticClass: "card-img-top",
+                attrs: {
+                  src: game.image_source,
+                  alt: game.name,
+                  height: "150",
+                  width: "150"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "card-body",
+                  staticStyle: { "text-align": "center" }
+                },
+                [
                   _c("h6", { staticClass: "card-title" }, [
                     _vm._v(_vm._s(game.name))
                   ]),
                   _vm._v(" "),
                   _c(
-                    "small",
-                    {
-                      staticClass: "text-danger",
-                      staticStyle: { position: "absolute", bottom: "10px" }
-                    },
-                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
+                    "a",
+                    { staticClass: "btn btn-danger", attrs: { href: "#" } },
+                    [_vm._v("number")]
                   )
-                ])
-              ]
-            )
-          ])
+                ]
+              )
+            ]
+          )
         ]
       )
     })
@@ -103069,7 +103043,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2da7ad7a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0caa52ba", module.exports)
   }
 }
 
@@ -103099,7 +103073,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\profilesidebar.vue"
+Component.options.__file = "resources/assets/js/components/profilesidebar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103108,9 +103082,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-d76671ac", Component.options)
+    hotAPI.createRecord("data-v-405fec2c", Component.options)
   } else {
-    hotAPI.reload("data-v-d76671ac", Component.options)
+    hotAPI.reload("data-v-405fec2c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103173,14 +103147,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
+  props: ['profile', 'loggedin', 'isfollowing'],
 
   data: function data() {
     return {
-      users: [],
+      user: [],
       profilecontent: [],
       followers: [],
-      followings: []
+      followings: [],
+      auth: []
     };
   },
 
@@ -103194,7 +103169,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     var url = '/api/profilepage/' + this.profile.name;
     axios.get(url).then(function (response) {
-      _this.users = JSON.parse(JSON.stringify(response.data));
+      _this.user = JSON.parse(JSON.stringify(response.data));
     });
 
     var followersurl = '/api/followers/' + this.profile.name;
@@ -103206,12 +103181,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get(followingsurl).then(function (response) {
       _this.followings = JSON.parse(JSON.stringify(response.data));
     });
+
+    axios.get('/api/user').then(function (response) {
+      _this.auth_user = response.data;
+    });
   },
 
 
   methods: {
     follow: function follow() {
-
+      console.log(document.getElementById('follow_btn').value);
       axios.post('/api/profilepage/follow', {
         user_id: document.getElementById('follow_btn').value,
         follower_id: this.auth_user.id
@@ -103261,246 +103240,262 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.users, function(user) {
-      return _c(
-        "div",
-        { staticClass: "card", staticStyle: { width: "100%" } },
-        [
-          _c("h3", { staticClass: "card-title" }, [_vm._v(_vm._s(user.name))]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "card-img-top",
-            attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "btn-group",
-              staticStyle: {
-                padding: "0",
-                width: "100%",
-                border: "0px",
-                "border-radius": "0px"
-              }
-            },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  staticStyle: {
-                    width: "50%",
-                    "border-right": "1px",
-                    "border-radius": "0px",
-                    "margin-right": "1px"
-                  },
-                  attrs: { type: "button" },
-                  on: { click: _vm.togglefollowers }
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "card",
+        staticStyle: {
+          width: "100%",
+          "border-radius": "0px 0px 0.25rem 0rem",
+          border: "0px"
+        }
+      },
+      [
+        _c(
+          "h3",
+          {
+            staticClass: "card-title",
+            staticStyle: { margin: "0", padding: "0.5rem" }
+          },
+          [_vm._v(_vm._s(_vm.user.name))]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group",
+            staticStyle: {
+              padding: "0",
+              width: "100%",
+              border: "0px",
+              "border-radius": "0px"
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  "border-right": "1px",
+                  "border-radius": "0px",
+                  "margin-right": "1px"
                 },
-                [
-                  _vm._v("Followers"),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "badge badge-light" }, [
-                    _vm._v(" " + _vm._s(_vm.followers.length))
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  staticStyle: {
-                    width: "50%",
-                    border: "0px",
-                    "border-radius": "0px"
-                  },
-                  attrs: { type: "button" },
-                  on: { click: _vm.togglefollowings }
-                },
-                [
-                  _vm._v("Following"),
-                  _c("br"),
-                  _c("span", { staticClass: "badge badge-light" }, [
-                    _vm._v(" " + _vm._s(_vm.followings.length))
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _vm.loggedin == 1
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "container-fluid",
-                    staticStyle: { "text-align": "center" },
-                    attrs: { id: "follow_unfollow" }
-                  },
-                  [
-                    _vm.isfollowing == 0
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success btn-lg",
-                            attrs: { id: "follow_btn", value: user.id },
-                            on: { click: _vm.follow }
-                          },
-                          [_vm._v("follow")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.isfollowing == 1
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger btn-lg",
-                            attrs: { id: "unfollow_btn", value: user.id },
-                            on: { click: _vm.unfollow }
-                          },
-                          [_vm._v("unfollow")]
-                        )
-                      : _vm._e(),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "alert alert-success",
-                        staticStyle: { display: "none" },
-                        attrs: { id: "followmsg", role: "alert" }
-                      },
-                      [_vm._v("You are now following " + _vm._s(user.name))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "alert alert-danger",
-                        staticStyle: { display: "none" },
-                        attrs: { id: "unfollowmsg", role: "alert" }
-                      },
-                      [
-                        _vm._v(
-                          " You are no longer following " + _vm._s(user.name)
-                        )
-                      ]
-                    )
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.loggedin == 0
-              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
-                  _vm._v(
-                    " Please log in or register to follow " + _vm._s(user.name)
-                  )
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowers }
+              },
+              [
+                _vm._v("Followers"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followers.length))
                 ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+              ]
+            ),
             _vm._v(" "),
-            _c("h5", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(_vm.profilecontent.about))
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "list-group",
-              staticStyle: {
-                width: "100%",
-                "max-height": "500px",
-                overflow: "hidden",
-                display: "none"
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  border: "0px",
+                  "border-radius": "0px"
+                },
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowings }
               },
-              attrs: { id: "followerslist" }
-            },
-            [
-              _c(
+              [
+                _vm._v("Following"),
+                _c("br"),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followings.length))
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "container-fluid" }, [
+          _vm.loggedin == 1
+            ? _c(
                 "div",
                 {
                   staticClass: "container-fluid",
-                  staticStyle: {
-                    "overflow-y": "scroll",
-                    width: "100%",
-                    height: "100%",
-                    padding: "0"
-                  }
+                  staticStyle: { "text-align": "center" },
+                  attrs: { id: "follow_unfollow" }
                 },
                 [
-                  _vm._m(0, true),
+                  _vm.isfollowing == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-lg",
+                          attrs: { id: "follow_btn", value: _vm.user.id },
+                          on: { click: _vm.follow }
+                        },
+                        [_vm._v("follow")]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
-                  _vm._l(_vm.followers, function(follower) {
-                    return _c(
-                      "a",
-                      {
-                        staticClass: "list-group-item list-group-item-action",
-                        attrs: { href: "/profilepage/" + follower.name }
-                      },
-                      [_vm._v(" " + _vm._s(follower.name))]
-                    )
-                  })
-                ],
-                2
+                  _vm.isfollowing == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-lg",
+                          attrs: { id: "unfollow_btn", value: _vm.user.id },
+                          on: { click: _vm.unfollow }
+                        },
+                        [_vm._v("unfollow")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-success",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "followmsg", role: "alert" }
+                    },
+                    [_vm._v("You are now following " + _vm._s(_vm.user.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unfollowmsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer following " + _vm._s(_vm.user.name)
+                      )
+                    ]
+                  )
+                ]
               )
-            ]
-          ),
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "list-group",
-              staticStyle: {
-                width: "100%",
-                "max-height": "500px",
-                overflow: "hidden",
-                display: "none"
-              },
-              attrs: { id: "followingslist" }
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                _vm._v(
+                  " Please log in or register to follow " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
             },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "container-fluid",
-                  staticStyle: {
-                    "overflow-y": "scroll",
-                    width: "100%",
-                    height: "100%",
-                    padding: "0"
-                  }
-                },
-                [
-                  _vm._m(1, true),
-                  _vm._v(" "),
-                  _vm._l(_vm.followings, function(following) {
-                    return _c(
-                      "a",
-                      {
-                        staticClass: "list-group-item list-group-item-action",
-                        attrs: { href: "/profilepage/" + following.name }
-                      },
-                      [_vm._v(" " + _vm._s(following.name))]
-                    )
-                  })
-                ],
-                2
-              )
-            ]
-          )
-        ]
-      )
-    })
-  )
+            attrs: { id: "followerslist" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "container-fluid",
+                staticStyle: {
+                  "overflow-y": "scroll",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0"
+                }
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.followers, function(follower) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "/profilepage/" + follower.name }
+                    },
+                    [_vm._v(" " + _vm._s(follower.name))]
+                  )
+                })
+              ],
+              2
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
+            },
+            attrs: { id: "followingslist" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "container-fluid",
+                staticStyle: {
+                  "overflow-y": "scroll",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0"
+                }
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._l(_vm.followings, function(following) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "/profilepage/" + following.name }
+                    },
+                    [_vm._v(" " + _vm._s(following.name))]
+                  )
+                })
+              ],
+              2
+            )
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -103525,7 +103520,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-d76671ac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
   }
 }
 
@@ -103555,7 +103550,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\nowlivebar.vue"
+Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103564,9 +103559,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-35981a28", Component.options)
+    hotAPI.createRecord("data-v-64aabce8", Component.options)
   } else {
-    hotAPI.reload("data-v-35981a28", Component.options)
+    hotAPI.reload("data-v-64aabce8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103582,6 +103577,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -103633,61 +103630,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-md-2 pt-1", staticStyle: { "padding-left": "0" } },
-    [
-      _c(
-        "div",
-        { staticClass: "container-fluid" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
+  return _c("div", { staticClass: "col-3", staticStyle: { padding: "0" } }, [
+    _c(
+      "div",
+      { staticClass: "container-fluid", staticStyle: { padding: "0" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.users, function(user) {
+          return _c(
+            "div",
+            {
+              staticClass: "streamer list-group-item",
+              class: {
+                "list-group-item": user.now_live,
+                "list-group-item-secondary": !user.now_live
+              },
+              staticStyle: {
+                "background-color": "#343a40",
+                "border-radius": "0px 0px 0rem 0rem"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "d-flex w-100 justify-content-between" },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { color: "#f5f5dc" },
+                      attrs: { href: "/" + user.name }
+                    },
+                    [_vm._v(_vm._s(user.name))]
+                  ),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      class: { "d-none": !user.now_live }
+                    },
+                    [_vm._v("live now")]
+                  )
+                ]
+              )
+            ]
+          )
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "container-fluid",
+        staticStyle: {
+          "max-height": "500px",
+          padding: "0",
+          "border-radius": "0px 0px 0rem 0rem"
+        }
+      },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "container-fluid",
+            staticStyle: {
+              padding: "0",
+              "overflow-y": "hidden",
+              "border-radius": "0px 0px 0.25rem 0rem"
+            }
+          },
           _vm._l(_vm.users, function(user) {
             return _c(
               "div",
-              {
-                staticClass: "streamer list-group-item",
-                class: {
-                  "list-group-item-primary": user.now_live,
-                  "list-group-item-secondary": !user.now_live
-                }
-              },
+              { staticClass: "container-fluid", staticStyle: { padding: "0" } },
               [
                 _c(
-                  "div",
-                  { staticClass: "d-flex w-100 justify-content-between" },
-                  [
-                    _c("a", { attrs: { href: "/" + user.name } }, [
-                      _vm._v(_vm._s(user.name))
-                    ]),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "text-danger",
-                        class: { "d-none": !user.now_live }
-                      },
-                      [_vm._v("live now")]
-                    )
-                  ]
+                  "a",
+                  {
+                    staticClass: "list-group-item",
+                    staticStyle: {
+                      color: "#f5f5dc",
+                      "background-color": "#343a40",
+                      "border-radius": "0px"
+                    },
+                    attrs: { href: "/profilepage/" + user.name }
+                  },
+                  [_vm._v(_vm._s(user.name))]
                 )
               ]
             )
           })
-        ],
-        2
-      )
-    ]
-  )
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "list-group-item" }, [
-      _c("h5", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          border: "0px",
+          "border-radius": "0px 0px 0rem 0rem"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Some other users")])]
+    )
   }
 ]
 render._withStripped = true
@@ -103695,7 +103771,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-35981a28", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-64aabce8", module.exports)
   }
 }
 
@@ -103725,7 +103801,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\frontpagemain.vue"
+Component.options.__file = "resources/assets/js/components/frontpagemain.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103734,9 +103810,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-23c75faa", Component.options)
+    hotAPI.createRecord("data-v-0d70c4ea", Component.options)
   } else {
-    hotAPI.reload("data-v-23c75faa", Component.options)
+    hotAPI.reload("data-v-0d70c4ea", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103771,7 +103847,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-5 pt-1" }, [
+    return _c("div", { staticClass: "col" }, [
       _c("p", [_vm._v(" lots of stuff here soon ")])
     ])
   }
@@ -103781,7 +103857,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-23c75faa", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0d70c4ea", module.exports)
   }
 }
 
@@ -103811,7 +103887,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\profilepagemain.vue"
+Component.options.__file = "resources/assets/js/components/profilepagemain.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103820,9 +103896,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7ea466ea", Component.options)
+    hotAPI.createRecord("data-v-b8ed07ac", Component.options)
   } else {
-    hotAPI.reload("data-v-7ea466ea", Component.options)
+    hotAPI.reload("data-v-b8ed07ac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103867,7 +103943,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7ea466ea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-b8ed07ac", module.exports)
   }
 }
 
@@ -103897,7 +103973,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\stream.vue"
+Component.options.__file = "resources/assets/js/components/dashboardstream.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103906,9 +103982,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-304d74d2", Component.options)
+    hotAPI.createRecord("data-v-2d04944d", Component.options)
   } else {
-    hotAPI.reload("data-v-304d74d2", Component.options)
+    hotAPI.reload("data-v-2d04944d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103920,205 +103996,6 @@ module.exports = Component.exports
 
 /***/ }),
 /* 172 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	name: 'stream',
-	props: ['streamer', 'followercount', 'viewers']
-});
-
-/***/ }),
-/* 173 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "col-md-9 pl-1 pt-1",
-      staticStyle: { "overflow-y": "scroll" }
-    },
-    [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
-            _c("li", { staticClass: "nav-item px-1" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [_vm._v(_vm._s(_vm.streamer.name))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item px-1" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [
-                  _vm._v("viewers "),
-                  _c("small", { staticClass: "text-muted" }, [
-                    _vm._v(_vm._s(_vm.viewers.length))
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item px-1" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [
-                  _vm._v("followers "),
-                  _c("small", { staticClass: "text-muted" }, [
-                    _vm._v(_vm._s(_vm.followercount))
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c(
-        "video",
-        {
-          staticClass: "video-js",
-          attrs: {
-            id: "vid1",
-            controls: "",
-            preload: "auto",
-            "data-setup": '{ "aspectRatio": "16:9" }'
-          }
-        },
-        [
-          _vm._v(" \".m3u8\" type='application/x-mpegURL'>\n\t\t\t    "),
-          _c("p", { staticClass: "vjs-no-js" }, [
-            _vm._v(
-              "\n\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t    \t"
-            ),
-            _c(
-              "a",
-              {
-                attrs: {
-                  href: "http://videojs.com/html5-video-support/",
-                  target: "_blank"
-                }
-              },
-              [_vm._v("supports HTML5 video")]
-            )
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-304d74d2", module.exports)
-  }
-}
-
-/***/ }),
-/* 174 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(175)
-/* template */
-var __vue_template__ = __webpack_require__(176)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\dashboardstream.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-081f7f0d", Component.options)
-  } else {
-    hotAPI.reload("data-v-081f7f0d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 175 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104254,7 +104131,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 176 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104521,20 +104398,20 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-081f7f0d", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2d04944d", module.exports)
   }
 }
 
 /***/ }),
-/* 177 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(178)
+var __vue_script__ = __webpack_require__(175)
 /* template */
-var __vue_template__ = __webpack_require__(179)
+var __vue_template__ = __webpack_require__(176)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -104551,7 +104428,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\dashboardprofile.vue"
+Component.options.__file = "resources/assets/js/components/dashboardprofile.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -104560,9 +104437,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-aff2bd28", Component.options)
+    hotAPI.createRecord("data-v-1fc4342c", Component.options)
   } else {
-    hotAPI.reload("data-v-aff2bd28", Component.options)
+    hotAPI.reload("data-v-1fc4342c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -104573,7 +104450,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 178 */
+/* 175 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104726,13 +104603,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.profilecontent.about = response.data;
         $('#collapseEdit').collapse("toggle");
       });
-    }
+    },
 
+    uploadimage: function uploadimage() {
+      var formData = new FormData();
+      formData.append("profileimage", document.getElementById('profileimage').files[0]);
+      axios.post('/api/uploadimage', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+        console.log('file sent');
+      });
+    }
   }
 });
 
 /***/ }),
-/* 179 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104766,37 +104650,28 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "form",
-                      {
+                    _c("form", { attrs: { enctype: "multipart/form-data" } }, [
+                      _c("input", {
                         attrs: {
-                          action: "/uploadimage",
-                          method: "POST",
-                          enctype: "multipart/form-data"
-                        }
-                      },
-                      [
-                        _c("input", {
-                          attrs: {
-                            type: "hidden",
-                            name: "_token",
-                            id: "csrf-token"
-                          },
-                          domProps: { value: _vm.csrftoken }
-                        }),
-                        _vm._v(" "),
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Upload")]
-                        )
-                      ]
-                    )
+                          type: "hidden",
+                          name: "_token",
+                          id: "csrf-token"
+                        },
+                        domProps: { value: _vm.csrftoken }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.uploadimage }
+                        },
+                        [_vm._v("Upload")]
+                      )
+                    ])
                   ])
                 ]
               )
@@ -104950,24 +104825,24 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-aff2bd28", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1fc4342c", module.exports)
   }
 }
 
 /***/ }),
-/* 180 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(181)
+  __webpack_require__(178)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(183)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(184)
+var __vue_template__ = __webpack_require__(181)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -104984,7 +104859,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Chatroom.vue"
+Component.options.__file = "resources/assets/js/components/Chatroom.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -104993,9 +104868,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1fc57d2a", Component.options)
+    hotAPI.createRecord("data-v-14a1cfea", Component.options)
   } else {
-    hotAPI.reload("data-v-1fc57d2a", Component.options)
+    hotAPI.reload("data-v-14a1cfea", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -105006,23 +104881,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 181 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(182);
+var content = __webpack_require__(179);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("22047796", content, false, {});
+var update = __webpack_require__(14)("4b800605", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -105032,7 +104907,7 @@ if(false) {
 }
 
 /***/ }),
-/* 182 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)(false);
@@ -105046,7 +104921,7 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
-/* 183 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105087,13 +104962,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             highestid: 0,
             activeUsers: [],
             colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
-            index: 0,
-            loggedIn: false
+            index: 0
         };
     },
-    props: ['user', 'streamer', 'viewers'],
+    props: ['user', 'streamer'],
     mounted: function mounted() {
-        var _this = this;
 
         var viewportHeight = document.getElementById('container').clientHeight;
         var navbarHeight = document.getElementById('navbar').clientHeight;
@@ -105101,27 +104974,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
 
         this.listen();
-
-        if (this.user != undefined) {
-            this.loggedIn = true;
-        } else {
-            document.getElementById('chatfield').style.backgroundColor = "lightgray";
-        }
-
-        Echo.join('StreamPresence.' + this.streamer.stream.id).here(function (users) {
-            // this.viewers = users;
-            _this.$emit('user-list', users);
-        }).joining(function (user) {
-            // this.viewers.push(JSON.parse(JSON.stringify(user)));
-            _this.$emit('user-joined', user);
-        }).leaving(function (user) {
-            // for (var i = 0 ; i < viewers.length ; i++) {
-            //     if(viewers[i].id == user.id) {
-            //         viewers.splice(i, 1);
-            //     }
-            // }
-            _this.$emit('user-left', user);
-        });
     },
 
     methods: {
@@ -105143,11 +104995,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         listen: function listen() {
-            var _this2 = this;
+            var _this = this;
 
             Echo.channel('stream.' + this.streamer.stream.id).listen('NewChatmessage', function (chatmessage) {
-                _this2.assignColorToUsers(chatmessage);
-                _this2.messages = _this2.messages.concat(chatmessage);
+                _this.assignColorToUsers(chatmessage);
+                _this.messages = _this.messages.concat(chatmessage);
             });
         }
     },
@@ -105161,7 +105013,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 184 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105212,29 +105064,23 @@ var render = function() {
       })
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "chatfield", attrs: { id: "chatfield" } }, [
-      _vm.loggedIn
-        ? _c("input", {
-            staticClass: "form-control mt-auto mb-auto",
-            staticStyle: { height: "100%" },
-            attrs: { type: "text", id: "messageField" },
-            on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.createChatMessage($event)
-              }
+    _c("div", { staticClass: "chatfield" }, [
+      _c("input", {
+        staticClass: "form-control mt-auto mb-auto",
+        staticStyle: { height: "100%" },
+        attrs: { type: "text", id: "messageField" },
+        on: {
+          keydown: function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
             }
-          })
-        : _c("input", {
-            staticClass: "form-control mt-auto mb-auto",
-            staticStyle: { height: "100%" },
-            attrs: { disabled: "", value: "Please log in to chat" }
-          })
+            return _vm.createChatMessage($event)
+          }
+        }
+      })
     ])
   ])
 }
@@ -105244,186 +105090,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1fc57d2a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-14a1cfea", module.exports)
   }
 }
 
 /***/ }),
-/* 185 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(186)
-/* template */
-var __vue_template__ = __webpack_require__(187)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\streamersByGame.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-055ece30", Component.options)
-  } else {
-    hotAPI.reload("data-v-055ece30", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 186 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['game', 'streamers'],
-  data: function data() {
-    return {
-      imageLink: "/images/drdisrespect.jpeg",
-      sortable: []
-    };
-  },
-  mounted: function mounted() {
-
-    function compare(a, b) {
-      if (a.user.followers_count < b.user.followers_count) return -1;
-      if (a.user.followers_count > b.user.followers_count) return 1;
-      return 0;
-    }
-
-    for (var streamer in this.streamers) {
-      this.sortable.push(this.streamers[streamer]);
-    }
-
-    this.streamers = this.sortable.sort(compare).reverse();
-  }
-});
-
-/***/ }),
-/* 187 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "col-md-10 d-flex flex-wrap justify-content-end px-5",
-      staticStyle: { "padding-right": "0" }
-    },
-    _vm._l(_vm.streamers, function(streamer) {
-      return _c(
-        "div",
-        {
-          staticClass: "p-1",
-          staticStyle: { padding: "0", margin: "0", float: "right" }
-        },
-        [
-          _c("a", { attrs: { href: "/" + streamer.user.name } }, [
-            _c(
-              "div",
-              {
-                staticClass: "card",
-                staticStyle: { width: "175px", height: "100%" }
-              },
-              [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: _vm.imageLink,
-                    alt: streamer.user.name,
-                    height: "150",
-                    width: "150"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(streamer.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v(_vm._s(streamer.user.name))]),
-                  _vm._v(" "),
-                  _c(
-                    "small",
-                    {
-                      staticClass: "text-danger",
-                      staticStyle: { position: "absolute", bottom: "10px" }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(streamer.user.followers_count) + " followers"
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ])
-        ]
-      )
-    })
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-055ece30", module.exports)
-  }
-}
-
-/***/ }),
-/* 188 */
+/* 182 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
