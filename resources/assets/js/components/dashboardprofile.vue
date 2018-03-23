@@ -18,13 +18,13 @@
             <div id="collapseImage" class="collapse" aria-labelledby="headingImage" data-parent="#accordion">
               <div class="card-body">
 
-                <form action="/uploadimage" method="POST" enctype="multipart/form-data">
+                <form  enctype="multipart/form-data">
                    <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
                   <div class="form-group">
                     <label for="profileimage">Example file input</label>
                     <input type="file" class="form-control-file" id="profileimage" name="profileimage">
                   </div>
-                  <button type="submit" class="btn btn-primary">Upload</button>
+                  <div type="submit" class="btn btn-primary"v-on:click="uploadimage">Upload</div>
                 </form>
 
               </div>
@@ -147,6 +147,13 @@ export default {
        })
       },
 
+      uploadimage: function() {
+        var formData = new FormData();
+        formData.append("profileimage", document.getElementById('profileimage').files[0]);
+        axios.post('/api/uploadimage' , formData, { headers: {'Content-Type': 'multipart/form-data' }}).then(response => {
+        console.log('file sent');
+       })
+      },
     }
   }
 </script>
