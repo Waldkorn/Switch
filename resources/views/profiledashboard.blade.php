@@ -22,13 +22,7 @@
     #navbar{
     padding-right:0;
     color:#f5f5dc;
-    }
-    .nav-link {
-      color:#dc3545;
-    }
-    .nav-link:hover {
-      color:#dc3545;
-      text-decoration: underline;
+
     }
 
     #navbarToggleExternalContent{
@@ -57,11 +51,33 @@
     </style>
   </head>
   <body>
+
 @include('layouts.navbar')
 
-<div  class="container-fluid" id="app" style="padding:0px">
-  <dashboard :user="{{$user}}"></dashboard>
-</div>
-    <script src="{{ asset('js/app.js') }}"></script>
-  </body>
+<ul class="nav nav-pills nav-fill navbar-dark bg-dark">
+  <li class="nav-item">
+    <a class="nav-link" href="/streamdashboard" style="color:#dc3545">Stream</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/profiledashboard" style="background-color:#dc3545">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/channeldashboard" style="color:#dc3545">Channel</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">schedule</a>
+  </li>
+</ul>
+
+  <div class="container-fluid">
+
+    <div id="app">
+      <dashboardprofile></dashboardprofile>
+    </div>
+
+  </div>
+
+	<script src="{{ asset('js/app.js') }}"></script>
+
+</body>
 </html>

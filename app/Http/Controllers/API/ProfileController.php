@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Game;
 use App\User;
+use App\Profilecontent;
 
 
 class ProfileController extends Controller
 {
   public function get($name){
-    echo User::where('name',$name)->get();
+    echo User::where('name',$name)->first();
   }
 
     public function follow_user(){
@@ -37,5 +38,21 @@ class ProfileController extends Controller
       $user->followers()->detach($unfollower->id);
       $message = "you unfollowed " . $user->name;
       return $message;
+    }
+
+    public function getcontent($username){
+      $user = User::where('name',$username)->first();
+      $profilecontent = Profilecontent::where('user_id',$user->id)->first();
+      return $profilecontent;
+    }
+
+    public function followers($username){
+        $user = User::where('name',$username)->first();
+        return $user->followers()->withCount('followers')->get();
+    }
+
+    public function following($username){
+        $user = User::where('name',$username)->first();
+        return $user->followings()->withCount('followings')->get();
     }
 }

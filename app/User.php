@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'streamer_id', 'follower_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'followers', 'streamer_id', 'follower_id');
     }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -49,5 +49,10 @@ class User extends Authenticatable
     public function stream()
     {
         return $this->hasOne(Stream::class, 'user_id', 'id');
+    }
+
+    public function Profilecontent()
+    {
+        return $this->hasOne(Profilecontent::class, 'user_id', 'id');
     }
 }

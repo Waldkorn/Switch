@@ -14,16 +14,11 @@ use Illuminate\Http\Request;
 */
 
 
-
 Auth::routes();
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
-
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     dd($request->user());
-//});
-
 
 ////////////////////////
 // Frontpage Routes //
@@ -41,6 +36,9 @@ Route::get('/listusers', "API\FrontpageController@listusers");
 Route::get('/profilepage/{name}', "API\ProfileController@get");
 Route::post('/profilepage/follow', 'API\ProfileController@follow_user');
 Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
+Route::get('/profilecontent/{username}', 'API\ProfileController@getcontent');
+Route::get('/followers/{username}', 'API\ProfileController@followers');
+Route::get('/following/{username}', 'API\ProfileController@following');
 
 
 ////////////////////////
@@ -58,7 +56,3 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 
 Route::post('/stream', 'API\StreamController@golive');
-
-////////////////////////
-// Auth Routes //
-////////////////////////

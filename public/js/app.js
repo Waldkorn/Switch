@@ -23875,6 +23875,115 @@ module.exports = win;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24181,115 +24290,6 @@ module.exports = {
   extend: extend,
   trim: trim
 };
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
 
 
 /***/ }),
@@ -29030,7 +29030,7 @@ module.exports = exports['default'];
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var normalizeHeaderName = __webpack_require__(114);
 
 var DEFAULT_CONTENT_TYPE = {
@@ -47318,7 +47318,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var settle = __webpack_require__(115);
 var buildURL = __webpack_require__(117);
 var parseHeaders = __webpack_require__(118);
@@ -47566,7 +47566,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(52);
-module.exports = __webpack_require__(179);
+module.exports = __webpack_require__(191);
 
 
 /***/ }),
@@ -47603,14 +47603,41 @@ Vue.component('profilesidebar', __webpack_require__(159));
 Vue.component('nowlivebar', __webpack_require__(162));
 Vue.component('frontpagemain', __webpack_require__(165));
 Vue.component('profilepagemain', __webpack_require__(168));
+Vue.component('stream', __webpack_require__(171));
 
 //dashboard//
-Vue.component('dashboardstream', __webpack_require__(171));
+Vue.component('dashboard', __webpack_require__(174));
+Vue.component('dashboardstream', __webpack_require__(177));
+Vue.component('dashboardprofile', __webpack_require__(180));
 
-Vue.component('chatroom', __webpack_require__(174));
+Vue.component('chatroom', __webpack_require__(183));
+
+Vue.component('streams', __webpack_require__(188));
 
 var app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        viewers: [],
+        darkmode: false
+    },
+    methods: {
+        setUsers: function setUsers(users) {
+            this.viewers = users;
+        },
+        addUser: function addUser(user) {
+            this.viewers.push(JSON.parse(JSON.stringify(user)));
+        },
+        removeUser: function removeUser(user) {
+            for (var i = 0; i < this.viewers.length; i++) {
+                if (this.viewers[i].id == user.id) {
+                    this.viewers.splice(i, 1);
+                }
+            }
+        },
+        toggleDarkMode: function toggleDarkMode() {
+            this.darkmode = !this.darkmode;
+        }
+    }
 });
 
 /***/ }),
@@ -83430,7 +83457,7 @@ module.exports = __webpack_require__(111);
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var bind = __webpack_require__(45);
 var Axios = __webpack_require__(113);
 var defaults = __webpack_require__(22);
@@ -83517,7 +83544,7 @@ function isSlowBuffer (obj) {
 
 
 var defaults = __webpack_require__(22);
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var InterceptorManager = __webpack_require__(122);
 var dispatchRequest = __webpack_require__(123);
 
@@ -83602,7 +83629,7 @@ module.exports = Axios;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -83682,7 +83709,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -83755,7 +83782,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -83815,7 +83842,7 @@ module.exports = function parseHeaders(headers) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -83933,7 +83960,7 @@ module.exports = btoa;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -83993,7 +84020,7 @@ module.exports = (
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -84052,7 +84079,7 @@ module.exports = InterceptorManager;
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 var transformData = __webpack_require__(124);
 var isCancel = __webpack_require__(49);
 var defaults = __webpack_require__(22);
@@ -84145,7 +84172,7 @@ module.exports = function dispatchRequest(config) {
 "use strict";
 
 
-var utils = __webpack_require__(2);
+var utils = __webpack_require__(3);
 
 /**
  * Transform the data for a request or a response
@@ -100519,7 +100546,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(135)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(138)
 /* template */
@@ -101568,7 +101595,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(141)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(143)
 /* template */
@@ -101889,7 +101916,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(146)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(148)
 /* template */
@@ -102676,7 +102703,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(151)
 /* template */
@@ -102769,7 +102796,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(154)
 /* template */
@@ -102898,7 +102925,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(157)
 /* template */
@@ -102961,6 +102988,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -102968,7 +102998,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       games: null
     };
   },
-
   mounted: function mounted() {
     var _this = this;
 
@@ -102988,34 +103017,52 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-3", staticStyle: { "padding-right": "0" } },
+    {
+      staticClass: "col-md-5 d-flex flex-wrap justify-content-end",
+      staticStyle: { "padding-right": "0" }
+    },
     _vm._l(_vm.games, function(game) {
       return _c(
         "div",
-        { staticClass: "p-2", staticStyle: { padding: "0", float: "right" } },
+        {
+          staticClass: "p-1",
+          staticStyle: { padding: "0", margin: "0", float: "right" }
+        },
         [
-          _c("div", { staticClass: "card", staticStyle: { width: "150px" } }, [
-            _c("img", {
-              staticClass: "card-img-top",
-              attrs: {
-                src: game.image_source,
-                alt: game.name,
-                height: "150",
-                width: "150"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h6", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(game.name))
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("number")]
-              )
-            ])
+          _c("a", { attrs: { href: "/game/" + game.name } }, [
+            _c(
+              "div",
+              {
+                staticClass: "card",
+                staticStyle: { width: "175px", height: "100%" }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: game.image_source,
+                    alt: game.name,
+                    height: "150",
+                    width: "150"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(game.name))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      staticStyle: { position: "absolute", bottom: "10px" }
+                    },
+                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
+                  )
+                ])
+              ]
+            )
           ])
         ]
       )
@@ -103037,7 +103084,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(160)
 /* template */
@@ -103108,29 +103155,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
+  props: ['profile', 'loggedin', 'isfollowing'],
 
   data: function data() {
     return {
-      users: null
+      user: [],
+      profilecontent: [],
+      followers: [],
+      followings: [],
+      auth: []
     };
   },
 
   mounted: function mounted() {
     var _this = this;
 
+    var contenturl = '/api/profilecontent/' + this.profile.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+
     var url = '/api/profilepage/' + this.profile.name;
     axios.get(url).then(function (response) {
-      _this.users = JSON.parse(JSON.stringify(response.data));
+      _this.user = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followersurl = '/api/followers/' + this.profile.name;
+    axios.get(followersurl).then(function (response) {
+      _this.followers = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followingsurl = '/api/following/' + this.profile.name;
+    axios.get(followingsurl).then(function (response) {
+      _this.followings = JSON.parse(JSON.stringify(response.data));
+    });
+
+    axios.get('/api/user').then(function (response) {
+      _this.auth_user = response.data;
     });
   },
 
 
   methods: {
     follow: function follow() {
-
+      console.log(document.getElementById('follow_btn').value);
       axios.post('/api/profilepage/follow', {
         user_id: document.getElementById('follow_btn').value,
         follower_id: this.auth_user.id
@@ -103149,7 +103241,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('unfollowmsg').style.display = "block";
         document.getElementById('unfollow_btn').style.display = "none";
       });
+    },
+
+    togglefollowers: function togglefollowers() {
+      var x = document.getElementById("followerslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+
+    togglefollowings: function togglefollowings() {
+      var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
     }
+
   }
 });
 
@@ -103161,6 +103272,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c(
     "div",
     _vm._l(_vm.users, function(user) {
@@ -103179,16 +103291,110 @@ var render = function() {
             _c("h5", { staticClass: "card-title" }, [
               _vm._v("followers: [some number]")
             ]),
+=======
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "card",
+        staticStyle: {
+          width: "100%",
+          "border-radius": "0px 0px 0.25rem 0rem",
+          border: "0px"
+        }
+      },
+      [
+        _c(
+          "h3",
+          {
+            staticClass: "card-title",
+            staticStyle: { margin: "0", padding: "0.5rem" }
+          },
+          [_vm._v(_vm._s(_vm.user.name))]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group",
+            staticStyle: {
+              padding: "0",
+              width: "100%",
+              border: "0px",
+              "border-radius": "0px"
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  "border-right": "1px",
+                  "border-radius": "0px",
+                  "margin-right": "1px"
+                },
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowers }
+              },
+              [
+                _vm._v("Followers"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followers.length))
+                ])
+              ]
+            ),
+>>>>>>> develop
             _vm._v(" "),
-            _vm.loggedin == 1
-              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  border: "0px",
+                  "border-radius": "0px"
+                },
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowings }
+              },
+              [
+                _vm._v("Following"),
+                _c("br"),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followings.length))
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "container-fluid" }, [
+          _vm.loggedin == 1
+            ? _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: { "text-align": "center" },
+                  attrs: { id: "follow_unfollow" }
+                },
+                [
                   _vm.isfollowing == 0
                     ? _c(
                         "button",
                         {
-                          staticClass: "btn btn-success",
-                          staticStyle: { "margin-top": "1rem" },
-                          attrs: { id: "follow_btn", value: user.id },
+                          staticClass: "btn btn-success btn-lg",
+                          attrs: { id: "follow_btn", value: _vm.user.id },
                           on: { click: _vm.follow }
                         },
                         [_vm._v("follow")]
@@ -103199,9 +103405,8 @@ var render = function() {
                     ? _c(
                         "button",
                         {
-                          staticClass: "btn btn-danger",
-                          staticStyle: { "margin-top": "1rem" },
-                          attrs: { id: "unfollow_btn", value: user.id },
+                          staticClass: "btn btn-danger btn-lg",
+                          attrs: { id: "unfollow_btn", value: _vm.user.id },
                           on: { click: _vm.unfollow }
                         },
                         [_vm._v("unfollow")]
@@ -103216,7 +103421,7 @@ var render = function() {
                       staticStyle: { display: "none" },
                       attrs: { id: "followmsg", role: "alert" }
                     },
-                    [_vm._v("You are now following " + _vm._s(user.name))]
+                    [_vm._v("You are now following " + _vm._s(_vm.user.name))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -103228,33 +103433,135 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        " You are no longer following " + _vm._s(user.name)
+                        " You are no longer following " + _vm._s(_vm.user.name)
                       )
                     ]
                   )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.loggedin == 0
-              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
-                  _vm._v(
-                    " Please log in or register to follow " +
-                      _vm._s(user.name) +
-                      "\n"
-                  )
-                ])
-              : _vm._e()
-          ]),
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c("p", { staticClass: "card-text" }, [
-            _vm._v("pinned games, maybe social media links, whatever")
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                _vm._v(
+                  " Please log in or register to follow " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
           ])
-        ]
-      )
-    })
-  )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
+            },
+            attrs: { id: "followerslist" }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "container-fluid",
+                staticStyle: {
+                  "overflow-y": "scroll",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0"
+                }
+              },
+              _vm._l(_vm.followers, function(follower) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { href: "/profilepage/" + follower.name }
+                  },
+                  [_vm._v(" " + _vm._s(follower.name))]
+                )
+              })
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
+            },
+            attrs: { id: "followingslist" }
+          },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "container-fluid",
+                staticStyle: {
+                  "overflow-y": "scroll",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0"
+                }
+              },
+              _vm._l(_vm.followings, function(following) {
+                return _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item list-group-item-action",
+                    attrs: { href: "/profilepage/" + following.name }
+                  },
+                  [_vm._v(" " + _vm._s(following.name))]
+                )
+              })
+            )
+          ]
+        )
+      ]
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Followers:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "list-group-item list-group-item-dark" }, [
+      _c("strong", [_vm._v("Following:")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -103269,7 +103576,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(163)
 /* template */
@@ -103333,14 +103640,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -103370,11 +103669,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-3", staticStyle: { "padding-left": "0" } },
+    { staticClass: "col-md-2 pt-1", staticStyle: { padding: "0" } },
     [
       _c(
         "div",
-        { staticClass: "container-fluid" },
+        { staticClass: "container-fluid px-0" },
         [
           _vm._m(0),
           _vm._v(" "),
@@ -103384,8 +103683,12 @@ var render = function() {
               {
                 staticClass: "streamer list-group-item",
                 class: {
-                  "list-group-item-primary": user.now_live,
+                  "list-group-item": user.now_live,
                   "list-group-item-secondary": !user.now_live
+                },
+                staticStyle: {
+                  "background-color": "#343a40",
+                  "border-radius": "0px 0px 0rem 0rem"
                 }
               },
               [
@@ -103393,9 +103696,14 @@ var render = function() {
                   "div",
                   { staticClass: "d-flex w-100 justify-content-between" },
                   [
-                    _c("a", { attrs: { href: "/" + user.name } }, [
-                      _vm._v(_vm._s(user.name))
-                    ]),
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#f5f5dc" },
+                        attrs: { href: "/" + user.name }
+                      },
+                      [_vm._v(_vm._s(user.name))]
+                    ),
                     _c(
                       "small",
                       {
@@ -103411,43 +103719,6 @@ var render = function() {
           })
         ],
         2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "container-fluid",
-          staticStyle: { "max-height": "500px" }
-        },
-        [
-          _vm._v(" Some other users\n    "),
-          _c(
-            "div",
-            {
-              staticClass: "container-fluid",
-              staticStyle: { padding: "0", "overflow-y": "scroll" }
-            },
-            _vm._l(_vm.users, function(user) {
-              return _c(
-                "div",
-                {
-                  staticClass: "container-fluid",
-                  staticStyle: { padding: "0" }
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "list-group-item",
-                      attrs: { href: "/profilepage/" + user.name }
-                    },
-                    [_vm._v(_vm._s(user.name))]
-                  )
-                ]
-              )
-            })
-          )
-        ]
       )
     ]
   )
@@ -103457,9 +103728,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "list-group-item" }, [
-      _c("h5", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])]
+    )
   }
 ]
 render._withStripped = true
@@ -103476,7 +103756,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(166)
 /* template */
@@ -103543,7 +103823,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
+    return _c("div", { staticClass: "col-md-5 pt-1" }, [
       _c("p", [_vm._v(" lots of stuff here soon ")])
     ])
   }
@@ -103562,7 +103842,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(169)
 /* template */
@@ -103648,7 +103928,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(172)
 /* template */
@@ -103669,7 +103949,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< HEAD
 Component.options.__file = "resources/assets/js/components/dashboardstream.vue"
+=======
+Component.options.__file = "resources\\assets\\js\\components\\Stream.vue"
+>>>>>>> develop
 
 /* hot reload */
 if (false) {(function () {
@@ -103678,9 +103962,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< HEAD
     hotAPI.createRecord("data-v-2d04944d", Component.options)
   } else {
     hotAPI.reload("data-v-2d04944d", Component.options)
+=======
+    hotAPI.createRecord("data-v-5eab21b7", Component.options)
+  } else {
+    hotAPI.reload("data-v-5eab21b7", Component.options)
+>>>>>>> develop
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103761,6 +104051,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< HEAD
 //
 
 
@@ -103820,6 +104111,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     }
   }
+=======
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: 'stream',
+	props: ['streamer', 'followers', 'viewers', 'darkmode'],
+	data: function data() {
+		return {
+			watchstream: true,
+			watchviewers: false,
+			watchfollowers: false
+		};
+	},
+	methods: {
+		showstream: function showstream() {
+			this.watchstream = true;
+			this.watchviewers = false;
+			this.watchfollowers = false;
+		},
+		showviewers: function showviewers() {
+			this.watchstream = false;
+			this.watchviewers = true;
+			this.watchfollowers = false;
+		},
+		showfollowers: function showfollowers() {
+			this.watchstream = false;
+			this.watchviewers = false;
+			this.watchfollowers = true;
+		},
+		toggleDarkMode: function toggleDarkMode() {
+			this.$emit('darkmode');
+		}
+	}
+>>>>>>> develop
 });
 
 /***/ }),
@@ -103830,6 +104154,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-9" }, [
       _c(
@@ -104029,6 +104354,1693 @@ var render = function() {
       ])
     ])
   ])
+=======
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-9 pl-1 pt-1",
+      staticStyle: { "overflow-y": "scroll" }
+    },
+    [
+      _c("div", { staticClass: "card", class: { "bg-dark": _vm.darkmode } }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
+            _c(
+              "li",
+              {
+                staticClass: "nav-item px-1",
+                class: { "bg-dark": _vm.darkmode },
+                on: { click: _vm.showstream }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link active",
+                    class: {
+                      "bg-secondary": _vm.darkmode,
+                      "border-secondary": _vm.darkmode
+                    },
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v(_vm._s(_vm.streamer.name))]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item px-1",
+                class: { "bg-dark": _vm.darkmode },
+                on: { click: _vm.showviewers }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link active",
+                    class: {
+                      "bg-secondary": _vm.darkmode,
+                      "border-secondary": _vm.darkmode
+                    },
+                    attrs: { href: "#" }
+                  },
+                  [
+                    _vm._v("viewers "),
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v(_vm._s(_vm.viewers.length))
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item px-1",
+                class: { "bg-dark": _vm.darkmode },
+                on: { click: _vm.showfollowers }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-link active",
+                    class: {
+                      "bg-secondary": _vm.darkmode,
+                      "border-secondary": _vm.darkmode
+                    },
+                    attrs: { href: "#" }
+                  },
+                  [
+                    _vm._v("followers "),
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v(_vm._s(_vm.followers.length))
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "ml-auto" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-dark",
+                  attrs: { type: "button" },
+                  on: { click: _vm.toggleDarkMode }
+                },
+                [_vm._v("Dark mode")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.watchstream,
+                expression: "watchstream"
+              }
+            ]
+          },
+          [
+            _vm.streamer.now_live
+              ? _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "video",
+                    {
+                      staticClass: "video-js",
+                      attrs: {
+                        id: "vid1",
+                        controls: "",
+                        preload: "auto",
+                        "data-setup": '{ "aspectRatio": "16:9" }'
+                      }
+                    },
+                    [
+                      _c("source", {
+                        attrs: {
+                          src:
+                            "http://10.0.0.61:8080/hls/" +
+                            _vm.streamer.stream_token +
+                            ".m3u8",
+                          type: "application/x-mpegURL"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]
+                  )
+                ])
+              : _c("div", { staticClass: "card-body" }, [
+                  _c("img", {
+                    attrs: {
+                      src: "/images/offline.png",
+                      alt: "streamer offline"
+                    }
+                  })
+                ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.watchviewers,
+                expression: "watchviewers"
+              }
+            ]
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h1", [_vm._v("\n\t\t\t\t\tWatching now\n\t\t\t\t")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "list-group" },
+                _vm._l(_vm.viewers, function(viewer) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "list-group-item",
+                      class: {
+                        "bg-secondary": _vm.darkmode,
+                        "border-secondary": _vm.darkmode
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { attrs: { href: "/profilepage/" + viewer.name } },
+                        [_vm._v(_vm._s(viewer.name))]
+                      )
+                    ]
+                  )
+                })
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.watchfollowers,
+                expression: "watchfollowers"
+              }
+            ]
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h1", [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.streamer.name) +
+                    "'s followers\n\t\t\t\t"
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "list-group" },
+                _vm._l(_vm.followers, function(follower) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "list-group-item",
+                      class: {
+                        "bg-secondary": _vm.darkmode,
+                        "border-secondary": _vm.darkmode
+                      }
+                    },
+                    [
+                      _c(
+                        "a",
+                        { attrs: { href: "/profilepage/" + follower.name } },
+                        [_vm._v(_vm._s(follower.name))]
+                      )
+                    ]
+                  )
+                })
+              )
+            ])
+          ]
+        )
+      ])
+    ]
+  )
+>>>>>>> develop
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "http://videojs.com/html5-video-support/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("supports HTML5 video")]
+      )
+    ])
+<<<<<<< HEAD
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "streamtitle" } }, [_vm._v("Title:")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "streamtitle",
+          placeholder: "Enter stream title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "card-text" }, [
+      _vm._v("And your unique stream key, like this:"),
+      _c("img", {
+        staticClass: "card-img-top",
+        staticStyle: { "max-width": "100%" },
+        attrs: {
+          src: "/images/dashboard/streamsettingsobs.png",
+          alt: "OBS stream settings"
+        }
+      })
+    ])
+=======
+>>>>>>> develop
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+<<<<<<< HEAD
+    require("vue-hot-reload-api")      .rerender("data-v-2d04944d", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-5eab21b7", module.exports)
+>>>>>>> develop
+  }
+}
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(175)
+/* template */
+var __vue_template__ = __webpack_require__(176)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+<<<<<<< HEAD
+Component.options.__file = "resources/assets/js/components/Chatroom.vue"
+=======
+Component.options.__file = "resources\\assets\\js\\components\\dashboard.vue"
+>>>>>>> develop
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+<<<<<<< HEAD
+    hotAPI.createRecord("data-v-14a1cfea", Component.options)
+  } else {
+    hotAPI.reload("data-v-14a1cfea", Component.options)
+=======
+    hotAPI.createRecord("data-v-49180b4d", Component.options)
+  } else {
+    hotAPI.reload("data-v-49180b4d", Component.options)
+>>>>>>> develop
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 175 */
+<<<<<<< HEAD
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(176);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(14)("4b800605", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(13)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\n    border-left-style: solid;\n    border-left-width: thin;\n    border-color: black;\n\n    overflow: hidden;\n}\n.chatbox {\n\n    width: 100%;\n    height: 90%;\n}\n.chatfield {\n\n    width: 100%;\n    height: 10%;\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n}\n.chatmessages {\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n    border-radius: 2px;\n}\n\n", ""]);
+
+// exports
+
+=======
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+>>>>>>> develop
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false
+
+    };
+  },
+  props: ['user'],
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    },
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+    }
+
+  }
+});
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "0px" } },
+    [
+      _c("ul", { staticClass: "nav nav-pills nav-fill navbar-dark bg-dark" }, [
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showstreamdash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Stream")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showprofiledash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Profile")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showchanneldash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Channel")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container-fluid", staticStyle: { padding: "0px" } },
+        [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.streamdash,
+                  expression: "streamdash"
+                }
+              ],
+              attrs: { id: "nav-stream" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "row", staticStyle: { border: "0px" } },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "col-9", staticStyle: { border: "0px" } },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          staticStyle: {
+                            width: "100%",
+                            "margin-bottom": "1rem",
+                            "text-align": "center"
+                          }
+                        },
+                        [
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Stream Preview")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "video",
+                            {
+                              staticClass: "video-js",
+                              attrs: {
+                                id: "vid1",
+                                controls: "",
+                                preload: "auto",
+                                "data-setup": '{ "aspectRatio": "16:9" }'
+                              }
+                            },
+                            [
+                              _c("source", {
+                                attrs: {
+                                  src:
+                                    "http://10.0.0.61:8080/hls/" +
+                                    _vm.user.stream_token +
+                                    ".m3u8",
+                                  type: "application/x-mpegURL"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(1)
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          staticStyle: { width: "100%", "text-align": "center" }
+                        },
+                        [
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Start streaming?")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            { staticStyle: { "text-align": "left" } },
+                            [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "gameselect" } }, [
+                                  _vm._v("Game:")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: { id: "gameselect" }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "form-group",
+                                  staticStyle: { "text-align": "center" }
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: { type: "submit" },
+                                      on: { click: _vm.golive }
+                                    },
+                                    [_vm._v("GO LIVE!")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-3", staticStyle: { border: "0px" } },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("h5", { staticClass: "card-header" }, [
+                          _vm._v("Getting started")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step one: Streaming software")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Two: setting up a stream")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "Once your streaming software is installed and running, it'll have to stream to our server."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "container",
+                              staticStyle: {
+                                "text-align": "center",
+                                "margin-bottom": "1rem"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "block"
+                                  },
+                                  attrs: { id: "streamkey_btn" },
+                                  on: { click: _vm.streamkey }
+                                },
+                                [_vm._v("Show my streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "none"
+                                  },
+                                  attrs: { id: "hide_btn" },
+                                  on: { click: _vm.hidekey }
+                                },
+                                [_vm._v("hide streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "alert alert-danger",
+                                staticStyle: { display: "none" },
+                                attrs: { id: "streamkeymessage", role: "alert" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "alert alert-danger" }, [
+                            _vm._v(
+                              "(This is your personal streamkey, never show it to anyone!)"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Three: connect to the server")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "After you've entered your url and streamkey, you can start streaming to our server"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "You should see a preview of your stream on this page"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Four: Start streaming! ")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "finally, choose a title and game, and go live! Your viewers can find your stream on your profile."
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.profiledash,
+                  expression: "profiledash"
+                }
+              ],
+              attrs: { id: "nav-profile" }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-3" }, [
+                  _c(
+                    "div",
+                    { staticClass: "card", staticStyle: { width: "18rem" } },
+                    [
+                      _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src: _vm.profilecontent.img_url,
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseImage",
+                                  "aria-labelledby": "headingImage",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c(
+                                    "form",
+                                    {
+                                      attrs: {
+                                        action: "/uploadimage",
+                                        enctype: "multipart/form-data",
+                                        method: "POST"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "profileimage" } },
+                                          [_vm._v("Example file input")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          attrs: {
+                                            type: "hidden",
+                                            name: "_token",
+                                            id: "csrf-token"
+                                          },
+                                          domProps: { value: _vm.csrftoken }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "form-control-file",
+                                          attrs: {
+                                            type: "file",
+                                            id: "profileimage",
+                                            name: "profileimage"
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          attrs: { type: "submit" }
+                                        },
+                                        [_vm._v("Upload")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(_vm.user.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(_vm.profilecontent.about))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(6),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseEdit",
+                                  "aria-labelledby": "headingEdit",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c("form", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "aboutinput" } },
+                                        [_vm._v("Text")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "aboutinput"
+                                        },
+                                        domProps: {
+                                          value: _vm.profilecontent.about
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "submit" },
+                                        on: { click: _vm.updateAbout }
+                                      },
+                                      [_vm._v("Update")]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.channeldash,
+                  expression: "channeldash"
+                }
+              ],
+              attrs: { id: "nav-channel" }
+            },
+            [_vm._v("channel settings here")]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
+        _vm._v("schedule")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\r\n      \t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\r\n      \t\t\t\t    \t"
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "http://videojs.com/html5-video-support/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("supports HTML5 video")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "streamtitle" } }, [_vm._v("Title:")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "streamtitle",
+          placeholder: "Enter stream title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "card-text" }, [
+      _vm._v("And your unique stream key, like this:"),
+      _c("img", {
+        staticClass: "card-img-top",
+        staticStyle: { "max-width": "100%" },
+        attrs: {
+          src: "/images/dashboard/streamsettingsobs.png",
+          alt: "OBS stream settings"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseImage",
+                "aria-expanded": "false",
+                "aria-controls": "collapseImage"
+              }
+            },
+            [
+              _vm._v(
+                "\r\n                            Upload new image\r\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\r\n                            Edit about section:\r\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-49180b4d", module.exports)
+  }
+}
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(178)
+/* template */
+var __vue_template__ = __webpack_require__(179)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\dashboardstream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-081f7f0d", Component.options)
+  } else {
+    hotAPI.reload("data-v-081f7f0d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      games: []
+    };
+  },
+  props: ['user'],
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      }).then(function (response) {
+        console.log("you are live!");
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-9" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: {
+            width: "100%",
+            "margin-bottom": "1rem",
+            "text-align": "center"
+          }
+        },
+        [
+          _c("h5", { staticClass: "card-header" }, [_vm._v("Stream Preview")]),
+          _vm._v(" "),
+          _c(
+            "video",
+            {
+              staticClass: "video-js",
+              attrs: {
+                id: "vid1",
+                controls: "",
+                preload: "auto",
+                "data-setup": '{ "aspectRatio": "16:9" }'
+              }
+            },
+            [
+              _c("source", {
+                attrs: {
+                  src:
+                    "http://10.0.0.61:8080/hls/" +
+                    _vm.user.stream_token +
+                    ".m3u8",
+                  type: "application/x-mpegURL"
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: { width: "100%", "text-align": "center" }
+        },
+        [
+          _c("h5", { staticClass: "card-header" }, [
+            _vm._v("Start streaming?")
+          ]),
+          _vm._v(" "),
+          _c("form", { staticStyle: { "text-align": "left" } }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "gameselect" } }, [_vm._v("Game:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                { staticClass: "form-control", attrs: { id: "gameselect" } },
+                _vm._l(_vm.games, function(game) {
+                  return _c("option", { domProps: { value: game.id } }, [
+                    _vm._v(_vm._s(game.name))
+                  ])
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-group",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "submit" },
+                    on: { click: _vm.golive }
+                  },
+                  [_vm._v("GO LIVE!")]
+                )
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("h5", { staticClass: "card-header" }, [_vm._v("Getting started")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step one: Streaming software")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
+            )
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step Two: setting up a stream")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "Once your streaming software is installed and running, it'll have to stream to our server."
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "container",
+              staticStyle: { "text-align": "center", "margin-bottom": "1rem" }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { "margin-top": "1rem", display: "block" },
+                  attrs: { id: "streamkey_btn" },
+                  on: { click: _vm.streamkey }
+                },
+                [_vm._v("Show my streamkey")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { "margin-top": "1rem", display: "none" },
+                  attrs: { id: "hide_btn" },
+                  on: { click: _vm.hidekey }
+                },
+                [_vm._v("hide streamkey")]
+              ),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "alert alert-danger",
+                staticStyle: { display: "none" },
+                attrs: { id: "streamkeymessage", role: "alert" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "alert alert-danger" }, [
+            _vm._v(
+              "(This is your personal streamkey, never show it to anyone!)"
+            )
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step Three: connect to the server")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "After you've entered your url and streamkey, you can start streaming to our server"
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("You should see a preview of your stream on this page")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v("Step Four: Start streaming! ")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "finally, choose a title and game, and go live! Your viewers can find your stream on your profile."
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -104090,24 +106102,496 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2d04944d", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-081f7f0d", module.exports)
   }
 }
 
 /***/ }),
-/* 174 */
+/* 180 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(181)
+/* template */
+var __vue_template__ = __webpack_require__(182)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\dashboardprofile.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aff2bd28", Component.options)
+  } else {
+    hotAPI.reload("data-v-aff2bd28", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 181 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      user: [],
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/user').then(function (response) {
+      _this.user = response.data;
+    });
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    }
+
+  }
+});
+
+/***/ }),
+/* 182 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "card", staticStyle: { width: "18rem" } }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "Card image cap" }
+        }),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { attrs: { id: "accordion" } }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "collapse",
+                  attrs: {
+                    id: "collapseImage",
+                    "aria-labelledby": "headingImage",
+                    "data-parent": "#accordion"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c(
+                      "form",
+                      {
+                        attrs: {
+                          action: "/uploadimage",
+                          enctype: "multipart/form-data",
+                          method: "POST"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "profileimage" } }, [
+                            _vm._v("Example file input")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_token",
+                              id: "csrf-token"
+                            },
+                            domProps: { value: _vm.csrftoken }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control-file",
+                            attrs: {
+                              type: "file",
+                              id: "profileimage",
+                              name: "profileimage"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Upload")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.user.name))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "accordion" } }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "collapse",
+                  attrs: {
+                    id: "collapseEdit",
+                    "aria-labelledby": "headingEdit",
+                    "data-parent": "#accordion"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("form", [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "aboutinput" } }, [
+                          _vm._v("Text")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: { type: "text", id: "aboutinput" },
+                          domProps: { value: _vm.profilecontent.about }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.updateAbout }
+                        },
+                        [_vm._v("Update")]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-3" })
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseImage",
+                "aria-expanded": "false",
+                "aria-controls": "collapseImage"
+              }
+            },
+            [_vm._v("\n                Upload new image\n              ")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "form",
+      {
+        attrs: {
+          action: "/uploadimage",
+          method: "POST",
+          enctype: "multipart/form-data"
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "profileimage" } }, [
+            _vm._v("Example file input")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control-file",
+            attrs: { type: "file", id: "profileimage", name: "profileimage" }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Upload")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\n                    Edit about section:\n                  "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aff2bd28", module.exports)
+  }
+}
+
+/***/ }),
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(175)
+  __webpack_require__(184)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(177)
+var __vue_script__ = __webpack_require__(186)
 /* template */
-var __vue_template__ = __webpack_require__(178)
+var __vue_template__ = __webpack_require__(187)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -104124,7 +106608,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Chatroom.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Chatroom.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -104133,9 +106617,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14a1cfea", Component.options)
+    hotAPI.createRecord("data-v-1fc57d2a", Component.options)
   } else {
-    hotAPI.reload("data-v-14a1cfea", Component.options)
+    hotAPI.reload("data-v-1fc57d2a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -104146,23 +106630,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(176);
+var content = __webpack_require__(185);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("4b800605", content, false, {});
+var update = __webpack_require__(14)("22047796", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -104172,7 +106656,7 @@ if(false) {
 }
 
 /***/ }),
-/* 176 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)(false);
@@ -104186,7 +106670,7 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
-/* 177 */
+/* 186 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104227,11 +106711,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             highestid: 0,
             activeUsers: [],
             colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
-            index: 0
+            index: 0,
+            loggedIn: false
         };
     },
-    props: ['user', 'streamer'],
+    props: ['user', 'streamer', 'viewers', 'darkmode'],
     mounted: function mounted() {
+        var _this = this;
 
         var viewportHeight = document.getElementById('container').clientHeight;
         var navbarHeight = document.getElementById('navbar').clientHeight;
@@ -104239,6 +106725,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
 
         this.listen();
+
+        if (this.user != undefined) {
+            this.loggedIn = true;
+        } else {
+            document.getElementById('chatfield').style.backgroundColor = "lightgray";
+        }
+
+        Echo.join('StreamPresence.' + this.streamer.stream.id).here(function (users) {
+            _this.$emit('user-list', users);
+        }).joining(function (user) {
+            _this.$emit('user-joined', user);
+        }).leaving(function (user) {
+            _this.$emit('user-left', user);
+        });
     },
 
     methods: {
@@ -104260,11 +106760,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         listen: function listen() {
-            var _this = this;
+            var _this2 = this;
 
             Echo.channel('stream.' + this.streamer.stream.id).listen('NewChatmessage', function (chatmessage) {
-                _this.assignColorToUsers(chatmessage);
-                _this.messages = _this.messages.concat(chatmessage);
+                _this2.assignColorToUsers(chatmessage);
+                _this2.messages = _this2.messages.concat(chatmessage);
             });
         }
     },
@@ -104278,76 +106778,104 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 178 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "chatroom pt-1 pb-1 px-1" }, [
-    _c(
-      "div",
-      {
-        staticClass: "chatbox",
-        staticStyle: { "overflow-y": "scroll" },
-        attrs: { id: "chatbox" }
-      },
-      _vm._l(_vm.messages, function(message) {
-        return _c(
-          "div",
-          { staticClass: "chatmessages card mx-1 my-1 py-1 px-1" },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "card-text",
-                staticStyle: { "margin-bottom": "-15px" }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.streamer.title) +
-                    "\n                "
-                ),
-                _c("p", [
-                  _c(
-                    "b",
-                    { style: "color:" + _vm.activeUsers[message.user.name] },
-                    [_vm._v(_vm._s(message.user.name) + ":")]
-                  ),
+  return _c(
+    "div",
+    {
+      staticClass: "chatroom pt-1 pb-1 px-1",
+      class: { "bg-dark": _vm.darkmode, "bg-secondary": _vm.darkmode }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "chatbox",
+          class: { "bg-dark": _vm.darkmode, "border-secondary": _vm.darkmode },
+          staticStyle: { "overflow-y": "scroll" },
+          attrs: { id: "chatbox" }
+        },
+        _vm._l(_vm.messages, function(message) {
+          return _c(
+            "div",
+            {
+              staticClass: "chatmessages card mx-1 my-1 py-1 px-1",
+              class: {
+                "bg-secondary": _vm.darkmode,
+                "border-secondary": _vm.darkmode
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "card-text",
+                  staticStyle: { "margin-bottom": "-15px" }
+                },
+                [
                   _vm._v(
-                    "\n\n                    " +
-                      _vm._s(message.message) +
+                    "\n                " +
+                      _vm._s(_vm.streamer.title) +
                       "\n                "
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      })
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "chatfield" }, [
-      _c("input", {
-        staticClass: "form-control mt-auto mb-auto",
-        staticStyle: { height: "100%" },
-        attrs: { type: "text", id: "messageField" },
-        on: {
-          keydown: function($event) {
-            if (
-              !("button" in $event) &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
-            return _vm.createChatMessage($event)
-          }
-        }
-      })
-    ])
-  ])
+                  ),
+                  _c("p", [
+                    _c(
+                      "b",
+                      { style: "color:" + _vm.activeUsers[message.user.name] },
+                      [_vm._v(_vm._s(message.user.name) + ":")]
+                    ),
+                    _vm._v(
+                      "\n\n                    " +
+                        _vm._s(message.message) +
+                        "\n                "
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        })
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "chatfield", attrs: { id: "chatfield" } }, [
+        _vm.loggedIn
+          ? _c("input", {
+              staticClass: "form-control mt-auto mb-auto",
+              class: {
+                "bg-secondary": _vm.darkmode,
+                "border-secondary": _vm.darkmode
+              },
+              staticStyle: { height: "100%" },
+              attrs: { type: "text", id: "messageField" },
+              on: {
+                keydown: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.createChatMessage($event)
+                }
+              }
+            })
+          : _c("input", {
+              staticClass: "form-control mt-auto mb-auto",
+              class: {
+                "bg-secondary": _vm.darkmode,
+                "border-secondary": _vm.darkmode
+              },
+              staticStyle: { height: "100%" },
+              attrs: { disabled: "", value: "Please log in to chat" }
+            })
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -104355,12 +106883,190 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-14a1cfea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1fc57d2a", module.exports)
   }
 }
 
 /***/ }),
-/* 179 */
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(189)
+/* template */
+var __vue_template__ = __webpack_require__(190)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\streamersByGame.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-055ece30", Component.options)
+  } else {
+    hotAPI.reload("data-v-055ece30", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 189 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['game', 'streamers'],
+  data: function data() {
+    return {
+      imageLink: "/images/drdisrespect.jpeg",
+      sortable: []
+    };
+  },
+  mounted: function mounted() {
+
+    function compare(a, b) {
+      if (a.user.followers_count < b.user.followers_count) return -1;
+      if (a.user.followers_count > b.user.followers_count) return 1;
+      return 0;
+    }
+
+    for (var streamer in this.streamers) {
+      this.sortable.push(this.streamers[streamer]);
+    }
+
+    this.streamers = this.sortable.sort(compare).reverse();
+  }
+});
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-10 d-flex flex-wrap justify-content-end px-5",
+      staticStyle: { "padding-right": "0" }
+    },
+    _vm._l(_vm.streamers, function(streamer) {
+      return _c(
+        "div",
+        {
+          staticClass: "p-1",
+          staticStyle: { padding: "0", margin: "0", float: "right" }
+        },
+        [
+          _c("a", { attrs: { href: "/" + streamer.user.name } }, [
+            _c(
+              "div",
+              {
+                staticClass: "card",
+                staticStyle: { width: "175px", height: "100%" }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: _vm.imageLink,
+                    alt: streamer.user.name,
+                    height: "150",
+                    width: "150"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(streamer.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", [_vm._v(_vm._s(streamer.user.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      staticStyle: { position: "absolute", bottom: "10px" }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(streamer.user.followers_count) + " followers"
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+<<<<<<< HEAD
+    require("vue-hot-reload-api")      .rerender("data-v-14a1cfea", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-055ece30", module.exports)
+>>>>>>> develop
+  }
+}
+
+/***/ }),
+/* 191 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

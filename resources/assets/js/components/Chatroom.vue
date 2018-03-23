@@ -1,8 +1,8 @@
 <template>
-    <div class="chatroom pt-1 pb-1 px-1">
+    <div class="chatroom pt-1 pb-1 px-1" v-bind:class="{ 'bg-dark': darkmode, 'bg-secondary': darkmode }">
 
-        <div id="chatbox" class="chatbox" style="overflow-y:scroll;">
-            <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages">
+        <div id="chatbox" class="chatbox" style="overflow-y:scroll;" v-bind:class="{ 'bg-dark': darkmode, 'border-secondary': darkmode }">
+            <div class="chatmessages card mx-1 my-1 py-1 px-1" v-for="message in messages" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
                 <div class="card-text" style="margin-bottom: -15px;">
                     {{ streamer.title }}
                     <p>
@@ -14,11 +14,11 @@
             </div>
         </div>
 
-        <div class="chatfield">
+        <div id="chatfield" class="chatfield" >
 
-            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" style="height: 100%;">
+            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height: 100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
-            </input>
+            <input disabled v-else class="form-control mt-auto mb-auto" value="Please log in to chat" style="height:100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
         </div>
 
@@ -34,10 +34,11 @@
                 highestid : 0,
                 activeUsers : [],
                 colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
-                index: 0
+                index: 0,
+                loggedIn: false
             }
         },
-        props: [ 'user', 'streamer' ],
+        props: [ 'user', 'streamer', 'viewers', 'darkmode' ],
         mounted() {
 
             var viewportHeight = document.getElementById('container').clientHeight;
@@ -47,6 +48,22 @@
 
             this.listen();
 
+            if (this.user != undefined) {
+                this.loggedIn = true;
+            } else {
+                document.getElementById('chatfield').style.backgroundColor = "lightgray";
+            }                       
+
+            Echo.join('StreamPresence.' + this.streamer.stream.id)
+            .here((users) => {
+                this.$emit('user-list', users);
+            })
+            .joining((user) => {
+                this.$emit('user-joined', user);
+            })
+            .leaving((user) => {
+                this.$emit('user-left', user);
+            })
         },
         methods: {
             createChatMessage : function(message) {

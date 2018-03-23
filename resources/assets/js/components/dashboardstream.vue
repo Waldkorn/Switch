@@ -1,6 +1,5 @@
 <template>
   <div class="row">
-    <div class="col-9">
       <div class="card" style="width:100%;margin-bottom:1rem;text-align:center">
         <h5 class="card-header">Stream Preview</h5>
         <video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
@@ -12,28 +11,28 @@
 				</video>
       </div>
       <div class="card" style="width:100%;text-align:center">
-          <h5 class="card-header">Start streaming?</h5>
-      <form style="text-align:left">
-        <div class="form-group">
-          <label for="streamtitle">Title:</label>
-          <input type="text" class="form-control" id="streamtitle" placeholder="Enter stream title" >
+        <h5 class="card-header">Start streaming?</h5>
+        <form style="text-align:left">
 
-        </div>
-        <div class="form-group">
-          <label for="gameselect">Game:</label>
-          <select class="form-control" id="gameselect">
-            <option v-for="game in games" :value="game.id">{{game.name}}</option>
+          <div class="form-group">
+            <label for="streamtitle">Title:</label>
+            <input type="text" class="form-control" id="streamtitle" placeholder="Enter stream title" >
+          </div>
 
-          </select>
-        </div>
-  <div class="form-group" style="text-align:center">
-        <div type="submit" class="btn btn-success" v-on:click="golive">GO LIVE!</div>
+          <div class="form-group">
+            <label for="gameselect">Game:</label>
+            <select class="form-control" id="gameselect">
+              <option v-for="game in games" :value="game.id">{{game.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="text-align:center">
+            <div type="submit" class="btn btn-success" v-on:click="golive">GO LIVE!</div>
+          </div>
+        </form>
       </div>
-      </form>
-    </div>
-    </div>
 
-
+    </div>
 
     <div class="col-3">
       <div class="card">
@@ -43,8 +42,7 @@
           <p class="card-text">To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use.</p>
           <h5 class="card-title">Step Two: setting up a stream</h5>
           <p class="card-text">Once your streaming software is installed and running, it'll have to stream to our server.</p>
-
-          <p class="card-text">In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/{{user.name}}/</p>
+          <p class="card-text">In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/</p>
           <p class="card-text">And your unique stream key, like this:<img class="card-img-top" src="/images/dashboard/streamsettingsobs.png" alt="OBS stream settings" style="max-width:100%"></p>
 
           <div class='container' style="text-align:center; margin-bottom:1rem">
@@ -67,26 +65,20 @@
 <script>
 
 export default {
-    props: ['auth_id'],
-
     data:function(){
       return{
-          user : null,
-          games : null
+          games : []
       }
     },
-
+    props: ['user'],
     mounted() {
-      axios.get('/api/user').then(response => {
-        this.user = response.data;
-      });
-
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
       })
     },
 
     methods: {
+
       streamkey: function() {
 
           axios.post('/api/streamkey', {
@@ -97,9 +89,8 @@ export default {
             document.getElementById('streamkey_btn').style.display = "none";
             document.getElementById('hide_btn').style.display = "block";
             document.getElementById('streamkeymessage').innerHTML = response.data;
-
             })
-          },
+      },
 
       hidekey: function() {
           document.getElementById('streamkeymessage').style.display = "none";

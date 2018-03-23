@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Game;
+use App\Stream;
 use Auth;
 
 class ViewController extends Controller
@@ -36,22 +38,47 @@ class ViewController extends Controller
     return view('profilepage', compact('user','loggedin','isfollowing'));
   }
 
-
-  public function dashboard(){
-    $auth_id = Auth::user()->id;
-    return view('dashboard',compact('auth_id'));
+  public function dashboard() {
+    $user = Auth::user();
+    return view('dashboard', compact('user'));
   }
 
+  // public function streamdashboard(){
+  //   $user = Auth::user();
+  //   return view('streamdashboard', compact('user'));
+  // }
+
+  // public function profiledashboard(){
+  //       return view('profiledashboard');
+  // }
+
+  // public function channeldashboard(){
+  //       return view('channeldashboard');
+  // }
+
   public function test(){
-    return view('test');
+    return view('dashboard');
   }
 
   public function stream($username)
   {
   	$streamer = User::where('name', $username)->with('stream.game')->first();
-  	$followerCount = $streamer->followers()->count();
+  	$followers = $streamer->followers()->get();
 
-  	return view('streampage', compact('streamer', 'followerCount'));
+    return view('streampage', compact('streamer', 'followers'));
+  }
+
+  public function game($gamename) {
+    $game = Game::where('name', $gamename)->first();
+
+    $streamers = $game
+    ->streams()
+    ->with(['user' => function($user) {
+      $user->withCount('followers')->orderBy('followers_count');
+    }])
+    ->get();
+
+    return view('gamepage', compact('game', 'streamers'));
   }
 
   
