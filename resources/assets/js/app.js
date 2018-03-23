@@ -52,7 +52,8 @@ Vue.component('streams', require('./components/streamersByGame.vue'))
 const app = new Vue({
     el: '#app',
     data: {
-    	viewers: []
+    	viewers: [],
+        darkmode: false
     },
     methods: {
     	setUsers: function(users) {
@@ -67,6 +68,9 @@ const app = new Vue({
                     this.viewers.splice(i, 1);
                 }
             }
-    	}
+    	},
+        toggleDarkMode: function() {
+            this.darkmode = !this.darkmode;
+        }
     }
 });

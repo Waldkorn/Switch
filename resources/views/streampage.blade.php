@@ -61,7 +61,7 @@
 
 			<div id="main" class="row mr-0 ml-0" style="max-width:100%;">
 
-				<stream :streamer="{{$streamer}}" :followers="{{$followers}}" :viewers="viewers"></stream>
+				<stream :streamer="{{$streamer}}" :followers="{{$followers}}" :viewers="viewers" :darkmode="darkmode" v-on:darkmode="toggleDarkMode"></stream>
 
 				<div class="col-md-3 px-0">
 
@@ -74,6 +74,7 @@
 					v-on:user-joined="addUser"
 					v-on:user-left="removeUser"
 					:viewers="viewers"
+					:darkmode="darkmode"
 					></chatroom>
 
 				</div>
