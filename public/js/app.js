@@ -47606,6 +47606,7 @@ Vue.component('profilepagemain', __webpack_require__(168));
 Vue.component('stream', __webpack_require__(171));
 
 //dashboard//
+Vue.component('dashboard', __webpack_require__(192));
 Vue.component('dashboardstream', __webpack_require__(174));
 Vue.component('dashboardprofile', __webpack_require__(177));
 
@@ -47662,9 +47663,9 @@ __webpack_require__(68);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(44);
+    window.$ = window.jQuery = __webpack_require__(44);
 
-  __webpack_require__(109);
+    __webpack_require__(109);
 } catch (e) {}
 
 /**
@@ -47686,9 +47687,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -47702,10 +47703,10 @@ if (token) {
 window.Pusher = __webpack_require__(130);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
-  broadcaster: 'pusher',
-  key: '8f0d4c8f929781d570a0',
-  cluster: 'eu',
-  encrypted: true
+    broadcaster: 'pusher',
+    key: '8f0d4c8f929781d570a0',
+    cluster: 'eu',
+    encrypted: true
 });
 
 /***/ }),
@@ -100555,7 +100556,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-5d1d7d82"
+var __vue_scopeId__ = "data-v-3f99fc75"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -100566,7 +100567,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/passport/Clients.vue"
+Component.options.__file = "resources\\assets\\js\\components\\passport\\Clients.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -100575,9 +100576,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5d1d7d82", Component.options)
+    hotAPI.createRecord("data-v-3f99fc75", Component.options)
   } else {
-    hotAPI.reload("data-v-5d1d7d82", Component.options)
+    hotAPI.reload("data-v-3f99fc75", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -100598,13 +100599,13 @@ var content = __webpack_require__(136);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("2a28cc49", content, false, {});
+var update = __webpack_require__(14)("a44a1dd2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f99fc75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f99fc75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -100622,7 +100623,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-3f99fc75] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -101581,7 +101582,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5d1d7d82", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3f99fc75", module.exports)
   }
 }
 
@@ -101604,7 +101605,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-2ee9fe67"
+var __vue_scopeId__ = "data-v-0b76a99a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -101615,7 +101616,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "resources\\assets\\js\\components\\passport\\AuthorizedClients.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -101624,9 +101625,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2ee9fe67", Component.options)
+    hotAPI.createRecord("data-v-0b76a99a", Component.options)
   } else {
-    hotAPI.reload("data-v-2ee9fe67", Component.options)
+    hotAPI.reload("data-v-0b76a99a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -101647,13 +101648,13 @@ var content = __webpack_require__(142);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("10846595", content, false, {});
+var update = __webpack_require__(14)("437dd684", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -101671,7 +101672,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-0b76a99a] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -101902,7 +101903,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2ee9fe67", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0b76a99a", module.exports)
   }
 }
 
@@ -101925,7 +101926,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-89c53f18"
+var __vue_scopeId__ = "data-v-50e40461"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -101936,7 +101937,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "resources\\assets\\js\\components\\passport\\PersonalAccessTokens.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -101945,9 +101946,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-89c53f18", Component.options)
+    hotAPI.createRecord("data-v-50e40461", Component.options)
   } else {
-    hotAPI.reload("data-v-89c53f18", Component.options)
+    hotAPI.reload("data-v-50e40461", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -101968,13 +101969,13 @@ var content = __webpack_require__(147);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("4e7bd74e", content, false, {});
+var update = __webpack_require__(14)("174f2f0a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -101992,7 +101993,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-50e40461] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -102693,7 +102694,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-89c53f18", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-50e40461", module.exports)
   }
 }
 
@@ -102723,7 +102724,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/test.vue"
+Component.options.__file = "resources\\assets\\js\\components\\test.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -102732,9 +102733,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bd7c2fae", Component.options)
+    hotAPI.createRecord("data-v-dc63952e", Component.options)
   } else {
-    hotAPI.reload("data-v-bd7c2fae", Component.options)
+    hotAPI.reload("data-v-dc63952e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -102786,7 +102787,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-bd7c2fae", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-dc63952e", module.exports)
   }
 }
 
@@ -102816,7 +102817,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -102825,9 +102826,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-0ca92eac", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-0ca92eac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -102915,7 +102916,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
   }
 }
 
@@ -102945,7 +102946,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/games.vue"
+Component.options.__file = "resources\\assets\\js\\components\\games.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -102954,9 +102955,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0caa52ba", Component.options)
+    hotAPI.createRecord("data-v-2da7ad7a", Component.options)
   } else {
-    hotAPI.reload("data-v-0caa52ba", Component.options)
+    hotAPI.reload("data-v-2da7ad7a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103074,7 +103075,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0caa52ba", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2da7ad7a", module.exports)
   }
 }
 
@@ -103104,7 +103105,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/profilesidebar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\profilesidebar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103113,9 +103114,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-405fec2c", Component.options)
+    hotAPI.createRecord("data-v-d76671ac", Component.options)
   } else {
-    hotAPI.reload("data-v-405fec2c", Component.options)
+    hotAPI.reload("data-v-d76671ac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103545,7 +103546,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-d76671ac", module.exports)
   }
 }
 
@@ -103575,7 +103576,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\nowlivebar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103584,9 +103585,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-64aabce8", Component.options)
+    hotAPI.createRecord("data-v-35981a28", Component.options)
   } else {
-    hotAPI.reload("data-v-64aabce8", Component.options)
+    hotAPI.reload("data-v-35981a28", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103727,7 +103728,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-64aabce8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-35981a28", module.exports)
   }
 }
 
@@ -103757,7 +103758,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/frontpagemain.vue"
+Component.options.__file = "resources\\assets\\js\\components\\frontpagemain.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103766,9 +103767,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0d70c4ea", Component.options)
+    hotAPI.createRecord("data-v-23c75faa", Component.options)
   } else {
-    hotAPI.reload("data-v-0d70c4ea", Component.options)
+    hotAPI.reload("data-v-23c75faa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103813,7 +103814,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0d70c4ea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-23c75faa", module.exports)
   }
 }
 
@@ -103843,7 +103844,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/profilepagemain.vue"
+Component.options.__file = "resources\\assets\\js\\components\\profilepagemain.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103852,9 +103853,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b8ed07ac", Component.options)
+    hotAPI.createRecord("data-v-7ea466ea", Component.options)
   } else {
-    hotAPI.reload("data-v-b8ed07ac", Component.options)
+    hotAPI.reload("data-v-7ea466ea", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -103899,7 +103900,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b8ed07ac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7ea466ea", module.exports)
   }
 }
 
@@ -103929,7 +103930,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Stream.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Stream.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -103938,9 +103939,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5ffd2477", Component.options)
+    hotAPI.createRecord("data-v-5eab21b7", Component.options)
   } else {
-    hotAPI.reload("data-v-5ffd2477", Component.options)
+    hotAPI.reload("data-v-5eab21b7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -104339,7 +104340,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5ffd2477", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5eab21b7", module.exports)
   }
 }
 
@@ -104369,7 +104370,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/dashboardstream.vue"
+Component.options.__file = "resources\\assets\\js\\components\\dashboardstream.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -104378,9 +104379,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2d04944d", Component.options)
+    hotAPI.createRecord("data-v-081f7f0d", Component.options)
   } else {
-    hotAPI.reload("data-v-2d04944d", Component.options)
+    hotAPI.reload("data-v-081f7f0d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -104787,7 +104788,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2d04944d", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-081f7f0d", module.exports)
   }
 }
 
@@ -104817,7 +104818,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/dashboardprofile.vue"
+Component.options.__file = "resources\\assets\\js\\components\\dashboardprofile.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -104826,9 +104827,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1fc4342c", Component.options)
+    hotAPI.createRecord("data-v-aff2bd28", Component.options)
   } else {
-    hotAPI.reload("data-v-1fc4342c", Component.options)
+    hotAPI.reload("data-v-aff2bd28", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -104844,6 +104845,14 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -105077,7 +105086,9 @@ var render = function() {
                           [_vm._v("Upload")]
                         )
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
                   ])
                 ]
               )
@@ -105094,7 +105105,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { attrs: { id: "accordion" } }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "div",
@@ -105185,6 +105196,39 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
+      "form",
+      {
+        attrs: {
+          action: "/uploadimage",
+          method: "POST",
+          enctype: "multipart/form-data"
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "profileimage" } }, [
+            _vm._v("Example file input")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control-file",
+            attrs: { type: "file", id: "profileimage", name: "profileimage" }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Upload")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
       "div",
       { staticClass: "card-header", attrs: { id: "headingEdit" } },
       [
@@ -105216,7 +105260,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1fc4342c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-aff2bd28", module.exports)
   }
 }
 
@@ -105250,7 +105294,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Chatroom.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Chatroom.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -105259,9 +105303,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14a1cfea", Component.options)
+    hotAPI.createRecord("data-v-1fc57d2a", Component.options)
   } else {
-    hotAPI.reload("data-v-14a1cfea", Component.options)
+    hotAPI.reload("data-v-1fc57d2a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -105282,13 +105326,13 @@ var content = __webpack_require__(182);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(14)("4b800605", content, false, {});
+var update = __webpack_require__(14)("22047796", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -105525,7 +105569,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-14a1cfea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1fc57d2a", module.exports)
   }
 }
 
@@ -105555,7 +105599,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/streamersByGame.vue"
+Component.options.__file = "resources\\assets\\js\\components\\streamersByGame.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -105564,9 +105608,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2235ae28", Component.options)
+    hotAPI.createRecord("data-v-055ece30", Component.options)
   } else {
-    hotAPI.reload("data-v-2235ae28", Component.options)
+    hotAPI.reload("data-v-055ece30", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -105699,7 +105743,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2235ae28", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-055ece30", module.exports)
   }
 }
 
@@ -105708,6 +105752,945 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(193)
+/* template */
+var __vue_template__ = __webpack_require__(194)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\dashboard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-49180b4d", Component.options)
+  } else {
+    hotAPI.reload("data-v-49180b4d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 193 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      user: [],
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false
+
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/user').then(function (response) {
+      _this.user = response.data;
+    });
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    },
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+    }
+
+  }
+});
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "0px" } },
+    [
+      _c("ul", { staticClass: "nav nav-pills nav-fill navbar-dark bg-dark" }, [
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showstreamdash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Stream")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showprofiledash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Profile")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showchanneldash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Channel")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container-fluid", staticStyle: { padding: "0px" } },
+        [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.streamdash,
+                  expression: "streamdash"
+                }
+              ],
+              attrs: { id: "nav-stream" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "row", staticStyle: { border: "0px" } },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "col-9", staticStyle: { border: "0px" } },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          staticStyle: {
+                            width: "100%",
+                            "margin-bottom": "1rem",
+                            "text-align": "center"
+                          }
+                        },
+                        [
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Stream Preview")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "video",
+                            {
+                              staticClass: "video-js",
+                              attrs: {
+                                id: "vid1",
+                                controls: "",
+                                preload: "auto",
+                                "data-setup": '{ "aspectRatio": "16:9" }'
+                              }
+                            },
+                            [
+                              _c("source", {
+                                attrs: {
+                                  src:
+                                    "http://10.0.0.61:8080/hls/" +
+                                    _vm.user.stream_token +
+                                    ".m3u8",
+                                  type: "application/x-mpegURL"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(1)
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          staticStyle: { width: "100%", "text-align": "center" }
+                        },
+                        [
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Start streaming?")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            { staticStyle: { "text-align": "left" } },
+                            [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "gameselect" } }, [
+                                  _vm._v("Game:")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: { id: "gameselect" }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "form-group",
+                                  staticStyle: { "text-align": "center" }
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: { type: "submit" },
+                                      on: { click: _vm.golive }
+                                    },
+                                    [_vm._v("GO LIVE!")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-3", staticStyle: { border: "0px" } },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("h5", { staticClass: "card-header" }, [
+                          _vm._v("Getting started")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step one: Streaming software")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Two: setting up a stream")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "Once your streaming software is installed and running, it'll have to stream to our server."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "container",
+                              staticStyle: {
+                                "text-align": "center",
+                                "margin-bottom": "1rem"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "block"
+                                  },
+                                  attrs: { id: "streamkey_btn" },
+                                  on: { click: _vm.streamkey }
+                                },
+                                [_vm._v("Show my streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "none"
+                                  },
+                                  attrs: { id: "hide_btn" },
+                                  on: { click: _vm.hidekey }
+                                },
+                                [_vm._v("hide streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "alert alert-danger",
+                                staticStyle: { display: "none" },
+                                attrs: { id: "streamkeymessage", role: "alert" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "alert alert-danger" }, [
+                            _vm._v(
+                              "(This is your personal streamkey, never show it to anyone!)"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Three: connect to the server")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "After you've entered your url and streamkey, you can start streaming to our server"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "You should see a preview of your stream on this page"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Four: Start streaming! ")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "finally, choose a title and game, and go live! Your viewers can find your stream on your profile."
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.profiledash,
+                  expression: "profiledash"
+                }
+              ],
+              attrs: { id: "nav-profile" }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-3" }, [
+                  _c(
+                    "div",
+                    { staticClass: "card", staticStyle: { width: "18rem" } },
+                    [
+                      _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src: _vm.profilecontent.img_url,
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseImage",
+                                  "aria-labelledby": "headingImage",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c(
+                                    "form",
+                                    {
+                                      attrs: {
+                                        action: "/uploadimage",
+                                        enctype: "multipart/form-data",
+                                        method: "POST"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "profileimage" } },
+                                          [_vm._v("Example file input")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          attrs: {
+                                            type: "hidden",
+                                            name: "_token",
+                                            id: "csrf-token"
+                                          },
+                                          domProps: { value: _vm.csrftoken }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "form-control-file",
+                                          attrs: {
+                                            type: "file",
+                                            id: "profileimage",
+                                            name: "profileimage"
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          attrs: { type: "submit" }
+                                        },
+                                        [_vm._v("Upload")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(_vm.user.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(_vm.profilecontent.about))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(6),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseEdit",
+                                  "aria-labelledby": "headingEdit",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c("form", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "aboutinput" } },
+                                        [_vm._v("Text")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "aboutinput"
+                                        },
+                                        domProps: {
+                                          value: _vm.profilecontent.about
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "submit" },
+                                        on: { click: _vm.updateAbout }
+                                      },
+                                      [_vm._v("Update")]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.channeldash,
+                  expression: "channeldash"
+                }
+              ],
+              attrs: { id: "nav-channel" }
+            },
+            [_vm._v("channel settings here")]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
+        _vm._v("schedule")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\r\n      \t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\r\n      \t\t\t\t    \t"
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "http://videojs.com/html5-video-support/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("supports HTML5 video")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "streamtitle" } }, [_vm._v("Title:")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "streamtitle",
+          placeholder: "Enter stream title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "card-text" }, [
+      _vm._v("And your unique stream key, like this:"),
+      _c("img", {
+        staticClass: "card-img-top",
+        staticStyle: { "max-width": "100%" },
+        attrs: {
+          src: "/images/dashboard/streamsettingsobs.png",
+          alt: "OBS stream settings"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseImage",
+                "aria-expanded": "false",
+                "aria-controls": "collapseImage"
+              }
+            },
+            [
+              _vm._v(
+                "\r\n                            Upload new image\r\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\r\n                            Edit about section:\r\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-49180b4d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

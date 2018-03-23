@@ -53,7 +53,7 @@ class ViewController extends Controller
   }
 
   public function test(){
-    return view('test');
+    return view('dashboard');
   }
 
   public function stream($username)
@@ -76,7 +76,7 @@ class ViewController extends Controller
     ->get();
 
     return view('gamepage', compact('game', 'streamers'));
-    
+
   }
 
 
