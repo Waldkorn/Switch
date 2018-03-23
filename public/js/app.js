@@ -104398,7 +104398,33 @@ var render = function() {
           },
           [
             _vm.streamer.now_live
-              ? _c("div", { staticClass: "card-body" }, [_vm._m(0)])
+              ? _c("div", { staticClass: "card-body" }, [
+                  _c(
+                    "video",
+                    {
+                      staticClass: "video-js",
+                      attrs: {
+                        id: "vid1",
+                        controls: "",
+                        preload: "auto",
+                        "data-setup": '{ "aspectRatio": "16:9" }'
+                      }
+                    },
+                    [
+                      _c("source", {
+                        attrs: {
+                          src:
+                            "http://10.0.0.61:8080/hls/" +
+                            _vm.streamer.stream_token +
+                            ".m3u8",
+                          type: "application/x-mpegURL"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(0)
+                    ]
+                  )
+                ])
               : _c("div", { staticClass: "card-body" }, [
                   _c("img", {
                     attrs: {
@@ -104510,36 +104536,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "video",
-      {
-        staticClass: "video-js",
-        attrs: {
-          id: "vid1",
-          controls: "",
-          preload: "auto",
-          "data-setup": '{ "aspectRatio": "16:9" }'
-        }
-      },
-      [
-        _vm._v(" \".m3u8\" type='application/x-mpegURL'>\n\t\t\t\t    "),
-        _c("p", { staticClass: "vjs-no-js" }, [
-          _vm._v(
-            "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
-          ),
-          _c(
-            "a",
-            {
-              attrs: {
-                href: "http://videojs.com/html5-video-support/",
-                target: "_blank"
-              }
-            },
-            [_vm._v("supports HTML5 video")]
-          )
-        ])
-      ]
-    )
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "http://videojs.com/html5-video-support/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("supports HTML5 video")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -104863,9 +104874,7 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "card-text" }, [
             _vm._v(
-              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/" +
-                _vm._s(_vm.user.name) +
-                "/"
+              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
             )
           ]),
           _vm._v(" "),
