@@ -27,7 +27,15 @@
                   </div>
                   <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
-                
+                <form action="/uploadimage" method="POST" enctype="multipart/form-data">
+
+
+                  <div class="form-group">
+                    <label for="profileimage">Example file input</label>
+                    <input type="file" class="form-control-file" id="profileimage" name="profileimage">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
 
               </div>
             </div>

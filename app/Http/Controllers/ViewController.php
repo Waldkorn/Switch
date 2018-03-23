@@ -52,7 +52,7 @@ class ViewController extends Controller
   }
 
   public function test(){
-    return view('test');
+    return view('dashboard');
   }
 
   public function stream($username)

@@ -47595,11 +47595,15 @@ module.exports = Cancel;
 
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 __webpack_require__(52);
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 module.exports = __webpack_require__(188);
 =======
 __webpack_require__(53);
 module.exports = __webpack_require__(184);
 >>>>>>> file uploading finally works
+=======
+module.exports = __webpack_require__(191);
+>>>>>>> dashboard loading
 
 
 /***/ }),
@@ -47639,9 +47643,11 @@ Vue.component('profilepagemain', __webpack_require__(168));
 Vue.component('stream', __webpack_require__(171));
 
 //dashboard//
-Vue.component('dashboardstream', __webpack_require__(174));
-Vue.component('dashboardprofile', __webpack_require__(177));
+Vue.component('dashboard', __webpack_require__(174));
+Vue.component('dashboardstream', __webpack_require__(177));
+Vue.component('dashboardprofile', __webpack_require__(180));
 
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 Vue.component('chatroom', __webpack_require__(180));
 
@@ -47649,6 +47655,11 @@ Vue.component('streams', __webpack_require__(185));
 =======
 Vue.component('chatroom', __webpack_require__(179));
 >>>>>>> file uploading finally works
+=======
+Vue.component('chatroom', __webpack_require__(183));
+
+Vue.component('streams', __webpack_require__(188));
+>>>>>>> dashboard loading
 
 var app = new Vue({
     el: '#app',
@@ -104592,6 +104603,942 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/assets/js/components/dashboard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2073dee6", Component.options)
+  } else {
+    hotAPI.reload("data-v-2073dee6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 175 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      user: [],
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false
+
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/user').then(function (response) {
+      _this.user = response.data;
+    });
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    },
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+    }
+
+  }
+});
+
+/***/ }),
+/* 176 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container-fluid", staticStyle: { padding: "0px" } },
+    [
+      _c("ul", { staticClass: "nav nav-pills nav-fill navbar-dark bg-dark" }, [
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showstreamdash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Stream")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showprofiledash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Profile")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showchanneldash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Channel")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container-fluid", staticStyle: { padding: "0px" } },
+        [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.streamdash,
+                  expression: "streamdash"
+                }
+              ],
+              attrs: { id: "nav-stream" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "row", staticStyle: { border: "0px" } },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "col-9", staticStyle: { border: "0px" } },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          staticStyle: {
+                            width: "100%",
+                            "margin-bottom": "1rem",
+                            "text-align": "center"
+                          }
+                        },
+                        [
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Stream Preview")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "video",
+                            {
+                              staticClass: "video-js",
+                              attrs: {
+                                id: "vid1",
+                                controls: "",
+                                preload: "auto",
+                                "data-setup": '{ "aspectRatio": "16:9" }'
+                              }
+                            },
+                            [
+                              _c("source", {
+                                attrs: {
+                                  src:
+                                    "http://10.0.0.61:8080/hls/" +
+                                    _vm.user.stream_token +
+                                    ".m3u8",
+                                  type: "application/x-mpegURL"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(1)
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          staticStyle: { width: "100%", "text-align": "center" }
+                        },
+                        [
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Start streaming?")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            { staticStyle: { "text-align": "left" } },
+                            [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "gameselect" } }, [
+                                  _vm._v("Game:")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: { id: "gameselect" }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "form-group",
+                                  staticStyle: { "text-align": "center" }
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: { type: "submit" },
+                                      on: { click: _vm.golive }
+                                    },
+                                    [_vm._v("GO LIVE!")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-3", staticStyle: { border: "0px" } },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("h5", { staticClass: "card-header" }, [
+                          _vm._v("Getting started")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step one: Streaming software")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Two: setting up a stream")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "Once your streaming software is installed and running, it'll have to stream to our server."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "container",
+                              staticStyle: {
+                                "text-align": "center",
+                                "margin-bottom": "1rem"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "block"
+                                  },
+                                  attrs: { id: "streamkey_btn" },
+                                  on: { click: _vm.streamkey }
+                                },
+                                [_vm._v("Show my streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "none"
+                                  },
+                                  attrs: { id: "hide_btn" },
+                                  on: { click: _vm.hidekey }
+                                },
+                                [_vm._v("hide streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "alert alert-danger",
+                                staticStyle: { display: "none" },
+                                attrs: { id: "streamkeymessage", role: "alert" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "alert alert-danger" }, [
+                            _vm._v(
+                              "(This is your personal streamkey, never show it to anyone!)"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Three: connect to the server")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "After you've entered your url and streamkey, you can start streaming to our server"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "You should see a preview of your stream on this page"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Four: Start streaming! ")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "finally, choose a title and game, and go live! Your viewers can find your stream on your profile."
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.profiledash,
+                  expression: "profiledash"
+                }
+              ],
+              attrs: { id: "nav-profile" }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-3" }, [
+                  _c(
+                    "div",
+                    { staticClass: "card", staticStyle: { width: "18rem" } },
+                    [
+                      _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src: _vm.profilecontent.img_url,
+                          alt: "Card image cap"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseImage",
+                                  "aria-labelledby": "headingImage",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c(
+                                    "form",
+                                    {
+                                      attrs: {
+                                        action: "/uploadimage",
+                                        enctype: "multipart/form-data",
+                                        method: "POST"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "profileimage" } },
+                                          [_vm._v("Example file input")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          attrs: {
+                                            type: "hidden",
+                                            name: "_token",
+                                            id: "csrf-token"
+                                          },
+                                          domProps: { value: _vm.csrftoken }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "form-control-file",
+                                          attrs: {
+                                            type: "file",
+                                            id: "profileimage",
+                                            name: "profileimage"
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          attrs: { type: "submit" }
+                                        },
+                                        [_vm._v("Upload")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(_vm.user.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(_vm.profilecontent.about))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(6),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseEdit",
+                                  "aria-labelledby": "headingEdit",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c("form", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "aboutinput" } },
+                                        [_vm._v("Text")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "aboutinput"
+                                        },
+                                        domProps: {
+                                          value: _vm.profilecontent.about
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "submit" },
+                                        on: { click: _vm.updateAbout }
+                                      },
+                                      [_vm._v("Update")]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.channeldash,
+                  expression: "channeldash"
+                }
+              ],
+              attrs: { id: "nav-channel" }
+            },
+            [_vm._v("channel settings here")]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link disabled", attrs: { href: "#" } }, [
+        _vm._v("schedule")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\n      \t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n      \t\t\t\t    \t"
+      ),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "http://videojs.com/html5-video-support/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("supports HTML5 video")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "streamtitle" } }, [_vm._v("Title:")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "streamtitle",
+          placeholder: "Enter stream title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "card-text" }, [
+      _vm._v("And your unique stream key, like this:"),
+      _c("img", {
+        staticClass: "card-img-top",
+        staticStyle: { "max-width": "100%" },
+        attrs: {
+          src: "/images/dashboard/streamsettingsobs.png",
+          alt: "OBS stream settings"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseImage",
+                "aria-expanded": "false",
+                "aria-controls": "collapseImage"
+              }
+            },
+            [
+              _vm._v(
+                "\n                            Upload new image\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\n                            Edit about section:\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2073dee6", module.exports)
+  }
+}
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(178)
+/* template */
+var __vue_template__ = __webpack_require__(179)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/assets/js/components/dashboardstream.vue"
 
 /* hot reload */
@@ -104614,7 +105561,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 175 */
+/* 178 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -104745,7 +105692,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 176 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105015,19 +105962,23 @@ if (false) {
 }
 
 /***/ }),
-/* 177 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(178)
+var __vue_script__ = __webpack_require__(181)
 /* template */
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 var __vue_template__ = __webpack_require__(179)
 =======
 var __vue_template__ = __webpack_require__(178)
 >>>>>>> file uploading finally works
+=======
+var __vue_template__ = __webpack_require__(182)
+>>>>>>> dashboard loading
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105066,11 +106017,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 178 */
+/* 181 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -105227,6 +106186,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 179 */
 =======
@@ -105234,6 +106194,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 177 */,
 /* 178 */
 >>>>>>> file uploading finally works
+=======
+/* 182 */
+>>>>>>> dashboard loading
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105310,7 +106273,9 @@ var render = function() {
                           [_vm._v("Upload")]
                         )
                       ]
-                    )
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
                   ])
                 ]
               )
@@ -105327,7 +106292,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { attrs: { id: "accordion" } }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c(
                 "div",
@@ -105418,6 +106383,39 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
+      "form",
+      {
+        attrs: {
+          action: "/uploadimage",
+          method: "POST",
+          enctype: "multipart/form-data"
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "profileimage" } }, [
+            _vm._v("Example file input")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control-file",
+            attrs: { type: "file", id: "profileimage", name: "profileimage" }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Upload")]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
       "div",
       { staticClass: "card-header", attrs: { id: "headingEdit" } },
       [
@@ -105454,23 +106452,32 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 180 */
 =======
 /* 179 */
 >>>>>>> file uploading finally works
+=======
+/* 183 */
+>>>>>>> dashboard loading
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
   __webpack_require__(181)
+=======
+  __webpack_require__(184)
+>>>>>>> dashboard loading
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(183)
+var __vue_script__ = __webpack_require__(186)
 /* template */
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 var __vue_template__ = __webpack_require__(184)
 =======
   __webpack_require__(180)
@@ -105481,6 +106488,9 @@ var __vue_script__ = __webpack_require__(182)
 /* template */
 var __vue_template__ = __webpack_require__(183)
 >>>>>>> file uploading finally works
+=======
+var __vue_template__ = __webpack_require__(187)
+>>>>>>> dashboard loading
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105519,21 +106529,29 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 181 */
 =======
 /* 180 */
 >>>>>>> file uploading finally works
+=======
+/* 184 */
+>>>>>>> dashboard loading
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 var content = __webpack_require__(182);
 =======
 var content = __webpack_require__(181);
 >>>>>>> file uploading finally works
+=======
+var content = __webpack_require__(185);
+>>>>>>> dashboard loading
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -105553,11 +106571,15 @@ if(false) {
 }
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 182 */
 =======
 /* 181 */
 >>>>>>> file uploading finally works
+=======
+/* 185 */
+>>>>>>> dashboard loading
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)(false);
@@ -105571,11 +106593,15 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 183 */
 =======
 /* 182 */
 >>>>>>> file uploading finally works
+=======
+/* 186 */
+>>>>>>> dashboard loading
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105683,11 +106709,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 184 */
 =======
 /* 183 */
 >>>>>>> file uploading finally works
+=======
+/* 187 */
+>>>>>>> dashboard loading
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105797,15 +106827,15 @@ if (false) {
 }
 
 /***/ }),
-/* 185 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(186)
+var __vue_script__ = __webpack_require__(189)
 /* template */
-var __vue_template__ = __webpack_require__(187)
+var __vue_template__ = __webpack_require__(190)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105844,7 +106874,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 186 */
+/* 189 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105893,7 +106923,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 187 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105971,11 +107001,15 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< cdfe6815262afba5f3ac765328393a8b4faefd5c
 <<<<<<< 20695b48619bde5feb533b0331151985b428836c
 /* 188 */
 =======
 /* 184 */
 >>>>>>> file uploading finally works
+=======
+/* 191 */
+>>>>>>> dashboard loading
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
