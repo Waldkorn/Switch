@@ -13,7 +13,7 @@ use App\Profilecontent;
 class ProfileController extends Controller
 {
   public function get($name){
-    echo User::where('name',$name)->get();
+    echo User::where('name',$name)->first();
   }
 
     public function follow_user(){
@@ -47,7 +47,7 @@ class ProfileController extends Controller
     }
 
     public function followers($username){
-        $user = User::where('name',$username)->firstupdates();
+        $user = User::where('name',$username)->first();
         return $user->followers()->withCount('followers')->get();
     }
 

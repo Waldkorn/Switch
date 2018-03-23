@@ -102995,29 +102995,43 @@ var render = function() {
         "div",
         { staticClass: "p-2", staticStyle: { padding: "0", float: "right" } },
         [
-          _c("div", { staticClass: "card", staticStyle: { width: "150px" } }, [
-            _c("img", {
-              staticClass: "card-img-top",
-              attrs: {
-                src: game.image_source,
-                alt: game.name,
-                height: "150",
-                width: "150"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h6", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(game.name))
-              ]),
+          _c(
+            "div",
+            {
+              staticClass: "card",
+              staticStyle: { width: "150px", color: "#343a40" }
+            },
+            [
+              _c("img", {
+                staticClass: "card-img-top",
+                attrs: {
+                  src: game.image_source,
+                  alt: game.name,
+                  height: "150",
+                  width: "150"
+                }
+              }),
               _vm._v(" "),
               _c(
-                "a",
-                { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("number")]
+                "div",
+                {
+                  staticClass: "card-body",
+                  staticStyle: { "text-align": "center" }
+                },
+                [
+                  _c("h6", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(game.name))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    { staticClass: "btn btn-danger", attrs: { href: "#" } },
+                    [_vm._v("number")]
+                  )
+                ]
               )
-            ])
-          ])
+            ]
+          )
         ]
       )
     })
@@ -103133,14 +103147,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['auth_user', 'profile', 'loggedin', 'isfollowing'],
+  props: ['profile', 'loggedin', 'isfollowing'],
 
   data: function data() {
     return {
-      users: [],
+      user: [],
       profilecontent: [],
       followers: [],
-      followings: []
+      followings: [],
+      auth: []
     };
   },
 
@@ -103154,7 +103169,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     var url = '/api/profilepage/' + this.profile.name;
     axios.get(url).then(function (response) {
-      _this.users = JSON.parse(JSON.stringify(response.data));
+      _this.user = JSON.parse(JSON.stringify(response.data));
     });
 
     var followersurl = '/api/followers/' + this.profile.name;
@@ -103166,12 +103181,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get(followingsurl).then(function (response) {
       _this.followings = JSON.parse(JSON.stringify(response.data));
     });
+
+    axios.get('/api/user').then(function (response) {
+      _this.auth_user = response.data;
+    });
   },
 
 
   methods: {
     follow: function follow() {
-
+      console.log(document.getElementById('follow_btn').value);
       axios.post('/api/profilepage/follow', {
         user_id: document.getElementById('follow_btn').value,
         follower_id: this.auth_user.id
@@ -103221,246 +103240,262 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    _vm._l(_vm.users, function(user) {
-      return _c(
-        "div",
-        { staticClass: "card", staticStyle: { width: "100%" } },
-        [
-          _c("h3", { staticClass: "card-title" }, [_vm._v(_vm._s(user.name))]),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "card-img-top",
-            attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "btn-group",
-              staticStyle: {
-                padding: "0",
-                width: "100%",
-                border: "0px",
-                "border-radius": "0px"
-              }
-            },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  staticStyle: {
-                    width: "50%",
-                    "border-right": "1px",
-                    "border-radius": "0px",
-                    "margin-right": "1px"
-                  },
-                  attrs: { type: "button" },
-                  on: { click: _vm.togglefollowers }
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "card",
+        staticStyle: {
+          width: "100%",
+          "border-radius": "0px 0px 0.25rem 0rem",
+          border: "0px"
+        }
+      },
+      [
+        _c(
+          "h3",
+          {
+            staticClass: "card-title",
+            staticStyle: { margin: "0", padding: "0.5rem" }
+          },
+          [_vm._v(_vm._s(_vm.user.name))]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.profilecontent.img_url, alt: "hardcoded example" }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "btn-group",
+            staticStyle: {
+              padding: "0",
+              width: "100%",
+              border: "0px",
+              "border-radius": "0px"
+            }
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  "border-right": "1px",
+                  "border-radius": "0px",
+                  "margin-right": "1px"
                 },
-                [
-                  _vm._v("Followers"),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "badge badge-light" }, [
-                    _vm._v(" " + _vm._s(_vm.followers.length))
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  staticStyle: {
-                    width: "50%",
-                    border: "0px",
-                    "border-radius": "0px"
-                  },
-                  attrs: { type: "button" },
-                  on: { click: _vm.togglefollowings }
-                },
-                [
-                  _vm._v("Following"),
-                  _c("br"),
-                  _c("span", { staticClass: "badge badge-light" }, [
-                    _vm._v(" " + _vm._s(_vm.followings.length))
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _vm.loggedin == 1
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "container-fluid",
-                    staticStyle: { "text-align": "center" },
-                    attrs: { id: "follow_unfollow" }
-                  },
-                  [
-                    _vm.isfollowing == 0
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success btn-lg",
-                            attrs: { id: "follow_btn", value: user.id },
-                            on: { click: _vm.follow }
-                          },
-                          [_vm._v("follow")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.isfollowing == 1
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger btn-lg",
-                            attrs: { id: "unfollow_btn", value: user.id },
-                            on: { click: _vm.unfollow }
-                          },
-                          [_vm._v("unfollow")]
-                        )
-                      : _vm._e(),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "alert alert-success",
-                        staticStyle: { display: "none" },
-                        attrs: { id: "followmsg", role: "alert" }
-                      },
-                      [_vm._v("You are now following " + _vm._s(user.name))]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "alert alert-danger",
-                        staticStyle: { display: "none" },
-                        attrs: { id: "unfollowmsg", role: "alert" }
-                      },
-                      [
-                        _vm._v(
-                          " You are no longer following " + _vm._s(user.name)
-                        )
-                      ]
-                    )
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.loggedin == 0
-              ? _c("div", { attrs: { id: "follow_unfollow" } }, [
-                  _vm._v(
-                    " Please log in or register to follow " + _vm._s(user.name)
-                  )
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowers }
+              },
+              [
+                _vm._v("Followers"),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followers.length))
                 ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+              ]
+            ),
             _vm._v(" "),
-            _c("h5", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(_vm.profilecontent.about))
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "list-group",
-              staticStyle: {
-                width: "100%",
-                "max-height": "500px",
-                overflow: "hidden",
-                display: "none"
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: {
+                  width: "50%",
+                  border: "0px",
+                  "border-radius": "0px"
+                },
+                attrs: { type: "button" },
+                on: { click: _vm.togglefollowings }
               },
-              attrs: { id: "followerslist" }
-            },
-            [
-              _c(
+              [
+                _vm._v("Following"),
+                _c("br"),
+                _c("span", { staticClass: "badge badge-light" }, [
+                  _vm._v(" " + _vm._s(_vm.followings.length))
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("div", { staticClass: "container-fluid" }, [
+          _vm.loggedin == 1
+            ? _c(
                 "div",
                 {
                   staticClass: "container-fluid",
-                  staticStyle: {
-                    "overflow-y": "scroll",
-                    width: "100%",
-                    height: "100%",
-                    padding: "0"
-                  }
+                  staticStyle: { "text-align": "center" },
+                  attrs: { id: "follow_unfollow" }
                 },
                 [
-                  _vm._m(0, true),
+                  _vm.isfollowing == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-lg",
+                          attrs: { id: "follow_btn", value: _vm.user.id },
+                          on: { click: _vm.follow }
+                        },
+                        [_vm._v("follow")]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
-                  _vm._l(_vm.followers, function(follower) {
-                    return _c(
-                      "a",
-                      {
-                        staticClass: "list-group-item list-group-item-action",
-                        attrs: { href: "/profilepage/" + follower.name }
-                      },
-                      [_vm._v(" " + _vm._s(follower.name))]
-                    )
-                  })
-                ],
-                2
+                  _vm.isfollowing == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-lg",
+                          attrs: { id: "unfollow_btn", value: _vm.user.id },
+                          on: { click: _vm.unfollow }
+                        },
+                        [_vm._v("unfollow")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-success",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "followmsg", role: "alert" }
+                    },
+                    [_vm._v("You are now following " + _vm._s(_vm.user.name))]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unfollowmsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer following " + _vm._s(_vm.user.name)
+                      )
+                    ]
+                  )
+                ]
               )
-            ]
-          ),
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "list-group",
-              staticStyle: {
-                width: "100%",
-                "max-height": "500px",
-                overflow: "hidden",
-                display: "none"
-              },
-              attrs: { id: "followingslist" }
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                _vm._v(
+                  " Please log in or register to follow " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
             },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "container-fluid",
-                  staticStyle: {
-                    "overflow-y": "scroll",
-                    width: "100%",
-                    height: "100%",
-                    padding: "0"
-                  }
-                },
-                [
-                  _vm._m(1, true),
-                  _vm._v(" "),
-                  _vm._l(_vm.followings, function(following) {
-                    return _c(
-                      "a",
-                      {
-                        staticClass: "list-group-item list-group-item-action",
-                        attrs: { href: "/profilepage/" + following.name }
-                      },
-                      [_vm._v(" " + _vm._s(following.name))]
-                    )
-                  })
-                ],
-                2
-              )
-            ]
-          )
-        ]
-      )
-    })
-  )
+            attrs: { id: "followerslist" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "container-fluid",
+                staticStyle: {
+                  "overflow-y": "scroll",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0"
+                }
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.followers, function(follower) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "/profilepage/" + follower.name }
+                    },
+                    [_vm._v(" " + _vm._s(follower.name))]
+                  )
+                })
+              ],
+              2
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "list-group",
+            staticStyle: {
+              width: "100%",
+              "max-height": "500px",
+              overflow: "hidden",
+              display: "none"
+            },
+            attrs: { id: "followingslist" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "container-fluid",
+                staticStyle: {
+                  "overflow-y": "scroll",
+                  width: "100%",
+                  height: "100%",
+                  padding: "0"
+                }
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._l(_vm.followings, function(following) {
+                  return _c(
+                    "a",
+                    {
+                      staticClass: "list-group-item list-group-item-action",
+                      attrs: { href: "/profilepage/" + following.name }
+                    },
+                    [_vm._v(" " + _vm._s(following.name))]
+                  )
+                })
+              ],
+              2
+            )
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -103566,6 +103601,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -103593,98 +103630,140 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-3", staticStyle: { "padding-left": "0" } },
-    [
-      _c(
-        "div",
-        { staticClass: "container-fluid" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.users, function(user) {
-            return _c(
-              "div",
-              {
-                staticClass: "streamer list-group-item",
-                class: {
-                  "list-group-item-primary": user.now_live,
-                  "list-group-item-secondary": !user.now_live
-                }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "d-flex w-100 justify-content-between" },
-                  [
-                    _c("a", { attrs: { href: "/" + user.name } }, [
-                      _vm._v(_vm._s(user.name))
-                    ]),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "text-danger",
-                        class: { "d-none": !user.now_live }
-                      },
-                      [_vm._v("live now")]
-                    )
-                  ]
-                )
-              ]
-            )
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "container-fluid",
-          staticStyle: { "max-height": "500px" }
-        },
-        [
-          _vm._v(" Some other users\n    "),
-          _c(
+  return _c("div", { staticClass: "col-3", staticStyle: { padding: "0" } }, [
+    _c(
+      "div",
+      { staticClass: "container-fluid", staticStyle: { padding: "0" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.users, function(user) {
+          return _c(
             "div",
             {
-              staticClass: "container-fluid",
-              staticStyle: { padding: "0", "overflow-y": "scroll" }
+              staticClass: "streamer list-group-item",
+              class: {
+                "list-group-item": user.now_live,
+                "list-group-item-secondary": !user.now_live
+              },
+              staticStyle: {
+                "background-color": "#343a40",
+                "border-radius": "0px 0px 0rem 0rem"
+              }
             },
-            _vm._l(_vm.users, function(user) {
-              return _c(
+            [
+              _c(
                 "div",
-                {
-                  staticClass: "container-fluid",
-                  staticStyle: { padding: "0" }
-                },
+                { staticClass: "d-flex w-100 justify-content-between" },
                 [
                   _c(
                     "a",
                     {
-                      staticClass: "list-group-item",
-                      attrs: { href: "/profilepage/" + user.name }
+                      staticStyle: { color: "#f5f5dc" },
+                      attrs: { href: "/" + user.name }
                     },
                     [_vm._v(_vm._s(user.name))]
+                  ),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      class: { "d-none": !user.now_live }
+                    },
+                    [_vm._v("live now")]
                   )
                 ]
               )
-            })
+            ]
           )
-        ]
-      )
-    ]
-  )
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "container-fluid",
+        staticStyle: {
+          "max-height": "500px",
+          padding: "0",
+          "border-radius": "0px 0px 0rem 0rem"
+        }
+      },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "container-fluid",
+            staticStyle: {
+              padding: "0",
+              "overflow-y": "hidden",
+              "border-radius": "0px 0px 0.25rem 0rem"
+            }
+          },
+          _vm._l(_vm.users, function(user) {
+            return _c(
+              "div",
+              { staticClass: "container-fluid", staticStyle: { padding: "0" } },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "list-group-item",
+                    staticStyle: {
+                      color: "#f5f5dc",
+                      "background-color": "#343a40",
+                      "border-radius": "0px"
+                    },
+                    attrs: { href: "/profilepage/" + user.name }
+                  },
+                  [_vm._v(_vm._s(user.name))]
+                )
+              ]
+            )
+          })
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "list-group-item" }, [
-      _c("h5", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          border: "0px",
+          "border-radius": "0px 0px 0rem 0rem"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Some other users")])]
+    )
   }
 ]
 render._withStripped = true
@@ -104524,8 +104603,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.profilecontent.about = response.data;
         $('#collapseEdit').collapse("toggle");
       });
-    }
+    },
 
+    uploadimage: function uploadimage() {
+      var formData = new FormData();
+      formData.append("profileimage", document.getElementById('profileimage').files[0]);
+      console.log(formData);
+      axios.post('/api/uploadimage', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+        console.log('file sent');
+      });
+    }
   }
 });
 
@@ -104564,37 +104651,19 @@ var render = function() {
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
-                    _c(
-                      "form",
-                      {
-                        attrs: {
-                          action: "/uploadimage",
-                          method: "POST",
-                          enctype: "multipart/form-data"
-                        }
-                      },
-                      [
-                        _c("input", {
-                          attrs: {
-                            type: "hidden",
-                            name: "_token",
-                            id: "csrf-token"
-                          },
-                          domProps: { value: _vm.csrftoken }
-                        }),
-                        _vm._v(" "),
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Upload")]
-                        )
-                      ]
-                    )
+                    _c("form", [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" },
+                          on: { click: _vm.uploadimage }
+                        },
+                        [_vm._v("Upload")]
+                      )
+                    ])
                   ])
                 ]
               )
@@ -104703,7 +104772,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "profileimage" } }, [
-        _vm._v("Example file input")
+        _vm._v("Choose your profile picture:")
       ]),
       _vm._v(" "),
       _c("input", {
