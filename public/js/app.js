@@ -114072,11 +114072,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+<<<<<<< HEAD
       games: null
+=======
+      games: []
+>>>>>>> minor error fixes
     };
   },
-
+  props: ['user'],
   mounted: function mounted() {
+<<<<<<< HEAD
     axios.get('/api/user').then(function (response) {
       console.log(response.data);
     });
@@ -114094,6 +114099,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 176 */
 >>>>>>> solved merge conflicts
 /***/ (function(module, exports, __webpack_require__) {
+=======
+    var _this = this;
+
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+>>>>>>> minor error fixes
 
 var render = function() {
   var _vm = this
