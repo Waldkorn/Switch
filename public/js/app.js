@@ -61,10 +61,14 @@
 /******/
 /******/ 	// Load entry module and return exports
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 175);
 =======
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
 >>>>>>> Users can now see how many people are viewing
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+>>>>>>> file uploading finally works
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -24502,7 +24506,7 @@ module.exports = win;
 "use strict";
 
 
-var bind = __webpack_require__(45);
+var bind = __webpack_require__(46);
 var isBuffer = __webpack_require__(112);
 
 /*global toString:true*/
@@ -26725,7 +26729,11 @@ var _resolveUrl2 = _interopRequireDefault(_resolveUrl);
 
 var _videoJs = __webpack_require__(1);
 
+<<<<<<< HEAD
 var _m3u8Parser = __webpack_require__(27);
+=======
+var _m3u8Parser = __webpack_require__(26);
+>>>>>>> file uploading finally works
 
 var _m3u8Parser2 = _interopRequireDefault(_m3u8Parser);
 
@@ -28278,6 +28286,7 @@ module.exports = function webwackify(fn, fnModuleId) {
  */
 
 
+<<<<<<< HEAD
 var Stream = __webpack_require__(5);
 var mp4 = __webpack_require__(41);
 var m2ts = __webpack_require__(33);
@@ -28286,6 +28295,16 @@ var H264Stream = __webpack_require__(36).H264Stream;
 var AacStream = __webpack_require__(215);
 var coneOfSilence = __webpack_require__(216);
 var clock = __webpack_require__(217);
+=======
+var Stream = __webpack_require__(4);
+var mp4 = __webpack_require__(40);
+var m2ts = __webpack_require__(32);
+var AdtsStream = __webpack_require__(34);
+var H264Stream = __webpack_require__(35).H264Stream;
+var AacStream = __webpack_require__(92);
+var coneOfSilence = __webpack_require__(93);
+var clock = __webpack_require__(94);
+>>>>>>> file uploading finally works
 
 // constants
 var AUDIO_PROPERTIES = [
@@ -30179,10 +30198,17 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
+<<<<<<< HEAD
     adapter = __webpack_require__(49);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
     adapter = __webpack_require__(49);
+=======
+    adapter = __webpack_require__(48);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(48);
+>>>>>>> file uploading finally works
   }
   return adapter;
 }
@@ -30257,10 +30283,17 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)))
 
 /***/ }),
 /* 24 */
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(47)))
+
+/***/ }),
+/* 23 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -30288,7 +30321,11 @@ module.exports = function(module) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 25 */
+=======
+/* 24 */
+>>>>>>> file uploading finally works
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33262,7 +33299,11 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6)))
 
 /***/ }),
+<<<<<<< HEAD
 /* 26 */
+=======
+/* 25 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports) {
 
 module.exports = isFunction
@@ -33283,17 +33324,29 @@ function isFunction (fn) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 27 */
+=======
+/* 26 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 var _lineStream = __webpack_require__(28);
 
 var _lineStream2 = _interopRequireDefault(_lineStream);
 
 var _parseStream = __webpack_require__(29);
+=======
+var _lineStream = __webpack_require__(27);
+
+var _lineStream2 = _interopRequireDefault(_lineStream);
+
+var _parseStream = __webpack_require__(28);
+>>>>>>> file uploading finally works
 
 var _parseStream2 = _interopRequireDefault(_parseStream);
 
@@ -33333,10 +33386,14 @@ module.exports = {
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 28 */
 =======
 /* 38 */
 >>>>>>> Users can now see how many people are viewing
+=======
+/* 27 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33419,10 +33476,14 @@ exports['default'] = LineStream;
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 29 */
 =======
 /* 39 */
 >>>>>>> Users can now see how many people are viewing
+=======
+/* 28 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33906,10 +33967,14 @@ exports['default'] = ParseStream;
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 30 */
 =======
 /* 41 */
 >>>>>>> Users can now see how many people are viewing
+=======
+/* 29 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33933,7 +33998,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _decrypter = __webpack_require__(196);
 
+<<<<<<< HEAD
 var _asyncStream = __webpack_require__(31);
+=======
+var _asyncStream = __webpack_require__(30);
+>>>>>>> file uploading finally works
 
 var _asyncStream2 = _interopRequireDefault(_asyncStream);
 
@@ -33946,10 +34015,14 @@ module.exports = exports['default'];
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 31 */
 =======
 /* 42 */
 >>>>>>> Users can now see how many people are viewing
+=======
+/* 30 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34043,7 +34116,11 @@ exports['default'] = AsyncStream;
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 32 */
+=======
+/* 31 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -34055,6 +34132,7 @@ module.exports = {
 <<<<<<< HEAD
 
 /***/ }),
+<<<<<<< HEAD
 /* 33 */
 =======
     if (!this.messageHandlers) {
@@ -34110,6 +34188,9 @@ module.exports = exports["default"];
 /***/ }),
 /* 44 */
 >>>>>>> Users can now see how many people are viewing
+=======
+/* 32 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34124,10 +34205,17 @@ module.exports = exports["default"];
  * Media Source Extensions.
  */
 
+<<<<<<< HEAD
 var Stream = __webpack_require__(5),
   CaptionStream = __webpack_require__(206),
   StreamTypes = __webpack_require__(11),
   TimestampRolloverStream = __webpack_require__(34).TimestampRolloverStream;
+=======
+var Stream = __webpack_require__(4),
+  CaptionStream = __webpack_require__(83),
+  StreamTypes = __webpack_require__(8),
+  TimestampRolloverStream = __webpack_require__(33).TimestampRolloverStream;
+>>>>>>> file uploading finally works
 
 <<<<<<< HEAD
 var m2tsStreamTypes = __webpack_require__(11);
@@ -34646,7 +34734,11 @@ module.exports = m2ts;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 34 */
+=======
+/* 33 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34737,7 +34829,11 @@ module.exports = {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 35 */
+=======
+/* 34 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34877,10 +34973,14 @@ module.exports = AdtsStream;
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 36 */
 =======
 /* 46 */
 >>>>>>> Users can now see how many people are viewing
+=======
+/* 35 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35341,7 +35441,11 @@ module.exports = {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 37 */
+=======
+/* 36 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35407,7 +35511,11 @@ exports['default'] = createTextTracksIfNecessary;
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 38 */
+=======
+/* 37 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35430,7 +35538,11 @@ var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
+<<<<<<< HEAD
 var _muxJsLibFlv = __webpack_require__(32);
+=======
+var _muxJsLibFlv = __webpack_require__(31);
+>>>>>>> file uploading finally works
 
 var _muxJsLibFlv2 = _interopRequireDefault(_muxJsLibFlv);
 
@@ -35562,7 +35674,11 @@ exports['default'] = function (self) {
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 39 */
+=======
+/* 38 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35594,7 +35710,11 @@ exports["default"] = flashConstants;
 module.exports = exports["default"];
 
 /***/ }),
+<<<<<<< HEAD
 /* 40 */
+=======
+/* 39 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -35820,7 +35940,11 @@ exports['default'] = function (self) {
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 41 */
+=======
+/* 40 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36624,7 +36748,11 @@ module.exports = {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 42 */
+=======
+/* 41 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36677,7 +36805,11 @@ var _mediaSegmentRequest = __webpack_require__(220);
 
 var _ranges = __webpack_require__(22);
 
+<<<<<<< HEAD
 var _playlistSelectors = __webpack_require__(43);
+=======
+var _playlistSelectors = __webpack_require__(42);
+>>>>>>> file uploading finally works
 
 // in ms
 var CHECK_BUFFER_DELAY = 500;
@@ -38096,7 +38228,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 exports['default'] = SegmentLoader;
 
 /***/ }),
+<<<<<<< HEAD
 /* 43 */
+=======
+/* 42 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38116,7 +38252,11 @@ var _playlist = __webpack_require__(9);
 
 var _playlist2 = _interopRequireDefault(_playlist);
 
+<<<<<<< HEAD
 var _utilCodecsJs = __webpack_require__(44);
+=======
+var _utilCodecsJs = __webpack_require__(43);
+>>>>>>> file uploading finally works
 
 // Utilities
 
@@ -38531,7 +38671,11 @@ var lowestBitrateCompatibleVariantSelector = function lowestBitrateCompatibleVar
 exports.lowestBitrateCompatibleVariantSelector = lowestBitrateCompatibleVariantSelector;
 
 /***/ }),
+<<<<<<< HEAD
 /* 44 */
+=======
+/* 43 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38578,7 +38722,11 @@ var parseCodecs = function parseCodecs() {
 exports.parseCodecs = parseCodecs;
 
 /***/ }),
+<<<<<<< HEAD
 /* 45 */
+=======
+/* 44 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38594,7 +38742,11 @@ var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
+<<<<<<< HEAD
 var _aesDecrypter = __webpack_require__(30);
+=======
+var _aesDecrypter = __webpack_require__(29);
+>>>>>>> file uploading finally works
 
 var _binUtils = __webpack_require__(10);
 
@@ -38631,7 +38783,11 @@ exports['default'] = function (self) {
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 46 */
+=======
+/* 45 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -49102,7 +49258,11 @@ return jQuery;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 47 */
+=======
+/* 46 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49120,7 +49280,11 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 48 */
+=======
+/* 47 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -49310,7 +49474,11 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 49 */
+=======
+/* 48 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49330,7 +49498,7 @@ var settle = __webpack_require__(115);
 var buildURL = __webpack_require__(117);
 var parseHeaders = __webpack_require__(118);
 var isURLSameOrigin = __webpack_require__(119);
-var createError = __webpack_require__(48);
+var createError = __webpack_require__(49);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(120);
 >>>>>>> edited profilecontent migration and seeders, now works
 
@@ -49507,7 +49675,11 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 50 */
+=======
+/* 49 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49532,7 +49704,11 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 51 */
+=======
+/* 50 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49544,7 +49720,11 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 52 */
+=======
+/* 51 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49570,6 +49750,7 @@ module.exports = Cancel;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 53 */,
 /* 54 */,
 /* 55 */,
@@ -49710,6 +49891,17 @@ module.exports = __webpack_require__(188);
 
 /***/ }),
 /* 176 */
+=======
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(53);
+module.exports = __webpack_require__(184);
+
+
+/***/ }),
+/* 53 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -49719,7 +49911,11 @@ module.exports = __webpack_require__(188);
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+<<<<<<< HEAD
 __webpack_require__(177);
+=======
+__webpack_require__(54);
+>>>>>>> file uploading finally works
 
 window.Vue = __webpack_require__(254);
 
@@ -49773,10 +49969,14 @@ Vue.component('stream', __webpack_require__(171));
 Vue.component('dashboardstream', __webpack_require__(174));
 Vue.component('dashboardprofile', __webpack_require__(177));
 
+<<<<<<< HEAD
 Vue.component('chatroom', __webpack_require__(180));
 
 Vue.component('streams', __webpack_require__(185));
 >>>>>>> solved merge conflicts
+=======
+Vue.component('chatroom', __webpack_require__(179));
+>>>>>>> file uploading finally works
 
 var app = new Vue({
     el: '#app',
@@ -49823,7 +50023,11 @@ var app = new Vue({
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 177 */
+=======
+/* 54 */
+>>>>>>> file uploading finally works
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49831,8 +50035,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_echo__);
 
+<<<<<<< HEAD
 window._ = __webpack_require__(178);
 window.Popper = __webpack_require__(25).default;
+=======
+window._ = __webpack_require__(55);
+window.Popper = __webpack_require__(24).default;
+>>>>>>> file uploading finally works
 
 var videojs = __webpack_require__(1);
 window.videojs = videojs;
@@ -49846,7 +50055,11 @@ __webpack_require__(191);
 
 try {
 <<<<<<< HEAD
+<<<<<<< HEAD
   window.$ = window.jQuery = __webpack_require__(46);
+=======
+  window.$ = window.jQuery = __webpack_require__(45);
+>>>>>>> file uploading finally works
 
   __webpack_require__(232);
 =======
@@ -49898,7 +50111,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 178 */
+=======
+/* 55 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -67426,7 +67643,11 @@ var _stream = __webpack_require__(22);
 var _lineStream = __webpack_require__(32);
 >>>>>>> Users can now see how many people are viewing
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(24)(module)))
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(23)(module)))
+>>>>>>> file uploading finally works
 
 <<<<<<< HEAD
 /***/ }),
@@ -67483,10 +67704,17 @@ function SafeParseTuple(obj, reviver) {
 
 "use strict";
 
+<<<<<<< HEAD
 var window = __webpack_require__(3)
 var isFunction = __webpack_require__(26)
 var parseHeaders = __webpack_require__(183)
 var xtend = __webpack_require__(186)
+=======
+var window = __webpack_require__(1)
+var isFunction = __webpack_require__(25)
+var parseHeaders = __webpack_require__(60)
+var xtend = __webpack_require__(63)
+>>>>>>> file uploading finally works
 
 module.exports = createXHR
 createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
@@ -67823,7 +68051,11 @@ exports.right = function(str){
 /* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 var isFunction = __webpack_require__(26)
+=======
+var isFunction = __webpack_require__(25)
+>>>>>>> file uploading finally works
 
 module.exports = forEach
 
@@ -69879,10 +70111,14 @@ var _removeCuesFromTrack = __webpack_require__(17);
 var _xhr2 = _interopRequireDefault(_xhr);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var _aesDecrypter = __webpack_require__(30);
 =======
 var _createTextTracksIfNecessary = __webpack_require__(41);
 >>>>>>> Users can now see how many people are viewing
+=======
+var _aesDecrypter = __webpack_require__(29);
+>>>>>>> file uploading finally works
 
 var _binUtils = __webpack_require__(10);
 
@@ -69893,8 +70129,12 @@ var _videojsContribMediaSources = __webpack_require__(202);
 =======
 var _addTextTrackData = __webpack_require__(24);
 
+<<<<<<< HEAD
 var _flashTransmuxerWorker = __webpack_require__(42);
 >>>>>>> Users can now see how many people are viewing
+=======
+var _m3u8Parser = __webpack_require__(26);
+>>>>>>> file uploading finally works
 
 var _m3u8Parser = __webpack_require__(27);
 
@@ -69942,7 +70182,11 @@ var _reloadSourceOnError = __webpack_require__(231);
 
 var _reloadSourceOnError2 = _interopRequireDefault(_reloadSourceOnError);
 
+<<<<<<< HEAD
 var _playlistSelectorsJs = __webpack_require__(43);
+=======
+var _playlistSelectorsJs = __webpack_require__(42);
+>>>>>>> file uploading finally works
 
 var Hls = {
   PlaylistLoader: _playlistLoader2['default'],
@@ -70805,11 +71049,19 @@ var _stream = __webpack_require__(17);
 
 var _stream2 = _interopRequireDefault(_stream);
 
+<<<<<<< HEAD
 var _lineStream = __webpack_require__(28);
 
 var _lineStream2 = _interopRequireDefault(_lineStream);
 
 var _parseStream = __webpack_require__(29);
+=======
+var _lineStream = __webpack_require__(27);
+
+var _lineStream2 = _interopRequireDefault(_lineStream);
+
+var _parseStream = __webpack_require__(28);
+>>>>>>> file uploading finally works
 
 var _parseStream2 = _interopRequireDefault(_parseStream);
 
@@ -71316,7 +71568,11 @@ var _aes = __webpack_require__(197);
 
 var _aes2 = _interopRequireDefault(_aes);
 
+<<<<<<< HEAD
 var _asyncStream = __webpack_require__(31);
+=======
+var _asyncStream = __webpack_require__(30);
+>>>>>>> file uploading finally works
 
 var _asyncStream2 = _interopRequireDefault(_asyncStream);
 
@@ -72280,7 +72536,11 @@ var _flashSourceBuffer = __webpack_require__(204);
 
 var _flashSourceBuffer2 = _interopRequireDefault(_flashSourceBuffer);
 
+<<<<<<< HEAD
 var _flashConstants = __webpack_require__(39);
+=======
+var _flashConstants = __webpack_require__(38);
+>>>>>>> file uploading finally works
 
 <<<<<<< HEAD
 var _flashConstants2 = _interopRequireDefault(_flashConstants);
@@ -72510,10 +72770,14 @@ var _globalDocument = __webpack_require__(16);
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var _muxJsLibFlv = __webpack_require__(32);
 =======
 var _videoJs = __webpack_require__(7);
 >>>>>>> Users can now see how many people are viewing
+=======
+var _muxJsLibFlv = __webpack_require__(31);
+>>>>>>> file uploading finally works
 
 var _muxJsLibFlv2 = _interopRequireDefault(_muxJsLibFlv);
 
@@ -72526,7 +72790,11 @@ var _virtualSourceBuffer = __webpack_require__(94);
 var _removeCuesFromTrack2 = _interopRequireDefault(_removeCuesFromTrack);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var _createTextTracksIfNecessary = __webpack_require__(37);
+=======
+var _createTextTracksIfNecessary = __webpack_require__(36);
+>>>>>>> file uploading finally works
 
 var _createTextTracksIfNecessary2 = _interopRequireDefault(_createTextTracksIfNecessary);
 =======
@@ -72535,9 +72803,13 @@ var _addTextTrackData = __webpack_require__(24);
 var _codecUtils = __webpack_require__(18);
 >>>>>>> Users can now see how many people are viewing
 
+<<<<<<< HEAD
 var _addTextTrackData = __webpack_require__(19);
 
 var _flashTransmuxerWorker = __webpack_require__(38);
+=======
+var _flashTransmuxerWorker = __webpack_require__(37);
+>>>>>>> file uploading finally works
 
 var _flashTransmuxerWorker2 = _interopRequireDefault(_flashTransmuxerWorker);
 
@@ -72545,7 +72817,11 @@ var _webwackify = __webpack_require__(20);
 
 var _webwackify2 = _interopRequireDefault(_webwackify);
 
+<<<<<<< HEAD
 var _flashConstants = __webpack_require__(39);
+=======
+var _flashConstants = __webpack_require__(38);
+>>>>>>> file uploading finally works
 
 var _flashConstants2 = _interopRequireDefault(_flashConstants);
 
@@ -72553,7 +72829,11 @@ var resolveFlashTransmuxWorker = function resolveFlashTransmuxWorker() {
   var result = undefined;
 
   try {
+<<<<<<< HEAD
     result = /*require.resolve*/(38);
+=======
+    result = /*require.resolve*/(37);
+>>>>>>> file uploading finally works
   } catch (e) {
     // no result
   }
@@ -73175,6 +73455,7 @@ module.exports = exports['default'];
 "use strict";
 
 
+<<<<<<< HEAD
 var Stream = __webpack_require__(5);
 var FlvTag = __webpack_require__(18);
 var m2ts = __webpack_require__(33);
@@ -73182,6 +73463,15 @@ var AdtsStream = __webpack_require__(35);
 var H264Stream = __webpack_require__(36).H264Stream;
 var CoalesceStream = __webpack_require__(209);
 var TagList = __webpack_require__(210);
+=======
+var Stream = __webpack_require__(4);
+var FlvTag = __webpack_require__(17);
+var m2ts = __webpack_require__(32);
+var AdtsStream = __webpack_require__(34);
+var H264Stream = __webpack_require__(35).H264Stream;
+var CoalesceStream = __webpack_require__(86);
+var TagList = __webpack_require__(87);
+>>>>>>> file uploading finally works
 
 var
   Transmuxer,
@@ -75651,7 +75941,11 @@ var _videoJs = __webpack_require__(1);
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
+<<<<<<< HEAD
 var _createTextTracksIfNecessary = __webpack_require__(37);
+=======
+var _createTextTracksIfNecessary = __webpack_require__(36);
+>>>>>>> file uploading finally works
 
 var _createTextTracksIfNecessary2 = _interopRequireDefault(_createTextTracksIfNecessary);
 
@@ -75665,7 +75959,11 @@ var _webwackify = __webpack_require__(20);
 
 var _webwackify2 = _interopRequireDefault(_webwackify);
 
+<<<<<<< HEAD
 var _transmuxerWorker = __webpack_require__(40);
+=======
+var _transmuxerWorker = __webpack_require__(39);
+>>>>>>> file uploading finally works
 
 var _transmuxerWorker2 = _interopRequireDefault(_transmuxerWorker);
 
@@ -75675,7 +75973,11 @@ var resolveTransmuxWorker = function resolveTransmuxWorker() {
   var result = undefined;
 
   try {
+<<<<<<< HEAD
     result = /*require.resolve*/(40);
+=======
+    result = /*require.resolve*/(39);
+>>>>>>> file uploading finally works
   } catch (e) {
     // no result
   }
@@ -76526,10 +76828,17 @@ exports['default'] = VirtualSourceBuffer;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
+<<<<<<< HEAD
   generator: __webpack_require__(41),
   Transmuxer: __webpack_require__(21).Transmuxer,
   AudioSegmentStream: __webpack_require__(21).AudioSegmentStream,
   VideoSegmentStream: __webpack_require__(21).VideoSegmentStream
+=======
+  generator: __webpack_require__(40),
+  Transmuxer: __webpack_require__(20).Transmuxer,
+  AudioSegmentStream: __webpack_require__(20).AudioSegmentStream,
+  VideoSegmentStream: __webpack_require__(20).VideoSegmentStream
+>>>>>>> file uploading finally works
 };
 
 
@@ -76814,7 +77123,11 @@ var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 <<<<<<< HEAD
 var _playlistJs = __webpack_require__(9);
 
+<<<<<<< HEAD
 var _segmentLoader = __webpack_require__(42);
+=======
+var _segmentLoader = __webpack_require__(41);
+>>>>>>> file uploading finally works
 
 var _segmentLoader2 = _interopRequireDefault(_segmentLoader);
 =======
@@ -76851,7 +77164,11 @@ var _webwackify = __webpack_require__(20);
 
 var _webwackify2 = _interopRequireDefault(_webwackify);
 
+<<<<<<< HEAD
 var _decrypterWorker = __webpack_require__(45);
+=======
+var _decrypterWorker = __webpack_require__(44);
+>>>>>>> file uploading finally works
 
 var _decrypterWorker2 = _interopRequireDefault(_decrypterWorker);
 
@@ -76859,7 +77176,11 @@ var _config = __webpack_require__(15);
 
 var _config2 = _interopRequireDefault(_config);
 
+<<<<<<< HEAD
 var _utilCodecsJs = __webpack_require__(44);
+=======
+var _utilCodecsJs = __webpack_require__(43);
+>>>>>>> file uploading finally works
 
 var _mediaGroups = __webpack_require__(228);
 
@@ -76886,7 +77207,11 @@ var resolveDecrypterWorker = function resolveDecrypterWorker() {
   var result = undefined;
 
   try {
+<<<<<<< HEAD
     result = /*require.resolve*/(45);
+=======
+    result = /*require.resolve*/(44);
+>>>>>>> file uploading finally works
   } catch (e) {
     // no result
   }
@@ -78943,6 +79268,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 <<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _segmentLoader = __webpack_require__(42);
 =======
 var _globalWindow = __webpack_require__(8);
@@ -78951,6 +79277,9 @@ var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
 var _ranges = __webpack_require__(27);
 >>>>>>> Users can now see how many people are viewing
+=======
+var _segmentLoader = __webpack_require__(41);
+>>>>>>> file uploading finally works
 
 var _segmentLoader2 = _interopRequireDefault(_segmentLoader);
 
@@ -80360,8 +80689,13 @@ module.exports = {
  */
 
 
+<<<<<<< HEAD
 var StreamTypes = __webpack_require__(11);
 var handleRollover = __webpack_require__(34).handleRollover;
+=======
+var StreamTypes = __webpack_require__(8);
+var handleRollover = __webpack_require__(33).handleRollover;
+>>>>>>> file uploading finally works
 var probe = {};
 probe.ts = __webpack_require__(226);
 probe.aac = __webpack_require__(227);
@@ -82805,7 +83139,11 @@ module.exports = exports['default'];
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
+<<<<<<< HEAD
 	 true ? factory(exports, __webpack_require__(46), __webpack_require__(25)) :
+=======
+	 true ? factory(exports, __webpack_require__(45), __webpack_require__(24)) :
+>>>>>>> file uploading finally works
 	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
 	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -86913,7 +87251,7 @@ var Axios = __webpack_require__(236);
 var defaults = __webpack_require__(23);
 =======
 var utils = __webpack_require__(3);
-var bind = __webpack_require__(45);
+var bind = __webpack_require__(46);
 var Axios = __webpack_require__(113);
 var defaults = __webpack_require__(22);
 >>>>>>> edited profilecontent migration and seeders, now works
@@ -86949,9 +87287,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
+<<<<<<< HEAD
 axios.Cancel = __webpack_require__(52);
 axios.CancelToken = __webpack_require__(250);
 axios.isCancel = __webpack_require__(51);
+=======
+axios.Cancel = __webpack_require__(51);
+axios.CancelToken = __webpack_require__(127);
+axios.isCancel = __webpack_require__(50);
+>>>>>>> file uploading finally works
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -87115,7 +87459,11 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
+<<<<<<< HEAD
 var createError = __webpack_require__(50);
+=======
+var createError = __webpack_require__(49);
+>>>>>>> file uploading finally works
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -87576,7 +87924,7 @@ var combineURLs = __webpack_require__(249);
 =======
 var utils = __webpack_require__(3);
 var transformData = __webpack_require__(124);
-var isCancel = __webpack_require__(49);
+var isCancel = __webpack_require__(50);
 var defaults = __webpack_require__(22);
 var isAbsoluteURL = __webpack_require__(125);
 var combineURLs = __webpack_require__(126);
@@ -87741,7 +88089,11 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
+<<<<<<< HEAD
 var Cancel = __webpack_require__(52);
+=======
+var Cancel = __webpack_require__(51);
+>>>>>>> file uploading finally works
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -104041,7 +104393,11 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
+<<<<<<< HEAD
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(48)))
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(47)))
+>>>>>>> file uploading finally works
 
 /***/ }),
 /* 257 */
@@ -113215,6 +113571,7 @@ var normalizeComponent = __webpack_require__(2)
 <<<<<<< HEAD
 var __vue_script__ = __webpack_require__(335)
 /* template */
+<<<<<<< HEAD
 var __vue_template__ = __webpack_require__(336)
 =======
 /* 169 */
@@ -113232,6 +113589,9 @@ var __vue_script__ = __webpack_require__(178)
 /* template */
 var __vue_template__ = __webpack_require__(179)
 >>>>>>> solved merge conflicts
+=======
+var __vue_template__ = __webpack_require__(178)
+>>>>>>> file uploading finally works
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -113552,6 +113912,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 >>>>>>> form and controller for image uploading, not functional
 
@@ -113623,6 +113985,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('#collapseEdit').collapse("toggle");
       });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> dashboard sections are now individual pages, users can edit the about section
     }
 <<<<<<< HEAD
@@ -113637,12 +114000,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.post('/api/uploadimage', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
         console.log('file sent');
       });
+=======
+>>>>>>> file uploading finally works
     }
+
   }
 >>>>>>> form and controller for image uploading, not functional
 });
 
 /***/ }),
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -113656,6 +114023,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 =======
 /* 179 */
 >>>>>>> solved merge conflicts
+=======
+/* 176 */,
+/* 177 */,
+/* 178 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -113715,28 +114087,50 @@ var staticRenderFns = [
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
-                    _c("form", { attrs: { enctype: "multipart/form-data" } }, [
-                      _c("input", {
+                    _c(
+                      "form",
+                      {
                         attrs: {
-                          type: "hidden",
-                          name: "_token",
-                          id: "csrf-token"
-                        },
-                        domProps: { value: _vm.csrftoken }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "btn btn-primary",
-                          attrs: { type: "submit" },
-                          on: { click: _vm.uploadimage }
-                        },
-                        [_vm._v("Upload")]
-                      )
-                    ])
+                          action: "/uploadimage",
+                          enctype: "multipart/form-data",
+                          method: "POST"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "profileimage" } }, [
+                            _vm._v("Example file input")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_token",
+                              id: "csrf-token"
+                            },
+                            domProps: { value: _vm.csrftoken }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control-file",
+                            attrs: {
+                              type: "file",
+                              id: "profileimage",
+                              name: "profileimage"
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Upload")]
+                        )
+                      ]
+                    )
                   ])
                 ]
               )
@@ -113753,7 +114147,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { attrs: { id: "accordion" } }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "div",
@@ -113847,21 +114241,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "profileimage" } }, [
-        _vm._v("Example file input")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control-file",
-        attrs: { type: "file", id: "profileimage", name: "profileimage" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "card-header", attrs: { id: "headingEdit" } },
@@ -113906,6 +114285,7 @@ if (false) {
 /***/ }),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 177 */
 =======
 /* 178 */
@@ -113913,11 +114293,15 @@ if (false) {
 =======
 /* 180 */
 >>>>>>> solved merge conflicts
+=======
+/* 179 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   __webpack_require__(178)
@@ -113943,6 +114327,15 @@ var __vue_template__ = __webpack_require__(182)
 =======
 var __vue_template__ = __webpack_require__(184)
 >>>>>>> solved merge conflicts
+=======
+  __webpack_require__(180)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(182)
+/* template */
+var __vue_template__ = __webpack_require__(183)
+>>>>>>> file uploading finally works
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -113983,6 +114376,7 @@ module.exports = Component.exports
 /***/ }),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 178 */
 =======
 /* 179 */
@@ -113990,6 +114384,9 @@ module.exports = Component.exports
 =======
 /* 181 */
 >>>>>>> solved merge conflicts
+=======
+/* 180 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -113997,7 +114394,11 @@ module.exports = Component.exports
 // load the styles
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 var content = __webpack_require__(179);
+=======
+var content = __webpack_require__(181);
+>>>>>>> file uploading finally works
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -114033,6 +114434,7 @@ if(false) {
 /***/ }),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 179 */
 =======
 /* 180 */
@@ -114040,6 +114442,9 @@ if(false) {
 =======
 /* 182 */
 >>>>>>> solved merge conflicts
+=======
+/* 181 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -114055,6 +114460,7 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 /***/ }),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 180 */
 =======
 /* 181 */
@@ -114062,6 +114468,9 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 =======
 /* 183 */
 >>>>>>> solved merge conflicts
+=======
+/* 182 */
+>>>>>>> file uploading finally works
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -114171,6 +114580,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ }),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 181 */
 =======
 /* 182 */
@@ -114178,6 +114588,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 =======
 /* 184 */
 >>>>>>> solved merge conflicts
+=======
+/* 183 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -114465,8 +114878,12 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 188 */
 >>>>>>> solved merge conflicts
+=======
+/* 184 */
+>>>>>>> file uploading finally works
 /***/ (function(module, exports) {
 =======
 /* 183 */

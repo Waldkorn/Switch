@@ -17,27 +17,17 @@
             </div>
             <div id="collapseImage" class="collapse" aria-labelledby="headingImage" data-parent="#accordion">
               <div class="card-body">
-<<<<<<< HEAD
-                <form action="/uploadimage" enctype="multipart/form-data" method="POST" >
-=======
-
                 <form  enctype="multipart/form-data">
                    <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
->>>>>>> image upload routes changed to api
+
                   <div class="form-group">
                     <label for="profileimage">Example file input</label>
                     <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
                     <input type="file" class="form-control-file" id="profileimage" name="profileimage">
                   </div>
-<<<<<<< HEAD
                   <button type="submit" class="btn btn-primary">Upload</button>
               </form>
-=======
-                  <div type="submit" class="btn btn-primary"v-on:click="uploadimage">Upload</div>
-                </form>
->>>>>>> image upload routes changed to api
-
-              </div>
+            </div>
             </div>
           </div>
         </div>
