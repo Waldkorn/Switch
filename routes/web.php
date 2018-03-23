@@ -19,17 +19,16 @@ Route::get('/',"ViewController@frontpage");
 Route::get('/profilepage/{username}', 'ViewController@profile');
 
 
-Route::get('/{username}', 'ViewController@stream');
 
 Route::get('/dashboard',"ViewController@dashboard");
 
 
-Route::get('/streampage', function () {
-    return view('streampage');
-});
+
 
 
 Route::get('/test', 'ViewController@test');
 
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/{username}', 'ViewController@stream');

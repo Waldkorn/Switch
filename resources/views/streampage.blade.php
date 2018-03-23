@@ -55,7 +55,11 @@
 					@if (Auth::check())
 						:user="{{ Auth::user() }}"
 					@endif
+<<<<<<< 1eb8c5c955c1baff3619622455f3308828b53a4f
 					:streamer="{{$streamer}}"></chatroom>
+=======
+					></chatroom>
+>>>>>>> personal streampage added
 
 				</div>
 			</div> <!-- app -->
