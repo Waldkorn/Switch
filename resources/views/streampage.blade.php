@@ -61,7 +61,7 @@
 
 			<div id="main" class="row mr-0 ml-0" style="max-width:100%;">
 
-				<stream :streamer="{{$streamer}}" :followercount="{{$followerCount}}" :viewers="viewers"></stream>
+				<stream :streamer="{{$streamer}}" :followers="{{$followers}}" :viewers="viewers"></stream>
 
 				<div class="col-md-3 px-0">
 

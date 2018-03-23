@@ -103994,10 +103994,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'stream',
-	props: ['streamer', 'followercount', 'viewers']
+	props: ['streamer', 'followers', 'viewers'],
+	data: function data() {
+		return {
+			watchstream: true,
+			watchviewers: false,
+			watchfollowers: false
+		};
+	},
+	methods: {
+		showstream: function showstream() {
+			this.watchstream = true;
+			this.watchviewers = false;
+			this.watchfollowers = false;
+		},
+		showviewers: function showviewers() {
+			this.watchstream = false;
+			this.watchviewers = true;
+			this.watchfollowers = false;
+		},
+		showfollowers: function showfollowers() {
+			this.watchstream = false;
+			this.watchviewers = false;
+			this.watchfollowers = true;
+		}
+	}
 });
 
 /***/ }),
@@ -104018,49 +104068,154 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
-            _c("li", { staticClass: "nav-item px-1" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [_vm._v(_vm._s(_vm.streamer.name))]
-              )
-            ]),
+            _c(
+              "li",
+              { staticClass: "nav-item px-1", on: { click: _vm.showstream } },
+              [
+                _c(
+                  "a",
+                  { staticClass: "nav-link active", attrs: { href: "#" } },
+                  [_vm._v(_vm._s(_vm.streamer.name))]
+                )
+              ]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item px-1" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [
-                  _vm._v("viewers "),
-                  _c("small", { staticClass: "text-muted" }, [
-                    _vm._v(_vm._s(_vm.viewers.length))
-                  ])
-                ]
-              )
-            ]),
+            _c(
+              "li",
+              { staticClass: "nav-item px-1", on: { click: _vm.showviewers } },
+              [
+                _c(
+                  "a",
+                  { staticClass: "nav-link active", attrs: { href: "#" } },
+                  [
+                    _vm._v("viewers "),
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v(_vm._s(_vm.viewers.length))
+                    ])
+                  ]
+                )
+              ]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item px-1" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link active", attrs: { href: "#" } },
-                [
-                  _vm._v("followers "),
-                  _c("small", { staticClass: "text-muted" }, [
-                    _vm._v(_vm._s(_vm.followercount))
-                  ])
-                ]
-              )
-            ])
+            _c(
+              "li",
+              {
+                staticClass: "nav-item px-1",
+                on: { click: _vm.showfollowers }
+              },
+              [
+                _c(
+                  "a",
+                  { staticClass: "nav-link active", attrs: { href: "#" } },
+                  [
+                    _vm._v("followers "),
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v(_vm._s(_vm.followers.length))
+                    ])
+                  ]
+                )
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
-        _vm.streamer.nowLive
-          ? _c("div", { staticClass: "card-body" }, [_vm._m(0)])
-          : _c("div", { staticClass: "card-body" }, [
-              _c("img", {
-                attrs: { src: "/images/offline.png", alt: "streamer offline" }
-              })
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.watchstream,
+                expression: "watchstream"
+              }
+            ]
+          },
+          [
+            _vm.streamer.now_live
+              ? _c("div", { staticClass: "card-body" }, [_vm._m(0)])
+              : _c("div", { staticClass: "card-body" }, [
+                  _c("img", {
+                    attrs: {
+                      src: "/images/offline.png",
+                      alt: "streamer offline"
+                    }
+                  })
+                ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.watchviewers,
+                expression: "watchviewers"
+              }
+            ]
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h1", [_vm._v("\n\t\t\t\t\tWatching now\n\t\t\t\t")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "list-group" },
+                _vm._l(_vm.viewers, function(viewer) {
+                  return _c("div", { staticClass: "list-group-item" }, [
+                    _c(
+                      "a",
+                      { attrs: { href: "/profilepage/" + viewer.name } },
+                      [_vm._v(_vm._s(viewer.name))]
+                    )
+                  ])
+                })
+              )
             ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.watchfollowers,
+                expression: "watchfollowers"
+              }
+            ]
+          },
+          [
+            _c("div", { staticClass: "card-body" }, [
+              _c("h1", [
+                _vm._v(
+                  "\n\t\t\t\t\t" +
+                    _vm._s(_vm.streamer.name) +
+                    "'s followers\n\t\t\t\t"
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "list-group" },
+                _vm._l(_vm.followers, function(follower) {
+                  return _c("div", { staticClass: "list-group-item" }, [
+                    _c(
+                      "a",
+                      { attrs: { href: "/profilepage/" + follower.name } },
+                      [_vm._v(_vm._s(follower.name))]
+                    )
+                  ])
+                })
+              )
+            ])
+          ]
+        )
       ])
     ]
   )
@@ -104082,10 +104237,10 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v(" \".m3u8\" type='application/x-mpegURL'>\n\t\t\t    "),
+        _vm._v(" \".m3u8\" type='application/x-mpegURL'>\n\t\t\t\t    "),
         _c("p", { staticClass: "vjs-no-js" }, [
           _vm._v(
-            "\n\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t    \t"
+            "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
           ),
           _c(
             "a",
