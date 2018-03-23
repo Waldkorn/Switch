@@ -25,7 +25,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
-
+Route::get('/profilepage/{username}',"ViewController@profile");
 
 ////////////////
 // Dashboards //
@@ -35,12 +35,6 @@ Route::get('/streamdashboard',"ViewController@streamdashboard");
 Route::get('/profiledashboard',"ViewController@profiledashboard");
 Route::get('/channeldashboard',"ViewController@channeldashboard");
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 0ead856db9fee9bb828e7a13619ad33825fd498a
 
 //////////////////
 // Image upload //
@@ -53,4 +47,3 @@ Route::post('/uploadimage','UploadController@updateimage');
 ////////////
 
 Route::get('/{username}', 'ViewController@stream');
-
