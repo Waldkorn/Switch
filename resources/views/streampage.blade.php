@@ -61,6 +61,7 @@
 
 			<div id="main" class="row mr-0 ml-0" style="max-width:100%;">
 
+<<<<<<< HEAD
 				<div class="col-md-9 pl-1 pt-1" style="overflow-y:scroll;">
 
 					<div class="card">
@@ -93,6 +94,9 @@
 
 
 				</div>
+=======
+				<stream :streamer="{{$streamer}}" :followercount="{{$followerCount}}" :viewers="viewers"></stream>
+>>>>>>> 0ead856db9fee9bb828e7a13619ad33825fd498a
 
 				<div class="col-md-3 px-0">
 
@@ -100,7 +104,12 @@
 					@if (Auth::check())
 						:user="{{ Auth::user() }}"
 					@endif
-					:streamer="{{$streamer}}"></chatroom>
+					:streamer="{{$streamer}}"
+					v-on:user-list="setUsers"
+					v-on:user-joined="addUser"
+					v-on:user-left="removeUser"
+					:viewers="viewers"
+					></chatroom>
 
 				</div>
 			</div> <!-- app -->

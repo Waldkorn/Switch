@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Game;
+use App\Stream;
 use Auth;
 
 class ViewController extends Controller
@@ -58,7 +60,22 @@ class ViewController extends Controller
   	$streamer = User::where('name', $username)->with('stream.game')->first();
   	$followerCount = $streamer->followers()->count();
 
-  	return view('streampage', compact('streamer', 'followerCount'));
+    return view('streampage', compact('streamer', 'followerCount'));
+  }
+
+  public function game($gamename) {
+
+    $game = Game::where('name', $gamename)->first();
+
+    $streamers = $game
+    ->streams()
+    ->with(['user' => function($user) {
+      $user->withCount('followers')->orderBy('followers_count');
+    }])
+    ->get();
+
+    return view('gamepage', compact('game', 'streamers'));
+    
   }
 
 
