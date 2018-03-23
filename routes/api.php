@@ -61,7 +61,7 @@ Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware(
 
 
 Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
-
+Route::post('/uploadimage','API\UploadController@updateimage');
 
 ////////////////////////
 // Auth Routes //
