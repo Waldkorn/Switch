@@ -12,12 +12,22 @@
 */
 Auth::routes();
 
-
-Route::post('/uploadimage','UploadController@updateimage');
-
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
 Route::get('/profilepage/{username}',"ViewController@profile");
+
+////////////////
+// Dashboards //
+////////////////
+
+Route::get('/dashboard',"ViewController@dashboard");
+
+
+//////////////////
+// Image upload //
+//////////////////
+
+Route::post('/uploadimage','UploadController@updateimage');
 
 Route::get('/test',"ViewController@test");
 

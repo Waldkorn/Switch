@@ -62,7 +62,7 @@
 @include('layouts.navbar')
 
 <div  class="container-fluid" id="app" style="padding:0px">
-  <dashboard></dashboard>
+  <dashboard :user="{{$user}}"></dashboard>
 </div>
     <script src="{{ asset('js/app.js') }}"></script>
   </body>

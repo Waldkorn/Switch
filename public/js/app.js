@@ -104803,7 +104803,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      user: [],
       profilecontent: [],
       csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
       games: [],
@@ -104813,13 +104812,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     };
   },
-
+  props: ['user'],
   mounted: function mounted() {
     var _this = this;
-
-    axios.get('/api/user').then(function (response) {
-      _this.user = response.data;
-    });
 
     axios.get('/api/profilecontent').then(function (response) {
       _this.profilecontent = JSON.parse(JSON.stringify(response.data));

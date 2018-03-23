@@ -38,18 +38,23 @@ class ViewController extends Controller
     return view('profilepage', compact('user','loggedin','isfollowing'));
   }
 
-  public function dashboard(){
+  public function dashboard() {
     $user = Auth::user();
-    return view('dashboard',compact('user'));
+    return view('dashboard', compact('user'));
   }
 
-  public function profiledashboard(){
-        return view('profiledashboard');
-  }
+  // public function streamdashboard(){
+  //   $user = Auth::user();
+  //   return view('streamdashboard', compact('user'));
+  // }
 
-  public function channeldashboard(){
-        return view('channeldashboard');
-  }
+  // public function profiledashboard(){
+  //       return view('profiledashboard');
+  // }
+
+  // public function channeldashboard(){
+  //       return view('channeldashboard');
+  // }
 
   public function test(){
     return view('dashboard');
