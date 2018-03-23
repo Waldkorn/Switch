@@ -30,6 +30,14 @@
       color:#dc3545;
       text-decoration: underline;
     }
+    .nav-link {
+      color:#dc3545;
+
+    }
+    .nav-link:hover {
+      color:#dc3545;
+      text-decoration: underline;
+    }
 
     #navbarToggleExternalContent{
     margin-top:0.9rem;
