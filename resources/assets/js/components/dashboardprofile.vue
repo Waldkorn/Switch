@@ -26,8 +26,9 @@
                     <input type="file" class="form-control-file" id="profileimage" name="profileimage">
                   </div>
                   <button type="submit" class="btn btn-primary">Upload</button>
-              </form>
+                </form>
             </div>
+
             </div>
           </div>
         </div>
