@@ -109323,6 +109323,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return {
             clients: [],
 
+<<<<<<< HEAD
             createForm: {
                 errors: [],
                 name: '',
@@ -109345,6 +109346,30 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         this.prepareComponent();
     },
 
+=======
+  data: function data() {
+    return {
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false
+
+    };
+  },
+  props: ['user'],
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/profilecontent').then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+>>>>>>> minor bug fixes
 
     /**
      * Prepare the component (Vue 2.x).
