@@ -60,12 +60,180 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
+<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 175);
+=======
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+>>>>>>> Users can now see how many people are viewing
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */,
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+module.exports = __webpack_require__(2);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+__webpack_require__(57);
+
+window.Vue = __webpack_require__(135);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+//passport//
+Vue.component('passport-clients', __webpack_require__(138));
+
+Vue.component('passport-authorized-clients', __webpack_require__(144));
+
+Vue.component('passport-personal-access-tokens', __webpack_require__(149));
+Vue.component('test', __webpack_require__(154));
+
+Vue.component('example-component', __webpack_require__(157));
+Vue.component('games', __webpack_require__(160));
+Vue.component('profilesidebar', __webpack_require__(163));
+Vue.component('nowlivebar', __webpack_require__(166));
+Vue.component('frontpagemain', __webpack_require__(169));
+Vue.component('profilepagemain', __webpack_require__(172));
+Vue.component('stream', __webpack_require__(186));
+
+//dashboard//
+Vue.component('dashboardstream', __webpack_require__(175));
+
+Vue.component('chatroom', __webpack_require__(178));
+
+Vue.component('streams', __webpack_require__(183));
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        viewers: []
+    },
+    methods: {
+        setUsers: function setUsers(users) {
+            this.viewers = users;
+        },
+        addUser: function addUser(user) {
+            this.viewers.push(JSON.parse(JSON.stringify(user)));
+        },
+        removeUser: function removeUser(user) {
+            for (var i = 0; i < this.viewers.length; i++) {
+                if (this.viewers[i].id == user.id) {
+                    this.viewers.splice(i, 1);
+                }
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -82,12 +250,21 @@
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
+<<<<<<< HEAD
 var window = _interopDefault(__webpack_require__(3));
 var document = _interopDefault(__webpack_require__(12));
 var tsml = _interopDefault(__webpack_require__(180));
 var safeParseTuple = _interopDefault(__webpack_require__(181));
 var xhr = _interopDefault(__webpack_require__(182));
 var vtt = _interopDefault(__webpack_require__(187));
+=======
+var window = _interopDefault(__webpack_require__(8));
+var document = _interopDefault(__webpack_require__(16));
+var tsml = _interopDefault(__webpack_require__(61));
+var safeParseTuple = _interopDefault(__webpack_require__(62));
+var xhr = _interopDefault(__webpack_require__(63));
+var vtt = _interopDefault(__webpack_require__(68));
+>>>>>>> Users can now see how many people are viewing
 
 var version = "6.7.3";
 
@@ -23855,7 +24032,31 @@ module.exports = videojs;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 2 */
+=======
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+if (typeof window !== "undefined") {
+    win = window;
+} else if (typeof global !== "undefined") {
+    win = global;
+} else if (typeof self !== "undefined"){
+    win = self;
+} else {
+    win = {};
+}
+
+module.exports = win;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+
+/***/ }),
+/* 9 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -23964,31 +24165,17 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 3 */
+=======
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-/* WEBPACK VAR INJECTION */(function(global) {var win;
-
-if (typeof window !== "undefined") {
-    win = window;
-} else if (typeof global !== "undefined") {
-    win = global;
-} else if (typeof self !== "undefined"){
-    win = self;
-} else {
-    win = {};
-}
-
-module.exports = win;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-=======
 "use strict";
 
 
-var bind = __webpack_require__(45);
-var isBuffer = __webpack_require__(112);
+var bind = __webpack_require__(51);
+var isBuffer = __webpack_require__(116);
 
 /*global toString:true*/
 
@@ -24151,6 +24338,352 @@ function isURLSearchParams(val) {
 function trim(str) {
   return str.replace(/^\s*/, '').replace(/\s*$/, '');
 }
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && navigator.product === 'ReactNative') {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = merge(result[key], val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim
+};
+
+
+/***/ }),
+/* 11 */
+>>>>>>> Users can now see how many people are viewing
+/***/ (function(module, exports, __webpack_require__) {
+
+<<<<<<< HEAD
+/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+if (typeof window !== "undefined") {
+    win = window;
+} else if (typeof global !== "undefined") {
+    win = global;
+} else if (typeof self !== "undefined"){
+    win = self;
+} else {
+    win = {};
+}
+
+module.exports = win;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+=======
+"use strict";
+
+
+var bind = __webpack_require__(45);
+var isBuffer = __webpack_require__(112);
+
+/*global toString:true*/
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+<<<<<<< HEAD
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+=======
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+<<<<<<< HEAD
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+=======
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+<<<<<<< HEAD
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+=======
+var _videoJs = __webpack_require__(7);
+
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * Determine if we're running in a standard browser environment
@@ -24510,6 +25043,7 @@ function forEach(obj, fn) {
     obj = [obj];
   }
 
+<<<<<<< HEAD
   if (isArray(obj)) {
     // Iterate over array values
     for (var i = 0, l = obj.length; i < l; i++) {
@@ -24524,6 +25058,39 @@ function forEach(obj, fn) {
     }
   }
 }
+=======
+    return (playlist.attributes.BANDWIDTH || 0) < currentBandwidth;
+  }).length === 0;
+};
+
+exports.isLowestEnabledRendition = isLowestEnabledRendition;
+// exports
+exports['default'] = {
+  duration: duration,
+  seekable: seekable,
+  safeLiveIndex: safeLiveIndex,
+  getMediaInfoForTime: getMediaInfoForTime,
+  isEnabled: isEnabled,
+  isDisabled: isDisabled,
+  isBlacklisted: isBlacklisted,
+  isIncompatible: isIncompatible,
+  playlistEnd: playlistEnd,
+  isAes: isAes,
+  isFmp4: isFmp4,
+  hasAttribute: hasAttribute,
+  estimateSegmentRequestTime: estimateSegmentRequestTime,
+  isLowestEnabledRendition: isLowestEnabledRendition
+};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file bin-utils.js
+ */
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * Accepts varargs expecting each argument to be an object, then
@@ -24574,8 +25141,71 @@ function extend(a, b, thisArg) {
       a[key] = val;
     }
   });
+<<<<<<< HEAD
   return a;
 }
+=======
+
+  return transferable;
+};
+
+/**
+ * Returns a unique string identifier for a media initialization
+ * segment.
+ */
+var initSegmentId = function initSegmentId(initSegment) {
+  var byterange = initSegment.byterange || {
+    length: Infinity,
+    offset: 0
+  };
+
+  return [byterange.length, byterange.offset, initSegment.resolvedUri].join(',');
+};
+
+/**
+ * utils to help dump binary data to the console
+ */
+var utils = {
+  hexDump: function hexDump(data) {
+    var bytes = Array.prototype.slice.call(data);
+    var step = 16;
+    var result = '';
+    var hex = undefined;
+    var ascii = undefined;
+
+    for (var j = 0; j < bytes.length / step; j++) {
+      hex = bytes.slice(j * step, j * step + step).map(formatHexString).join('');
+      ascii = bytes.slice(j * step, j * step + step).map(formatAsciiString).join('');
+      result += hex + ' ' + ascii + '\n';
+    }
+    return result;
+  },
+  tagDump: function tagDump(tag) {
+    return utils.hexDump(tag.bytes);
+  },
+  textRanges: function textRanges(ranges) {
+    var result = '';
+    var i = undefined;
+
+    for (i = 0; i < ranges.length; i++) {
+      result += textRange(ranges, i) + ' ';
+    }
+    return result;
+  },
+  createTransferableMessage: createTransferableMessage,
+  initSegmentId: initSegmentId
+};
+
+exports['default'] = utils;
+module.exports = exports['default'];
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+>>>>>>> Users can now see how many people are viewing
 
 module.exports = {
   isArray: isArray,
@@ -24602,7 +25232,35 @@ module.exports = {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 5 */
+=======
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
+    typeof window !== 'undefined' ? window : {}
+var minDoc = __webpack_require__(60);
+
+var doccy;
+
+if (typeof document !== 'undefined') {
+    doccy = document;
+} else {
+    doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
+
+    if (!doccy) {
+        doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
+    }
+}
+
+module.exports = doccy;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+
+/***/ }),
+/* 17 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24689,6 +25347,21 @@ var Stream = function() {
   };
 };
 
+<<<<<<< HEAD
+=======
+exports["default"] = removeCuesFromTrack;
+module.exports = exports["default"];
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file codec-utils.js
+ */
+
+>>>>>>> Users can now see how many people are viewing
 /**
  * Forwards all `data` events on this stream to the destination stream. The
  * destination stream should provide a method `push` to receive the data
@@ -24736,6 +25409,7 @@ g = (function() {
 	return this;
 })();
 
+<<<<<<< HEAD
 try {
 	// This works if eval is allowed (see CSP)
 	g = g || Function("return this")() || (1,eval)("this");
@@ -24744,6 +25418,11 @@ try {
 	if(typeof window === "object")
 		g = window;
 }
+=======
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
@@ -24753,6 +25432,7 @@ module.exports = g;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 7 */
 /***/ (function(module, exports) {
 
@@ -24836,6 +25516,9 @@ function toComment(sourceMap) {
 
 /***/ }),
 /* 8 */
+=======
+/* 20 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -24854,7 +25537,11 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
+<<<<<<< HEAD
 var listToStyles = __webpack_require__(278)
+=======
+var listToStyles = __webpack_require__(141)
+>>>>>>> Users can now see how many people are viewing
 
 /*
 type StyleObject = {
@@ -25063,7 +25750,11 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 9 */
+=======
+/* 21 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25084,7 +25775,11 @@ var _videoJs = __webpack_require__(1);
 
 var _globalWindow = __webpack_require__(3);
 
+<<<<<<< HEAD
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
+=======
+var _resolveUrl = __webpack_require__(73);
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * walk backward until we find a duration we can use
@@ -25094,6 +25789,7 @@ var _globalWindow2 = _interopRequireDefault(_globalWindow);
  * @param {Number} endSequence the mediaSequence to stop walking on
  */
 
+<<<<<<< HEAD
 var backwardDuration = function backwardDuration(playlist, endSequence) {
   var result = 0;
   var i = endSequence - playlist.mediaSequence;
@@ -25119,15 +25815,24 @@ var backwardDuration = function backwardDuration(playlist, endSequence) {
     if (typeof segment.end !== 'undefined') {
       return { result: result + segment.end, precise: true };
     }
+=======
+var _videoJs = __webpack_require__(7);
+
+var _m3u8Parser = __webpack_require__(31);
+>>>>>>> Users can now see how many people are viewing
 
     result += segment.duration;
 
+<<<<<<< HEAD
     if (typeof segment.start !== 'undefined') {
       return { result: result + segment.start, precise: true };
     }
   }
   return { result: result, precise: false };
 };
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * walk forward until we find a duration we can use
@@ -25653,7 +26358,11 @@ exports['default'] = {
 };
 
 /***/ }),
+<<<<<<< HEAD
 /* 10 */
+=======
+/* 22 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25813,7 +26522,11 @@ module.exports = doccy;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
+<<<<<<< HEAD
 /* 13 */
+=======
+/* 23 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26096,10 +26809,16 @@ var updateMaster = function updateMaster(master, media) {
     mergedPlaylist.segments = updateSegments(playlist.segments, media.segments, media.mediaSequence - playlist.mediaSequence);
   }
 
+<<<<<<< HEAD
   // resolve any segment URIs to prevent us from having to do it later
   mergedPlaylist.segments.forEach(function (segment) {
     resolveSegmentUris(segment, mergedPlaylist.resolvedUri);
   });
+=======
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   // TODO Right now in the playlists array there are two references to each playlist, one
   // that is referenced by index, and one by URI. The index reference may no longer be
@@ -26122,8 +26841,12 @@ var setupMediaPlaylists = function setupMediaPlaylists(master) {
   while (i--) {
     var playlist = master.playlists[i];
 
+<<<<<<< HEAD
     master.playlists[playlist.uri] = playlist;
     playlist.resolvedUri = (0, _resolveUrl2['default'])(master.uri, playlist.uri);
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
     if (!playlist.attributes) {
       // Although the spec states an #EXT-X-STREAM-INF tag MUST have a
@@ -26133,10 +26856,14 @@ var setupMediaPlaylists = function setupMediaPlaylists(master) {
       // this scenario.
       playlist.attributes = {};
 
+<<<<<<< HEAD
       _videoJs.log.warn('Invalid playlist STREAM-INF detected. Missing BANDWIDTH attribute.');
     }
   }
 };
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 exports.setupMediaPlaylists = setupMediaPlaylists;
 var resolveMediaGroupUris = function resolveMediaGroupUris(master) {
@@ -26247,6 +26974,7 @@ var PlaylistLoader = (function (_EventTarget) {
         this.state = startingState;
       }
 
+<<<<<<< HEAD
       this.error = {
         playlist: this.master.playlists[url],
         status: xhr.status,
@@ -26254,6 +26982,17 @@ var PlaylistLoader = (function (_EventTarget) {
         responseText: xhr.responseText,
         code: xhr.status >= 500 ? 4 : 2
       };
+=======
+exports['default'] = {
+  addTextTrackData: addTextTrackData,
+  durationOfVideo: durationOfVideo
+};
+module.exports = exports['default'];
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       this.trigger('error');
     }
@@ -26583,10 +27322,46 @@ var PlaylistLoader = (function (_EventTarget) {
 exports['default'] = PlaylistLoader;
 
 /***/ }),
+<<<<<<< HEAD
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+=======
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * mux.js
+ *
+ * Copyright (c) 2015 Brightcove
+ * All rights reserved.
+ *
+ * A stream-based mp2t to mp4 converter. This utility can be used to
+ * deliver mp4s to a SourceBuffer on platforms that support native
+ * Media Source Extensions.
+ */
+
+
+var Stream = __webpack_require__(11);
+var mp4 = __webpack_require__(45);
+var m2ts = __webpack_require__(37);
+var AdtsStream = __webpack_require__(39);
+var H264Stream = __webpack_require__(40).H264Stream;
+var AacStream = __webpack_require__(96);
+var coneOfSilence = __webpack_require__(97);
+var clock = __webpack_require__(98);
+
+// constants
+var AUDIO_PROPERTIES = [
+  'audioobjecttype',
+  'channelcount',
+  'samplerate',
+  'samplingfrequencyindex',
+  'samplesize'
+];
+>>>>>>> Users can now see how many people are viewing
 
 
 Object.defineProperty(exports, "__esModule", {
@@ -27931,6 +28706,7 @@ VideoSegmentStream = function(track, options) {
         alignedGops = this.alignGopsAtStart_(gops);
       }
 
+<<<<<<< HEAD
       if (!alignedGops) {
         // save all the nals in the last GOP into the gop cache
         this.gopCache_.unshift({
@@ -27938,6 +28714,11 @@ VideoSegmentStream = function(track, options) {
           pps: track.pps,
           sps: track.sps
         });
+=======
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
         // Keep a maximum of 6 GOPs in the cache
         this.gopCache_.length = Math.min(6, this.gopCache_.length);
@@ -27960,9 +28741,13 @@ VideoSegmentStream = function(track, options) {
 
     collectDtsInfo(track, gops);
 
+<<<<<<< HEAD
     // First, we have to build the index from byte locations to
     // samples (that is, frames) in the video data
     track.samples = this.generateSampleTable_(gops);
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
     // Concatenate the video data and construct the mdat
     mdat = mp4.mdat(this.concatenateNalData_(gops));
@@ -28271,9 +29056,15 @@ VideoSegmentStream = function(track, options) {
       for (i = 0; i < currentGop.length; i++) {
         currentFrame = currentGop[i];
 
+<<<<<<< HEAD
         // For each NAL..
         for (j = 0; j < currentFrame.length; j++) {
           currentNal = currentFrame[j];
+=======
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
           view.setUint32(dataOffset, currentNal.data.byteLength);
           dataOffset += 4;
@@ -28285,10 +29076,15 @@ VideoSegmentStream = function(track, options) {
     return data;
   };
 
+<<<<<<< HEAD
   // trim gop list to the first gop found that has a matching pts with a gop in the list
   // of gopsToAlignWith starting from the START of the list
   this.alignGopsAtStart_ = function(gops) {
     var alignIndex, gopIndex, align, gop, byteLength, nalCount, duration, alignedGops;
+=======
+var utils = __webpack_require__(10);
+var normalizeHeaderName = __webpack_require__(118);
+>>>>>>> Users can now see how many people are viewing
 
     byteLength = gops.byteLength;
     nalCount = gops.nalCount;
@@ -28299,9 +29095,23 @@ VideoSegmentStream = function(track, options) {
       align = gopsToAlignWith[alignIndex];
       gop = gops[gopIndex];
 
+<<<<<<< HEAD
       if (align.pts === gop.pts) {
         break;
       }
+=======
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(53);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(53);
+  }
+  return adapter;
+}
+>>>>>>> Users can now see how many people are viewing
 
       if (gop.pts > align.pts) {
         // this current gop starts after the current gop we want to align on, so increment
@@ -28369,12 +29179,20 @@ VideoSegmentStream = function(track, options) {
         alignEndIndex = gopIndex;
       }
 
+<<<<<<< HEAD
       gopIndex--;
     }
 
     if (!matchFound && alignEndIndex === null) {
       return null;
     }
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)))
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     var trimIndex;
 
@@ -30819,12 +31637,20 @@ function isModifierRequired(modifiers, requestingName, requestedName) {
 function arrow(data, options) {
   var _data$offsets$arrow;
 
+<<<<<<< HEAD
   // arrow depends on keepTogether in order to work
   if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
     return data;
   }
 
   var arrowElement = options.element;
+=======
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(12)))
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
   // if arrowElement is a string, suppose it's a CSS selector
   if (typeof arrowElement === 'string') {
@@ -30850,12 +31676,18 @@ function arrow(data, options) {
 
   var isVertical = ['left', 'right'].indexOf(placement) !== -1;
 
+<<<<<<< HEAD
   var len = isVertical ? 'height' : 'width';
   var sideCapitalized = isVertical ? 'Top' : 'Left';
   var side = sideCapitalized.toLowerCase();
   var altSide = isVertical ? 'left' : 'top';
   var opSide = isVertical ? 'bottom' : 'right';
   var arrowElementSize = getOuterSizes(arrowElement)[len];
+=======
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   //
   // extends keepTogether behavior making sure the popper and its
@@ -30872,8 +31704,12 @@ function arrow(data, options) {
   }
   data.offsets.popper = getClientRect(data.offsets.popper);
 
+<<<<<<< HEAD
   // compute center of the popper
   var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
+=======
+var _lineStream = __webpack_require__(32);
+>>>>>>> Users can now see how many people are viewing
 
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
@@ -30882,14 +31718,22 @@ function arrow(data, options) {
   var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
   var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
+<<<<<<< HEAD
   // prevent arrowElement from being placed not contiguously to its popper
   sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
+=======
+var _parseStream = __webpack_require__(33);
+>>>>>>> Users can now see how many people are viewing
 
   data.arrowElement = arrowElement;
   data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
 
+<<<<<<< HEAD
   return data;
 }
+=======
+var _parser = __webpack_require__(75);
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * Get the opposite placement variation of the given one
@@ -30943,6 +31787,7 @@ var placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end
 // Get rid of `auto` `auto-start` and `auto-end`
 var validPlacements = placements.slice(3);
 
+<<<<<<< HEAD
 /**
  * Given an initial placement, returns all the subsequent placements
  * clockwise (or counter-clockwise).
@@ -30955,6 +31800,11 @@ var validPlacements = placements.slice(3);
  */
 function clockwise(placement) {
   var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+=======
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   var index = validPlacements.indexOf(placement);
   var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));
@@ -30985,7 +31835,11 @@ function flip(data, options) {
     return data;
   }
 
+<<<<<<< HEAD
   var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);
+=======
+var _stream = __webpack_require__(22);
+>>>>>>> Users can now see how many people are viewing
 
   var placement = data.placement.split('-')[0];
   var placementOpposite = getOppositePlacement(placement);
@@ -31076,12 +31930,18 @@ function keepTogether(data) {
   var opSide = isVertical ? 'left' : 'top';
   var measurement = isVertical ? 'width' : 'height';
 
+<<<<<<< HEAD
   if (popper[side] < floor(reference[opSide])) {
     data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];
   }
   if (popper[opSide] > floor(reference[side])) {
     data.offsets.popper[opSide] = floor(reference[side]);
   }
+=======
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   return data;
 }
@@ -31153,10 +32013,14 @@ function toValue(str, measurement, popperOffsets, referenceOffsets) {
 function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
   var offsets = [0, 0];
 
+<<<<<<< HEAD
   // Use height if placement is left or right and index is 0 otherwise use width
   // in this way the first offset will use an axis and the second one
   // will use the other one
   var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;
+=======
+var _stream = __webpack_require__(22);
+>>>>>>> Users can now see how many people are viewing
 
   // Split the offset string to obtain a list of values and operands
   // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
@@ -31408,18 +32272,390 @@ function inner(data) {
   return data;
 }
 
+<<<<<<< HEAD
+=======
+      // Tags
+      match = /^#EXTM3U/.exec(line);
+      if (match) {
+        this.trigger('data', {
+          type: 'tag',
+          tagType: 'm3u'
+        });
+        return;
+      }
+      match = /^#EXTINF:?([0-9\.]*)?,?(.*)?$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'inf'
+        };
+        if (match[1]) {
+          event.duration = parseFloat(match[1]);
+        }
+        if (match[2]) {
+          event.title = match[2];
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-TARGETDURATION:?([0-9.]*)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'targetduration'
+        };
+        if (match[1]) {
+          event.duration = parseInt(match[1], 10);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#ZEN-TOTAL-DURATION:?([0-9.]*)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'totalduration'
+        };
+        if (match[1]) {
+          event.duration = parseInt(match[1], 10);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-VERSION:?([0-9.]*)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'version'
+        };
+        if (match[1]) {
+          event.version = parseInt(match[1], 10);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-MEDIA-SEQUENCE:?(\-?[0-9.]*)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'media-sequence'
+        };
+        if (match[1]) {
+          event.number = parseInt(match[1], 10);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-DISCONTINUITY-SEQUENCE:?(\-?[0-9.]*)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'discontinuity-sequence'
+        };
+        if (match[1]) {
+          event.number = parseInt(match[1], 10);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-PLAYLIST-TYPE:?(.*)?$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'playlist-type'
+        };
+        if (match[1]) {
+          event.playlistType = match[1];
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-BYTERANGE:?([0-9.]*)?@?([0-9.]*)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'byterange'
+        };
+        if (match[1]) {
+          event.length = parseInt(match[1], 10);
+        }
+        if (match[2]) {
+          event.offset = parseInt(match[2], 10);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-ALLOW-CACHE:?(YES|NO)?/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'allow-cache'
+        };
+        if (match[1]) {
+          event.allowed = !/NO/.test(match[1]);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-MAP:?(.*)$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'map'
+        };
+
+        if (match[1]) {
+          var attributes = parseAttributes(match[1]);
+
+          if (attributes.URI) {
+            event.uri = attributes.URI;
+          }
+          if (attributes.BYTERANGE) {
+            var _attributes$BYTERANGE = attributes.BYTERANGE.split('@'),
+                _attributes$BYTERANGE2 = _slicedToArray(_attributes$BYTERANGE, 2),
+                length = _attributes$BYTERANGE2[0],
+                offset = _attributes$BYTERANGE2[1];
+
+            event.byterange = {};
+            if (length) {
+              event.byterange.length = parseInt(length, 10);
+            }
+            if (offset) {
+              event.byterange.offset = parseInt(offset, 10);
+            }
+          }
+        }
+
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-STREAM-INF:?(.*)$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'stream-inf'
+        };
+        if (match[1]) {
+          event.attributes = parseAttributes(match[1]);
+
+          if (event.attributes.RESOLUTION) {
+            var split = event.attributes.RESOLUTION.split('x');
+            var resolution = {};
+
+            if (split[0]) {
+              resolution.width = parseInt(split[0], 10);
+            }
+            if (split[1]) {
+              resolution.height = parseInt(split[1], 10);
+            }
+            event.attributes.RESOLUTION = resolution;
+          }
+          if (event.attributes.BANDWIDTH) {
+            event.attributes.BANDWIDTH = parseInt(event.attributes.BANDWIDTH, 10);
+          }
+          if (event.attributes['PROGRAM-ID']) {
+            event.attributes['PROGRAM-ID'] = parseInt(event.attributes['PROGRAM-ID'], 10);
+          }
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-MEDIA:?(.*)$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'media'
+        };
+        if (match[1]) {
+          event.attributes = parseAttributes(match[1]);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-ENDLIST/.exec(line);
+      if (match) {
+        this.trigger('data', {
+          type: 'tag',
+          tagType: 'endlist'
+        });
+        return;
+      }
+      match = /^#EXT-X-DISCONTINUITY/.exec(line);
+      if (match) {
+        this.trigger('data', {
+          type: 'tag',
+          tagType: 'discontinuity'
+        });
+        return;
+      }
+      match = /^#EXT-X-PROGRAM-DATE-TIME:?(.*)$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'program-date-time'
+        };
+        if (match[1]) {
+          event.dateTimeString = match[1];
+          event.dateTimeObject = new Date(match[1]);
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-KEY:?(.*)$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'key'
+        };
+        if (match[1]) {
+          event.attributes = parseAttributes(match[1]);
+          // parse the IV string into a Uint32Array
+          if (event.attributes.IV) {
+            if (event.attributes.IV.substring(0, 2).toLowerCase() === '0x') {
+              event.attributes.IV = event.attributes.IV.substring(2);
+            }
+
+            event.attributes.IV = event.attributes.IV.match(/.{8}/g);
+            event.attributes.IV[0] = parseInt(event.attributes.IV[0], 16);
+            event.attributes.IV[1] = parseInt(event.attributes.IV[1], 16);
+            event.attributes.IV[2] = parseInt(event.attributes.IV[2], 16);
+            event.attributes.IV[3] = parseInt(event.attributes.IV[3], 16);
+            event.attributes.IV = new Uint32Array(event.attributes.IV);
+          }
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-CUE-OUT-CONT:?(.*)?$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'cue-out-cont'
+        };
+        if (match[1]) {
+          event.data = match[1];
+        } else {
+          event.data = '';
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-CUE-OUT:?(.*)?$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'cue-out'
+        };
+        if (match[1]) {
+          event.data = match[1];
+        } else {
+          event.data = '';
+        }
+        this.trigger('data', event);
+        return;
+      }
+      match = /^#EXT-X-CUE-IN:?(.*)?$/.exec(line);
+      if (match) {
+        event = {
+          type: 'tag',
+          tagType: 'cue-in'
+        };
+        if (match[1]) {
+          event.data = match[1];
+        } else {
+          event.data = '';
+        }
+        this.trigger('data', event);
+        return;
+      }
+
+      // unknown tag type
+      this.trigger('data', {
+        type: 'tag',
+        data: line.slice(4)
+      });
+    }
+  }]);
+
+  return ParseStream;
+}(_stream2['default']);
+
+exports['default'] = ParseStream;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+>>>>>>> Users can now see how many people are viewing
 /**
  * Modifier function, each modifier can have a function of this type assigned
  * to its `fn` property.<br />
  * These functions will be called on each update, this means that you must
  * make sure they are performant enough to avoid performance bottlenecks.
  *
+<<<<<<< HEAD
  * @function ModifierFn
  * @argument {dataObject} data - The data object generated by `update` method
  * @argument {Object} options - Modifiers configuration and options
  * @returns {dataObject} The data object, properly modified
  */
 
+=======
+ * ```js
+ * import {Decrypter, decrypt, AsyncStream} from 'aes-decrypter';
+ * ```
+ */
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _decrypter = __webpack_require__(77);
+
+var _asyncStream = __webpack_require__(35);
+
+var _asyncStream2 = _interopRequireDefault(_asyncStream);
+
+exports['default'] = {
+  decrypt: _decrypter.decrypt,
+  Decrypter: _decrypter.Decrypter,
+  AsyncStream: _asyncStream2['default']
+};
+module.exports = exports['default'];
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file async-stream.js
+ */
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _stream = __webpack_require__(79);
+
+var _stream2 = _interopRequireDefault(_stream);
+
+>>>>>>> Users can now see how many people are viewing
 /**
  * Modifiers are plugins used to alter the behavior of your poppers.<br />
  * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
@@ -31582,6 +32818,7 @@ var modifiers = {
     element: '[x-arrow]'
   },
 
+<<<<<<< HEAD
   /**
    * Modifier used to flip the popper's placement when it starts to overlap its
    * reference element.
@@ -31636,6 +32873,17 @@ var modifiers = {
     /** @prop {ModifierFn} */
     fn: inner
   },
+=======
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+  tag: __webpack_require__(23),
+  Transmuxer: __webpack_require__(86),
+  getFlvHeader: __webpack_require__(92)
+};
+>>>>>>> Users can now see how many people are viewing
 
   /**
    * Modifier used to hide the popper when its reference element is outside of the
@@ -31656,6 +32904,7 @@ var modifiers = {
     fn: hide
   },
 
+<<<<<<< HEAD
   /**
    * Computes the style that will be applied to the popper element to gets
    * properly positioned.
@@ -31731,6 +32980,11 @@ var modifiers = {
     gpuAcceleration: undefined
   }
 };
+=======
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * The `dataObject` is an object containing all the informations used by Popper.js
@@ -31751,6 +33005,24 @@ var modifiers = {
  * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
  */
 
+<<<<<<< HEAD
+=======
+var Stream = __webpack_require__(11),
+  CaptionStream = __webpack_require__(87),
+  StreamTypes = __webpack_require__(15),
+  TimestampRolloverStream = __webpack_require__(38).TimestampRolloverStream;
+
+var m2tsStreamTypes = __webpack_require__(15);
+
+// object types
+var TransportPacketStream, TransportParseStream, ElementaryStream;
+
+// constants
+var
+  MP2T_PACKET_LENGTH = 188, // bytes
+  SYNC_BYTE = 0x47;
+
+>>>>>>> Users can now see how many people are viewing
 /**
  * Default options provided to Popper.js constructor.<br />
  * These can be overriden using the `options` argument of Popper.js.<br />
@@ -32025,7 +33297,21 @@ var _parseStream = __webpack_require__(29);
 
 var _parseStream2 = _interopRequireDefault(_parseStream);
 
+<<<<<<< HEAD
 var _parser = __webpack_require__(194);
+=======
+var m2ts = {
+  PAT_PID: 0x0000,
+  MP2T_PACKET_LENGTH: MP2T_PACKET_LENGTH,
+  TransportPacketStream: TransportPacketStream,
+  TransportParseStream: TransportParseStream,
+  ElementaryStream: ElementaryStream,
+  TimestampRolloverStream: TimestampRolloverStream,
+  CaptionStream: CaptionStream.CaptionStream,
+  Cea608Stream: CaptionStream.Cea608Stream,
+  MetadataStream: __webpack_require__(88)
+};
+>>>>>>> Users can now see how many people are viewing
 
 var _parser2 = _interopRequireDefault(_parser);
 
@@ -32046,7 +33332,11 @@ module.exports = {
     */
 
 /***/ }),
+<<<<<<< HEAD
 /* 28 */
+=======
+/* 38 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32056,7 +33346,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+<<<<<<< HEAD
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+=======
+var Stream = __webpack_require__(11);
+
+var MAX_TS = 8589934592;
+
+var RO_THRESH = 4294967296;
+>>>>>>> Users can now see how many people are viewing
 
 var _stream = __webpack_require__(17);
 
@@ -32120,15 +33418,23 @@ var LineStream = function (_Stream) {
 exports['default'] = LineStream;
 
 /***/ }),
+<<<<<<< HEAD
 /* 29 */
+=======
+/* 39 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+=======
+var Stream = __webpack_require__(11);
+>>>>>>> Users can now see how many people are viewing
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -32164,6 +33470,27 @@ var attributeSeparator = function attributeSeparator() {
   return new RegExp('(?:^|,)(' + keyvalue + ')');
 };
 
+<<<<<<< HEAD
+=======
+AdtsStream.prototype = new Stream();
+
+module.exports = AdtsStream;
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Stream = __webpack_require__(11);
+var ExpGolomb = __webpack_require__(89);
+
+var H264Stream, NalByteStream;
+var PROFILES_WITH_OPTIONAL_SPS_DATA;
+
+>>>>>>> Users can now see how many people are viewing
 /**
  * Parse attributes from a line given the seperator
  *
@@ -32578,7 +33905,11 @@ var ParseStream = function (_Stream) {
 exports['default'] = ParseStream;
 
 /***/ }),
+<<<<<<< HEAD
 /* 30 */
+=======
+/* 41 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32614,7 +33945,11 @@ exports['default'] = {
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 31 */
+=======
+/* 42 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32635,9 +33970,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+<<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _stream = __webpack_require__(198);
+=======
+var _globalWindow = __webpack_require__(8);
+
+var _globalWindow2 = _interopRequireDefault(_globalWindow);
+
+var _muxJsLibFlv = __webpack_require__(36);
+>>>>>>> Users can now see how many people are viewing
 
 var _stream2 = _interopRequireDefault(_stream);
 
@@ -32709,9 +34052,64 @@ module.exports = {
   getFlvHeader: __webpack_require__(211)
 };
 
+<<<<<<< HEAD
 
 /***/ }),
 /* 33 */
+=======
+    if (!this.messageHandlers) {
+      this.messageHandlers = new MessageHandlers();
+    }
+
+    if (event.data && event.data.action && event.data.action !== 'init') {
+      if (this.messageHandlers[event.data.action]) {
+        this.messageHandlers[event.data.action](event.data);
+      }
+    }
+  };
+};
+
+exports['default'] = function (self) {
+  return new FlashTransmuxerWorker(self);
+};
+
+module.exports = exports['default'];
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file flash-constants.js
+ */
+/**
+ * The maximum size in bytes for append operations to the video.js
+ * SWF. Calling through to Flash blocks and can be expensive so
+ * we chunk data and pass through 4KB at a time, yielding to the
+ * browser between chunks. This gives a theoretical maximum rate of
+ * 1MB/s into Flash. Any higher and we begin to drop frames and UI
+ * responsiveness suffers.
+ *
+ * @private
+ */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var flashConstants = {
+  // times in milliseconds
+  TIME_BETWEEN_CHUNKS: 1,
+  BYTES_PER_CHUNK: 1024 * 32
+};
+
+exports["default"] = flashConstants;
+module.exports = exports["default"];
+
+/***/ }),
+/* 44 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32731,10 +34129,28 @@ var Stream = __webpack_require__(5),
   StreamTypes = __webpack_require__(11),
   TimestampRolloverStream = __webpack_require__(34).TimestampRolloverStream;
 
+<<<<<<< HEAD
 var m2tsStreamTypes = __webpack_require__(11);
 
 // object types
 var TransportPacketStream, TransportParseStream, ElementaryStream;
+=======
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _globalWindow = __webpack_require__(8);
+
+var _globalWindow2 = _interopRequireDefault(_globalWindow);
+
+var _muxJsLibMp4 = __webpack_require__(95);
+>>>>>>> Users can now see how many people are viewing
 
 // constants
 var
@@ -32978,6 +34394,7 @@ TransportParseStream = function() {
     result.type = 'pes';
     result.data = packet.subarray(offset);
 
+<<<<<<< HEAD
     this.trigger('data', result);
   };
 
@@ -32987,6 +34404,11 @@ TransportParseStream.STREAM_TYPES  = {
   h264: 0x1b,
   adts: 0x0f
 };
+=======
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * Reconsistutes program elementary stream (PES) packets from parsed
@@ -33454,7 +34876,11 @@ module.exports = AdtsStream;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 36 */
+=======
+/* 46 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33479,6 +34905,7 @@ NalByteStream = function() {
   this.push = function(data) {
     var swapBuffer;
 
+<<<<<<< HEAD
     if (!buffer) {
       buffer = data.data;
     } else {
@@ -33497,6 +34924,41 @@ NalByteStream = function() {
     // or this:
     // 0 0 1 .. NAL .. 0 0 0
     // ^ sync point        ^ i
+=======
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _playlist = __webpack_require__(13);
+
+var _playlist2 = _interopRequireDefault(_playlist);
+
+var _videoJs = __webpack_require__(7);
+
+var _videoJs2 = _interopRequireDefault(_videoJs);
+
+var _sourceUpdater = __webpack_require__(100);
+
+var _sourceUpdater2 = _interopRequireDefault(_sourceUpdater);
+
+var _config = __webpack_require__(19);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _globalWindow = __webpack_require__(8);
+
+var _globalWindow2 = _interopRequireDefault(_globalWindow);
+
+var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(17);
+
+var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs2 = _interopRequireDefault(_videojsContribMediaSourcesEs5RemoveCuesFromTrackJs);
+
+var _binUtils = __webpack_require__(14);
+
+var _mediaSegmentRequest = __webpack_require__(101);
+
+var _ranges = __webpack_require__(27);
+
+var _playlistSelectors = __webpack_require__(47);
+>>>>>>> Users can now see how many people are viewing
 
     // advance the sync point to a NAL start, if necessary
     for (; syncPoint < buffer.byteLength - 3; syncPoint++) {
@@ -34780,6 +36242,21 @@ stbl = function(track) {
       pictureParameterSets.push((pps[i].byteLength & 0xFF));
       pictureParameterSets = pictureParameterSets.concat(Array.prototype.slice.call(pps[i]));
     }
+<<<<<<< HEAD
+=======
+  }]);
+
+  return SegmentLoader;
+})(_videoJs2['default'].EventTarget);
+
+exports['default'] = SegmentLoader;
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+>>>>>>> Users can now see how many people are viewing
 
     return box(types.avc1, new Uint8Array([
       0x00, 0x00, 0x00,
@@ -34836,26 +36313,35 @@ stbl = function(track) {
       0x00, 0x00, 0x00, // reserved
       0x00, 0x01, // data_reference_index
 
+<<<<<<< HEAD
       // AudioSampleEntry, ISO/IEC 14496-12
       0x00, 0x00, 0x00, 0x00, // reserved
       0x00, 0x00, 0x00, 0x00, // reserved
       (track.channelcount & 0xff00) >> 8,
       (track.channelcount & 0xff), // channelcount
+=======
+var _config = __webpack_require__(19);
+>>>>>>> Users can now see how many people are viewing
 
       (track.samplesize & 0xff00) >> 8,
       (track.samplesize & 0xff), // samplesize
       0x00, 0x00, // pre_defined
       0x00, 0x00, // reserved
 
+<<<<<<< HEAD
       (track.samplerate & 0xff00) >> 8,
       (track.samplerate & 0xff),
       0x00, 0x00 // samplerate, 16.16
+=======
+var _playlist = __webpack_require__(13);
+>>>>>>> Users can now see how many people are viewing
 
       // MP4AudioSampleEntry, ISO/IEC 14496-14
     ]), esds(track));
   };
 }());
 
+<<<<<<< HEAD
 tkhd = function(track) {
   var result = new Uint8Array([
     0x00, // version 0
@@ -34893,6 +36379,9 @@ tkhd = function(track) {
     track.height & 0xFF,
     0x00, 0x00 // height
   ]);
+=======
+var _utilCodecsJs = __webpack_require__(48);
+>>>>>>> Users can now see how many people are viewing
 
   return box(types.tkhd, result);
 };
@@ -35219,6 +36708,27 @@ var detectEndOfStream = function detectEndOfStream(playlist, mediaSource, segmen
   // buffered data instead of waiting for me
   return playlist.endList && mediaSource.readyState === 'open' && appendedLastSegment;
 };
+<<<<<<< HEAD
+=======
+exports.lowestBitrateCompatibleVariantSelector = lowestBitrateCompatibleVariantSelector;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * @file - codecs.js - Handles tasks regarding codec strings such as translating them to
+ * codec strings, or translating codec strings into objects that can be examined.
+ */
+
+/**
+ * Parses a codec string to retrieve the number of codecs specified,
+ * the video codec and object type indicator, and the audio profile.
+ */
+
+>>>>>>> Users can now see how many people are viewing
 
 var finite = function finite(num) {
   return typeof num === 'number' && isFinite(num);
@@ -35245,6 +36755,25 @@ var illegalMediaSwitch = function illegalMediaSwitch(loaderType, startingMedia, 
 
   return null;
 };
+<<<<<<< HEAD
+=======
+exports.parseCodecs = parseCodecs;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
 exports.illegalMediaSwitch = illegalMediaSwitch;
 /**
@@ -35263,6 +36792,7 @@ exports.illegalMediaSwitch = illegalMediaSwitch;
 var safeBackBufferTrimTime = function safeBackBufferTrimTime(seekable, currentTime, targetDuration) {
   var removeToTime = undefined;
 
+<<<<<<< HEAD
   if (seekable.length && seekable.start(0) > 0 && seekable.start(0) < currentTime) {
     // If we have a seekable range use that as the limit for what can be removed safely
     removeToTime = seekable.start(0);
@@ -35276,6 +36806,11 @@ var safeBackBufferTrimTime = function safeBackBufferTrimTime(seekable, currentTi
   // cause playback stalls.
   return Math.min(removeToTime, currentTime - targetDuration);
 };
+=======
+var _aesDecrypter = __webpack_require__(34);
+
+var _binUtils = __webpack_require__(14);
+>>>>>>> Users can now see how many people are viewing
 
 exports.safeBackBufferTrimTime = safeBackBufferTrimTime;
 /**
@@ -35294,7 +36829,28 @@ var SegmentLoader = (function (_videojs$EventTarget) {
 
     var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+<<<<<<< HEAD
     _classCallCheck(this, SegmentLoader);
+=======
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery JavaScript Library v3.3.1
+ * https://jquery.com/
+ *
+ * Includes Sizzle.js
+ * https://sizzlejs.com/
+ *
+ * Copyright JS Foundation and other contributors
+ * Released under the MIT license
+ * https://jquery.org/license
+ *
+ * Date: 2018-01-20T17:24Z
+ */
+( function( global, factory ) {
+>>>>>>> Users can now see how many people are viewing
 
     _get(Object.getPrototypeOf(SegmentLoader.prototype), 'constructor', this).call(this);
     // check pre-conditions
@@ -45461,7 +47017,13 @@ var location = window.location;
 
 var nonce = Date.now();
 
+<<<<<<< HEAD
 var rquery = ( /\?/ );
+=======
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 
 
@@ -45487,11 +47049,17 @@ jQuery.parseXML = function( data ) {
 };
 
 
+<<<<<<< HEAD
 var
 	rbracket = /\[\]$/,
 	rCRLF = /\r?\n/g,
 	rsubmitterTypes = /^(?:submit|button|image|reset|file)$/i,
 	rsubmittable = /^(?:input|select|textarea|keygen)/i;
+=======
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
 function buildParams( prefix, obj, traditional, add ) {
 	var name;
@@ -45575,12 +47143,18 @@ jQuery.fn.extend( {
 	serializeArray: function() {
 		return this.map( function() {
 
+<<<<<<< HEAD
 			// Can add propHook for "elements" to filter or add form elements
 			var elements = jQuery.prop( this, "elements" );
 			return elements ? jQuery.makeArray( elements ) : this;
 		} )
 		.filter( function() {
 			var type = this.type;
+=======
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 			// Use .is( ":disabled" ) so that fieldset[disabled] works
 			return this.name && !jQuery( this ).is( ":disabled" ) &&
@@ -45594,11 +47168,21 @@ jQuery.fn.extend( {
 				return null;
 			}
 
+<<<<<<< HEAD
 			if ( Array.isArray( val ) ) {
 				return jQuery.map( val, function( val ) {
 					return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
 				} );
 			}
+=======
+var utils = __webpack_require__(10);
+var settle = __webpack_require__(119);
+var buildURL = __webpack_require__(121);
+var parseHeaders = __webpack_require__(122);
+var isURLSameOrigin = __webpack_require__(123);
+var createError = __webpack_require__(54);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(124);
+>>>>>>> Users can now see how many people are viewing
 
 			return { name: elem.name, value: val.replace( rCRLF, "\r\n" ) };
 		} ).get();
@@ -45676,8 +47260,16 @@ function addToPrefiltersOrTransports( structure ) {
 	};
 }
 
+<<<<<<< HEAD
 // Base inspection function for prefilters and transports
 function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {
+=======
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(125);
+>>>>>>> Users can now see how many people are viewing
 
 	var inspected = {},
 		seekingTransport = ( structure === transports );
@@ -45755,6 +47347,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 		finalDataType = dataTypes[ 0 ];
 	} else {
 
+<<<<<<< HEAD
 		// Try convertible dataTypes
 		for ( type in responses ) {
 			if ( !dataTypes[ 0 ] || s.converters[ type + " " + dataTypes[ 0 ] ] ) {
@@ -45765,11 +47358,19 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 				firstDataType = type;
 			}
 		}
+=======
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+>>>>>>> Users can now see how many people are viewing
 
 		// Or just use first one
 		finalDataType = finalDataType || firstDataType;
 	}
 
+<<<<<<< HEAD
 	// If we found a dataType
 	// We add the dataType to the list if needed
 	// and return the corresponding response
@@ -45780,6 +47381,9 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 		return responses[ finalDataType ];
 	}
 }
+=======
+var enhanceError = __webpack_require__(120);
+>>>>>>> Users can now see how many people are viewing
 
 /* Chain conversions given the request and the original response
  * Also sets the responseXXX fields on the jqXHR instance
@@ -45791,12 +47395,18 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 		// Work with a copy of dataTypes in case we need to modify it for conversion
 		dataTypes = s.dataTypes.slice();
 
+<<<<<<< HEAD
 	// Create converters map with lowercased keys
 	if ( dataTypes[ 1 ] ) {
 		for ( conv in s.converters ) {
 			converters[ conv.toLowerCase() ] = s.converters[ conv ];
 		}
 	}
+=======
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 	current = dataTypes.shift();
 
@@ -45812,8 +47422,14 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 			response = s.dataFilter( response, s.dataType );
 		}
 
+<<<<<<< HEAD
 		prev = current;
 		current = dataTypes.shift();
+=======
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 		if ( current ) {
 
@@ -45836,6 +47452,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 						tmp = conv2.split( " " );
 						if ( tmp[ 1 ] === current ) {
 
+<<<<<<< HEAD
 							// If prev can be converted to accepted input
 							conv = converters[ prev + " " + tmp[ 0 ] ] ||
 								converters[ "* " + tmp[ 0 ] ];
@@ -45946,6 +47563,23 @@ jQuery.extend( {
 			// Parse text as xml
 			"text xml": jQuery.parseXML
 		},
+=======
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_echo__);
+
+window._ = __webpack_require__(58);
+window.Popper = __webpack_require__(29).default;
+
+var videojs = __webpack_require__(7);
+window.videojs = videojs;
+__webpack_require__(72);
+>>>>>>> Users can now see how many people are viewing
 
 		// For options that shouldn't be deep extended:
 		// you can add your own custom options here if
@@ -45957,6 +47591,7 @@ jQuery.extend( {
 		}
 	},
 
+<<<<<<< HEAD
 	// Creates a full fledged settings object into target
 	// with both ajaxSettings and settings fields.
 	// If target is omitted, writes into ajaxSettings.
@@ -45965,13 +47600,24 @@ jQuery.extend( {
 
 			// Building a settings object
 			ajaxExtend( ajaxExtend( target, jQuery.ajaxSettings ), settings ) :
+=======
+try {
+    window.$ = window.jQuery = __webpack_require__(50);
+
+    __webpack_require__(113);
+} catch (e) {}
+>>>>>>> Users can now see how many people are viewing
 
 			// Extending ajaxSettings
 			ajaxExtend( jQuery.ajaxSettings, target );
 	},
 
+<<<<<<< HEAD
 	ajaxPrefilter: addToPrefiltersOrTransports( prefilters ),
 	ajaxTransport: addToPrefiltersOrTransports( transports ),
+=======
+window.axios = __webpack_require__(114);
+>>>>>>> Users can now see how many people are viewing
 
 	// Main method
 	ajax: function( url, options ) {
@@ -45997,14 +47643,24 @@ jQuery.extend( {
 			// timeout handle
 			timeoutTimer,
 
+<<<<<<< HEAD
 			// Url cleanup var
 			urlAnchor,
+=======
+window.Pusher = __webpack_require__(134);
+>>>>>>> Users can now see how many people are viewing
 
 			// Request state (becomes false upon send and true upon completion)
 			completed,
 
+<<<<<<< HEAD
 			// To know if global events are to be dispatched
 			fireGlobals,
+=======
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 			// Loop variable
 			i,
@@ -59819,6 +61475,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       return typeof value == 'number' && nativeIsFinite(value);
     }
 
+<<<<<<< HEAD
     /**
      * Checks if `value` is classified as a `Function` object.
      *
@@ -59874,6 +61531,136 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      */
     function isInteger(value) {
       return typeof value == 'number' && value == toInteger(value);
+=======
+  /*--------------------------------------------------------------------------*/
+
+  // Export lodash.
+  var _ = runInContext();
+
+  // Some AMD build optimizers, like r.js, check for condition patterns like:
+  if (true) {
+    // Expose Lodash on the global object to prevent errors when Lodash is
+    // loaded by a script tag in the presence of an AMD loader.
+    // See http://requirejs.org/docs/errors.html#mismatch for more details.
+    // Use `_.noConflict` to remove Lodash from the global object.
+    root._ = _;
+
+    // Define as an anonymous module so, through path mapping, it can be
+    // referenced as the "underscore" module.
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+      return _;
+    }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  }
+  // Check for `exports` after `define` in case a build optimizer adds it.
+  else if (freeModule) {
+    // Export for Node.js.
+    (freeModule.exports = _)._ = _;
+    // Export for CommonJS support.
+    freeExports._ = _;
+  }
+  else {
+    // Export to the global object.
+    root._ = _;
+  }
+}.call(this));
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(59)(module)))
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports) {
+
+function clean (s) {
+  return s.replace(/\n\r?\s*/g, '')
+}
+
+
+module.exports = function tsml (sa) {
+  var s = ''
+    , i = 0
+
+  for (; i < arguments.length; i++)
+    s += clean(sa[i]) + (arguments[i + 1] || '')
+
+  return s
+}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports) {
+
+module.exports = SafeParseTuple
+
+function SafeParseTuple(obj, reviver) {
+    var json
+    var error = null
+
+    try {
+        json = JSON.parse(obj, reviver)
+    } catch (err) {
+        error = err
+    }
+
+    return [error, json]
+}
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var window = __webpack_require__(8)
+var isFunction = __webpack_require__(30)
+var parseHeaders = __webpack_require__(64)
+var xtend = __webpack_require__(67)
+
+module.exports = createXHR
+createXHR.XMLHttpRequest = window.XMLHttpRequest || noop
+createXHR.XDomainRequest = "withCredentials" in (new createXHR.XMLHttpRequest()) ? createXHR.XMLHttpRequest : window.XDomainRequest
+
+forEachArray(["get", "put", "post", "patch", "head", "delete"], function(method) {
+    createXHR[method === "delete" ? "del" : method] = function(uri, options, callback) {
+        options = initParams(uri, options, callback)
+        options.method = method.toUpperCase()
+        return _createXHR(options)
+>>>>>>> Users can now see how many people are viewing
     }
 
     /**
@@ -60485,6 +62272,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       return value <= other;
     });
 
+<<<<<<< HEAD
     /**
      * Converts `value` to an array.
      *
@@ -60522,6 +62310,16 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
           func = tag == mapTag ? mapToArray : (tag == setTag ? setToArray : values);
 
       return func(value);
+=======
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var trim = __webpack_require__(65)
+  , forEach = __webpack_require__(66)
+  , isArray = function(arg) {
+      return Object.prototype.toString.call(arg) === '[object Array]';
+>>>>>>> Users can now see how many people are viewing
     }
 
     /**
@@ -60551,6 +62349,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       if (!value) {
         return value === 0 ? value : 0;
       }
+<<<<<<< HEAD
       value = toNumber(value);
       if (value === INFINITY || value === -INFINITY) {
         var sign = (value < 0 ? -1 : 1);
@@ -60558,6 +62357,38 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       }
       return value === value ? value : 0;
     }
+=======
+  )
+
+  return result
+}
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports) {
+
+
+exports = module.exports = trim;
+
+function trim(str){
+  return str.replace(/^\s*|\s*$/g, '');
+}
+
+exports.left = function(str){
+  return str.replace(/^\s*/, '');
+};
+
+exports.right = function(str){
+  return str.replace(/\s*$/, '');
+};
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isFunction = __webpack_require__(30)
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Converts `value` to an integer.
@@ -60752,6 +62583,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 
     /*------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
     /**
      * Assigns own enumerable string keyed properties of source objects to the
      * destination object. Source objects are applied from left to right.
@@ -60795,6 +62627,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
         }
       }
     });
+=======
+/***/ }),
+/* 67 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * This method is like `_.assign` except that it iterates over own and
@@ -60954,6 +62791,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       return properties == null ? result : baseAssign(result, properties);
     }
 
+<<<<<<< HEAD
     /**
      * Assigns own and inherited enumerable string keyed properties of source
      * objects to the destination object for all destination properties that
@@ -60977,6 +62815,15 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      */
     var defaults = baseRest(function(object, sources) {
       object = Object(object);
+=======
+    return target
+}
+
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       var index = -1;
       var length = sources.length;
@@ -60986,6 +62833,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
         length = 1;
       }
 
+<<<<<<< HEAD
       while (++index < length) {
         var source = sources[index];
         var props = keysIn(source);
@@ -60995,6 +62843,15 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
         while (++propsIndex < propsLength) {
           var key = props[propsIndex];
           var value = object[key];
+=======
+var window = __webpack_require__(8);
+
+var vttjs = module.exports = {
+  WebVTT: __webpack_require__(69),
+  VTTCue: __webpack_require__(70),
+  VTTRegion: __webpack_require__(71)
+};
+>>>>>>> Users can now see how many people are viewing
 
           if (value === undefined ||
               (eq(value, objectProto[key]) && !hasOwnProperty.call(object, key))) {
@@ -61142,6 +62999,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
         : baseFor(object, getIteratee(iteratee, 3), keysIn);
     }
 
+<<<<<<< HEAD
     /**
      * This method is like `_.forIn` except that it iterates over properties of
      * `object` in the opposite order.
@@ -61173,6 +63031,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
         ? object
         : baseForRight(object, getIteratee(iteratee, 3), keysIn);
     }
+=======
+/***/ }),
+/* 69 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Iterates over own enumerable string keyed properties of an object and
@@ -63182,8 +65045,71 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       if (!string || !(chars = baseToString(chars))) {
         return string;
       }
+<<<<<<< HEAD
       var strSymbols = stringToArray(string),
           end = charsEndIndex(strSymbols, stringToArray(chars)) + 1;
+=======
+    } catch(e) {
+      self.reportOrThrowError(e);
+    }
+    self.onflush && self.onflush();
+    return this;
+  }
+};
+
+module.exports = WebVTT;
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports) {
+
+/**
+ * Copyright 2013 vtt.js Contributors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+var autoKeyword = "auto";
+var directionSetting = {
+  "": true,
+  "lr": true,
+  "rl": true
+};
+var alignSetting = {
+  "start": true,
+  "middle": true,
+  "end": true,
+  "left": true,
+  "right": true
+};
+
+function findDirectionSetting(value) {
+  if (typeof value !== "string") {
+    return false;
+  }
+  var dir = directionSetting[value.toLowerCase()];
+  return dir ? value.toLowerCase() : false;
+}
+
+function findAlignSetting(value) {
+  if (typeof value !== "string") {
+    return false;
+  }
+  var align = alignSetting[value.toLowerCase()];
+  return align ? value.toLowerCase() : false;
+}
+>>>>>>> Users can now see how many people are viewing
 
       return castSlice(strSymbols, 0, end).join('');
     }
@@ -63529,6 +65455,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       });
     }
 
+<<<<<<< HEAD
     /**
      * Creates a function that invokes the predicate properties of `source` with
      * the corresponding property values of a given object, returning `true` if
@@ -63556,6 +65483,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     function conforms(source) {
       return baseConforms(baseClone(source, CLONE_DEEP_FLAG));
     }
+=======
+/***/ }),
+/* 71 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Creates a function that returns `value`.
@@ -63718,6 +65650,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     function iteratee(func) {
       return baseIteratee(typeof func == 'function' ? func : baseClone(func, CLONE_DEEP_FLAG));
     }
+<<<<<<< HEAD
 
     /**
      * Creates a function that performs a partial deep comparison between a given
@@ -63780,6 +65713,50 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
     }
+=======
+  });
+}
+
+module.exports = VTTRegion;
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file videojs-contrib-hls.js
+ *
+ * The main file for the HLS project.
+ * License: https://github.com/videojs/videojs-contrib-hls/blob/master/LICENSE
+ */
+
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _globalDocument = __webpack_require__(16);
+
+var _globalDocument2 = _interopRequireDefault(_globalDocument);
+
+var _playlistLoader = __webpack_require__(21);
+
+var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
+
+var _playlist = __webpack_require__(13);
+
+var _playlist2 = _interopRequireDefault(_playlist);
+
+var _xhr = __webpack_require__(76);
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Creates a function that invokes the method at `path` of a given object.
@@ -63811,6 +65788,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       };
     });
 
+<<<<<<< HEAD
     /**
      * The opposite of `_.method`; this method creates a function that invokes
      * the method at a given path of `object`. Any additional arguments are
@@ -63879,6 +65857,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     function mixin(object, source, options) {
       var props = keys(source),
           methodNames = baseFunctions(source, props);
+=======
+var _aesDecrypter = __webpack_require__(34);
+
+var _binUtils = __webpack_require__(14);
+>>>>>>> Users can now see how many people are viewing
 
       if (options == null &&
           !(isObject(source) && (methodNames.length || !props.length))) {
@@ -63890,6 +65873,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       var chain = !(isObject(options) && 'chain' in options) || !!options.chain,
           isFunc = isFunction(object);
 
+<<<<<<< HEAD
       arrayEach(methodNames, function(methodName) {
         var func = source[methodName];
         object[methodName] = func;
@@ -63908,10 +65892,16 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
           };
         }
       });
+=======
+var _videojsContribMediaSources = __webpack_require__(83);
+
+var _m3u8Parser = __webpack_require__(31);
+>>>>>>> Users can now see how many people are viewing
 
       return object;
     }
 
+<<<<<<< HEAD
     /**
      * Reverts the `_` variable to its previous value and returns a reference to
      * the `lodash` function.
@@ -63931,6 +65921,9 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       }
       return this;
     }
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * This method returns `undefined`.
@@ -63948,6 +65941,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       // No operation performed.
     }
 
+<<<<<<< HEAD
     /**
      * Creates a function that gets the argument at index `n`. If `n` is negative,
      * the nth argument from the end is returned.
@@ -63994,6 +65988,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      * // => [4, 1]
      */
     var over = createOver(arrayMap);
+=======
+var _masterPlaylistController = __webpack_require__(99);
+
+var _config = __webpack_require__(19);
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Creates a function that checks if **all** of the `predicates` return
@@ -64021,6 +66020,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      */
     var overEvery = createOver(arrayEvery);
 
+<<<<<<< HEAD
     /**
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
@@ -64046,6 +66046,9 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      * // => false
      */
     var overSome = createOver(arraySome);
+=======
+var _renditionMixin = __webpack_require__(110);
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Creates a function that returns the value at `path` of a given object.
@@ -64073,6 +66076,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
     }
 
+<<<<<<< HEAD
     /**
      * The opposite of `_.property`; this method creates a function that returns
      * the value at a given path of `object`.
@@ -64142,6 +66146,50 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      * // => []
      */
     var range = createRange();
+=======
+var _globalWindow = __webpack_require__(8);
+
+var _globalWindow2 = _interopRequireDefault(_globalWindow);
+
+var _playbackWatcher = __webpack_require__(111);
+
+var _playbackWatcher2 = _interopRequireDefault(_playbackWatcher);
+
+var _reloadSourceOnError = __webpack_require__(112);
+
+var _reloadSourceOnError2 = _interopRequireDefault(_reloadSourceOnError);
+
+var _playlistSelectorsJs = __webpack_require__(47);
+
+var Hls = {
+  PlaylistLoader: _playlistLoader2['default'],
+  Playlist: _playlist2['default'],
+  Decrypter: _aesDecrypter.Decrypter,
+  AsyncStream: _aesDecrypter.AsyncStream,
+  decrypt: _aesDecrypter.decrypt,
+  utils: _binUtils2['default'],
+
+  STANDARD_PLAYLIST_SELECTOR: _playlistSelectorsJs.lastBandwidthSelector,
+  INITIAL_PLAYLIST_SELECTOR: _playlistSelectorsJs.lowestBitrateCompatibleVariantSelector,
+  comparePlaylistBandwidth: _playlistSelectorsJs.comparePlaylistBandwidth,
+  comparePlaylistResolution: _playlistSelectorsJs.comparePlaylistResolution,
+
+  xhr: (0, _xhr2['default'])()
+};
+
+// 0.5 MB/s
+var INITIAL_BANDWIDTH = 4194304;
+
+// Define getter/setters for config properites
+['GOAL_BUFFER_LENGTH', 'MAX_GOAL_BUFFER_LENGTH', 'GOAL_BUFFER_LENGTH_RATE', 'BUFFER_LOW_WATER_LINE', 'MAX_BUFFER_LOW_WATER_LINE', 'BUFFER_LOW_WATER_LINE_RATE', 'BANDWIDTH_VARIANCE'].forEach(function (prop) {
+  Object.defineProperty(Hls, prop, {
+    get: function get() {
+      _videoJs2['default'].log.warn('using Hls.' + prop + ' is UNSAFE be sure you know what you are doing');
+      return _config2['default'][prop];
+    },
+    set: function set(value) {
+      _videoJs2['default'].log.warn('using Hls.' + prop + ' is UNSAFE be sure you know what you are doing');
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * This method is like `_.range` except that it populates values in
@@ -65038,6 +67086,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 
     /*------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
     /**
      * The semantic version number.
      *
@@ -65046,6 +67095,11 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
      * @type {string}
      */
     lodash.VERSION = VERSION;
+=======
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     // Assign default placeholders.
     arrayEach(['bind', 'bindKey', 'curry', 'curryRight', 'partial', 'partialRight'], function(methodName) {
@@ -65077,10 +67131,14 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       };
     });
 
+<<<<<<< HEAD
     // Add `LazyWrapper` methods that accept an `iteratee` value.
     arrayEach(['filter', 'map', 'takeWhile'], function(methodName, index) {
       var type = index + 1,
           isFilter = type == LAZY_FILTER_FLAG || type == LAZY_WHILE_FLAG;
+=======
+var _urlToolkit = __webpack_require__(74);
+>>>>>>> Users can now see how many people are viewing
 
       LazyWrapper.prototype[methodName] = function(iteratee) {
         var result = this.clone();
@@ -65093,9 +67151,13 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       };
     });
 
+<<<<<<< HEAD
     // Add `LazyWrapper` methods for `_.head` and `_.last`.
     arrayEach(['head', 'last'], function(methodName, index) {
       var takeName = 'take' + (index ? 'Right' : '');
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
       LazyWrapper.prototype[methodName] = function() {
         return this[takeName](1).value()[0];
@@ -65119,9 +67181,15 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       return this.filter(predicate).head();
     };
 
+<<<<<<< HEAD
     LazyWrapper.prototype.findLast = function(predicate) {
       return this.reverse().find(predicate);
     };
+=======
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
       if (typeof path == 'function') {
@@ -65237,10 +67305,16 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
       }
     });
 
+<<<<<<< HEAD
     realNames[createHybrid(undefined, WRAP_BIND_KEY_FLAG).name] = [{
       'name': 'wrapper',
       'func': undefined
     }];
+=======
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     // Add methods to `LazyWrapper`.
     LazyWrapper.prototype.clone = lazyClone;
@@ -65267,8 +67341,12 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 
   /*--------------------------------------------------------------------------*/
 
+<<<<<<< HEAD
   // Export lodash.
   var _ = runInContext();
+=======
+var _stream = __webpack_require__(22);
+>>>>>>> Users can now see how many people are viewing
 
   // Some AMD build optimizers, like r.js, check for condition patterns like:
   if (true) {
@@ -65278,6 +67356,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     // Use `_.noConflict` to remove Lodash from the global object.
     root._ = _;
 
+<<<<<<< HEAD
     // Define as an anonymous module so, through path mapping, it can be
     // referenced as the "underscore" module.
     !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
@@ -65297,12 +67376,19 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     root._ = _;
   }
 }.call(this));
+=======
+var _lineStream = __webpack_require__(32);
+>>>>>>> Users can now see how many people are viewing
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(24)(module)))
 
+<<<<<<< HEAD
 /***/ }),
 /* 179 */
 /***/ (function(module, exports) {
+=======
+var _parseStream = __webpack_require__(33);
+>>>>>>> Users can now see how many people are viewing
 
 /* (ignored) */
 
@@ -65448,6 +67534,24 @@ function _createXHR(options) {
         evt.statusCode = 0
         return callback(evt, failureResponse)
     }
+<<<<<<< HEAD
+=======
+  }]);
+
+  return Parser;
+}(_stream2['default']);
+
+exports['default'] = Parser;
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file xhr.js
+ */
+>>>>>>> Users can now see how many people are viewing
 
     // will load the data & process the response in a special response object
     function loadFunc() {
@@ -65491,6 +67595,7 @@ function _createXHR(options) {
         }
     }
 
+<<<<<<< HEAD
     var key
     var aborted
     var uri = xhr.url = options.uri || options.url
@@ -65508,6 +67613,9 @@ function _createXHR(options) {
         url: uri,
         rawRequest: xhr
     }
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
     if ("json" in options && options.json !== false) {
         isJson = true
@@ -65594,7 +67702,11 @@ function noop() {}
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 183 */
+=======
+/* 77 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var trim = __webpack_require__(184)
@@ -65629,20 +67741,32 @@ module.exports = function (headers) {
   return result
 }
 
+<<<<<<< HEAD
 /***/ }),
 /* 184 */
 /***/ (function(module, exports) {
+=======
+var _aes = __webpack_require__(78);
+>>>>>>> Users can now see how many people are viewing
 
 
+<<<<<<< HEAD
 exports = module.exports = trim;
+=======
+var _asyncStream = __webpack_require__(35);
+>>>>>>> Users can now see how many people are viewing
 
 function trim(str){
   return str.replace(/^\s*|\s*$/g, '');
 }
 
+<<<<<<< HEAD
 exports.left = function(str){
   return str.replace(/^\s*/, '');
 };
+=======
+var _pkcs7 = __webpack_require__(80);
+>>>>>>> Users can now see how many people are viewing
 
 exports.right = function(str){
   return str.replace(/\s*$/, '');
@@ -65727,7 +67851,11 @@ function extend() {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 187 */
+=======
+/* 78 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -66039,10 +68167,16 @@ function parseCue(input, cue, regionList) {
   skipWhitespace();
   cue.endTime = consumeTimeStamp();     // (5) collect cue end time
 
+<<<<<<< HEAD
   // 4.1 WebVTT cue settings list.
   skipWhitespace();
   consumeCueSettings(input, cue);
 }
+=======
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 var ESCAPE = {
   "&amp;": "&",
@@ -66214,6 +68348,7 @@ var strongRTLRanges = [[0x5be, 0x5be], [0x5c0, 0x5c0], [0x5c3, 0x5c3], [0x5c6, 0
  [0x1ee79, 0x1ee7c], [0x1ee7e, 0x1ee7e], [0x1ee80, 0x1ee89], [0x1ee8b, 0x1ee9b],
  [0x1eea1, 0x1eea3], [0x1eea5, 0x1eea9], [0x1eeab, 0x1eebb], [0x10fffd, 0x10fffd]];
 
+<<<<<<< HEAD
 function isStrongRTLChar(charCode) {
   for (var i = 0; i < strongRTLRanges.length; i++) {
     var currentRange = strongRTLRanges[i];
@@ -66221,6 +68356,11 @@ function isStrongRTLChar(charCode) {
       return true;
     }
   }
+=======
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   return false;
 }
@@ -66234,17 +68374,23 @@ function determineBidi(cueDiv) {
     return "ltr";
   }
 
+<<<<<<< HEAD
   function pushNodes(nodeStack, node) {
     for (var i = node.childNodes.length - 1; i >= 0; i--) {
       nodeStack.push(node.childNodes[i]);
     }
   }
+=======
+exports.pad = __webpack_require__(81);
+exports.unpad = __webpack_require__(82);
+>>>>>>> Users can now see how many people are viewing
 
   function nextTextNode(nodeStack) {
     if (!nodeStack || !nodeStack.length) {
       return null;
     }
 
+<<<<<<< HEAD
     var node = nodeStack.pop(),
         text = node.textContent || node.innerText;
     if (text) {
@@ -66265,6 +68411,11 @@ function determineBidi(cueDiv) {
       return nextTextNode(nodeStack);
     }
   }
+=======
+/***/ }),
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   pushNodes(nodeStack, cueDiv);
   while ((text = nextTextNode(nodeStack))) {
@@ -66450,6 +68601,7 @@ function BoxPosition(obj) {
     lh = rects ? Math.max((rects[0] && rects[0].height) || 0, obj.height / rects.length)
                : 0;
 
+<<<<<<< HEAD
   }
   this.left = obj.left;
   this.right = obj.right;
@@ -66458,6 +68610,11 @@ function BoxPosition(obj) {
   this.bottom = obj.bottom || (top + (obj.height || height));
   this.width = obj.width || width;
   this.lineHeight = lh !== undefined ? lh : obj.lineHeight;
+=======
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   if (isIE8 && !this.lineHeight) {
     this.lineHeight = 13;
@@ -66515,6 +68672,7 @@ BoxPosition.prototype.within = function(container) {
          this.right <= container.right;
 };
 
+<<<<<<< HEAD
 // Check if this box is entirely within the container or it is overlapping
 // on the edge opposite of the axis direction passed. For example, if "+x" is
 // passed and the box is overlapping on the left edge of the container, then
@@ -66531,6 +68689,11 @@ BoxPosition.prototype.overlapsOppositeAxis = function(container, axis) {
     return this.bottom > container.bottom;
   }
 };
+=======
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 // Find the percentage of the area that this box is overlapping with another
 // box.
@@ -66576,10 +68739,14 @@ BoxPosition.getSimpleBoxPosition = function(obj) {
   return ret;
 };
 
+<<<<<<< HEAD
 // Move a StyleBox to its specified, or next best, position. The containerBox
 // is the box that contains the StyleBox, such as a div. boxPositions are
 // a list of other boxes that the styleBox can't overlap with.
 function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
   // Find the best position for a cue box, b, on the video. The axis parameter
   // is a list of axis, the order of which, it will move the box along. For example:
@@ -66591,6 +68758,7 @@ function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
         specifiedPosition = new BoxPosition(b),
         percentage = 1; // Highest possible so the first thing we get is better.
 
+<<<<<<< HEAD
     for (var i = 0; i < axis.length; i++) {
       while (b.overlapsOppositeAxis(containerBox, axis[i]) ||
              (b.within(containerBox) && b.overlapsAny(boxPositions))) {
@@ -66613,12 +68781,16 @@ function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
     }
     return bestPosition || specifiedPosition;
   }
+=======
+var _flashMediaSource = __webpack_require__(84);
+>>>>>>> Users can now see how many people are viewing
 
   var boxPosition = new BoxPosition(styleBox),
       cue = styleBox.cue,
       linePos = computeLinePos(cue),
       axis = [];
 
+<<<<<<< HEAD
   // If we have a line number to align the cue to.
   if (cue.snapToLines) {
     var size;
@@ -66636,12 +68808,16 @@ function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
       size = "width";
       break;
     }
+=======
+var _htmlMediaSource = __webpack_require__(93);
+>>>>>>> Users can now see how many people are viewing
 
     var step = boxPosition.lineHeight,
         position = step * Math.round(linePos),
         maxPosition = containerBox[size] + step,
         initialAxis = axis[0];
 
+<<<<<<< HEAD
     // If the specified intial position is greater then the max position then
     // clamp the box to the amount of steps it would take for the box to
     // reach the max position.
@@ -66649,6 +68825,9 @@ function moveBoxToLinePosition(window, styleBox, containerBox, boxPositions) {
       position = position < 0 ? -1 : 1;
       position *= Math.ceil(maxPosition / step) * step;
     }
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
     // If computed line position returns negative then line numbers are
     // relative to the bottom of the video instead of the top. Therefore, we
@@ -66785,8 +68964,14 @@ WebVTT.processCues = function(window, cues, overlay) {
     font: fontSize + "px " + FONT_STYLE
   };
 
+<<<<<<< HEAD
   (function() {
     var styleBox, cue;
+=======
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     for (var i = 0; i < cues.length; i++) {
       cue = cues[i];
@@ -66837,6 +69022,7 @@ WebVTT.Parser.prototype = {
   parse: function (data) {
     var self = this;
 
+<<<<<<< HEAD
     // If there is no data then we won't decode it, but will just try to parse
     // whatever is in buffer already. This may occur in circumstances, for
     // example when flush() is called.
@@ -66844,6 +69030,9 @@ WebVTT.Parser.prototype = {
       // Try to decode the data that we received.
       self.buffer += self.decoder.decode(data, {stream: true});
     }
+=======
+var _globalDocument = __webpack_require__(16);
+>>>>>>> Users can now see how many people are viewing
 
     function collectNextLine() {
       var buffer = self.buffer;
@@ -66863,9 +69052,13 @@ WebVTT.Parser.prototype = {
       return line;
     }
 
+<<<<<<< HEAD
     // 3.4 WebVTT region and WebVTT region settings syntax
     function parseRegion(input) {
       var settings = new Settings();
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
       parseOptions(input, function (k, v) {
         switch (k) {
@@ -66901,6 +69094,7 @@ WebVTT.Parser.prototype = {
         }
       }, /=/, /\s/);
 
+<<<<<<< HEAD
       // Create the region, using default values for any values that were not
       // specified.
       if (settings.has("id")) {
@@ -66922,6 +69116,9 @@ WebVTT.Parser.prototype = {
         });
       }
     }
+=======
+var _flashSourceBuffer = __webpack_require__(85);
+>>>>>>> Users can now see how many people are viewing
 
     // draft-pantos-http-live-streaming-20
     // https://tools.ietf.org/html/draft-pantos-http-live-streaming-20#section-3.5
@@ -66929,6 +69126,7 @@ WebVTT.Parser.prototype = {
     function parseTimestampMap(input) {
       var settings = new Settings();
 
+<<<<<<< HEAD
       parseOptions(input, function(k, v) {
         switch(k) {
         case "MPEGT":
@@ -66939,6 +69137,9 @@ WebVTT.Parser.prototype = {
           break;
         }
       }, /[^\d]:/, /,/);
+=======
+var _flashConstants = __webpack_require__(43);
+>>>>>>> Users can now see how many people are viewing
 
       self.ontimestampmap && self.ontimestampmap({
         "MPEGTS": settings.get("MPEGTS"),
@@ -66946,6 +69147,7 @@ WebVTT.Parser.prototype = {
       });
     }
 
+<<<<<<< HEAD
     // 3.2 WebVTT metadata header syntax
     function parseHeader(input) {
       if (input.match(/X-TIMESTAMP-MAP/)) {
@@ -66967,6 +69169,9 @@ WebVTT.Parser.prototype = {
           }
         }, /:/);
       }
+=======
+var _codecUtils = __webpack_require__(18);
+>>>>>>> Users can now see how many people are viewing
 
     }
 
@@ -67569,7 +69774,11 @@ module.exports = VTTRegion;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 191 */
+=======
+/* 85 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67591,43 +69800,85 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _globalDocument = __webpack_require__(12);
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
 var _globalDocument2 = _interopRequireDefault(_globalDocument);
 
+<<<<<<< HEAD
 var _playlistLoader = __webpack_require__(16);
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
+<<<<<<< HEAD
 var _playlist = __webpack_require__(9);
+=======
+var _muxJsLibFlv = __webpack_require__(36);
+>>>>>>> Users can now see how many people are viewing
 
 var _playlist2 = _interopRequireDefault(_playlist);
 
+<<<<<<< HEAD
 var _xhr = __webpack_require__(195);
+=======
+var _removeCuesFromTrack = __webpack_require__(17);
+>>>>>>> Users can now see how many people are viewing
 
 var _xhr2 = _interopRequireDefault(_xhr);
 
+<<<<<<< HEAD
 var _aesDecrypter = __webpack_require__(30);
+=======
+var _createTextTracksIfNecessary = __webpack_require__(41);
+>>>>>>> Users can now see how many people are viewing
 
 var _binUtils = __webpack_require__(10);
 
+<<<<<<< HEAD
 var _binUtils2 = _interopRequireDefault(_binUtils);
 
 var _videojsContribMediaSources = __webpack_require__(202);
+=======
+var _addTextTrackData = __webpack_require__(24);
+
+var _flashTransmuxerWorker = __webpack_require__(42);
+>>>>>>> Users can now see how many people are viewing
 
 var _m3u8Parser = __webpack_require__(27);
 
+<<<<<<< HEAD
 var _m3u8Parser2 = _interopRequireDefault(_m3u8Parser);
+=======
+var _webwackify = __webpack_require__(25);
+>>>>>>> Users can now see how many people are viewing
 
 var _videoJs = __webpack_require__(1);
 
+<<<<<<< HEAD
 var _videoJs2 = _interopRequireDefault(_videoJs);
+=======
+var _flashConstants = __webpack_require__(43);
+>>>>>>> Users can now see how many people are viewing
 
 var _masterPlaylistController = __webpack_require__(218);
 
 var _config = __webpack_require__(15);
 
+<<<<<<< HEAD
 var _config2 = _interopRequireDefault(_config);
+=======
+  try {
+    result = /*require.resolve*/(42);
+  } catch (e) {
+    // no result
+  }
+>>>>>>> Users can now see how many people are viewing
 
 var _renditionMixin = __webpack_require__(229);
 
@@ -68170,7 +70421,13 @@ var HlsSourceHandler = function HlsSourceHandler(mode) {
     canHandleSource: function canHandleSource(srcObj) {
       var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
+<<<<<<< HEAD
       var localOptions = _videoJs2['default'].mergeOptions(_videoJs2['default'].options, options);
+=======
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       // this forces video.js to skip this tech/mode if its not the one we have been
       // overriden to use, by returing that we cannot handle the source.
@@ -68184,6 +70441,7 @@ var HlsSourceHandler = function HlsSourceHandler(mode) {
 
       var localOptions = _videoJs2['default'].mergeOptions(_videoJs2['default'].options, options, { hls: { mode: mode } });
 
+<<<<<<< HEAD
       if (mode === 'flash') {
         // We need to trigger this asynchronously to give others the chance
         // to bind to the event when a source is set at player creation
@@ -68191,6 +70449,15 @@ var HlsSourceHandler = function HlsSourceHandler(mode) {
           tech.trigger('loadstart');
         }, 1);
       }
+=======
+var Stream = __webpack_require__(11);
+var FlvTag = __webpack_require__(23);
+var m2ts = __webpack_require__(37);
+var AdtsStream = __webpack_require__(39);
+var H264Stream = __webpack_require__(40).H264Stream;
+var CoalesceStream = __webpack_require__(90);
+var TagList = __webpack_require__(91);
+>>>>>>> Users can now see how many people are viewing
 
       tech.hls = new HlsHandler(source, tech, localOptions);
       tech.hls.xhr = (0, _xhr2['default'])();
@@ -68870,7 +71137,11 @@ var Parser = function (_Stream) {
 exports['default'] = Parser;
 
 /***/ }),
+<<<<<<< HEAD
 /* 195 */
+=======
+/* 87 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68893,7 +71164,17 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+<<<<<<< HEAD
 var _videoJs = __webpack_require__(1);
+=======
+// Supplemental enhancement information (SEI) NAL units have a
+// payload type field to indicate how they are to be
+// interpreted. CEAS-708 caption content is always transmitted with
+// payload type 0x04.
+var USER_DATA_REGISTERED_ITU_T_T35 = 4,
+    RBSP_TRAILING_BITS = 128,
+    Stream = __webpack_require__(11);
+>>>>>>> Users can now see how many people are viewing
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
@@ -69461,6 +71742,7 @@ var Stream = (function () {
     value: function off(type, listener) {
       var index = undefined;
 
+<<<<<<< HEAD
       if (!this.listeners[type]) {
         return false;
       }
@@ -69468,6 +71750,11 @@ var Stream = (function () {
       this.listeners[type].splice(index, 1);
       return index > -1;
     }
+=======
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Trigger an event of the specified type on this stream. Any additional
@@ -69483,8 +71770,62 @@ var Stream = (function () {
       var length = undefined;
       var args = undefined;
 
+<<<<<<< HEAD
       callbacks = this.listeners[type];
       if (!callbacks) {
+=======
+var
+  Stream = __webpack_require__(11),
+  StreamTypes = __webpack_require__(15),
+  // return a percent-encoded representation of the specified byte range
+  // @see http://en.wikipedia.org/wiki/Percent-encoding
+  percentEncode = function(bytes, start, end) {
+    var i, result = '';
+    for (i = start; i < end; i++) {
+      result += '%' + ('00' + bytes[i].toString(16)).slice(-2);
+    }
+    return result;
+  },
+  // return the string representation of the specified byte range,
+  // interpreted as UTf-8.
+  parseUtf8 = function(bytes, start, end) {
+    return decodeURIComponent(percentEncode(bytes, start, end));
+  },
+  // return the string representation of the specified byte range,
+  // interpreted as ISO-8859-1.
+  parseIso88591 = function(bytes, start, end) {
+    return unescape(percentEncode(bytes, start, end)); // jshint ignore:line
+  },
+  parseSyncSafeInteger = function(data) {
+    return (data[0] << 21) |
+            (data[1] << 14) |
+            (data[2] << 7) |
+            (data[3]);
+  },
+  tagParsers = {
+    TXXX: function(tag) {
+      var i;
+      if (tag.data[0] !== 3) {
+        // ignore frames with unrecognized character encodings
+        return;
+      }
+
+      for (i = 1; i < tag.data.length; i++) {
+        if (tag.data[i] === 0) {
+          // parse the text fields
+          tag.description = parseUtf8(tag.data, 1, i);
+          // do not include the null terminator in the tag value
+          tag.value = parseUtf8(tag.data, i + 1, tag.data.length).replace(/\0*$/, '');
+          break;
+        }
+      }
+      tag.data = tag.value;
+    },
+    WXXX: function(tag) {
+      var i;
+      if (tag.data[0] !== 3) {
+        // ignore frames with unrecognized character encodings
+>>>>>>> Users can now see how many people are viewing
         return;
       }
       // Slicing the arguments on every invocation of this method
@@ -69609,9 +71950,15 @@ PADDING = [
    13, 13, 13, 13,
    13],
 
+<<<<<<< HEAD
   [12, 12, 12, 12,
    12, 12, 12, 12,
    12, 12, 12, 12],
+=======
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   [11, 11, 11, 11,
    11, 11, 11, 11,
@@ -69703,7 +72050,13 @@ var _htmlMediaSource2 = _interopRequireDefault(_htmlMediaSource);
 
 var _videoJs = __webpack_require__(1);
 
+<<<<<<< HEAD
 var _videoJs2 = _interopRequireDefault(_videoJs);
+=======
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 var urlCount = 0;
 
@@ -69721,10 +72074,14 @@ var defaults = {
   mode: 'auto'
 };
 
+<<<<<<< HEAD
 // store references to the media sources so they can be connected
 // to a video element (a swf object)
 // TODO: can we store this somewhere local to this module?
 _videoJs2['default'].mediaSources = {};
+=======
+var Stream = __webpack_require__(11);
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * Provide a method for a swf object to notify JS that a
@@ -69855,7 +72212,13 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+<<<<<<< HEAD
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+=======
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
@@ -69873,7 +72236,13 @@ var _flashSourceBuffer2 = _interopRequireDefault(_flashSourceBuffer);
 
 var _flashConstants = __webpack_require__(39);
 
+<<<<<<< HEAD
 var _flashConstants2 = _interopRequireDefault(_flashConstants);
+=======
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 var _codecUtils = __webpack_require__(14);
 
@@ -69886,8 +72255,12 @@ var _codecUtils = __webpack_require__(14);
  * @extends videojs.EventTarget
  */
 
+<<<<<<< HEAD
 var FlashMediaSource = (function (_videojs$EventTarget) {
   _inherits(FlashMediaSource, _videojs$EventTarget);
+=======
+var FlvTag = __webpack_require__(23);
+>>>>>>> Users can now see how many people are viewing
 
   function FlashMediaSource() {
     var _this = this;
@@ -70047,7 +72420,11 @@ for (var property in _flashConstants2['default']) {
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 204 */
+=======
+/* 93 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70070,25 +72447,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
 var _videoJs = __webpack_require__(1);
+=======
+var _globalWindow = __webpack_require__(8);
+
+var _globalWindow2 = _interopRequireDefault(_globalWindow);
+
+var _globalDocument = __webpack_require__(16);
+>>>>>>> Users can now see how many people are viewing
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
+<<<<<<< HEAD
 var _muxJsLibFlv = __webpack_require__(32);
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 var _muxJsLibFlv2 = _interopRequireDefault(_muxJsLibFlv);
 
+<<<<<<< HEAD
 var _removeCuesFromTrack = __webpack_require__(13);
+=======
+var _virtualSourceBuffer = __webpack_require__(94);
+>>>>>>> Users can now see how many people are viewing
 
 var _removeCuesFromTrack2 = _interopRequireDefault(_removeCuesFromTrack);
 
+<<<<<<< HEAD
 var _createTextTracksIfNecessary = __webpack_require__(37);
 
 var _createTextTracksIfNecessary2 = _interopRequireDefault(_createTextTracksIfNecessary);
+=======
+var _addTextTrackData = __webpack_require__(24);
+
+var _codecUtils = __webpack_require__(18);
+>>>>>>> Users can now see how many people are viewing
 
 var _addTextTrackData = __webpack_require__(19);
 
@@ -70412,6 +72811,7 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
 
       var chunkSize = _flashConstants2['default'].BYTES_PER_CHUNK;
 
+<<<<<<< HEAD
       if (!this.buffer_.length) {
         if (this.updating !== false) {
           this.updating = false;
@@ -70420,6 +72820,11 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
         // do nothing if the buffer is empty
         return;
       }
+=======
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       // concatenate appends up to the max append size
       var chunk = this.buffer_[0].subarray(0, chunkSize);
@@ -70473,6 +72878,7 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
       var videoTags = segmentData.tags.videoTags;
       var audioTags = segmentData.tags.audioTags;
 
+<<<<<<< HEAD
       // Establish the media timeline to PTS translation if we don't
       // have one already
       if (isNaN(this.basePtsOffset_) && (videoTags.length || audioTags.length)) {
@@ -70481,26 +72887,37 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
         // call will to use the proper pts value since it will always be less than Infinity
         var firstVideoTag = videoTags[0] || { pts: Infinity };
         var firstAudioTag = audioTags[0] || { pts: Infinity };
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
         this.basePtsOffset_ = Math.min(firstAudioTag.pts, firstVideoTag.pts);
       }
 
+<<<<<<< HEAD
       if (tech.seeking()) {
         // Do not use previously saved buffer end values while seeking since buffer
         // is cleared on all seeks
         this.videoBufferEnd_ = NaN;
         this.audioBufferEnd_ = NaN;
       }
+=======
+var _createTextTracksIfNecessary = __webpack_require__(41);
+>>>>>>> Users can now see how many people are viewing
 
       if (isNaN(this.videoBufferEnd_)) {
         if (tech.buffered().length) {
           videoTargetPts = tech.buffered().end(0) - this.timestampOffset;
         }
 
+<<<<<<< HEAD
         // Trim to currentTime if seeking
         if (tech.seeking()) {
           videoTargetPts = Math.max(videoTargetPts, tech.currentTime() - this.timestampOffset);
         }
+=======
+var _removeCuesFromTrack = __webpack_require__(17);
+>>>>>>> Users can now see how many people are viewing
 
         // PTS values are represented in milliseconds
         videoTargetPts *= 1e3;
@@ -70514,6 +72931,7 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
         videoTargetPts = this.videoBufferEnd_ + 0.1;
       }
 
+<<<<<<< HEAD
       // filter complete GOPs with a presentation time less than the seek target/end of buffer
       var currentIndex = videoTags.length;
 
@@ -70524,17 +72942,26 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
         // is equal to or less than videoTargetPts
         while (--currentIndex) {
           var currentTag = videoTags[currentIndex];
+=======
+var _addTextTrackData = __webpack_require__(24);
+
+var _webwackify = __webpack_require__(25);
+>>>>>>> Users can now see how many people are viewing
 
           if (currentTag.pts > videoTargetPts) {
             continue;
           }
 
+<<<<<<< HEAD
           // if we see a keyFrame or metadata tag once we've gone below videoTargetPts,
           // exit the loop as this is the start of the GOP that we want to append
           if (currentTag.keyFrame || currentTag.metaDataTag) {
             break;
           }
         }
+=======
+var _transmuxerWorker = __webpack_require__(44);
+>>>>>>> Users can now see how many people are viewing
 
         // We need to check if there are any metadata tags that come before currentIndex
         // as those will be metadata tags associated with the GOP we are appending
@@ -70544,15 +72971,27 @@ var FlashSourceBuffer = (function (_videojs$EventTarget) {
         while (currentIndex) {
           var nextTag = videoTags[currentIndex - 1];
 
+<<<<<<< HEAD
           if (!nextTag.metaDataTag) {
             break;
           }
+=======
+var _codecUtils = __webpack_require__(18);
+>>>>>>> Users can now see how many people are viewing
 
           currentIndex--;
         }
       }
 
+<<<<<<< HEAD
       var filteredVideoTags = videoTags.slice(currentIndex);
+=======
+  try {
+    result = /*require.resolve*/(44);
+  } catch (e) {
+    // no result
+  }
+>>>>>>> Users can now see how many people are viewing
 
       var audioTargetPts = undefined;
 
@@ -71121,6 +73560,7 @@ Transmuxer = function(options) {
     captionStream.reset();
   };
 
+<<<<<<< HEAD
   // Re-emit any data coming from the coalesce stream to the outside world
   coalesceStream.on('data', function(event) {
     self.trigger('data', event);
@@ -71130,6 +73570,17 @@ Transmuxer = function(options) {
   coalesceStream.on('done', function() {
     self.trigger('done');
   });
+=======
+/***/ }),
+/* 95 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+  generator: __webpack_require__(45),
+  Transmuxer: __webpack_require__(26).Transmuxer,
+  AudioSegmentStream: __webpack_require__(26).AudioSegmentStream,
+  VideoSegmentStream: __webpack_require__(26).VideoSegmentStream
+>>>>>>> Users can now see how many people are viewing
 };
 Transmuxer.prototype = new Stream();
 
@@ -71138,7 +73589,11 @@ module.exports = Transmuxer;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 206 */
+=======
+/* 96 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71155,6 +73610,10 @@ module.exports = Transmuxer;
  * @see https://www.gpo.gov/fdsys/pkg/CFR-2007-title47-vol1/pdf/CFR-2007-title47-vol1-sec15-119.pdf
  */
 
+<<<<<<< HEAD
+=======
+var Stream = __webpack_require__(11);
+>>>>>>> Users can now see how many people are viewing
 
 
 // -----------------
@@ -71290,12 +73749,18 @@ var CaptionStream = function() {
 
   this.captionPackets_ = [];
 
+<<<<<<< HEAD
   this.ccStreams_ = [
     new Cea608Stream(0, 0), // eslint-disable-line no-use-before-define
     new Cea608Stream(0, 1), // eslint-disable-line no-use-before-define
     new Cea608Stream(1, 0), // eslint-disable-line no-use-before-define
     new Cea608Stream(1, 1) // eslint-disable-line no-use-before-define
   ];
+=======
+/***/ }),
+/* 97 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
   this.reset();
 
@@ -71316,8 +73781,14 @@ CaptionStream.prototype.push = function(event) {
     return;
   }
 
+<<<<<<< HEAD
   // parse the sei
   sei = parseSei(event.escapedRBSP);
+=======
+/***/ }),
+/* 98 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
   // ignore everything but user_data_registered_itu_t_t35
   if (sei.payloadType !== USER_DATA_REGISTERED_ITU_T_T35) {
@@ -71417,12 +73888,18 @@ CaptionStream.prototype.dispatchCea608Packet = function(packet) {
   this.ccStreams_[(packet.type << 1) + this.activeCea608Channel_[packet.type]].push(packet);
 };
 
+<<<<<<< HEAD
 CaptionStream.prototype.setsChannel1Active = function(packet) {
   return ((packet.ccData & 0x7800) === 0x1000);
 };
 CaptionStream.prototype.setsChannel2Active = function(packet) {
   return ((packet.ccData & 0x7800) === 0x1800);
 };
+=======
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 // ----------------------
 // Session to Application
@@ -71553,11 +74030,16 @@ var Cea608Stream = function(field, dataChannel) {
   this.field_ = field || 0;
   this.dataChannel_ = dataChannel || 0;
 
+<<<<<<< HEAD
   this.name_ = 'CC' + (((this.field_ << 1) | this.dataChannel_) + 1);
+=======
+var _playlistLoader = __webpack_require__(21);
+>>>>>>> Users can now see how many people are viewing
 
   this.setConstants();
   this.reset();
 
+<<<<<<< HEAD
   this.push = function(packet) {
     var data, swap, char0, char1, text;
     // remove the parity bits
@@ -71568,6 +74050,11 @@ var Cea608Stream = function(field, dataChannel) {
       this.lastControlCode_ = null;
       return;
     }
+=======
+var _playlistJs = __webpack_require__(13);
+
+var _segmentLoader = __webpack_require__(46);
+>>>>>>> Users can now see how many people are viewing
 
     // Store control codes
     if ((data & 0xf000) === 0x1000) {
@@ -71576,28 +74063,41 @@ var Cea608Stream = function(field, dataChannel) {
       this.lastControlCode_ = null;
     }
 
+<<<<<<< HEAD
     char0 = data >>> 8;
     char1 = data & 0xff;
+=======
+var _vttSegmentLoader = __webpack_require__(102);
+>>>>>>> Users can now see how many people are viewing
 
     if (data === this.PADDING_) {
       return;
 
+<<<<<<< HEAD
     } else if (data === this.RESUME_CAPTION_LOADING_) {
       this.mode_ = 'popOn';
+=======
+var _ranges = __webpack_require__(27);
+>>>>>>> Users can now see how many people are viewing
 
     } else if (data === this.END_OF_CAPTION_) {
       this.clearFormatting(packet.pts);
       // if a caption was being displayed, it's gone now
       this.flushDisplayed(packet.pts);
 
+<<<<<<< HEAD
       // flip memory
       swap = this.displayed_;
       this.displayed_ = this.nonDisplayed_;
       this.nonDisplayed_ = swap;
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
       // start measuring the time to display the caption
       this.startPts_ = packet.pts;
 
+<<<<<<< HEAD
     } else if (data === this.ROLL_UP_2_ROWS_) {
       this.topRow_ = BOTTOM_ROW - 1;
       this.mode_ = 'rollUp';
@@ -71612,6 +74112,9 @@ var Cea608Stream = function(field, dataChannel) {
       this.flushDisplayed(packet.pts);
       this.shiftRowsUp_();
       this.startPts_ = packet.pts;
+=======
+var _adCueTags = __webpack_require__(103);
+>>>>>>> Users can now see how many people are viewing
 
     } else if (data === this.BACKSPACE_) {
       if (this.mode_ === 'popOn') {
@@ -71625,8 +74128,12 @@ var Cea608Stream = function(field, dataChannel) {
     } else if (data === this.ERASE_NON_DISPLAYED_MEMORY_) {
       this.nonDisplayed_ = createDisplayBuffer();
 
+<<<<<<< HEAD
     } else if (data === this.RESUME_DIRECT_CAPTIONING_) {
       this.mode_ = 'paintOn';
+=======
+var _syncController = __webpack_require__(104);
+>>>>>>> Users can now see how many people are viewing
 
     // Append special characters to caption text
     } else if (this.isSpecialCharacter(char0, char1)) {
@@ -71639,6 +74146,7 @@ var Cea608Stream = function(field, dataChannel) {
       this[this.mode_](packet.pts, text);
       this.column_++;
 
+<<<<<<< HEAD
     // Append extended characters to caption text
     } else if (this.isExtCharacter(char0, char1)) {
       // Extended characters always follow their "non-extended" equivalents.
@@ -71652,6 +74160,11 @@ var Cea608Stream = function(field, dataChannel) {
       } else {
         this.displayed_[BOTTOM_ROW] = this.displayed_[BOTTOM_ROW].slice(0, -1);
       }
+=======
+var _videojsContribMediaSourcesEs5CodecUtils = __webpack_require__(18);
+
+var _webwackify = __webpack_require__(25);
+>>>>>>> Users can now see how many people are viewing
 
       // Bitmask char0 so that we can apply character transformations
       // regardless of field and data channel.
@@ -71662,24 +74175,33 @@ var Cea608Stream = function(field, dataChannel) {
       this[this.mode_](packet.pts, text);
       this.column_++;
 
+<<<<<<< HEAD
     // Process mid-row codes
     } else if (this.isMidRowCode(char0, char1)) {
       // Attributes are not additive, so clear all formatting
       this.clearFormatting(packet.pts);
+=======
+var _decrypterWorker = __webpack_require__(49);
+>>>>>>> Users can now see how many people are viewing
 
       // According to the standard, mid-row codes
       // should be replaced with spaces, so add one now
       this[this.mode_](packet.pts, ' ');
       this.column_++;
 
+<<<<<<< HEAD
       if ((char1 & 0xe) === 0xe) {
         this.addFormatting(packet.pts, ['i']);
       }
+=======
+var _config = __webpack_require__(19);
+>>>>>>> Users can now see how many people are viewing
 
       if ((char1 & 0x1) === 0x1) {
         this.addFormatting(packet.pts, ['u']);
       }
 
+<<<<<<< HEAD
     // Detect offset control codes and adjust cursor
     } else if (this.isOffsetControlCode(char0, char1)) {
       // Cursor position is set by indent PAC (see below) in 4-column
@@ -71690,6 +74212,11 @@ var Cea608Stream = function(field, dataChannel) {
 
     // Detect PACs (Preamble Address Codes)
     } else if (this.isPAC(char0, char1)) {
+=======
+var _utilCodecsJs = __webpack_require__(48);
+
+var _mediaGroups = __webpack_require__(109);
+>>>>>>> Users can now see how many people are viewing
 
       // There's no logic for PAC -> row mapping, so we have to just
       // find the row code in an array and use its index :(
@@ -71734,7 +74261,15 @@ var Cea608Stream = function(field, dataChannel) {
       this[this.mode_](packet.pts, text);
       this.column_ += text.length;
 
+<<<<<<< HEAD
     } // finish data processing
+=======
+  try {
+    result = /*require.resolve*/(49);
+  } catch (e) {
+    // no result
+  }
+>>>>>>> Users can now see how many people are viewing
 
   };
 };
@@ -73035,7 +75570,11 @@ exports['default'] = HtmlMediaSource;
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 213 */
+=======
+/* 100 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73056,7 +75595,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+<<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 var _videoJs = __webpack_require__(1);
 
@@ -73120,7 +75663,42 @@ var makeWrappedSourceBuffer = function makeWrappedSourceBuffer(mediaSource, mime
         }
       });
     }
+<<<<<<< HEAD
   };
+=======
+  }]);
+
+  return SourceUpdater;
+})();
+
+exports['default'] = SourceUpdater;
+module.exports = exports['default'];
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _videoJs = __webpack_require__(7);
+
+var _videoJs2 = _interopRequireDefault(_videoJs);
+
+var _binUtils = __webpack_require__(14);
+
+var REQUEST_ERRORS = {
+  FAILURE: 2,
+  TIMEOUT: -101,
+  ABORTED: -102
+};
+>>>>>>> Users can now see how many people are viewing
 
   for (var key in sourceBuffer) {
     _loop(key);
@@ -73381,6 +75959,7 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
           return _videoJs2['default'].createTimeRange();
         }
 
+<<<<<<< HEAD
         // only one buffer is configured
         if (!this.videoBuffer_) {
           return this.audioBuffer_.buffered;
@@ -73388,6 +75967,11 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
         if (!this.audioBuffer_) {
           return this.videoBuffer_.buffered;
         }
+=======
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
         // both buffers are configured
         if (this.audioDisabled_) {
@@ -73449,10 +76033,14 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
           }
         }
 
+<<<<<<< HEAD
         return _videoJs2['default'].createTimeRanges(ranges);
       }
     });
   }
+=======
+var _segmentLoader = __webpack_require__(46);
+>>>>>>> Users can now see how many people are viewing
 
   /**
    * When we get a data event from the transmuxer
@@ -73463,22 +76051,34 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
    * @param {Event} event the data event from the transmuxer
    */
 
+<<<<<<< HEAD
   _createClass(VirtualSourceBuffer, [{
     key: 'data_',
     value: function data_(event) {
       var segment = event.data.segment;
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
       // Cast ArrayBuffer to TypedArray
       segment.data = new Uint8Array(segment.data, event.data.byteOffset, event.data.byteLength);
 
+<<<<<<< HEAD
       segment.initSegment = new Uint8Array(segment.initSegment.data, segment.initSegment.byteOffset, segment.initSegment.byteLength);
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
       (0, _createTextTracksIfNecessary2['default'])(this, this.mediaSource_, segment);
 
+<<<<<<< HEAD
       // Add the segments to the pendingBuffers array
       this.pendingBuffers_.push(segment);
       return;
     }
+=======
+var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(17);
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * When we get a done event from the transmuxer
@@ -73498,11 +76098,15 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
         return;
       }
 
+<<<<<<< HEAD
       // All buffers should have been flushed from the muxer
       // start processing anything we have received
       this.processPendingSegments_();
       return;
     }
+=======
+var _binUtils = __webpack_require__(14);
+>>>>>>> Users can now see how many people are viewing
 
     /**
      * Create our internal native audio/video source buffers and add
@@ -73868,7 +76472,11 @@ var VirtualSourceBuffer = (function (_videojs$EventTarget) {
 exports['default'] = VirtualSourceBuffer;
 
 /***/ }),
+<<<<<<< HEAD
 /* 214 */
+=======
+/* 103 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -73895,7 +76503,11 @@ module.exports = {
  * Media Source Extensions.
  */
 
+<<<<<<< HEAD
 var Stream = __webpack_require__(5);
+=======
+var _globalWindow = __webpack_require__(8);
+>>>>>>> Users can now see how many people are viewing
 
 // Constants
 var AacStream;
@@ -74118,7 +76730,11 @@ module.exports = {
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 218 */
+=======
+/* 104 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74141,15 +76757,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+<<<<<<< HEAD
 var _playlistLoader = __webpack_require__(16);
+=======
+var _muxJsLibMp4Probe = __webpack_require__(105);
+>>>>>>> Users can now see how many people are viewing
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
+<<<<<<< HEAD
 var _playlistJs = __webpack_require__(9);
 
 var _segmentLoader = __webpack_require__(42);
 
 var _segmentLoader2 = _interopRequireDefault(_segmentLoader);
+=======
+var _muxJsLibToolsTsInspectorJs = __webpack_require__(106);
+
+var _playlist = __webpack_require__(13);
+
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 var _vttSegmentLoader = __webpack_require__(221);
 
@@ -74477,12 +77105,18 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
     this.masterPlaylistLoader_ = new _playlistLoader2['default'](url, this.hls_, this.withCredentials);
     this.setupMasterPlaylistLoaderListeners_();
 
+<<<<<<< HEAD
     // setup segment loaders
     // combined audio/video or just video when alternate audio track is selected
     this.mainSegmentLoader_ = new _segmentLoader2['default'](_videoJs2['default'].mergeOptions(segmentLoaderSettings, {
       segmentMetadataTrack: this.segmentMetadataTrack_,
       loaderType: 'main'
     }), options);
+=======
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     // alternate audio track
     this.audioSegmentLoader_ = new _segmentLoader2['default'](_videoJs2['default'].mergeOptions(segmentLoaderSettings, {
@@ -74605,10 +77239,16 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
             var addSeekableRange = function addSeekableRange() {
               var seekable = _this2.seekable();
 
+<<<<<<< HEAD
               if (seekable.length !== 0) {
                 _this2.mediaSource.addSeekableRange_(seekable.start(0), seekable.end(0));
               }
             };
+=======
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
             if (_this2.duration() !== Infinity) {
               (function () {
@@ -74629,9 +77269,17 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
         }
       });
 
+<<<<<<< HEAD
       this.masterPlaylistLoader_.on('error', function () {
         _this2.blacklistCurrentPlaylist(_this2.masterPlaylistLoader_.error);
       });
+=======
+var StreamTypes = __webpack_require__(15);
+var handleRollover = __webpack_require__(38).handleRollover;
+var probe = {};
+probe.ts = __webpack_require__(107);
+probe.aac = __webpack_require__(108);
+>>>>>>> Users can now see how many people are viewing
 
       this.masterPlaylistLoader_.on('mediachanging', function () {
         _this2.mainSegmentLoader_.abort();
@@ -75015,6 +77663,7 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
       }
     }
 
+<<<<<<< HEAD
     /**
      * Check if a playlist has stopped being updated
      * @param {Object} playlist the media playlist object
@@ -75024,6 +77673,11 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
     key: 'stuckAtPlaylistEnd_',
     value: function stuckAtPlaylistEnd_(playlist) {
       var seekable = this.seekable();
+=======
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       if (!seekable.length) {
         // playlist doesn't have enough information to determine whether we are stuck
@@ -75032,9 +77686,13 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 
       var expired = this.syncController_.getExpiredTime(playlist, this.mediaSource.duration);
 
+<<<<<<< HEAD
       if (expired === null) {
         return false;
       }
+=======
+var StreamTypes = __webpack_require__(15);
+>>>>>>> Users can now see how many people are viewing
 
       // does not use the safe live end to calculate playlist end, since we
       // don't want to say we are stuck while there is still content
@@ -75227,9 +77885,15 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 
       mainSeekable = Hls.Playlist.seekable(media, expired);
 
+<<<<<<< HEAD
       if (mainSeekable.length === 0) {
         return;
       }
+=======
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       if (this.mediaTypes_.AUDIO.activePlaylistLoader) {
         media = this.mediaTypes_.AUDIO.activePlaylistLoader.media();
@@ -75485,7 +78149,11 @@ var MasterPlaylistController = (function (_videojs$EventTarget) {
 exports.MasterPlaylistController = MasterPlaylistController;
 
 /***/ }),
+<<<<<<< HEAD
 /* 219 */
+=======
+/* 109 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75500,11 +78168,19 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+<<<<<<< HEAD
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+<<<<<<< HEAD
 var _videoJs = __webpack_require__(1);
+=======
+var _playlistLoader = __webpack_require__(21);
+>>>>>>> Users can now see how many people are viewing
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
@@ -76014,9 +78690,36 @@ var getMostImportantError = function getMostImportantError(errors) {
  * @param {Function} doneFn - a callback that is executed after all resources have been
  *                            downloaded and any decryption completed
  */
+<<<<<<< HEAD
 var waitForCompletion = function waitForCompletion(activeXhrs, decrypter, doneFn) {
   var errors = [];
   var count = 0;
+=======
+var createMediaTypes = function createMediaTypes() {
+  var mediaTypes = {};
+
+  ['AUDIO', 'SUBTITLES', 'CLOSED-CAPTIONS'].forEach(function (type) {
+    mediaTypes[type] = {
+      groups: {},
+      tracks: {},
+      activePlaylistLoader: null,
+      activeGroup: noop,
+      activeTrack: noop,
+      onGroupChanged: noop,
+      onTrackChanged: noop
+    };
+  });
+
+  return mediaTypes;
+};
+exports.createMediaTypes = createMediaTypes;
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+>>>>>>> Users can now see how many people are viewing
 
   return function (error, segment) {
     if (error) {
@@ -76033,6 +78736,7 @@ var waitForCompletion = function waitForCompletion(activeXhrs, decrypter, doneFn
       if (errors.length > 0) {
         var worstError = getMostImportantError(errors);
 
+<<<<<<< HEAD
         return doneFn(worstError, segment);
       }
       if (segment.encryptedBytes) {
@@ -76043,6 +78747,9 @@ var waitForCompletion = function waitForCompletion(activeXhrs, decrypter, doneFn
     }
   };
 };
+=======
+var _playlistJs = __webpack_require__(13);
+>>>>>>> Users can now see how many people are viewing
 
 /**
  * Simple progress event callback handler that gathers some stats before
@@ -76162,7 +78869,11 @@ var mediaSegmentRequest = function mediaSegmentRequest(xhr, xhrOptions, decrypti
 exports.mediaSegmentRequest = mediaSegmentRequest;
 
 /***/ }),
+<<<<<<< HEAD
 /* 221 */
+=======
+/* 111 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -76183,13 +78894,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+<<<<<<< HEAD
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _segmentLoader = __webpack_require__(42);
+=======
+var _globalWindow = __webpack_require__(8);
+
+var _globalWindow2 = _interopRequireDefault(_globalWindow);
+
+var _ranges = __webpack_require__(27);
+>>>>>>> Users can now see how many people are viewing
 
 var _segmentLoader2 = _interopRequireDefault(_segmentLoader);
 
+<<<<<<< HEAD
 var _videoJs = __webpack_require__(1);
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
@@ -76629,7 +79352,11 @@ exports['default'] = VTTSegmentLoader;
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 222 */
+=======
+/* 112 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -76646,7 +79373,11 @@ var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = 
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+<<<<<<< HEAD
 var _globalWindow = __webpack_require__(3);
+=======
+var _videoJs = __webpack_require__(7);
+>>>>>>> Users can now see how many people are viewing
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -76747,6 +79478,7 @@ exports['default'] = {
 module.exports = exports['default'];
 
 /***/ }),
+<<<<<<< HEAD
 /* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -76754,6 +79486,21 @@ module.exports = exports['default'];
 /**
  * @file sync-controller.js
  */
+=======
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+  * Bootstrap v4.0.0 (https://getbootstrap.com)
+  * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  */
+(function (global, factory) {
+	 true ? factory(exports, __webpack_require__(50), __webpack_require__(29)) :
+	typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
+	(factory((global.bootstrap = {}),global.jQuery,global.Popper));
+}(this, (function (exports,$,Popper) { 'use strict';
+>>>>>>> Users can now see how many people are viewing
 
 
 
@@ -81434,6 +84181,7 @@ var Dropdown = function ($$$1) {
 
   var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
 
+<<<<<<< HEAD
   var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
   var Event = {
     HIDE: "hide" + EVENT_KEY,
@@ -81498,12 +84246,30 @@ var Dropdown = function ($$$1) {
       this._config = this._getConfig(config);
       this._menu = this._getMenuElement();
       this._inNavbar = this._detectNavbar();
+=======
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(115);
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       this._addEventListeners();
     } // Getters
 
 
+<<<<<<< HEAD
     var _proto = Dropdown.prototype;
+=======
+var utils = __webpack_require__(10);
+var bind = __webpack_require__(51);
+var Axios = __webpack_require__(117);
+var defaults = __webpack_require__(28);
+>>>>>>> Users can now see how many people are viewing
 
     // Public
     _proto.toggle = function toggle() {
@@ -81531,6 +84297,7 @@ var Dropdown = function ($$$1) {
         return;
       } // Disable totally Popper.js for Dropdown in Navbar
 
+<<<<<<< HEAD
 
       if (!this._inNavbar) {
         /**
@@ -81540,6 +84307,18 @@ var Dropdown = function ($$$1) {
         if (typeof Popper === 'undefined') {
           throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)');
         }
+=======
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(56);
+axios.CancelToken = __webpack_require__(131);
+axios.isCancel = __webpack_require__(55);
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(132);
+>>>>>>> Users can now see how many people are viewing
 
         var element = this._element; // For dropup with alignment we use the parent as popper container
 
@@ -81552,9 +84331,15 @@ var Dropdown = function ($$$1) {
         // https://github.com/twbs/bootstrap/issues/24251
 
 
+<<<<<<< HEAD
         if (this._config.boundary !== 'scrollParent') {
           $$$1(parent).addClass(ClassName.POSITION_STATIC);
         }
+=======
+/***/ }),
+/* 116 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
         this._popper = new Popper(element, this._menu, this._getPopperConfig());
       } // If this is a touch-enabled device we add extra
@@ -81571,9 +84356,15 @@ var Dropdown = function ($$$1) {
 
       this._element.setAttribute('aria-expanded', true);
 
+<<<<<<< HEAD
       $$$1(this._menu).toggleClass(ClassName.SHOW);
       $$$1(parent).toggleClass(ClassName.SHOW).trigger($$$1.Event(Event.SHOWN, relatedTarget));
     };
+=======
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     _proto.dispose = function dispose() {
       $$$1.removeData(this._element, DATA_KEY);
@@ -81584,9 +84375,16 @@ var Dropdown = function ($$$1) {
       if (this._popper !== null) {
         this._popper.destroy();
 
+<<<<<<< HEAD
         this._popper = null;
       }
     };
+=======
+var defaults = __webpack_require__(28);
+var utils = __webpack_require__(10);
+var InterceptorManager = __webpack_require__(126);
+var dispatchRequest = __webpack_require__(127);
+>>>>>>> Users can now see how many people are viewing
 
     _proto.update = function update() {
       this._inNavbar = this._detectNavbar();
@@ -81631,6 +84429,7 @@ var Dropdown = function ($$$1) {
       if ($parentDropdown.hasClass(ClassName.DROPUP)) {
         placement = AttachmentMap.TOP;
 
+<<<<<<< HEAD
         if ($$$1(this._menu).hasClass(ClassName.MENURIGHT)) {
           placement = AttachmentMap.TOPEND;
         }
@@ -81641,6 +84440,11 @@ var Dropdown = function ($$$1) {
       } else if ($$$1(this._menu).hasClass(ClassName.MENURIGHT)) {
         placement = AttachmentMap.BOTTOMEND;
       }
+=======
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       return placement;
     };
@@ -81649,8 +84453,12 @@ var Dropdown = function ($$$1) {
       return $$$1(this._element).closest('.navbar').length > 0;
     };
 
+<<<<<<< HEAD
     _proto._getPopperConfig = function _getPopperConfig() {
       var _this2 = this;
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
       var offsetConf = {};
 
@@ -81663,6 +84471,7 @@ var Dropdown = function ($$$1) {
         offsetConf.offset = this._config.offset;
       }
 
+<<<<<<< HEAD
       var popperConfig = {
         placement: this._getPlacement(),
         modifiers: {
@@ -81677,13 +84486,22 @@ var Dropdown = function ($$$1) {
       };
       return popperConfig;
     }; // Static
+=======
+/***/ }),
+/* 119 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 
     Dropdown._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
         var data = $$$1(this).data(DATA_KEY);
 
+<<<<<<< HEAD
         var _config = typeof config === 'object' ? config : null;
+=======
+var createError = __webpack_require__(54);
+>>>>>>> Users can now see how many people are viewing
 
         if (!data) {
           data = new Dropdown(this, _config);
@@ -81695,10 +84513,16 @@ var Dropdown = function ($$$1) {
             throw new TypeError("No method named \"" + config + "\"");
           }
 
+<<<<<<< HEAD
           data[config]();
         }
       });
     };
+=======
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     Dropdown._clearMenus = function _clearMenus(event) {
       if (event && (event.which === RIGHT_MOUSE_BUTTON_WHICH || event.type === 'keyup' && event.which !== TAB_KEYCODE)) {
@@ -81715,9 +84539,15 @@ var Dropdown = function ($$$1) {
           relatedTarget: toggles[i]
         };
 
+<<<<<<< HEAD
         if (!context) {
           continue;
         }
+=======
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
         var dropdownMenu = context._menu;
 
@@ -81725,9 +84555,13 @@ var Dropdown = function ($$$1) {
           continue;
         }
 
+<<<<<<< HEAD
         if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $$$1.contains(parent, event.target)) {
           continue;
         }
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
         var hideEvent = $$$1.Event(Event.HIDE, relatedTarget);
         $$$1(parent).trigger(hideEvent);
@@ -81760,6 +84594,7 @@ var Dropdown = function ($$$1) {
     }; // eslint-disable-next-line complexity
 
 
+<<<<<<< HEAD
     Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
       // If not input/textarea:
       //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
@@ -81771,6 +84606,11 @@ var Dropdown = function ($$$1) {
       if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $$$1(event.target).closest(Selector.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
         return;
       }
+=======
+/***/ }),
+/* 122 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       event.preventDefault();
       event.stopPropagation();
@@ -81779,7 +84619,11 @@ var Dropdown = function ($$$1) {
         return;
       }
 
+<<<<<<< HEAD
       var parent = Dropdown._getParentFromElement(this);
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
       var isActive = $$$1(parent).hasClass(ClassName.SHOW);
 
@@ -81806,10 +84650,16 @@ var Dropdown = function ($$$1) {
         index--;
       }
 
+<<<<<<< HEAD
       if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
         // Down
         index++;
       }
+=======
+/***/ }),
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       if (index < 0) {
         index = 0;
@@ -81818,6 +84668,7 @@ var Dropdown = function ($$$1) {
       items[index].focus();
     };
 
+<<<<<<< HEAD
     _createClass(Dropdown, null, [{
       key: "VERSION",
       get: function get() {
@@ -81841,6 +84692,9 @@ var Dropdown = function ($$$1) {
    * Data Api implementation
    * ------------------------------------------------------------------------
    */
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
 
   $$$1(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API + " " + Event.KEYUP_DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
@@ -81953,6 +84807,12 @@ var Modal = function ($$$1) {
       this._scrollbarWidth = 0;
     } // Getters
 
+<<<<<<< HEAD
+=======
+/***/ }),
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     var _proto = Modal.prototype;
 
@@ -81983,13 +84843,23 @@ var Modal = function ($$$1) {
 
       this._isShown = true;
 
+<<<<<<< HEAD
       this._checkScrollbar();
+=======
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       this._setScrollbar();
 
       this._adjustDialog();
 
+<<<<<<< HEAD
       $$$1(document.body).addClass(ClassName.OPEN);
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
       this._setEscapeEvent();
 
@@ -82036,7 +84906,13 @@ var Modal = function ($$$1) {
         this._isTransitioning = true;
       }
 
+<<<<<<< HEAD
       this._setEscapeEvent();
+=======
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       this._setResizeEvent();
 
@@ -82045,6 +84921,7 @@ var Modal = function ($$$1) {
       $$$1(this._element).off(Event.CLICK_DISMISS);
       $$$1(this._dialog).off(Event.MOUSEDOWN_DISMISS);
 
+<<<<<<< HEAD
       if (transition) {
         $$$1(this._element).one(Util.TRANSITION_END, function (event) {
           return _this2._hideModal(event);
@@ -82053,6 +84930,9 @@ var Modal = function ($$$1) {
         this._hideModal();
       }
     };
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
     _proto.dispose = function dispose() {
       $$$1.removeData(this._element, DATA_KEY);
@@ -82083,16 +84963,31 @@ var Modal = function ($$$1) {
 
       var transition = Util.supportsTransitionEnd() && $$$1(this._element).hasClass(ClassName.FADE);
 
+<<<<<<< HEAD
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
         // Don't move modal's DOM position
         document.body.appendChild(this._element);
       }
+=======
+/***/ }),
+/* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       this._element.style.display = 'block';
 
       this._element.removeAttribute('aria-hidden');
 
+<<<<<<< HEAD
       this._element.scrollTop = 0;
+=======
+var utils = __webpack_require__(10);
+var transformData = __webpack_require__(128);
+var isCancel = __webpack_require__(55);
+var defaults = __webpack_require__(28);
+var isAbsoluteURL = __webpack_require__(129);
+var combineURLs = __webpack_require__(130);
+>>>>>>> Users can now see how many people are viewing
 
       if (transition) {
         Util.reflow(this._element);
@@ -82163,14 +85058,24 @@ var Modal = function ($$$1) {
       }
     };
 
+<<<<<<< HEAD
     _proto._hideModal = function _hideModal() {
       var _this7 = this;
+=======
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
       this._element.style.display = 'none';
 
       this._element.setAttribute('aria-hidden', true);
 
+<<<<<<< HEAD
       this._isTransitioning = false;
+=======
+var utils = __webpack_require__(10);
+>>>>>>> Users can now see how many people are viewing
 
       this._showBackdrop(function () {
         $$$1(document.body).removeClass(ClassName.OPEN);
@@ -82179,9 +85084,15 @@ var Modal = function ($$$1) {
 
         _this7._resetScrollbar();
 
+<<<<<<< HEAD
         $$$1(_this7._element).trigger(Event.HIDDEN);
       });
     };
+=======
+/***/ }),
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     _proto._removeBackdrop = function _removeBackdrop() {
       if (this._backdrop) {
@@ -82200,9 +85111,15 @@ var Modal = function ($$$1) {
         this._backdrop = document.createElement('div');
         this._backdrop.className = ClassName.BACKDROP;
 
+<<<<<<< HEAD
         if (animate) {
           $$$1(this._backdrop).addClass(animate);
         }
+=======
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
         $$$1(this._backdrop).appendTo(document.body);
         $$$1(this._element).on(Event.CLICK_DISMISS, function (event) {
@@ -82226,7 +85143,13 @@ var Modal = function ($$$1) {
           Util.reflow(this._backdrop);
         }
 
+<<<<<<< HEAD
         $$$1(this._backdrop).addClass(ClassName.SHOW);
+=======
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
         if (!callback) {
           return;
@@ -82237,9 +85160,13 @@ var Modal = function ($$$1) {
           return;
         }
 
+<<<<<<< HEAD
         $$$1(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(BACKDROP_TRANSITION_DURATION);
       } else if (!this._isShown && this._backdrop) {
         $$$1(this._backdrop).removeClass(ClassName.SHOW);
+=======
+var Cancel = __webpack_require__(56);
+>>>>>>> Users can now see how many people are viewing
 
         var callbackRemove = function callbackRemove() {
           _this8._removeBackdrop();
@@ -82280,11 +85207,17 @@ var Modal = function ($$$1) {
       this._element.style.paddingRight = '';
     };
 
+<<<<<<< HEAD
     _proto._checkScrollbar = function _checkScrollbar() {
       var rect = document.body.getBoundingClientRect();
       this._isBodyOverflowing = rect.left + rect.right < window.innerWidth;
       this._scrollbarWidth = this._getScrollbarWidth();
     };
+=======
+/***/ }),
+/* 132 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
     _proto._setScrollbar = function _setScrollbar() {
       var _this9 = this;
@@ -82311,11 +85244,17 @@ var Modal = function ($$$1) {
           $$$1(element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) + _this9._scrollbarWidth + "px");
         }); // Adjust body padding
 
+<<<<<<< HEAD
         var actualPadding = document.body.style.paddingRight;
         var calculatedPadding = $$$1('body').css('padding-right');
         $$$1('body').data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
       }
     };
+=======
+/***/ }),
+/* 133 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
     _proto._resetScrollbar = function _resetScrollbar() {
       // Restore fixed content padding
@@ -83098,8 +86037,14 @@ var Tooltip = function ($$$1) {
    */
 
 
+<<<<<<< HEAD
   $$$1.fn[NAME] = Tooltip._jQueryInterface;
   $$$1.fn[NAME].Constructor = Tooltip;
+=======
+/***/ }),
+/* 134 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   $$$1.fn[NAME].noConflict = function () {
     $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
@@ -91745,6 +94690,7 @@ if (true) {
   var hasProxy =
     typeof Proxy !== 'undefined' && isNative(Proxy);
 
+<<<<<<< HEAD
   if (hasProxy) {
     var isBuiltInModifier = makeMap('stop,prevent,self,ctrl,shift,alt,meta,exact');
     config.keyCodes = new Proxy(config.keyCodes, {
@@ -91759,6 +94705,11 @@ if (true) {
       }
     });
   }
+=======
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
   var hasHandler = {
     has: function has (target, key) {
@@ -104519,9 +107470,16 @@ if (false) {(function () {
 
 module.exports = Component.exports
 
+<<<<<<< HEAD
 
 /***/ }),
 /* 305 */
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(136).setImmediate))
+
+/***/ }),
+/* 136 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -104557,12 +107515,35 @@ exports = module.exports = __webpack_require__(7)(false);
 // module
 exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\n    border-left-style: solid;\n    border-left-width: thin;\n    border-color: black;\n\n    overflow: hidden;\n}\n.chatbox {\n\n    width: 100%;\n    height: 90%;\n}\n.chatfield {\n\n    width: 100%;\n    height: 10%;\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n}\n.chatmessages {\n\n    border-style: solid;\n    border-width: thin;\n    border-color: black;\n    border-radius: 2px;\n}\n\n", ""]);
 
+<<<<<<< HEAD
 // exports
 
 
 /***/ }),
 /* 307 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+=======
+// setimmediate attaches itself to the global object
+__webpack_require__(137);
+// On some exotic environments, it's not clear which object `setimmeidate` was
+// able to install onto.  Search each possibility in the same order as the
+// `setimmediate` library.
+exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
+                       (typeof global !== "undefined" && global.setImmediate) ||
+                       (this && this.setImmediate);
+exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
+                         (typeof global !== "undefined" && global.clearImmediate) ||
+                         (this && this.clearImmediate);
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+>>>>>>> Users can now see how many people are viewing
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
@@ -105072,6 +108053,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -105367,12 +108349,19 @@ if (false) {
 
 /***/ }),
 /* 312 */
+=======
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(52)))
+
+/***/ }),
+/* 138 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 <<<<<<< HEAD
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< HEAD
   __webpack_require__(313)
 }
 =======
@@ -105382,6 +108371,15 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(315)
 /* template */
 var __vue_template__ = __webpack_require__(316)
+=======
+  __webpack_require__(139)
+}
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(142)
+/* template */
+var __vue_template__ = __webpack_require__(143)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105420,17 +108418,29 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 313 */
+=======
+/* 139 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
+<<<<<<< HEAD
 var content = __webpack_require__(314);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(8)("2a28cc49", content, false, {});
+=======
+var content = __webpack_require__(140);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("a44a1dd2", content, false, {});
+>>>>>>> Users can now see how many people are viewing
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -105446,10 +108456,17 @@ if(false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(false);
+=======
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+>>>>>>> Users can now see how many people are viewing
 // imports
 
 
@@ -105460,7 +108477,44 @@ exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 315 */
+=======
+/* 141 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 142 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105824,7 +108878,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 316 */
+=======
+/* 143 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106784,6 +109842,7 @@ var staticRenderFns = [
 =======
 
 /***/ }),
+<<<<<<< HEAD
 /* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -106793,6 +109852,21 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(163)
 /* template */
 var __vue_template__ = __webpack_require__(164)
+=======
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(145)
+}
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(147)
+/* template */
+var __vue_template__ = __webpack_require__(148)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106831,7 +109905,51 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 163 */
+=======
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(146);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("437dd684", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.action-link[data-v-0b76a99a] {\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 147 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106889,10 +110007,113 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             "aria-hidden": "true"
           }
         },
+<<<<<<< HEAD
         [_vm._v("×")]
       )
     ])
   },
+=======
+
+
+        /**
+         * Revoke the given token.
+         */
+        revoke: function revoke(token) {
+            var _this2 = this;
+
+            axios.delete('/oauth/tokens/' + token.id).then(function (response) {
+                _this2.getTokens();
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.tokens.length > 0
+      ? _c("div", [
+          _c("div", { staticClass: "card card-default" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Authorized Applications")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("table", { staticClass: "table table-borderless mb-0" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.tokens, function(token) {
+                    return _c("tr", [
+                      _c(
+                        "td",
+                        { staticStyle: { "vertical-align": "middle" } },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(token.client.name) +
+                              "\n                            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "vertical-align": "middle" } },
+                        [
+                          token.scopes.length > 0
+                            ? _c("span", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(token.scopes.join(", ")) +
+                                    "\n                                "
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "vertical-align": "middle" } },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "action-link text-danger",
+                              on: {
+                                click: function($event) {
+                                  _vm.revoke(token)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    Revoke\n                                "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  })
+                )
+              ])
+            ])
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+>>>>>>> Users can now see how many people are viewing
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -106916,6 +110137,7 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -106925,6 +110147,21 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(166)
 /* template */
 var __vue_template__ = __webpack_require__(167)
+=======
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(150)
+}
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(152)
+/* template */
+var __vue_template__ = __webpack_require__(153)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106963,6 +110200,7 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 166 */
 /***/ (function(module, exports) {
 
@@ -107029,6 +110267,54 @@ if (false) {
 /***/ }),
 /* 317 */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+/* 150 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(151);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("174f2f0a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.action-link[data-v-50e40461] {\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 152 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+>>>>>>> Users can now see how many people are viewing
 
 var disposed = false
 <<<<<<< HEAD
@@ -107242,7 +110528,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 321 */
+=======
+/* 153 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -107351,6 +110641,7 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -107367,6 +110658,17 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(325)
 /* template */
 var __vue_template__ = __webpack_require__(326)
+=======
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(155)
+/* template */
+var __vue_template__ = __webpack_require__(156)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -107405,7 +110707,37 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 323 */
+=======
+/* 155 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      games: null
+    };
+  },
+
+  mounted: function mounted() {
+    axios.get('/api/user').then(function (response) {
+      console.log(response.data);
+    });
+  }
+});
+
+/***/ }),
+/* 156 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -107431,11 +110763,40 @@ if(false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(false);
 // imports
+=======
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(158)
+/* template */
+var __vue_template__ = __webpack_require__(159)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+>>>>>>> Users can now see how many people are viewing
 
 
 // module
@@ -107445,7 +110806,11 @@ exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 325 */
+=======
+/* 158 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -107472,6 +110837,118 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+<<<<<<< HEAD
+=======
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card card-default" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Example Component")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n                    I'm an example component.\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v(
+                "\n                    I would like to test something\n                "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+  }
+}
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(161)
+/* template */
+var __vue_template__ = __webpack_require__(162)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\games.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2da7ad7a", Component.options)
+  } else {
+    hotAPI.reload("data-v-2da7ad7a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 161 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+>>>>>>> Users can now see how many people are viewing
 //
 //
 //
@@ -107489,6 +110966,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
@@ -107662,6 +111140,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
 <<<<<<< HEAD
+=======
+>>>>>>> Users can now see how many people are viewing
 
         /**
          * Get all of the personal access tokens for the user.
@@ -107677,14 +111157,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       games: []
     };
   },
+<<<<<<< HEAD
 >>>>>>> dashboard sections are now individual pages, users can edit the about section
 
             axios.get('/oauth/personal-access-tokens').then(function (response) {
                 _this.tokens = response.data;
             });
         },
+=======
+  mounted: function mounted() {
+    var _this = this;
+>>>>>>> Users can now see how many people are viewing
 
 
+<<<<<<< HEAD
         /**
          * Get all of the available scopes.
          */
@@ -107702,6 +111188,107 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     streamkey: function streamkey() {
 >>>>>>> dashboard sections are now individual pages, users can edit the about section
+=======
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-5 d-flex flex-wrap justify-content-end",
+      staticStyle: { "padding-right": "0" }
+    },
+    _vm._l(_vm.games, function(game) {
+      return _c(
+        "div",
+        {
+          staticClass: "p-1",
+          staticStyle: { padding: "0", margin: "0", float: "right" }
+        },
+        [
+          _c("a", { attrs: { href: "/game/" + game.name } }, [
+            _c(
+              "div",
+              {
+                staticClass: "card",
+                staticStyle: { width: "175px", height: "100%" }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: game.image_source,
+                    alt: game.name,
+                    height: "150",
+                    width: "150"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(game.name))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      staticStyle: { position: "absolute", bottom: "10px" }
+                    },
+                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2da7ad7a", module.exports)
+  }
+}
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(164)
+/* template */
+var __vue_template__ = __webpack_require__(165)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\profilesidebar.vue"
+>>>>>>> Users can now see how many people are viewing
 
         /**
          * Show the form for creating new tokens.
@@ -107722,6 +111309,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 =======
     golive: function golive() {
 
+<<<<<<< HEAD
       axios.post('/api/stream', {
 >>>>>>> dashboard sections are now individual pages, users can edit the about section
 
@@ -107743,6 +111331,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                 }
             });
         },
+=======
+/***/ }),
+/* 164 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
 
         /**
@@ -107793,7 +111386,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 326 */
+=======
+/* 165 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108171,6 +111768,7 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -108186,6 +111784,17 @@ var __vue_script__ = __webpack_require__(175)
 /* template */
 var __vue_template__ = __webpack_require__(176)
 >>>>>>> edited profilecontent migration and seeders, now works
+=======
+/* 166 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(167)
+/* template */
+var __vue_template__ = __webpack_require__(168)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -108235,7 +111844,11 @@ module.exports = Component.exports
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 328 */
+=======
+/* 167 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108261,14 +111874,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 329 */
+=======
+/* 168 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c("div")
+=======
+  return _c(
+    "div",
+    { staticClass: "col-md-2 pt-1", staticStyle: { "padding-left": "0" } },
+    [
+      _c(
+        "div",
+        { staticClass: "container-fluid" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user) {
+            return _c(
+              "div",
+              {
+                staticClass: "streamer list-group-item",
+                class: {
+                  "list-group-item-primary": user.now_live,
+                  "list-group-item-secondary": !user.now_live
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "d-flex w-100 justify-content-between" },
+                  [
+                    _c("a", { attrs: { href: "/" + user.name } }, [
+                      _vm._v(_vm._s(user.name))
+                    ]),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "text-danger",
+                        class: { "d-none": !user.now_live }
+                      },
+                      [_vm._v("live now")]
+                    )
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ]
+  )
+>>>>>>> Users can now see how many people are viewing
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -108281,6 +111947,7 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 330 */
 /***/ (function(module, exports) {
 
@@ -108299,6 +111966,17 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(335)
 /* template */
 var __vue_template__ = __webpack_require__(336)
+=======
+/* 169 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(170)
+/* template */
+var __vue_template__ = __webpack_require__(171)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -108337,11 +112015,16 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 335 */
 =======
 /* 175 */
 >>>>>>> edited profilecontent migration and seeders, now works
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
+=======
+/* 170 */
+/***/ (function(module, exports) {
+>>>>>>> Users can now see how many people are viewing
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
@@ -108417,11 +112100,181 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< HEAD
+=======
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-5 pt-1" }, [
+      _c("p", [_vm._v(" lots of stuff here soon ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-23c75faa", module.exports)
+  }
+}
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(173)
+/* template */
+var __vue_template__ = __webpack_require__(174)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\profilepagemain.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7ea466ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-7ea466ea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports) {
+
+>>>>>>> Users can now see how many people are viewing
 //
 //
 //
 //
 //
+<<<<<<< HEAD
+=======
+
+/***/ }),
+/* 174 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { height: "500px" } }, [
+      _c("p", [_vm._v(" lots of stuff here soon ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7ea466ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 175 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(176)
+/* template */
+var __vue_template__ = __webpack_require__(177)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\dashboardstream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-081f7f0d", Component.options)
+  } else {
+    hotAPI.reload("data-v-081f7f0d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 176 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+>>>>>>> Users can now see how many people are viewing
 //
 //
 //
@@ -108511,10 +112364,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* 336 */
 =======
 /* 176 */
 >>>>>>> edited profilecontent migration and seeders, now works
+=======
+/* 177 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108768,12 +112625,17 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 177 */
+=======
+/* 178 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< HEAD
   __webpack_require__(178)
 }
 var normalizeComponent = __webpack_require__(2)
@@ -108781,6 +112643,15 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(180)
 /* template */
 var __vue_template__ = __webpack_require__(181)
+=======
+  __webpack_require__(179)
+}
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(181)
+/* template */
+var __vue_template__ = __webpack_require__(182)
+>>>>>>> Users can now see how many people are viewing
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -108819,17 +112690,29 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 178 */
+=======
+/* 179 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
+<<<<<<< HEAD
 var content = __webpack_require__(179);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var update = __webpack_require__(14)("4b800605", content, false, {});
+=======
+var content = __webpack_require__(180);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("22047796", content, false, {});
+>>>>>>> Users can now see how many people are viewing
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108845,10 +112728,14 @@ if(false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 179 */
+=======
+/* 180 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -108859,7 +112746,11 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
+<<<<<<< HEAD
 /* 180 */
+=======
+/* 181 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108900,11 +112791,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             highestid: 0,
             activeUsers: [],
             colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
-            index: 0
+            index: 0,
+            loggedIn: false
         };
     },
-    props: ['user', 'streamer'],
+    props: ['user', 'streamer', 'viewers'],
     mounted: function mounted() {
+        var _this = this;
 
         var viewportHeight = document.getElementById('container').clientHeight;
         var navbarHeight = document.getElementById('navbar').clientHeight;
@@ -108912,6 +112805,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('main').style.maxHeight = viewportHeight - navbarHeight + "px";
 
         this.listen();
+
+        if (this.user != undefined) {
+            this.loggedIn = true;
+        } else {
+            document.getElementById('chatfield').style.backgroundColor = "lightgray";
+        }
+
+        Echo.join('StreamPresence.' + this.streamer.stream.id).here(function (users) {
+            // this.viewers = users;
+            _this.$emit('user-list', users);
+        }).joining(function (user) {
+            // this.viewers.push(JSON.parse(JSON.stringify(user)));
+            _this.$emit('user-joined', user);
+        }).leaving(function (user) {
+            // for (var i = 0 ; i < viewers.length ; i++) {
+            //     if(viewers[i].id == user.id) {
+            //         viewers.splice(i, 1);
+            //     }
+            // }
+            _this.$emit('user-left', user);
+        });
     },
 
     methods: {
@@ -108933,11 +112847,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         listen: function listen() {
-            var _this = this;
+            var _this2 = this;
 
             Echo.channel('stream.' + this.streamer.stream.id).listen('NewChatmessage', function (chatmessage) {
-                _this.assignColorToUsers(chatmessage);
-                _this.messages = _this.messages.concat(chatmessage);
+                _this2.assignColorToUsers(chatmessage);
+                _this2.messages = _this2.messages.concat(chatmessage);
             });
         }
     },
@@ -108951,7 +112865,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< HEAD
 /* 181 */
+=======
+/* 182 */
+>>>>>>> Users can now see how many people are viewing
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -109002,23 +112920,29 @@ var render = function() {
       })
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "chatfield" }, [
-      _c("input", {
-        staticClass: "form-control mt-auto mb-auto",
-        staticStyle: { height: "100%" },
-        attrs: { type: "text", id: "messageField" },
-        on: {
-          keydown: function($event) {
-            if (
-              !("button" in $event) &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
+    _c("div", { staticClass: "chatfield", attrs: { id: "chatfield" } }, [
+      _vm.loggedIn
+        ? _c("input", {
+            staticClass: "form-control mt-auto mb-auto",
+            staticStyle: { height: "100%" },
+            attrs: { type: "text", id: "messageField" },
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.createChatMessage($event)
+              }
             }
-            return _vm.createChatMessage($event)
-          }
-        }
-      })
+          })
+        : _c("input", {
+            staticClass: "form-control mt-auto mb-auto",
+            staticStyle: { height: "100%" },
+            attrs: { disabled: "", value: "Please log in to chat" }
+          })
     ])
   ])
 }
@@ -109033,10 +112957,382 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< HEAD
 /* 182 */
 /***/ (function(module, exports) {
+=======
+/* 183 */
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Users can now see how many people are viewing
 
-// removed by extract-text-webpack-plugin
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(184)
+/* template */
+var __vue_template__ = __webpack_require__(185)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\streamersByGame.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-055ece30", Component.options)
+  } else {
+    hotAPI.reload("data-v-055ece30", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 184 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['game', 'streamers'],
+  data: function data() {
+    return {
+      imageLink: "/images/drdisrespect.jpeg",
+      sortable: []
+    };
+  },
+  mounted: function mounted() {
+
+    function compare(a, b) {
+      if (a.user.followers_count < b.user.followers_count) return -1;
+      if (a.user.followers_count > b.user.followers_count) return 1;
+      return 0;
+    }
+
+    for (var streamer in this.streamers) {
+      this.sortable.push(this.streamers[streamer]);
+    }
+
+    this.streamers = this.sortable.sort(compare).reverse();
+  }
+});
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-10 d-flex flex-wrap justify-content-end px-5",
+      staticStyle: { "padding-right": "0" }
+    },
+    _vm._l(_vm.streamers, function(streamer) {
+      return _c(
+        "div",
+        {
+          staticClass: "p-1",
+          staticStyle: { padding: "0", margin: "0", float: "right" }
+        },
+        [
+          _c("a", { attrs: { href: "/" + streamer.user.name } }, [
+            _c(
+              "div",
+              {
+                staticClass: "card",
+                staticStyle: { width: "175px", height: "100%" }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: _vm.imageLink,
+                    alt: streamer.user.name,
+                    height: "150",
+                    width: "150"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(streamer.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("h6", [_vm._v(_vm._s(streamer.user.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "small",
+                    {
+                      staticClass: "text-danger",
+                      staticStyle: { position: "absolute", bottom: "10px" }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(streamer.user.followers_count) + " followers"
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-055ece30", module.exports)
+  }
+}
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(188)
+/* template */
+var __vue_template__ = __webpack_require__(187)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\stream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-304d74d2", Component.options)
+  } else {
+    hotAPI.reload("data-v-304d74d2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "col-md-9 pl-1 pt-1",
+      staticStyle: { "overflow-y": "scroll" }
+    },
+    [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
+            _c("li", { staticClass: "nav-item px-1" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link active", attrs: { href: "#" } },
+                [_vm._v(_vm._s(_vm.streamer.name))]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item px-1" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link active", attrs: { href: "#" } },
+                [
+                  _vm._v("viewers "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.viewers.length))
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item px-1" }, [
+              _c(
+                "a",
+                { staticClass: "nav-link active", attrs: { href: "#" } },
+                [
+                  _vm._v("followers "),
+                  _c("small", { staticClass: "text-muted" }, [
+                    _vm._v(_vm._s(_vm.followercount))
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c(
+        "video",
+        {
+          staticClass: "video-js",
+          attrs: {
+            id: "vid1",
+            controls: "",
+            preload: "auto",
+            "data-setup": '{ "aspectRatio": "16:9" }'
+          }
+        },
+        [
+          _vm._v(" \".m3u8\" type='application/x-mpegURL'>\n\t\t\t    "),
+          _c("p", { staticClass: "vjs-no-js" }, [
+            _vm._v(
+              "\n\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t    \t"
+            ),
+            _c(
+              "a",
+              {
+                attrs: {
+                  href: "http://videojs.com/html5-video-support/",
+                  target: "_blank"
+                }
+              },
+              [_vm._v("supports HTML5 video")]
+            )
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-304d74d2", module.exports)
+  }
+}
+
+/***/ }),
+/* 188 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	name: 'stream',
+	props: ['streamer', 'followercount', 'viewers']
+});
 
 /***/ })
 /******/ ]);

@@ -52,7 +52,7 @@
                 this.loggedIn = true;
             } else {
                 document.getElementById('chatfield').style.backgroundColor = "lightgray";
-            }                       
+            }
 
             Echo.join('StreamPresence.' + this.streamer.stream.id)
             .here((users) => {

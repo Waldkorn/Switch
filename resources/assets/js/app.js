@@ -37,7 +37,11 @@ Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
 Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
 Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
 Vue.component('profilepagemain', require('./components/profilepagemain.vue'));
+<<<<<<< HEAD
 Vue.component('stream', require('./components/Stream.vue'));
+=======
+Vue.component('stream', require('./components/stream.vue'));
+>>>>>>> Users can now see how many people are viewing
 
 //dashboard//
 Vue.component('dashboard', require('./components/dashboard.vue'));
