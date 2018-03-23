@@ -39,24 +39,32 @@ class ViewController extends Controller
   }
 
 
-  public function dashboard(){
-    $auth_id = Auth::user()->id;
-    return view('dashboard',compact('auth_id'));
+  public function streamdashboard(){
+        return view('streamdashboard');
+  }
+
+  public function profiledashboard(){
+        return view('profiledashboard');
+  }
+
+  public function channeldashboard(){
+        return view('channeldashboard');
   }
 
   public function test(){
     return view('test');
   }
 
-  public function stream($username) 
+  public function stream($username)
   {
   	$streamer = User::where('name', $username)->with('stream.game')->first();
   	$followerCount = $streamer->followers()->count();
-    
-  	return view('streampage', compact('streamer', 'followerCount'));
+
+    return view('streampage', compact('streamer', 'followerCount'));
   }
 
   public function game($gamename) {
+
     $game = Game::where('name', $gamename)->first();
 
     $streamers = $game
@@ -67,5 +75,8 @@ class ViewController extends Controller
     ->get();
 
     return view('gamepage', compact('game', 'streamers'));
+    
   }
+
+
 }

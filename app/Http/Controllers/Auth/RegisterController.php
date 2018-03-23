@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Stream;
+use App\Profilecontent;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -76,6 +77,13 @@ class RegisterController extends Controller
           'user_id' => $user->id,
           'title' =>'',
           'game_id'=>'2'
+        ]);
+
+        $stream = Profilecontent::create([
+
+          'about' =>'No desciption available',
+          'img_url'=>'/images/placeholder.jpg',
+          'user_id' => $user->id
         ]);
 
         return $user;

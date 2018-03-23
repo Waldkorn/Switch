@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Game;
+use App\Profilecontent;
 
 
 class DashboardController extends Controller
@@ -25,4 +27,22 @@ class DashboardController extends Controller
 
       echo $streamkey;
     }
+
+
+    public function getcontent(){
+      $user = Auth::user();
+      $profilecontent = Profilecontent::where('user_id',$user->id)->first();
+      return $profilecontent;
+    }
+
+    public function updateAbout(){
+      $user = Auth::user();
+      $newAbout = request('about');
+      Profilecontent::where('user_id', $user->id)->update([
+                  'about' =>  $newAbout,
+      ]);
+      return $newAbout;
+    }
+
+
 }

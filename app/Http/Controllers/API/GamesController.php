@@ -13,4 +13,8 @@ class GamesController extends Controller
     		$stream->where('now_live', 1);
     	}])->orderBy('streams_count', 'DESC')->get();
     }
+
+    public function getall(){
+      echo Game::get();
+    }
 }
