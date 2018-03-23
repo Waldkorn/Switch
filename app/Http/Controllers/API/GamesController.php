@@ -9,6 +9,8 @@ use App\Game;
 class GamesController extends Controller
 {
     public function get(){
-      echo Game::limit(6)->get();
+    	return Game::limit(6)->withCount(['streams' => function($stream) {
+    		$stream->where('now_live', 1);
+    	}])->orderBy('streams_count', 'DESC')->get();
     }
 }

@@ -14,8 +14,7 @@
 	<div id="app">
 		<div class="row" style="width:100%;margin:0">
 			<nowlivebar></nowlivebar>
-			<frontpagemain></frontpagemain>
-			<games></games>
+			<streams :game="{{json_encode($game)}}" :streamers="{{json_encode($streamers)}}"></streams>
 		</div>
 	</div>
 

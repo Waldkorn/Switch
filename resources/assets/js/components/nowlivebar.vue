@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3" style="padding-left:0;">
+  <div class="col-md-2 pt-1" style="padding-left:0;">
     <div class="container-fluid">
 
       <div class="list-group-item">
@@ -13,13 +13,13 @@
       </div>
     </div>
 
-    <div class=container-fluid style="max-height:500px"> Some other users
+<!--     <div class=container-fluid style="max-height:500px"> Some other users
       <div class=container-fluid style="padding:0;overflow-y:scroll;">
         <div class="container-fluid" style="padding:0" v-for="user in users">
           <a :href="'/profilepage/'  + user.name" class="list-group-item">{{user.name}}</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>  
 </template>
 <script>

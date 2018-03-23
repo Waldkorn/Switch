@@ -14,11 +14,11 @@
             </div>
         </div>
 
-        <div class="chatfield">
+        <div id="chatfield" class="chatfield">
 
-            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" style="height: 100%;">
+            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height: 100%;">
 
-            </input>
+            <input disabled v-else class="form-control mt-auto mb-auto" value="Please log in to chat" style="height:100%;">
 
         </div>
 
@@ -34,10 +34,11 @@
                 highestid : 0,
                 activeUsers : [],
                 colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
-                index: 0
+                index: 0,
+                loggedIn: false
             }
         },
-        props: [ 'user', 'streamer' ],
+        props: [ 'user', 'streamer', 'viewers' ],
         mounted() {
 
             var viewportHeight = document.getElementById('container').clientHeight;
@@ -47,6 +48,29 @@
 
             this.listen();
 
+            if (this.user != undefined) {
+                this.loggedIn = true;
+            } else {
+                document.getElementById('chatfield').style.backgroundColor = "lightgray";
+            }                       
+
+            Echo.join('StreamPresence.' + this.streamer.stream.id)
+            .here((users) => {
+                // this.viewers = users;
+                this.$emit('user-list', users);
+            })
+            .joining((user) => {
+                // this.viewers.push(JSON.parse(JSON.stringify(user)));
+                this.$emit('user-joined', user);
+            })
+            .leaving((user) => {
+                // for (var i = 0 ; i < viewers.length ; i++) {
+                //     if(viewers[i].id == user.id) {
+                //         viewers.splice(i, 1);
+                //     }
+                // }
+                this.$emit('user-left', user);
+            })
         },
         methods: {
             createChatMessage : function(message) {
