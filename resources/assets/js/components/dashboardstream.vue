@@ -32,7 +32,7 @@
         </form>
       </div>
 
-    </div>
+    
 
     <div class="col-3">
       <div class="card">
@@ -60,7 +60,6 @@
       </div>
     </div>
   </div>
-
 </template>
 <script>
 

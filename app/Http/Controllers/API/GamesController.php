@@ -17,8 +17,4 @@ class GamesController extends Controller
     public function getall(){
       echo Game::get();
     }
-
-    public function getall(){
-      echo Game::get();
-    }
 }
