@@ -73,16 +73,11 @@ export default {
 
     data:function(){
       return{
-          user : [],
           games : []
       }
     },
-
+    props: ['user'],
     mounted() {
-      axios.get('/api/user').then(response => {
-        this.user = response.data;
-      });
-
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
       })
@@ -100,7 +95,6 @@ export default {
             document.getElementById('streamkey_btn').style.display = "none";
             document.getElementById('hide_btn').style.display = "block";
             document.getElementById('streamkeymessage').innerHTML = response.data;
-
             })
       },
 

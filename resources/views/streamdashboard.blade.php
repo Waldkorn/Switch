@@ -70,7 +70,7 @@
 
 <div class="container-fluid" id="app">
 
-  <dashboardstream></dashboardstream>
+  <dashboardstream :user="{{$user}}"></dashboardstream>
 </div>
 
 	<script src="{{ asset('js/app.js') }}"></script>

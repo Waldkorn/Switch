@@ -104471,17 +104471,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      user: [],
       games: []
     };
   },
-
+  props: ['user'],
   mounted: function mounted() {
     var _this = this;
-
-    axios.get('/api/user').then(function (response) {
-      _this.user = response.data;
-    });
 
     axios.get('/api/allgames').then(function (response) {
       _this.games = JSON.parse(JSON.stringify(response.data));
