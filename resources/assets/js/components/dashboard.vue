@@ -155,13 +155,20 @@
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
+<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
           <div class="col-7" style="padding:0px;padding-left:1rem">
+=======
+          <div class="col-8" style="padding:0px;padding-left:1rem">
+>>>>>>> stream table dummy css
             <div class="card">
             <div class="card-header">
               <h5 class="card-title">scheduled streams</h5>
             </div>
             <div class="card-body" style="padding:0px">
+<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
 
+=======
+>>>>>>> stream table dummy css
               <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
   <thead>
     <tr style="color:#dc3545">
@@ -174,6 +181,7 @@
     </tr>
   </thead>
   <tbody>
+<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
     <tr v-for="schedule in schedules">
       <th scope="row">{{schedule.type}}</th>
       <td>{{schedule.title}}</td>
@@ -231,7 +239,11 @@
                     <option v-for="game in games" :value="game.id">{{game.name}}</option>
                   </select>
                 </div>
+<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
                 <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_single">Add event</div>
+=======
+                <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
+>>>>>>> stream table dummy css
               </form>
             </div>
 
@@ -393,6 +405,51 @@
       <td><div class="btn btn-info">edit</div></td>
       <td><div class="btn btn-danger">delete</div></td>
       <td></td>
+=======
+    <tr>
+      <th scope="row">single</th>
+      <td>Dota 2: electric boogaloo</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>Dota2</td>
+      <td>subscriber games</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">daily</th>
+      <td>Daily dose of minecraft</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>Minecraft</td>
+      <td>evening stream</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td><div class="btn btn-danger">delete all</div></td>
+    </tr>
+    <tr>
+      <th scope="row">weekly</th>
+      <td>sunday streamtime</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>WoW</td>
+      <td>weekend streams</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td><div class="btn btn-danger">delete all</div></td>
+    </tr>
+    <tr>
+      <th scope="row">monthly</th>
+      <td>Monthly subscriber stream</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>PUBG</td>
+      <td>subscriber ama</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td><div class="btn btn-danger">delete all</div></td>
+>>>>>>> stream table dummy css
     </tr>
 
   </tbody>
