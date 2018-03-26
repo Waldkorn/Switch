@@ -11,8 +11,8 @@
       <li class="nav-item" v-on:click="showchanneldash">
         <a class="nav-link" href="#" >Channel</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">schedule</a>
+      <li class="nav-item" v-on:click="showscheduledash">
+        <a class="nav-link" href="#">schedule</a>
       </li>
   </ul>
 
@@ -150,6 +150,63 @@
         </div>
       </div>
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
+      <div  id="nav-channel" v-show="scheduledash">
+        <div class="row">
+            <div class="row"></div>
+            <div class="row">
+              <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <div class="card-header">
+                <h5 class="card-title">Add a scheduled event</h5>
+              </div>
+              <div class="card-body"></div>
+              <form>
+                <div class="form-group">
+                  <label for="schedulename">Name</label>
+                  <input type="text" class="form-control" id="schedulename" placeholder="Event Name">
+                </div>
+
+                <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                 <label for="schedulestart">Start:</label>
+                 <input type="datetime-local" id="schedulestart" name="bdaytime">
+               </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+               <label for="scheduleend">End:</label>
+                <input type="datetime-local" id="scheduleend" name="bdaytime">
+             </div>
+                </div>
+              </div>
+
+                <div class="form-group">
+                  <label for="scheduletag">tag</label>
+                  <input type="text" class="form-control" id="scheduletag" placeholder="idk">
+                </div>
+                <div class="form-group">
+                  <label for="schedulegame">Game:</label>
+                  <select class="form-control" id="schedulegame">
+                    <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="scheduletype">type:</label>
+                  <select class="form-control" id="scheduletype">
+                    <option value="once">once</option>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </div>
+                <div type="submit" class="btn btn-primary" v-on:click="addschedule">Add event</div>
+              </form>
+            </div>
+          </div>
+            </div>
+          </div>
+      </div>
 </div>
 </div>
 </template>
@@ -167,7 +224,7 @@ export default {
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
-
+          scheduledash: false,
       }
     },
     props: ['user'],
@@ -227,17 +284,26 @@ export default {
 				this.streamdash = true;
 				this.profiledash = false;
 				this.channeldash = false;
+        this.scheduledash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
 				this.channeldash = false;
+        this.scheduledash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
 				this.profiledash = false;
 				this.channeldash = true;
+        this.scheduledash = false;
 			},
+      showscheduledash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.channeldash = false;
+        this.scheduledash = true;
+      },
 
 
 
