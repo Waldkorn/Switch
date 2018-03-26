@@ -109314,6 +109314,133 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+<<<<<<< HEAD
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+>>>>>>> added dummy schedule table to dashboard.vue
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     /*
@@ -109354,15 +109481,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       games: [],
       streamdash: true,
       profiledash: false,
-      channeldash: false
-
+      channeldash: false,
+      scheduledash: false
     };
   },
   props: ['user'],
   mounted: function mounted() {
     var _this = this;
 
+<<<<<<< HEAD
     axios.get('/api/profilecontent').then(function (response) {
+=======
+    var contenturl = 'api/profilecontent/' + this.user.name;
+    axios.get(contenturl).then(function (response) {
+>>>>>>> added dummy schedule table to dashboard.vue
       _this.profilecontent = JSON.parse(JSON.stringify(response.data));
     });
     axios.get('/api/allgames').then(function (response) {
@@ -109408,12 +109540,49 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         },
 
 
+<<<<<<< HEAD
         /**
          * Show the form for creating new clients.
          */
         showCreateClientForm: function showCreateClientForm() {
             $('#modal-create-client').modal('show');
         },
+=======
+      axios.post('/api/updateabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    },
+    addschedule: function addschedule() {
+      console.log("button works");
+    },
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.scheduledash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+      this.scheduledash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+      this.scheduledash = false;
+    },
+    showscheduledash: function showscheduledash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.scheduledash = true;
+    }
+>>>>>>> added dummy schedule table to dashboard.vue
 
 
         /**
@@ -109526,6 +109695,19 @@ var render = function() {
               ]
             )
           ]
+<<<<<<< HEAD
+=======
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showscheduledash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("schedule")
+            ])
+          ]
+>>>>>>> added dummy schedule table to dashboard.vue
         )
       ]),
       _vm._v(" "),
@@ -109579,8 +109761,39 @@ var render = function() {
                           }
                         },
                         [
+<<<<<<< HEAD
                           _vm._v(
                             "\n                                Edit\n                            "
+=======
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Stream Preview")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "video",
+                            {
+                              staticClass: "video-js",
+                              attrs: {
+                                id: "vid1",
+                                controls: "",
+                                preload: "auto",
+                                "data-setup": '{ "aspectRatio": "16:9" }'
+                              }
+                            },
+                            [
+                              _c("source", {
+                                attrs: {
+                                  src:
+                                    "http://10.0.0.61:8080/hls/" +
+                                    _vm.user.stream_token +
+                                    ".m3u8",
+                                  type: "application/x-mpegURL"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(0)
+                            ]
+>>>>>>> added dummy schedule table to dashboard.vue
                           )
                         ]
                       )
@@ -109598,6 +109811,7 @@ var render = function() {
                           }
                         },
                         [
+<<<<<<< HEAD
                           _vm._v(
                             "\n                                Delete\n                            "
                           )
@@ -109674,6 +109888,167 @@ var render = function() {
                               13,
                               $event.key,
                               "Enter"
+=======
+                          _c("h5", { staticClass: "card-header" }, [
+                            _vm._v("Start streaming?")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "form",
+                            { staticStyle: { "text-align": "left" } },
+                            [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "gameselect" } }, [
+                                  _vm._v("Game:")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: { id: "gameselect" }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "form-group",
+                                  staticStyle: { "text-align": "center" }
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "btn btn-success",
+                                      attrs: { type: "submit" },
+                                      on: { click: _vm.golive }
+                                    },
+                                    [_vm._v("GO LIVE!")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-3", staticStyle: { border: "0px" } },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("h5", { staticClass: "card-header" }, [
+                          _vm._v("Getting started")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step one: Streaming software")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Two: setting up a stream")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "Once your streaming software is installed and running, it'll have to stream to our server."
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "container",
+                              staticStyle: {
+                                "text-align": "center",
+                                "margin-bottom": "1rem"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "block"
+                                  },
+                                  attrs: { id: "streamkey_btn" },
+                                  on: { click: _vm.streamkey }
+                                },
+                                [_vm._v("Show my streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  staticStyle: {
+                                    "margin-top": "1rem",
+                                    display: "none"
+                                  },
+                                  attrs: { id: "hide_btn" },
+                                  on: { click: _vm.hidekey }
+                                },
+                                [_vm._v("hide streamkey")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", {
+                                staticClass: "alert alert-danger",
+                                staticStyle: { display: "none" },
+                                attrs: { id: "streamkeymessage", role: "alert" }
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "alert alert-danger" }, [
+                            _vm._v(
+                              "(This is your personal streamkey, never show it to anyone!)"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Step Three: connect to the server")
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "After you've entered your url and streamkey, you can start streaming to our server"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _vm._v(
+                              "You should see a preview of your stream on this page"
+>>>>>>> added dummy schedule table to dashboard.vue
                             )
                           ) {
                             return null
@@ -109832,6 +110207,7 @@ var render = function() {
                           value: _vm.editForm.name,
                           expression: "editForm.name"
                         }
+<<<<<<< HEAD
                       ],
                       staticClass: "form-control",
                       attrs: { id: "edit-client-name", type: "text" },
@@ -109846,6 +110222,137 @@ var render = function() {
                               13,
                               $event.key,
                               "Enter"
+=======
+                      }),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(4),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseImage",
+                                  "aria-labelledby": "headingImage",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c(
+                                    "form",
+                                    {
+                                      attrs: {
+                                        action: "/uploadimage",
+                                        enctype: "multipart/form-data",
+                                        method: "POST"
+                                      }
+                                    },
+                                    [
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "profileimage" } },
+                                          [_vm._v("Example file input")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          attrs: {
+                                            type: "hidden",
+                                            name: "_token",
+                                            id: "csrf-token"
+                                          },
+                                          domProps: { value: _vm.csrftoken }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          staticClass: "form-control-file",
+                                          attrs: {
+                                            type: "file",
+                                            id: "profileimage",
+                                            name: "profileimage"
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary",
+                                          attrs: { type: "submit" }
+                                        },
+                                        [_vm._v("Upload")]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(_vm.user.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(_vm.profilecontent.about))
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { attrs: { id: "accordion" } }, [
+                          _c("div", { staticClass: "card" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "collapse",
+                                attrs: {
+                                  id: "collapseEdit",
+                                  "aria-labelledby": "headingEdit",
+                                  "data-parent": "#accordion"
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "card-body" }, [
+                                  _c("form", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "aboutinput" } },
+                                        [_vm._v("Text")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          id: "aboutinput"
+                                        },
+                                        domProps: {
+                                          value: _vm.profilecontent.about
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "submit" },
+                                        on: { click: _vm.updateAbout }
+                                      },
+                                      [_vm._v("Update")]
+                                    )
+                                  ])
+                                ])
+                              ]
+>>>>>>> added dummy schedule table to dashboard.vue
                             )
                           ) {
                             return null
@@ -117495,10 +118002,110 @@ var render = function() {
                       )
                     ]
                   )
+<<<<<<< HEAD
                 ])
               ]
             )
           ])
+=======
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-3" })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.channeldash,
+                  expression: "channeldash"
+                }
+              ],
+              attrs: { id: "nav-channel" }
+            },
+            [_vm._v("channel settings here")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.scheduledash,
+                  expression: "scheduledash"
+                }
+              ],
+              attrs: { id: "nav-channel" }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-4", staticStyle: { padding: "0px" } },
+                  [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("form", [
+                          _vm._m(8),
+                          _vm._v(" "),
+                          _vm._m(9),
+                          _vm._v(" "),
+                          _vm._m(10),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", { attrs: { for: "schedulegame" } }, [
+                              _vm._v("Game:")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                staticClass: "form-control",
+                                attrs: { id: "schedulegame" }
+                              },
+                              _vm._l(_vm.games, function(game) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: game.id } },
+                                  [_vm._v(_vm._s(game.name))]
+                                )
+                              })
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(11),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
+                              on: { click: _vm.addschedule }
+                            },
+                            [_vm._v("Add event")]
+                          )
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ]
+          )
+>>>>>>> added dummy schedule table to dashboard.vue
         ]
       )
     })
@@ -117625,7 +118232,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+<<<<<<< HEAD
     return _c("div", { staticClass: "card-body" }, [
+=======
+    return _c("p", { staticClass: "vjs-no-js" }, [
+      _vm._v(
+        "\n      \t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n      \t\t\t\t    \t"
+      ),
+>>>>>>> added dummy schedule table to dashboard.vue
       _c(
         "video",
         {
@@ -117657,6 +118271,320 @@ var staticRenderFns = [
         ]
       )
     ])
+<<<<<<< HEAD
+=======
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "streamtitle" } }, [_vm._v("Title:")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "streamtitle",
+          placeholder: "Enter stream title"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "card-text" }, [
+      _vm._v("And your unique stream key, like this:"),
+      _c("img", {
+        staticClass: "card-img-top",
+        staticStyle: { "max-width": "100%" },
+        attrs: {
+          src: "/images/dashboard/streamsettingsobs.png",
+          alt: "OBS stream settings"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-img-overlay" }, [
+      _c("h5", { staticClass: "card-title" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseImage",
+                "aria-expanded": "false",
+                "aria-controls": "collapseImage"
+              }
+            },
+            [
+              _vm._v(
+                "\n                            Upload new image\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card-header", attrs: { id: "headingEdit" } },
+      [
+        _c("h5", { staticClass: "mb-0" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-link collapsed",
+              attrs: {
+                "data-toggle": "collapse",
+                "data-target": "#collapseEdit",
+                "aria-expanded": "false",
+                "aria-controls": "collapseEdit"
+              }
+            },
+            [
+              _vm._v(
+                "\n                            Edit about section:\n                          "
+              )
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-8", staticStyle: { padding: "0px" } },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("scheduled streams")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-hover table-dark" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("single")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Dota 2: electric boogaloo")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Dota2")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("subscriber games")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("daily")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Daily dose of minecraft")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Minecraft")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("evening stream")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("weekly")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("sunday streamtime")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("WoW")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("weekend streams")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Monthly subscriber stream")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("PUBG")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("subscriber ama")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v("Add a scheduled event")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "schedulename" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "schedulename", placeholder: "Event Name" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "schedulestart" } }, [_vm._v("Start:")]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "datetime-local",
+              id: "schedulestart",
+              name: "bdaytime"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "scheduleend" } }, [_vm._v("End:")]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: {
+              type: "datetime-local",
+              id: "scheduleend",
+              name: "bdaytime"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "scheduletag" } }, [_vm._v("tag")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "scheduletag", placeholder: "idk" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "scheduletype" } }, [_vm._v("type:")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { id: "scheduletype" } },
+        [
+          _c("option", { attrs: { value: "once" } }, [_vm._v("once")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "daily" } }, [_vm._v("Daily")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "weekly" } }, [_vm._v("Weekly")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "monthly" } }, [_vm._v("Monthly")])
+        ]
+      )
+    ])
+>>>>>>> added dummy schedule table to dashboard.vue
   }
 ]
 render._withStripped = true
