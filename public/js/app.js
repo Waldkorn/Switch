@@ -105768,7 +105768,7 @@ var render = function() {
                           _c(
                             "div",
                             {
-                              staticClass: "btn btn-primary",
+                              staticClass: "btn danger",
                               attrs: { type: "submit" },
                               on: { click: _vm.addschedule }
                             },
@@ -105915,7 +105915,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "col-8", staticStyle: { padding: "0px" } },
+      {
+        staticClass: "col-8",
+        staticStyle: { padding: "0px", "padding-left": "1rem" }
+      },
       [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
@@ -105924,107 +105927,164 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("table", { staticClass: "table table-hover table-dark" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+          _c(
+            "div",
+            { staticClass: "card-body", staticStyle: { padding: "0px" } },
+            [
+              _c(
+                "table",
+                {
+                  staticClass: "table table-striped table-dark",
+                  staticStyle: { margin: "0px", "background-color": "#343a40" }
+                },
+                [
+                  _c("thead", [
+                    _c("tr", { staticStyle: { color: "#dc3545" } }, [
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("single")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Dota 2: electric boogaloo")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("1 hour after soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Dota2")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("subscriber games")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("edit")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete all")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("daily")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Daily dose of minecraft")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("1 hour after soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Minecraft")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("evening stream")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("edit")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete all")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("weekly")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("sunday streamtime")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("1 hour after soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("WoW")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("weekend streams")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("edit")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete all")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("monthly")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Monthly subscriber stream")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("1 hour after soon")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("PUBG")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("subscriber ama")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("edit")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("delete all")])
-                ])
-              ])
-            ])
-          ])
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [_vm._v("single")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Dota 2: electric boogaloo")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("1 hour after soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Dota2")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("subscriber games")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-info" }, [
+                          _vm._v("edit")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td")
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [_vm._v("daily")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Daily dose of minecraft")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("1 hour after soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Minecraft")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("evening stream")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-info" }, [
+                          _vm._v("edit")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete all")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [_vm._v("weekly")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("sunday streamtime")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("1 hour after soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("WoW")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("weekend streams")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-info" }, [
+                          _vm._v("edit")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete all")
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v("monthly")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Monthly subscriber stream")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("1 hour after soon")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("PUBG")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("subscriber ama")]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-info" }, [
+                          _vm._v("edit")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("div", { staticClass: "btn btn-danger" }, [
+                          _vm._v("delete all")
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
         ])
       ]
     )
