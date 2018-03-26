@@ -19,18 +19,19 @@ class ScheduleController extends Controller
       $eventname = request('name');
       switch ($type) {
     case "once":
-        $start = request('start');
-        $stop = request('stop');
+        for ($x = 0; $x <= 10; $x++) {
+        $x
         $event = Schedule::create([
-            'title' => request('title'),
-            'user_id' => $user->id,
-            'streamer_name' => $user->name,
-            'game_id' => request('game_id'),
-            'start' => request('start'),
-            'stop' => request('stop'),
-            'type' => $type,
-            'tag' => request('tag'),
+          'title' => request('title'),
+          'user_id' => $user->id,
+          'streamer_name' => $user->name,
+          'game_id' => request('game_id'),
+          'start' => request('start'),
+          'stop' => request('stop'),
+          'type' => $type,
+          'tag' => request('tag'),
           ]);
+        }
 
         break;
     case "daily":
