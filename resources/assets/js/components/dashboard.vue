@@ -152,15 +152,15 @@
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
-          <div class="col-8" style="padding:0px">
+          <div class="col-8" style="padding:0px;padding-left:1rem">
             <div class="card">
             <div class="card-header">
               <h5 class="card-title">scheduled streams</h5>
             </div>
-            <div class="card-body">
-              <table class="table table-hover table-dark">
+            <div class="card-body" style="padding:0px">
+              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
   <thead>
-    <tr>
+    <tr style="color:#dc3545">
       <th scope="col">type</th>
       <th scope="col">name</th>
       <th scope="col">start</th>
@@ -177,9 +177,9 @@
       <td>1 hour after soon</td>
       <td>Dota2</td>
       <td>subscriber games</td>
-      <td>edit</td>
-      <td>delete</td>
-      <td>delete all</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td></td>
     </tr>
     <tr>
       <th scope="row">daily</th>
@@ -188,9 +188,9 @@
       <td>1 hour after soon</td>
       <td>Minecraft</td>
       <td>evening stream</td>
-      <td>edit</td>
-      <td>delete</td>
-      <td>delete all</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td><div class="btn btn-danger">delete all</div></td>
     </tr>
     <tr>
       <th scope="row">weekly</th>
@@ -199,9 +199,9 @@
       <td>1 hour after soon</td>
       <td>WoW</td>
       <td>weekend streams</td>
-      <td>edit</td>
-      <td>delete</td>
-      <td>delete all</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td><div class="btn btn-danger">delete all</div></td>
     </tr>
     <tr>
       <th scope="row">monthly</th>
@@ -210,9 +210,9 @@
       <td>1 hour after soon</td>
       <td>PUBG</td>
       <td>subscriber ama</td>
-      <td>edit</td>
-      <td>delete</td>
-      <td>delete all</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td><div class="btn btn-danger">delete all</div></td>
     </tr>
   </tbody>
 </table>
@@ -266,7 +266,7 @@
                     <option value="monthly">Monthly</option>
                   </select>
                 </div>
-                <div type="submit" class="btn btn-primary" v-on:click="addschedule">Add event</div>
+                <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
               </form>
               </div>
           </div>
