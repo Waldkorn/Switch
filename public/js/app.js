@@ -105042,6 +105042,72 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -105111,6 +105177,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.profilecontent.about = response.data;
         $('#collapseEdit').collapse("toggle");
       });
+    },
+    addschedule: function addschedule() {
+      console.log("button works");
     },
     showstreamdash: function showstreamdash() {
       this.streamdash = true;
@@ -105656,24 +105725,22 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "row" }),
+                _vm._m(6),
                 _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
+                _c(
+                  "div",
+                  { staticClass: "col-4", staticStyle: { padding: "0px" } },
+                  [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
-                        _vm._m(6),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body" }),
-                        _vm._v(" "),
                         _c("form", [
-                          _vm._m(7),
-                          _vm._v(" "),
                           _vm._m(8),
                           _vm._v(" "),
                           _vm._m(9),
+                          _vm._v(" "),
+                          _vm._m(10),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("label", { attrs: { for: "schedulegame" } }, [
@@ -105696,7 +105763,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(10),
+                          _vm._m(11),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -105709,9 +105776,9 @@ var render = function() {
                           )
                         ])
                       ])
-                    ]
-                  )
-                ])
+                    ])
+                  ]
+                )
               ])
             ]
           )
@@ -105838,6 +105905,126 @@ var staticRenderFns = [
               )
             ]
           )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-8", staticStyle: { padding: "0px" } },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("scheduled streams")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-hover table-dark" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("single")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Dota 2: electric boogaloo")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Dota2")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("subscriber games")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("daily")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Daily dose of minecraft")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Minecraft")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("evening stream")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("weekly")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("sunday streamtime")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("WoW")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("weekend streams")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("monthly")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Monthly subscriber stream")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("PUBG")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("subscriber ama")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ])
+              ])
+            ])
+          ])
         ])
       ]
     )
