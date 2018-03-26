@@ -29,8 +29,8 @@
 					    </p>
 					</video>
 				</div>
-				<div class="card-body" v-else>
-				 	<img src="/images/offline.png" alt="streamer offline">
+				<div class="card-body" style="text-align:center" v-else>
+				 	<img src="/images/offline.png" alt="streamer offline" style="width:85%">
 				</div>
 			</div>
 			<div v-show="watchviewers">
@@ -42,7 +42,7 @@
 						<div class="list-group-item" v-for="viewer in viewers" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 							<a :href="'/profilepage/' + viewer.name">{{viewer.name}}</a>
 						</div>
-					</div>				
+					</div>
 				</div>
 			</div>
 			<div v-show="watchfollowers">
@@ -54,7 +54,7 @@
 						<div class="list-group-item" v-for="follower in followers" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 							<a :href="'/profilepage/' + follower.name">{{follower.name}}</a>
 						</div>
-					</div>				
+					</div>
 				</div>
 			</div>
 		</div>

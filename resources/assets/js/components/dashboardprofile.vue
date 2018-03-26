@@ -149,7 +149,7 @@ export default {
 
       updateAbout: function() {
 
-        axios.post('/api/profilecontentabout', {
+        axios.post('/api/updateabout', {
           about: document.getElementById('aboutinput').value,
        }).then(response => {
          this.profilecontent.about = response.data;
