@@ -201,5 +201,4 @@ class ScheduleController extends Controller
           return "weekly stream saved";
 
       }
-
 }
