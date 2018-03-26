@@ -104205,14 +104205,22 @@ var render = function() {
                     ]
                   )
                 ])
-              : _c("div", { staticClass: "card-body" }, [
-                  _c("img", {
-                    attrs: {
-                      src: "/images/offline.png",
-                      alt: "streamer offline"
-                    }
-                  })
-                ])
+              : _c(
+                  "div",
+                  {
+                    staticClass: "card-body",
+                    staticStyle: { "text-align": "center" }
+                  },
+                  [
+                    _c("img", {
+                      staticStyle: { width: "85%" },
+                      attrs: {
+                        src: "/images/offline.png",
+                        alt: "streamer offline"
+                      }
+                    })
+                  ]
+                )
           ]
         ),
         _vm._v(" "),
@@ -104615,7 +104623,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateAbout: function updateAbout() {
       var _this2 = this;
 
-      axios.post('/api/profilecontentabout', {
+      axios.post('/api/updateabout', {
         about: document.getElementById('aboutinput').value
       }).then(function (response) {
         _this2.profilecontent.about = response.data;
@@ -105916,7 +105924,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateAbout: function updateAbout() {
       var _this2 = this;
 
-      axios.post('/api/profilecontentabout', {
+      axios.post('/api/updateabout', {
         about: document.getElementById('aboutinput').value
       }).then(function (response) {
         _this2.profilecontent.about = response.data;

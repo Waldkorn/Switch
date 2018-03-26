@@ -172,7 +172,7 @@ export default {
     },
     props: ['user'],
     mounted() {
-      console.log(this.user);
+      
        var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
@@ -216,7 +216,7 @@ export default {
 
       updateAbout: function() {
 
-        axios.post('/api/profilecontentabout', {
+        axios.post('/api/updateabout', {
           about: document.getElementById('aboutinput').value,
        }).then(response => {
          this.profilecontent.about = response.data;
