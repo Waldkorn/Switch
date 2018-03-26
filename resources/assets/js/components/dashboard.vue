@@ -182,7 +182,6 @@
       <td><div class="btn btn-danger">delete</div></td>
       <td></td>
     </tr>
-
   </tbody>
 </table>
           </div>
@@ -523,7 +522,6 @@ export default {
          document.getElementById('schedule_form_daily').style.display = "none";
        })
       },
-
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
