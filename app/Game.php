@@ -12,4 +12,9 @@ class Game extends Model
     {
     	return $this->hasMany(Stream::class);
     }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

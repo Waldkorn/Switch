@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profilecontent::class, 'user_id', 'id');
     }
+
+    public function schedule()
+    {
+        return $this->hasMany(Schedule::class, 'user_id', 'id');
+    }
 }
