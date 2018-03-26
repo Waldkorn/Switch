@@ -2,6 +2,7 @@
 <div class="container-fluid" style="padding:0px">
 
   <ul class="nav nav-pills nav-fill navbar-dark bg-dark">
+<<<<<<< b8fb01b3801554d5c7f85f423373bb92bad36cfc
     <li class="nav-item" v-on:click="showstreamdash">
       <a class="nav-link" href="#" >Stream</a>
     </li>
@@ -17,6 +18,20 @@
     <li class="nav-item">
       <a class="nav-link" href="#" v-on:click="showscheduledash">schedule</a>
     </li>
+=======
+      <li class="nav-item" v-on:click="showstreamdash">
+        <a class="nav-link" href="#" >Stream</a>
+      </li>
+    <li class="nav-item"v-on:click="showprofiledash">
+        <a class="nav-link" href="#" >Profile</a>
+      </li>
+      <li class="nav-item" v-on:click="showchanneldash">
+        <a class="nav-link" href="#" >Channel</a>
+      </li>
+      <li class="nav-item" v-on:click="showscheduledash">
+        <a class="nav-link" href="#">schedule</a>
+      </li>
+>>>>>>> schedule migration, model, and form in dashboard.vue
   </ul>
 
 <div class="container-fluid" style="padding:0px">
@@ -541,6 +556,7 @@ export default {
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
+<<<<<<< b8fb01b3801554d5c7f85f423373bb92bad36cfc
           startTime: {
                 time: ''
               },
@@ -592,6 +608,8 @@ export default {
                 from: '',
                 to: ''
               }]
+=======
+>>>>>>> schedule migration, model, and form in dashboard.vue
       }
     },
     components: {
@@ -720,14 +738,20 @@ export default {
 				this.profiledash = false;
 				this.channeldash = false;
         this.scheduledash = false;
+<<<<<<< b8fb01b3801554d5c7f85f423373bb92bad36cfc
         this.announcementsdash = false;
+=======
+>>>>>>> schedule migration, model, and form in dashboard.vue
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
 				this.channeldash = false;
         this.scheduledash = false;
+<<<<<<< b8fb01b3801554d5c7f85f423373bb92bad36cfc
         this.announcementsdash = false;
+=======
+>>>>>>> schedule migration, model, and form in dashboard.vue
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
@@ -735,6 +759,7 @@ export default {
 				this.channeldash = true;
         this.scheduledash = false;
 			},
+<<<<<<< b8fb01b3801554d5c7f85f423373bb92bad36cfc
       showannouncementdash: function() {
         this.streamdash = false;
         this.profiledash = false;
@@ -745,6 +770,14 @@ export default {
           this.announcements = response.data;
         })
       }
+=======
+      showscheduledash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.channeldash = false;
+        this.scheduledash = true;
+      },
+>>>>>>> schedule migration, model, and form in dashboard.vue
     }
   }
   
