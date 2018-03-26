@@ -158,7 +158,6 @@
               <h5 class="card-title">scheduled streams</h5>
             </div>
             <div class="card-body" style="padding:0px">
-
               <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
   <thead>
     <tr style="color:#dc3545">
