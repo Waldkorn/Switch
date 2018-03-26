@@ -104632,21 +104632,305 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> added dummy schedule table to dashboard.vue
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
       games: null,
       users: []
+=======
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false,
+      scheduledash: false
+>>>>>>> added dummy schedule table to dashboard.vue
     };
   },
 
   mounted: function mounted() {
     var _this = this;
 
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
     axios.get('/api/followings').then(function (response) {
       _this.users = response.data;
+=======
+    var contenturl = 'api/profilecontent/' + this.user.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+>>>>>>> added dummy schedule table to dashboard.vue
     });
     setInterval(function () {
       var _this2 = this;
@@ -104823,9 +105107,46 @@ if (false) {(function () {
 module.exports = Component.exports
 
 
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
 /***/ }),
 /* 306 */
 /***/ (function(module, exports) {
+=======
+      axios.post('/api/updateabout', {
+        about: document.getElementById('aboutinput').value
+      }).then(function (response) {
+        _this2.profilecontent.about = response.data;
+        $('#collapseEdit').collapse("toggle");
+      });
+    },
+    addschedule: function addschedule() {
+      console.log("button works");
+    },
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.scheduledash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+      this.scheduledash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+      this.scheduledash = false;
+    },
+    showscheduledash: function showscheduledash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.scheduledash = true;
+    }
+>>>>>>> added dummy schedule table to dashboard.vue
 
 throw new Error("Module build failed: SyntaxError: D:/xampp/htdocs/Code/Switch/resources/assets/js/components/dashboard.vue: Unexpected token (232:0)\n\n\u001b[0m \u001b[90m 230 | \u001b[39m    props\u001b[33m:\u001b[39m [\u001b[32m'user'\u001b[39m]\u001b[33m,\u001b[39m\n \u001b[90m 231 | \u001b[39m    mounted() {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 232 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m d1d30876f4d8abb2e48688f2bfc4a35c9b5657bb\n \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 233 | \u001b[39m        axios\u001b[33m.\u001b[39mget(\u001b[32m'/api/profilecontent'\u001b[39m)\u001b[33m.\u001b[39mthen(response \u001b[33m=>\u001b[39m {\n \u001b[90m 234 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 235 | \u001b[39m\u001b[0m\n");
 
@@ -105346,6 +105667,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row" }, [
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
                 _c("div", { staticClass: "row" }),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
@@ -105361,10 +105683,28 @@ var render = function() {
                         _c("form", [
                           _vm._m(7),
                           _vm._v(" "),
+=======
+                _vm._m(6),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-4", staticStyle: { padding: "0px" } },
+                  [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("form", [
+>>>>>>> added dummy schedule table to dashboard.vue
                           _vm._m(8),
                           _vm._v(" "),
                           _vm._m(9),
                           _vm._v(" "),
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
+=======
+                          _vm._m(10),
+                          _vm._v(" "),
+>>>>>>> added dummy schedule table to dashboard.vue
                           _c("div", { staticClass: "form-group" }, [
                             _c("label", { attrs: { for: "schedulegame" } }, [
                               _vm._v("Game:")
@@ -105386,7 +105726,11 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
                           _vm._m(10),
+=======
+                          _vm._m(11),
+>>>>>>> added dummy schedule table to dashboard.vue
                           _vm._v(" "),
                           _c(
                             "div",
@@ -105399,9 +105743,15 @@ var render = function() {
                           )
                         ])
                       ])
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
                     ]
                   )
                 ])
+=======
+                    ])
+                  ]
+                )
+>>>>>>> added dummy schedule table to dashboard.vue
               ])
             ]
           )
@@ -105536,6 +105886,129 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
+=======
+    return _c(
+      "div",
+      { staticClass: "col-8", staticStyle: { padding: "0px" } },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("scheduled streams")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("table", { staticClass: "table table-hover table-dark" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("single")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Dota 2: electric boogaloo")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Dota2")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("subscriber games")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("daily")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Daily dose of minecraft")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Minecraft")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("evening stream")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [_vm._v("weekly")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("sunday streamtime")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("WoW")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("weekend streams")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Monthly subscriber stream")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("1 hour after soon")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("PUBG")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("subscriber ama")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("edit")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("delete all")])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+>>>>>>> added dummy schedule table to dashboard.vue
     return _c("div", { staticClass: "card-header" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v("Add a scheduled event")])
     ])
