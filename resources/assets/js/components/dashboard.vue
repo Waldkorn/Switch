@@ -152,14 +152,80 @@
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
-            <div class="row"></div>
-            <div class="row">
-              <div class="card" style="width: 18rem;">
+          <div class="col-8" style="padding:0px">
+            <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">scheduled streams</h5>
+            </div>
             <div class="card-body">
+              <table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">type</th>
+      <th scope="col">name</th>
+      <th scope="col">start</th>
+      <th scope="col">end</th>
+      <th scope="col">game</th>
+      <th scope="col">tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">single</th>
+      <td>Dota 2: electric boogaloo</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>Dota2</td>
+      <td>subscriber games</td>
+      <td>edit</td>
+      <td>delete</td>
+      <td>delete all</td>
+    </tr>
+    <tr>
+      <th scope="row">daily</th>
+      <td>Daily dose of minecraft</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>Minecraft</td>
+      <td>evening stream</td>
+      <td>edit</td>
+      <td>delete</td>
+      <td>delete all</td>
+    </tr>
+    <tr>
+      <th scope="row">weekly</th>
+      <td>sunday streamtime</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>WoW</td>
+      <td>weekend streams</td>
+      <td>edit</td>
+      <td>delete</td>
+      <td>delete all</td>
+    </tr>
+    <tr>
+      <th scope="row">monthly</th>
+      <td>Monthly subscriber stream</td>
+      <td>soon</td>
+      <td>1 hour after soon</td>
+      <td>PUBG</td>
+      <td>subscriber ama</td>
+      <td>edit</td>
+      <td>delete</td>
+      <td>delete all</td>
+    </tr>
+  </tbody>
+</table>
+          </div>
+        </div>
+        </div>
+            <div class="col-4" style="padding:0px">
+              <div class="card">
+
               <div class="card-header">
                 <h5 class="card-title">Add a scheduled event</h5>
               </div>
-              <div class="card-body"></div>
+              <div class="card-body">
               <form>
                 <div class="form-group">
                   <label for="schedulename">Name</label>
@@ -202,7 +268,7 @@
                 </div>
                 <div type="submit" class="btn btn-primary" v-on:click="addschedule">Add event</div>
               </form>
-            </div>
+              </div>
           </div>
             </div>
           </div>
@@ -280,6 +346,9 @@ export default {
          $('#collapseEdit').collapse("toggle");
        })
       },
+      addschedule: function () {
+      console.log("button works");
+    },
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
