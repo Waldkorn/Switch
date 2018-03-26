@@ -235,7 +235,7 @@ export default {
 				this.streamdash = false;
 				this.profiledash = false;
 				this.channeldash = true;
-			},
+			}
 
 
 
