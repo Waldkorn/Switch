@@ -332,6 +332,7 @@ export default {
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
+<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
 
           startTime: {
                 time: ''
@@ -386,6 +387,8 @@ export default {
                 from: '',
                 to: ''
               }]
+=======
+>>>>>>> schedule migration, model, and form in dashboard.vue
       }
     },
 
@@ -394,8 +397,18 @@ export default {
     },
     props: ['user'],
     mounted() {
+<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
        var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
+=======
+<<<<<<< HEAD
+        axios.get('/api/profilecontent').then(response => {
+=======
+
+       var contenturl = 'api/profilecontent/'+this.user.name;
+      axios.get(contenturl).then(response => {
+>>>>>>> schedule migration, model, and form in dashboard.vue
+>>>>>>> schedule migration, model, and form in dashboard.vue
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/allgames').then(response => {
@@ -540,6 +553,12 @@ export default {
 				this.streamdash = false;
 				this.profiledash = false;
 				this.channeldash = true;
+<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
+=======
+<<<<<<< HEAD
+			}
+=======
+>>>>>>> schedule migration, model, and form in dashboard.vue
         this.scheduledash = false;
 			},
       showscheduledash: function() {
@@ -548,6 +567,13 @@ export default {
         this.channeldash = false;
         this.scheduledash = true;
       },
+<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
+=======
+
+
+
+>>>>>>> schedule migration, model, and form in dashboard.vue
+>>>>>>> schedule migration, model, and form in dashboard.vue
     }
   }
 
