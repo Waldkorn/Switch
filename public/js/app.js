@@ -64,8 +64,7 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;//! moment.js
@@ -76,16 +75,7 @@
     global.moment = factory()
 }(this, (function () { 'use strict';
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var window = _interopDefault(__webpack_require__(3));
-var document = _interopDefault(__webpack_require__(12));
-var tsml = _interopDefault(__webpack_require__(180));
-var safeParseTuple = _interopDefault(__webpack_require__(181));
-var xhr = _interopDefault(__webpack_require__(182));
-var vtt = _interopDefault(__webpack_require__(187));
-=======
 var hookCallback;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 function hooks () {
     return hookCallback.apply(null, arguments);
@@ -1912,7 +1902,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(306)("./" + name);
+            __webpack_require__(311)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4604,7 +4594,7 @@ return hooks;
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var window = _interopDefault(__webpack_require__(2));
+var window = _interopDefault(__webpack_require__(3));
 var document = _interopDefault(__webpack_require__(12));
 var tsml = _interopDefault(__webpack_require__(180));
 var safeParseTuple = _interopDefault(__webpack_require__(181));
@@ -23545,11 +23535,6 @@ var Player = function (_Component) {
 
     _this.options_.playerOptions = playerOptionsCopy;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-=======
     _this.middleware_ = [];
 
     _this.initChildren();
@@ -23576,7 +23561,6 @@ var Player = function (_Component) {
     if (_this.isAudio()) {
       _this.addClass('vjs-audio');
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     if (_this.flexNotSupported_()) {
       _this.addClass('vjs-no-flex');
@@ -23647,46 +23631,17 @@ var Player = function (_Component) {
     // Kill reference to this player
     Player.players[this.id_] = null;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* WEBPACK VAR INJECTION */(function(global) {var win;
-
-if (typeof window !== "undefined") {
-    win = window;
-} else if (typeof global !== "undefined") {
-    win = global;
-} else if (typeof self !== "undefined"){
-    win = self;
-} else {
-    win = {};
-}
-
-module.exports = win;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-=======
     if (this.tag && this.tag.player) {
       this.tag.player = null;
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     if (this.el_ && this.el_.player) {
       this.el_.player = null;
     }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var bind = __webpack_require__(47);
-var isBuffer = __webpack_require__(235);
-=======
     if (this.tech_) {
       this.tech_.dispose();
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     if (this.playerElIngest_) {
       this.playerElIngest_ = null;
@@ -23810,16 +23765,10 @@ var isBuffer = __webpack_require__(235);
     // keep track of the original for later so we can know if the source originally failed
     tag.initNetworkState_ = tag.networkState;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     // Wrap video tag in div (el/box) container
     if (tag.parentNode && !playerElIngest) {
       tag.parentNode.insertBefore(el, tag);
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // insert the tag as the first child of the player element
     // then manually add it to the children array so that this.addChild
@@ -23870,11 +23819,6 @@ var isBuffer = __webpack_require__(235);
     return this.dimension('height', value);
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-=======
   /**
    * A getter/setter for the `Player`'s width & height.
    *
@@ -23889,7 +23833,6 @@ var isBuffer = __webpack_require__(235);
    * @return {number}
    *         The dimension arguments value when getting (width/height).
    */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
   Player.prototype.dimension = function dimension(_dimension, value) {
@@ -23913,325 +23856,9 @@ var isBuffer = __webpack_require__(235);
       return;
     }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(260)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     this[privDimension] = parsedVal;
     this.updateStyleEl_();
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   /**
    * A getter/setter/toggler for the vjs-fluid `className` on the `Player`.
@@ -24254,11 +23881,6 @@ function applyToTag (styleElement, obj) {
 
     this.fluid_ = !!bool;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _videoJs = __webpack_require__(1);
-
-var _globalWindow = __webpack_require__(3);
-=======
     if (bool) {
       this.addClass('vjs-fluid');
     } else {
@@ -24267,7 +23889,6 @@ var _globalWindow = __webpack_require__(3);
 
     this.updateStyleEl_();
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   /**
    * Get/Set the aspect ratio
@@ -24671,14 +24292,8 @@ var _globalWindow = __webpack_require__(3);
    */
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
   Player.prototype.handleTechLoadStart_ = function handleTechLoadStart_() {
     // TODO: Update to use `emptied` event instead. See #1277.
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     this.removeClass('vjs-ended');
     this.removeClass('vjs-seeking');
@@ -24766,11 +24381,6 @@ var _globalWindow = __webpack_require__(3);
     this.trigger('play');
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
   /**
    * Retrigger the `waiting` event that was triggered by the {@link Tech}.
    *
@@ -24778,7 +24388,6 @@ var _globalWindow = __webpack_require__(3);
    * @listens Tech#waiting
    * @private
    */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
   Player.prototype.handleTechWaiting_ = function handleTechWaiting_() {
@@ -24806,15 +24415,6 @@ var _globalWindow = __webpack_require__(3);
    * @private
    */
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
-    typeof window !== 'undefined' ? window : {}
-var minDoc = __webpack_require__(179);
-=======
 
   Player.prototype.handleTechCanPlay_ = function handleTechCanPlay_() {
     this.removeClass('vjs-waiting');
@@ -24826,7 +24426,6 @@ var minDoc = __webpack_require__(179);
      */
     this.trigger('canplay');
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   /**
    * Retrigger the `canplaythrough` event that was triggered by the {@link Tech}.
@@ -24857,13 +24456,6 @@ var minDoc = __webpack_require__(179);
    * @private
    */
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 
   Player.prototype.handleTechPlaying_ = function handleTechPlaying_() {
     this.removeClass('vjs-waiting');
@@ -24875,7 +24467,6 @@ var minDoc = __webpack_require__(179);
      */
     this.trigger('playing');
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   /**
    * Retrigger the `seeking` event that was triggered by the {@link Tech}.
@@ -24936,11 +24527,6 @@ var minDoc = __webpack_require__(179);
       this.currentTime(this.options_.starttime);
     }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     this.addClass('vjs-has-started');
     /**
      * Fired the first time a video is played. Not part of the HLS spec, and this is
@@ -24953,7 +24539,6 @@ var minDoc = __webpack_require__(179);
      */
     this.trigger('firstplay');
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   /**
    * Retrigger the `pause` event that was triggered by the {@link Tech}.
@@ -25031,17 +24616,11 @@ var minDoc = __webpack_require__(179);
       return;
     }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     // When controls are disabled a click should not toggle playback because
     // the click is considered a control
     if (!this.controls_) {
       return;
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     if (this.paused()) {
       this.play();
@@ -25059,11 +24638,6 @@ var minDoc = __webpack_require__(179);
    */
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
   Player.prototype.handleTechTap_ = function handleTechTap_() {
     this.userActive(!this.userActive());
   };
@@ -25349,7 +24923,6 @@ var minDoc = __webpack_require__(179);
       // This can happen if `play()` is called while changing sources or before
       // one has been set on the player.
     } else {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       this.playOnLoadstart_ = function () {
         _this5.playOnLoadstart_ = null;
@@ -25386,9 +24959,6 @@ var minDoc = __webpack_require__(179);
     return this.techGet_('paused') === false ? false : true;
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _resolveUrl = __webpack_require__(192);
-=======
   /**
    * Get a TimeRange object representing the current ranges of time that the user
    * has played.
@@ -25397,14 +24967,8 @@ var _resolveUrl = __webpack_require__(192);
    *         A time range object that represents all the increments of time that have
    *         been played.
    */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _videoJs = __webpack_require__(1);
-
-var _m3u8Parser = __webpack_require__(27);
-=======
   Player.prototype.played = function played() {
     return this.techGet_('played') || createTimeRanges(0, 0);
   };
@@ -25420,18 +24984,13 @@ var _m3u8Parser = __webpack_require__(27);
    * @return {boolean}
    *         The value of scrubbing when getting
    */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _globalWindow = __webpack_require__(3);
-=======
   Player.prototype.scrubbing = function scrubbing(isScrubbing) {
     if (typeof isScrubbing === 'undefined') {
       return this.scrubbing_;
     }
     this.scrubbing_ = !!isScrubbing;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     if (isScrubbing) {
       this.addClass('vjs-scrubbing');
@@ -25938,17 +25497,11 @@ var _globalWindow = __webpack_require__(3);
       var techName = j[i];
       var tech = Tech.getTech(techName);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
       // Support old behavior of techs being registered as components.
       // Remove once that deprecated behavior is removed.
       if (!tech) {
         tech = Component.getComponent(techName);
       }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       // Check if the current tech is defined before continuing
       if (!tech) {
@@ -26092,14 +25645,8 @@ var _globalWindow = __webpack_require__(3);
     this.cache_.sources = sources;
     this.changingSrc_ = true;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     // intial source
     this.cache_.source = sources[0];
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // middlewareSource is the source after it has been changed by middleware
     setSource(this, sources[0], function (middlewareSource, mws) {
@@ -26427,12 +25974,6 @@ var _globalWindow = __webpack_require__(3);
    * @private
    */
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   Player.prototype.handleTechPosterChange_ = function handleTechPosterChange_() {
     if (!this.poster_ && this.tech_ && this.tech_.poster) {
@@ -26457,25 +25998,17 @@ var _globalWindow = __webpack_require__(3);
    */
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _globalWindow = __webpack_require__(3);
-=======
   Player.prototype.controls = function controls(bool) {
     if (bool === undefined) {
       return !!this.controls_;
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     bool = !!bool;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _videoJs = __webpack_require__(1);
-=======
     // Don't trigger a change event unless it actually changed
     if (this.controls_ === bool) {
       return;
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     this.controls_ = bool;
 
@@ -26608,14 +26141,8 @@ var _videoJs = __webpack_require__(1);
      */
     this.trigger('error');
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     return;
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   /**
    * Report user activity
@@ -26943,11 +26470,6 @@ var _videoJs = __webpack_require__(1);
     }
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
   /**
    * Gets available media playback quality metrics as specified by the W3C's Media
    * Playback Quality API.
@@ -26958,30 +26480,18 @@ var _videoJs = __webpack_require__(1);
    *         An object with supported media playback quality metrics or undefined if there
    *         is no tech or the tech does not support it.
    */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
   Player.prototype.getVideoPlaybackQuality = function getVideoPlaybackQuality() {
     return this.techGet_('getVideoPlaybackQuality');
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var Stream = __webpack_require__(5);
-var mp4 = __webpack_require__(41);
-var m2ts = __webpack_require__(33);
-var AdtsStream = __webpack_require__(35);
-var H264Stream = __webpack_require__(36).H264Stream;
-var AacStream = __webpack_require__(215);
-var coneOfSilence = __webpack_require__(216);
-var clock = __webpack_require__(217);
-=======
   /**
    * Get video width
    *
    * @return {number}
    *         current video width
    */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
   Player.prototype.videoWidth = function videoWidth() {
@@ -28365,18 +27875,12 @@ videojs.getAllPlayers = function () {
  */
 videojs.players = Player.players;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 /**
  * Get a component class object by name
  *
  * @borrows Component.getComponent as videojs.getComponent
  */
 videojs.getComponent = Component.getComponent;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /**
  * Register a component so it can referred to by name. Used when adding to other
@@ -28418,9 +27922,6 @@ videojs.getTech = Tech.getTech;
  */
 videojs.registerTech = Tech.registerTech;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _videoJs = __webpack_require__(1);
-=======
 /**
  * Register a middleware to a source type.
  *
@@ -28428,7 +27929,6 @@ var _videoJs = __webpack_require__(1);
  * @param {function(player):object} middleware A middleware factory that takes a player.
  */
 videojs.use = use;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /**
  * An object that can be returned by a middleware to signify
@@ -28867,51 +28367,8 @@ module.exports = videojs;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 23 */
-=======
 /* 2 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var win;
-
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var utils = __webpack_require__(4);
-var normalizeHeaderName = __webpack_require__(237);
-=======
-if (typeof window !== "undefined") {
-    win = window;
-} else if (typeof global !== "undefined") {
-    win = global;
-} else if (typeof self !== "undefined"){
-    win = self;
-} else {
-    win = {};
-}
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-
-module.exports = win;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
-
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(49);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(49);
-  }
-  return adapter;
-}
-=======
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -29017,46 +28474,30 @@ module.exports = function normalizeComponent (
   }
 }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(48)))
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports) {
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
+/* WEBPACK VAR INJECTION */(function(global) {var win;
 
+if (typeof window !== "undefined") {
+    win = window;
+} else if (typeof global !== "undefined") {
+    win = global;
+} else if (typeof self !== "undefined"){
+    win = self;
+} else {
+    win = {};
+}
 
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-=======
+module.exports = win;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 "use strict";
 
@@ -29535,7 +28976,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _videoJs = __webpack_require__(1);
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -30107,142 +29548,6 @@ exports['default'] = {
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * @file bin-utils.js
- */
-
-/**
- * convert a TimeRange to text
- *
- * @param {TimeRange} range the timerange to use for conversion
- * @param {Number} i the iterator on the range to convert
- */
-
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-var textRange = function textRange(range, i) {
-  return range.start(i) + '-' + range.end(i);
-};
-
-/**
- * format a number as hex string
- *
- * @param {Number} e The number
- * @param {Number} i the iterator
- */
-var formatHexString = function formatHexString(e, i) {
-  var value = e.toString(16);
-
-  return '00'.substring(0, 2 - value.length) + value + (i % 2 ? ' ' : '');
-};
-var formatAsciiString = function formatAsciiString(e) {
-  if (e >= 0x20 && e < 0x7e) {
-    return String.fromCharCode(e);
-  }
-  return '.';
-};
-
-/**
- * Creates an object for sending to a web worker modifying properties that are TypedArrays
- * into a new object with seperated properties for the buffer, byteOffset, and byteLength.
- *
- * @param {Object} message
- *        Object of properties and values to send to the web worker
- * @return {Object}
- *         Modified message with TypedArray values expanded
- * @function createTransferableMessage
- */
-var createTransferableMessage = function createTransferableMessage(message) {
-  var transferable = {};
-
-  Object.keys(message).forEach(function (key) {
-    var value = message[key];
-
-    if (ArrayBuffer.isView(value)) {
-      transferable[key] = {
-        bytes: value.buffer,
-        byteOffset: value.byteOffset,
-        byteLength: value.byteLength
-      };
-    } else {
-      transferable[key] = value;
-    }
-  });
-
-  return transferable;
-};
-
-/**
- * Returns a unique string identifier for a media initialization
- * segment.
- */
-var initSegmentId = function initSegmentId(initSegment) {
-  var byterange = initSegment.byterange || {
-    length: Infinity,
-    offset: 0
-  };
-
-  return [byterange.length, byterange.offset, initSegment.resolvedUri].join(',');
-};
-
-/**
- * utils to help dump binary data to the console
- */
-var utils = {
-  hexDump: function hexDump(data) {
-    var bytes = Array.prototype.slice.call(data);
-    var step = 16;
-    var result = '';
-    var hex = undefined;
-    var ascii = undefined;
-
-    for (var j = 0; j < bytes.length / step; j++) {
-      hex = bytes.slice(j * step, j * step + step).map(formatHexString).join('');
-      ascii = bytes.slice(j * step, j * step + step).map(formatAsciiString).join('');
-      result += hex + ' ' + ascii + '\n';
-    }
-    return result;
-  },
-  tagDump: function tagDump(tag) {
-    return utils.hexDump(tag.bytes);
-  },
-  textRanges: function textRanges(ranges) {
-    var result = '';
-    var i = undefined;
-
-    for (i = 0; i < ranges.length; i++) {
-      result += textRange(ranges, i) + ' ';
-    }
-    return result;
-  },
-  createTransferableMessage: createTransferableMessage,
-  initSegmentId: initSegmentId
-};
-
-exports['default'] = utils;
-module.exports = exports['default'];
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  H264_STREAM_TYPE: 0x1B,
-  ADTS_STREAM_TYPE: 0x0F,
-  METADATA_STREAM_TYPE: 0x15
-};
-
-
-/***/ }),
-/* 10 */
 /***/ (function(module, exports) {
 
 /*
@@ -30324,7 +29629,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 11 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -30549,6 +29854,142 @@ function applyToTag (styleElement, obj) {
     styleElement.appendChild(document.createTextNode(css))
   }
 }
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * @file bin-utils.js
+ */
+
+/**
+ * convert a TimeRange to text
+ *
+ * @param {TimeRange} range the timerange to use for conversion
+ * @param {Number} i the iterator on the range to convert
+ */
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var textRange = function textRange(range, i) {
+  return range.start(i) + '-' + range.end(i);
+};
+
+/**
+ * format a number as hex string
+ *
+ * @param {Number} e The number
+ * @param {Number} i the iterator
+ */
+var formatHexString = function formatHexString(e, i) {
+  var value = e.toString(16);
+
+  return '00'.substring(0, 2 - value.length) + value + (i % 2 ? ' ' : '');
+};
+var formatAsciiString = function formatAsciiString(e) {
+  if (e >= 0x20 && e < 0x7e) {
+    return String.fromCharCode(e);
+  }
+  return '.';
+};
+
+/**
+ * Creates an object for sending to a web worker modifying properties that are TypedArrays
+ * into a new object with seperated properties for the buffer, byteOffset, and byteLength.
+ *
+ * @param {Object} message
+ *        Object of properties and values to send to the web worker
+ * @return {Object}
+ *         Modified message with TypedArray values expanded
+ * @function createTransferableMessage
+ */
+var createTransferableMessage = function createTransferableMessage(message) {
+  var transferable = {};
+
+  Object.keys(message).forEach(function (key) {
+    var value = message[key];
+
+    if (ArrayBuffer.isView(value)) {
+      transferable[key] = {
+        bytes: value.buffer,
+        byteOffset: value.byteOffset,
+        byteLength: value.byteLength
+      };
+    } else {
+      transferable[key] = value;
+    }
+  });
+
+  return transferable;
+};
+
+/**
+ * Returns a unique string identifier for a media initialization
+ * segment.
+ */
+var initSegmentId = function initSegmentId(initSegment) {
+  var byterange = initSegment.byterange || {
+    length: Infinity,
+    offset: 0
+  };
+
+  return [byterange.length, byterange.offset, initSegment.resolvedUri].join(',');
+};
+
+/**
+ * utils to help dump binary data to the console
+ */
+var utils = {
+  hexDump: function hexDump(data) {
+    var bytes = Array.prototype.slice.call(data);
+    var step = 16;
+    var result = '';
+    var hex = undefined;
+    var ascii = undefined;
+
+    for (var j = 0; j < bytes.length / step; j++) {
+      hex = bytes.slice(j * step, j * step + step).map(formatHexString).join('');
+      ascii = bytes.slice(j * step, j * step + step).map(formatAsciiString).join('');
+      result += hex + ' ' + ascii + '\n';
+    }
+    return result;
+  },
+  tagDump: function tagDump(tag) {
+    return utils.hexDump(tag.bytes);
+  },
+  textRanges: function textRanges(ranges) {
+    var result = '';
+    var i = undefined;
+
+    for (i = 0; i < ranges.length; i++) {
+      result += textRange(ranges, i) + ' ';
+    }
+    return result;
+  },
+  createTransferableMessage: createTransferableMessage,
+  initSegmentId: initSegmentId
+};
+
+exports['default'] = utils;
+module.exports = exports['default'];
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  H264_STREAM_TYPE: 0x1B,
+  ADTS_STREAM_TYPE: 0x0F,
+  METADATA_STREAM_TYPE: 0x15
+};
 
 
 /***/ }),
@@ -30779,7 +30220,7 @@ var _m3u8Parser = __webpack_require__(27);
 
 var _m3u8Parser2 = _interopRequireDefault(_m3u8Parser);
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -31125,13 +30566,6 @@ var PlaylistLoader = (function (_EventTarget) {
 
       var mediaChange = !this.media_ || playlist.uri !== this.media_.uri;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6)))
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-=======
       // switch to fully loaded playlists immediately
       if (this.master.playlists[playlist.uri].endList) {
         // abort outstanding playlist requests
@@ -31150,7 +30584,6 @@ var PlaylistLoader = (function (_EventTarget) {
         }
         return;
       }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       // switching to the active playlist is a no-op
       if (!mediaChange) {
@@ -31176,11 +30609,6 @@ var PlaylistLoader = (function (_EventTarget) {
         this.trigger('mediachanging');
       }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
       this.request = this.hls_.xhr({
         uri: (0, _resolveUrl2['default'])(this.master.uri, playlist.uri),
         withCredentials: this.withCredentials
@@ -31189,7 +30617,6 @@ var PlaylistLoader = (function (_EventTarget) {
         if (!_this3.request) {
           return;
         }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
         if (error) {
           return _this3.playlistRequestError(_this3.request, playlist.uri, startingState);
@@ -31197,9 +30624,6 @@ var PlaylistLoader = (function (_EventTarget) {
 
         _this3.haveMetadata(req, playlist.uri);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _lineStream = __webpack_require__(28);
-=======
         // fire loadedmetadata the first time a media playlist is loaded
         if (startingState === 'HAVE_MASTER') {
           _this3.trigger('loadedmetadata');
@@ -31208,7 +30632,6 @@ var _lineStream = __webpack_require__(28);
         }
       });
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     /**
      * pause loading of the playlist
@@ -31238,9 +30661,6 @@ var _lineStream = __webpack_require__(28);
       }
     }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _parseStream = __webpack_require__(29);
-=======
     /**
      * start loading of the playlist
      */
@@ -31248,15 +30668,10 @@ var _parseStream = __webpack_require__(29);
     key: 'load',
     value: function load(isFinalRendition) {
       var _this4 = this;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       _globalWindow2['default'].clearTimeout(this.mediaUpdateTimeout);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _parser = __webpack_require__(194);
-=======
       var media = this.media();
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       if (isFinalRendition) {
         var delay = media ? media.targetDuration / 2 * 1000 : 5 * 1000;
@@ -31272,18 +30687,12 @@ var _parser = __webpack_require__(194);
         return;
       }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
       if (media && !media.endList) {
         this.trigger('mediaupdatetimeout');
       } else {
         this.trigger('loadedplaylist');
       }
     }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     /**
      * start loading of the playlist
@@ -31308,9 +30717,6 @@ var _parser = __webpack_require__(194);
         // clear the loader's request reference
         _this5.request = null;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _stream = __webpack_require__(17);
-=======
         if (error) {
           _this5.error = {
             status: req.status,
@@ -31324,7 +30730,6 @@ var _stream = __webpack_require__(17);
           }
           return _this5.trigger('error');
         }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
         var parser = new _m3u8Parser2['default'].Parser();
 
@@ -31520,11 +30925,7 @@ var Stream = function () {
 exports['default'] = Stream;
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 29 */
-=======
 /* 18 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31560,16 +30961,12 @@ FlvTag = function(type, extraData) {
         return;
       }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _stream = __webpack_require__(17);
-=======
       // allocate a new buffer and copy over the data that will not be modified
       bytes = new Uint8Array(minLength * 2);
       bytes.set(flv.bytes.subarray(0, flv.position), 0);
       flv.bytes = bytes;
       flv.view = new DataView(flv.bytes.buffer);
     },
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // commonly used metadata properties
     widthBytes = FlvTag.widthBytes || new Uint8Array('width'.length),
@@ -31843,18 +31240,12 @@ var _stream = __webpack_require__(17);
     this.bytes[ 9] = 0;
     this.bytes[10] = 0;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     // Sometimes we're at the end of the view and have one slot to write a
     // uint32, so, prepareWrite of count 4, since, view is uint8
     prepareWrite(this, 4);
     this.view.setUint32(this.length, this.length);
     this.length += 4;
     this.position += 4;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // trim down the byte buffer to what is actually being used
     this.bytes = this.bytes.subarray(0, this.length);
@@ -31878,11 +31269,6 @@ FlvTag.isVideoFrame = function(tag) {
   return FlvTag.VIDEO_TAG === tag[0];
 };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _decrypter = __webpack_require__(196);
-
-var _asyncStream = __webpack_require__(31);
-=======
 // (tag:ByteArray):Boolean {
 FlvTag.isMetaData = function(tag) {
   return FlvTag.METADATA_TAG === tag[0];
@@ -31893,7 +31279,6 @@ FlvTag.isKeyFrame = function(tag) {
   if (FlvTag.isVideoFrame(tag)) {
     return tag[11] === 0x17;
   }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   if (FlvTag.isAudioFrame(tag)) {
     return true;
@@ -31919,11 +31304,7 @@ module.exports = FlvTag;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 31 */
-=======
 /* 19 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31938,15 +31319,11 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _stream = __webpack_require__(198);
-=======
 var _videoJs = __webpack_require__(1);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
@@ -32003,17 +31380,6 @@ var durationOfVideo = function durationOfVideo(duration) {
 var addTextTrackData = function addTextTrackData(sourceHandler, captionArray, metadataArray) {
   var Cue = _globalWindow2['default'].WebKitDataCue || _globalWindow2['default'].VTTCue;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = {
-  tag: __webpack_require__(18),
-  Transmuxer: __webpack_require__(205),
-  getFlvHeader: __webpack_require__(211)
-};
-=======
   if (captionArray) {
     captionArray.forEach(function (caption) {
       var track = caption.stream;
@@ -32021,32 +31387,17 @@ module.exports = {
       this.inbandTextTracks_[track].addCue(new Cue(caption.startTime + this.timestampOffset, caption.endTime + this.timestampOffset, caption.text));
     }, sourceHandler);
   }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   if (metadataArray) {
     (function () {
       var videoDuration = durationOfVideo(sourceHandler.mediaSource_.duration);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
       metadataArray.forEach(function (metadata) {
         var time = metadata.cueTime + this.timestampOffset;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
         metadata.frames.forEach(function (frame) {
           var cue = new Cue(time, time, frame.value || frame.url || frame.data || '');
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var Stream = __webpack_require__(5),
-  CaptionStream = __webpack_require__(206),
-  StreamTypes = __webpack_require__(11),
-  TimestampRolloverStream = __webpack_require__(34).TimestampRolloverStream;
-
-var m2tsStreamTypes = __webpack_require__(11);
-=======
           cue.frame = frame;
           cue.value = frame;
           deprecateOldCue(cue);
@@ -32054,7 +31405,6 @@ var m2tsStreamTypes = __webpack_require__(11);
           this.metadataTrack_.addCue(cue);
         }, this);
       }, sourceHandler);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       // Updating the metadeta cues so that
       // the endTime of each cue is the startTime of the next cue
@@ -32322,22 +31672,8 @@ var bundleWithWebpack = function(fn, fnModuleId) {
 
 };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var m2ts = {
-  PAT_PID: 0x0000,
-  MP2T_PACKET_LENGTH: MP2T_PACKET_LENGTH,
-  TransportPacketStream: TransportPacketStream,
-  TransportParseStream: TransportParseStream,
-  ElementaryStream: ElementaryStream,
-  TimestampRolloverStream: TimestampRolloverStream,
-  CaptionStream: CaptionStream.CaptionStream,
-  Cea608Stream: CaptionStream.Cea608Stream,
-  MetadataStream: __webpack_require__(207)
-};
-=======
 module.exports = function webwackify(fn, fnModuleId) {
   var src;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   if (webpack) {
     src = bundleWithWebpack(fn, fnModuleId);
@@ -32355,11 +31691,7 @@ module.exports = function webwackify(fn, fnModuleId) {
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 34 */
-=======
 /* 21 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32384,9 +31716,6 @@ var AacStream = __webpack_require__(215);
 var coneOfSilence = __webpack_require__(216);
 var clock = __webpack_require__(217);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var Stream = __webpack_require__(5);
-=======
 // constants
 var AUDIO_PROPERTIES = [
   'audioobjecttype',
@@ -32395,7 +31724,6 @@ var AUDIO_PROPERTIES = [
   'samplingfrequencyindex',
   'samplesize'
 ];
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var VIDEO_PROPERTIES = [
   'width',
@@ -32543,27 +31871,17 @@ AudioSegmentStream = function(track) {
 
     this.prefixWithSilence_(track, frames);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     // we have to build the index from byte locations to
     // samples (that is, adts frames) in the audio data
     track.samples = this.generateSampleTable_(frames);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // concatenate the audio data to constuct the mdat
     mdat = mp4.mdat(this.concatenateFrameData_(frames));
 
     adtsFrames = [];
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var Stream = __webpack_require__(5);
-=======
     moof = mp4.moof(sequenceNumber, [track]);
     boxes = new Uint8Array(moof.byteLength + mdat.byteLength);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // bump the sequence number for next time
     sequenceNumber++;
@@ -32708,24 +32026,13 @@ VideoSegmentStream = function(track, options) {
     config,
     pps;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
   options = options || {};
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   VideoSegmentStream.prototype.init.call(this);
 
   delete track.minPTS;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var Stream = __webpack_require__(5);
-var ExpGolomb = __webpack_require__(208);
-=======
   this.gopCache_ = [];
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   this.push = function(nalUnit) {
     collectDtsInfo(track, nalUnit);
@@ -32975,15 +32282,9 @@ var ExpGolomb = __webpack_require__(208);
   this.extendFirstKeyFrame_ = function(gops) {
     var currentGop;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     if (!gops[0][0].keyFrame && gops.length > 1) {
       // Remove the first GOP
       currentGop = gops.shift();
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       gops.byteLength -=  currentGop.byteLength;
       gops.nalCount -= currentGop.nalCount;
@@ -33051,11 +32352,6 @@ var ExpGolomb = __webpack_require__(208);
     return frames;
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
   // Convert an array of frames into an array of Gop with each Gop being composed
   // of the frames that make up that Gop
   // Also keep track of cummulative data about the Gop from the frames such as the
@@ -33066,7 +32362,6 @@ var ExpGolomb = __webpack_require__(208);
       currentFrame,
       currentGop = [],
       gops = [];
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     // We must pre-set some of the values on the Gop since we
     // keep running totals of these values
@@ -33117,14 +32412,10 @@ var ExpGolomb = __webpack_require__(208);
     gops.nalCount += currentGop.nalCount;
     gops.duration += currentGop.duration;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _globalWindow = __webpack_require__(3);
-=======
     // push the final Gop
     gops.push(currentGop);
     return gops;
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   // generate the track's sample table from an array of gops
   this.generateSampleTable_ = function(gops, baseDataOffset) {
@@ -33136,12 +32427,8 @@ var _globalWindow = __webpack_require__(3);
       dataOffset = baseDataOffset || 0,
       samples = [];
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _muxJsLibFlv = __webpack_require__(32);
-=======
     for (h = 0; h < gops.length; h++) {
       currentGop = gops[h];
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       for (i = 0; i < currentGop.length; i++) {
         currentFrame = currentGop[i];
@@ -33252,14 +32539,8 @@ var _muxJsLibFlv = __webpack_require__(32);
     alignedGops.pts = alignedGops[0].pts;
     alignedGops.dts = alignedGops[0].dts;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
     return alignedGops;
   };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   // trim gop list to the first gop found that has a matching pts with a gop in the list
   // of gopsToAlignWith starting from the END of the list
@@ -33280,16 +32561,10 @@ var _muxJsLibFlv = __webpack_require__(32);
         break;
       }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
       if (align.pts > gop.pts) {
         alignIndex--;
         continue;
       }
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
       if (alignIndex === gopsToAlignWith.length - 1) {
         // gop.pts is greater than the last alignment candidate. If no match is found
@@ -33325,27 +32600,19 @@ var _muxJsLibFlv = __webpack_require__(32);
       return total;
     }, { byteLength: 0, duration: 0, nalCount: 0 });
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _globalWindow = __webpack_require__(3);
-=======
     alignedGops.byteLength = metadata.byteLength;
     alignedGops.duration = metadata.duration;
     alignedGops.nalCount = metadata.nalCount;
     alignedGops.pts = alignedGops[0].pts;
     alignedGops.dts = alignedGops[0].dts;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
     return alignedGops;
   };
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _muxJsLibMp4 = __webpack_require__(214);
-=======
   this.alignGopsWith = function(newGopsToAlignWith) {
     gopsToAlignWith = newGopsToAlignWith;
   };
 };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 VideoSegmentStream.prototype = new Stream();
 
@@ -33555,24 +32822,7 @@ CoalesceStream.prototype.flush = function(flushSource) {
     event.type = 'combined';
   }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * mux.js
- *
- * Copyright (c) 2015 Brightcove
- * All rights reserved.
- *
- * Functions that generate fragmented MP4s suitable for use with Media
- * Source Extensions.
- */
-=======
   this.emittedTracks += this.pendingTracks.length;
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
   initSegment = mp4.initSegment(this.pendingTracks);
 
@@ -37677,10 +36927,10 @@ module.exports = {
 
 var Stream = __webpack_require__(5),
   CaptionStream = __webpack_require__(206),
-  StreamTypes = __webpack_require__(9),
+  StreamTypes = __webpack_require__(11),
   TimestampRolloverStream = __webpack_require__(34).TimestampRolloverStream;
 
-var m2tsStreamTypes = __webpack_require__(9);
+var m2tsStreamTypes = __webpack_require__(11);
 
 // object types
 var TransportPacketStream, TransportParseStream, ElementaryStream;
@@ -38913,7 +38163,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -39111,7 +38361,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -40123,7 +39373,7 @@ var _config = __webpack_require__(15);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -40131,7 +39381,7 @@ var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(13
 
 var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs2 = _interopRequireDefault(_videojsContribMediaSourcesEs5RemoveCuesFromTrackJs);
 
-var _binUtils = __webpack_require__(8);
+var _binUtils = __webpack_require__(10);
 
 var _mediaSegmentRequest = __webpack_require__(220);
 
@@ -41983,13 +41233,13 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _globalWindow = __webpack_require__(2);
+var _globalWindow = __webpack_require__(3);
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
 var _aesDecrypter = __webpack_require__(30);
 
-var _binUtils = __webpack_require__(8);
+var _binUtils = __webpack_require__(10);
 
 /**
  * Our web worker interface so that things can talk to aes-decrypter
@@ -43600,14 +42850,8 @@ Sizzle.uniqueSort = function( results ) {
 	// See https://github.com/jquery/sizzle/pull/225
 	sortInput = null;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 	return results;
 };
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /**
  * Utility function for retrieving the text value of an array of DOM nodes
@@ -43655,11 +42899,7 @@ Expr = Sizzle.selectors = {
 
 	attrHandle: {},
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _playlist = __webpack_require__(9);
-=======
 	find: {},
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 	relative: {
 		">": { dir: "parentNode", first: true },
@@ -43668,31 +42908,20 @@ var _playlist = __webpack_require__(9);
 		"~": { dir: "previousSibling" }
 	},
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _videoJs = __webpack_require__(1);
-=======
 	preFilter: {
 		"ATTR": function( match ) {
 			match[1] = match[1].replace( runescape, funescape );
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			// Move the given value to match[3] whether quoted or unquoted
 			match[3] = ( match[3] || match[4] || match[5] || "" ).replace( runescape, funescape );
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _sourceUpdater = __webpack_require__(219);
-=======
 			if ( match[2] === "~=" ) {
 				match[3] = " " + match[3] + " ";
 			}
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			return match.slice( 0, 4 );
 		},
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _config = __webpack_require__(15);
-=======
 		"CHILD": function( match ) {
 			/* matches from matchExpr["CHILD"]
 				1 type (only|nth|...)
@@ -43705,7 +42934,6 @@ var _config = __webpack_require__(15);
 				8 y of y-component
 			*/
 			match[1] = match[1].toLowerCase();
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			if ( match[1].slice( 0, 3 ) === "nth" ) {
 				// nth-* requires argument
@@ -43713,40 +42941,23 @@ var _config = __webpack_require__(15);
 					Sizzle.error( match[0] );
 				}
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _globalWindow = __webpack_require__(3);
-=======
 				// numeric x and y parameters for Expr.filter.CHILD
 				// remember that false/true cast respectively to 0/1
 				match[4] = +( match[4] ? match[5] + (match[6] || 1) : 2 * ( match[3] === "even" || match[3] === "odd" ) );
 				match[5] = +( ( match[7] + match[8] ) || match[3] === "odd" );
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			// other types prohibit arguments
 			} else if ( match[3] ) {
 				Sizzle.error( match[0] );
 			}
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(13);
-=======
 			return match;
 		},
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 		"PSEUDO": function( match ) {
 			var excess,
 				unquoted = !match[6] && match[2];
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _binUtils = __webpack_require__(10);
-
-var _mediaSegmentRequest = __webpack_require__(220);
-
-var _ranges = __webpack_require__(22);
-
-var _playlistSelectors = __webpack_require__(43);
-=======
 			if ( matchExpr["CHILD"].test( match[0] ) ) {
 				return null;
 			}
@@ -43766,7 +42977,6 @@ var _playlistSelectors = __webpack_require__(43);
 				match[0] = match[0].slice( 0, excess );
 				match[2] = unquoted.slice( 0, excess );
 			}
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			// Return only captures needed by the pseudo filter method (type and argument)
 			return match.slice( 0, 3 );
@@ -45002,14 +44212,8 @@ var rootjQuery,
 				match = rquickExpr.exec( selector );
 			}
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 			// Match html or make sure no context is specified for #id
 			if ( match && ( match[ 1 ] || !context ) ) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 				// HANDLE: $(html) -> $(array)
 				if ( match[ 1 ] ) {
@@ -45031,39 +44235,27 @@ var rootjQuery,
 							if ( isFunction( this[ match ] ) ) {
 								this[ match ]( context[ match ] );
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _config = __webpack_require__(15);
-=======
 							// ...and otherwise set as attributes
 							} else {
 								this.attr( match, context[ match ] );
 							}
 						}
 					}
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 					return this;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _playlist = __webpack_require__(9);
-=======
 				// HANDLE: $(#id)
 				} else {
 					elem = document.getElementById( match[ 2 ] );
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 					if ( elem ) {
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _utilCodecsJs = __webpack_require__(44);
-=======
 						// Inject the element directly into the jQuery object
 						this[ 0 ] = elem;
 						this.length = 1;
 					}
 					return this;
 				}
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			// HANDLE: $(expr, $(...))
 			} else if ( !context || context.jquery ) {
@@ -45386,15 +44578,9 @@ jQuery.Callbacks = function( options ) {
 		// Actual Callbacks object
 		self = {
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 			// Add a callback or a collection of callbacks to the list
 			add: function() {
 				if ( list ) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 					// If we have memory from a past run, we should fire after adding
 					if ( memory && !firing ) {
@@ -45530,14 +44716,8 @@ function adoptValue( value, resolve, reject, noValue ) {
 		} else if ( value && isFunction( ( method = value.then ) ) ) {
 			method.call( value, resolve, reject );
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 		// Other non-thenables
 		} else {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 			// Control `resolve` arguments by letting Array#slice cast boolean `noValue` to integer:
 			// * false: [ value ].slice( 0 ) => resolve( value )
@@ -45558,12 +44738,8 @@ function adoptValue( value, resolve, reject, noValue ) {
 
 jQuery.extend( {
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _globalWindow = __webpack_require__(3);
-=======
 	Deferred: function( func ) {
 		var tuples = [
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 				// action, add listener, callbacks,
 				// ... .then handlers, argument index, [final state]
@@ -45587,18 +44763,12 @@ var _globalWindow = __webpack_require__(3);
 					return promise.then( null, fn );
 				},
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _aesDecrypter = __webpack_require__(30);
-
-var _binUtils = __webpack_require__(10);
-=======
 				// Keep pipe for back-compat
 				pipe: function( /* fnDone, fnFail, fnProgress */ ) {
 					var fns = arguments;
 
 					return jQuery.Deferred( function( newDefer ) {
 						jQuery.each( tuples, function( i, tuple ) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 							// Map tuples (progress, done, fail) to arguments (done, fail, progress)
 							var fn = isFunction( fns[ tuple[ 4 ] ] ) && fns[ tuple[ 4 ] ];
@@ -45642,17 +44812,11 @@ var _binUtils = __webpack_require__(10);
 
 									returned = handler.apply( that, args );
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-=======
 									// Support: Promises/A+ section 2.3.1
 									// https://promisesaplus.com/#point-48
 									if ( returned === deferred.promise() ) {
 										throw new TypeError( "Thenable self-resolution" );
 									}
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 									// Support: Promises/A+ sections 2.3.3.1, 3.5
 									// https://promisesaplus.com/#point-54
@@ -62697,11 +61861,7 @@ return ta;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 47 */
-=======
 /* 154 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -62794,13 +61954,8 @@ return te;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 48 */
-/***/ (function(module, exports) {
-=======
 /* 155 */
 /***/ (function(module, exports, __webpack_require__) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 //! moment.js locale configuration
 
@@ -63508,11 +62663,7 @@ return tzm;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 49 */
-=======
 /* 163 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -63572,16 +62723,6 @@ return tzmLatn;
 
 })));
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var utils = __webpack_require__(4);
-var settle = __webpack_require__(238);
-var buildURL = __webpack_require__(240);
-var parseHeaders = __webpack_require__(241);
-var isURLSameOrigin = __webpack_require__(242);
-var createError = __webpack_require__(50);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(243);
-=======
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /***/ }),
 /* 164 */
@@ -63858,15 +62999,7 @@ var uk = moment.defineLocale('uk', {
 
 return uk;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-    // Add xsrf header
-    // This is only done if running in a standard browser environment.
-    // Specifically not if we're in a web worker, or react-native.
-    if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(244);
-=======
 })));
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
 /***/ }),
@@ -64179,11 +63312,7 @@ return vi;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 50 */
-=======
 /* 170 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -64251,11 +63380,7 @@ var xPseudo = moment.defineLocale('x-pseudo', {
 
 return xPseudo;
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var enhanceError = __webpack_require__(239);
-=======
 })));
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 
 /***/ }),
@@ -64323,11 +63448,7 @@ return yo;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 51 */
-=======
 /* 172 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -64441,11 +63562,7 @@ return zhCn;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 52 */
-=======
 /* 173 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 //! moment.js locale configuration
@@ -64659,144 +63776,11 @@ return zhTw;
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */,
-/* 102 */,
-/* 103 */,
-/* 104 */,
-/* 105 */,
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */,
-/* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */,
-/* 114 */,
-/* 115 */,
-/* 116 */,
-/* 117 */,
-/* 118 */,
-/* 119 */,
-/* 120 */,
-/* 121 */,
-/* 122 */,
-/* 123 */,
-/* 124 */,
-/* 125 */,
-/* 126 */,
-/* 127 */,
-/* 128 */,
-/* 129 */,
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */,
-/* 174 */,
-=======
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(176);
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-module.exports = __webpack_require__(330);
-=======
-module.exports = __webpack_require__(320);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-module.exports = __webpack_require__(323);
->>>>>>> fixed daily streams array in showschedule function
+module.exports = __webpack_require__(328);
 
 
 /***/ }),
@@ -64829,8 +63813,8 @@ Vue.component('test', __webpack_require__(273));
 
 Vue.component('example-component', __webpack_require__(276));
 Vue.component('games', __webpack_require__(279));
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 Vue.component('profilesidebar', __webpack_require__(284));
+Vue.component('profileschedule', __webpack_require__(287));
 Vue.component('nowlivebar', __webpack_require__(290));
 Vue.component('frontpagemain', __webpack_require__(293));
 Vue.component('profilepagemain', __webpack_require__(296));
@@ -64845,27 +63829,6 @@ Vue.component('dashboardprofile', __webpack_require__(317));
 Vue.component('chatroom', __webpack_require__(320));
 
 Vue.component('streams', __webpack_require__(325));
-=======
-Vue.component('profilesidebar', __webpack_require__(282));
-Vue.component('profileschedule', __webpack_require__(285));
-Vue.component('nowlivebar', __webpack_require__(288));
-Vue.component('frontpagemain', __webpack_require__(291));
-Vue.component('profilepagemain', __webpack_require__(294));
-Vue.component('stream', __webpack_require__(297));
-
-//dashboard//
-Vue.component('dashboard', __webpack_require__(300));
-Vue.component('dashboardstream', __webpack_require__(309));
-Vue.component('dashboardprofile', __webpack_require__(312));
-
-Vue.component('chatroom', __webpack_require__(315));
-
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-Vue.component('streams', __webpack_require__(317));
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-Vue.component('streams', __webpack_require__(320));
->>>>>>> fixed daily streams array in showschedule function
 
 var app = new Vue({
     el: '#app',
@@ -64916,15 +63879,9 @@ __webpack_require__(191);
  */
 
 try {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
     window.$ = window.jQuery = __webpack_require__(46);
 
     __webpack_require__(232);
-=======
-  window.$ = window.jQuery = __webpack_require__(46);
-
-  __webpack_require__(232);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 } catch (e) {}
 
 /**
@@ -82124,11 +81081,7 @@ function SafeParseTuple(obj, reviver) {
 
 "use strict";
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var window = __webpack_require__(3)
-=======
-var window = __webpack_require__(2)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 var isFunction = __webpack_require__(26)
 var parseHeaders = __webpack_require__(183)
 var xtend = __webpack_require__(186)
@@ -82528,11 +81481,7 @@ function extend() {
 // forth between JSON. If we don't then it's not that big of a deal since we're
 // off browser.
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var window = __webpack_require__(3);
-=======
-var window = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var vttjs = module.exports = {
   WebVTT: __webpack_require__(188),
@@ -84380,11 +83329,7 @@ var _playlistLoader = __webpack_require__(16);
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _playlist = __webpack_require__(9);
-=======
 var _playlist = __webpack_require__(7);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _playlist2 = _interopRequireDefault(_playlist);
 
@@ -84394,11 +83339,7 @@ var _xhr2 = _interopRequireDefault(_xhr);
 
 var _aesDecrypter = __webpack_require__(30);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _binUtils = __webpack_require__(10);
-=======
-var _binUtils = __webpack_require__(8);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _binUtils2 = _interopRequireDefault(_binUtils);
 
@@ -84422,11 +83363,7 @@ var _renditionMixin = __webpack_require__(229);
 
 var _renditionMixin2 = _interopRequireDefault(_renditionMixin);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -85076,11 +84013,7 @@ var _urlToolkit = __webpack_require__(193);
 
 var _urlToolkit2 = _interopRequireDefault(_urlToolkit);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -86486,11 +85419,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -86871,11 +85800,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -88818,11 +87743,7 @@ module.exports = {
 
 var
   Stream = __webpack_require__(5),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
   StreamTypes = __webpack_require__(11),
-=======
-  StreamTypes = __webpack_require__(9),
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   // return a percent-encoded representation of the specified byte range
   // @see http://en.wikipedia.org/wiki/Percent-encoding
   percentEncode = function(bytes, start, end) {
@@ -89493,11 +88414,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -90958,11 +89875,7 @@ var _playlistLoader = __webpack_require__(16);
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _playlistJs = __webpack_require__(9);
-=======
 var _playlistJs = __webpack_require__(7);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _segmentLoader = __webpack_require__(42);
 
@@ -92542,11 +91455,7 @@ var _videoJs = __webpack_require__(1);
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _binUtils = __webpack_require__(10);
-=======
-var _binUtils = __webpack_require__(8);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var REQUEST_ERRORS = {
   FAILURE: 2,
@@ -93014,11 +91923,7 @@ var _videoJs = __webpack_require__(1);
 
 var _videoJs2 = _interopRequireDefault(_videoJs);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -93026,11 +91931,7 @@ var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs = __webpack_require__(13
 
 var _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs2 = _interopRequireDefault(_videojsContribMediaSourcesEs5RemoveCuesFromTrackJs);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _binUtils = __webpack_require__(10);
-=======
-var _binUtils = __webpack_require__(8);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var VTT_LINE_TERMINATORS = new Uint8Array('\n\n'.split('').map(function (char) {
   return char.charCodeAt(0);
@@ -93475,11 +92376,7 @@ var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = 
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -93610,11 +92507,7 @@ var _muxJsLibMp4Probe2 = _interopRequireDefault(_muxJsLibMp4Probe);
 
 var _muxJsLibToolsTsInspectorJs = __webpack_require__(225);
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _playlist = __webpack_require__(9);
-=======
 var _playlist = __webpack_require__(7);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _videoJs = __webpack_require__(1);
 
@@ -94404,11 +93297,7 @@ module.exports = {
  */
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var StreamTypes = __webpack_require__(11);
-=======
-var StreamTypes = __webpack_require__(9);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 var handleRollover = __webpack_require__(34).handleRollover;
 var probe = {};
 probe.ts = __webpack_require__(226);
@@ -94927,11 +93816,7 @@ module.exports = {
  */
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var StreamTypes = __webpack_require__(11);
-=======
-var StreamTypes = __webpack_require__(9);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var parsePid = function(packet) {
   var pid = packet[1] & 0x1f;
@@ -96151,11 +95036,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var _playlistJs = __webpack_require__(9);
-=======
 var _playlistJs = __webpack_require__(7);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /**
  * Returns a function that acts as the Enable/disable playlist function.
@@ -96282,11 +95163,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var _globalWindow = __webpack_require__(3);
-=======
-var _globalWindow = __webpack_require__(2);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 var _globalWindow2 = _interopRequireDefault(_globalWindow);
 
@@ -117857,7 +116734,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(258)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(261)
 /* template */
@@ -117910,11 +116787,7 @@ var content = __webpack_require__(259);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var update = __webpack_require__(8)("a44a1dd2", content, false, {});
-=======
-var update = __webpack_require__(11)("2a28cc49", content, false, {});
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+var update = __webpack_require__(9)("a44a1dd2", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -117933,11 +116806,7 @@ if(false) {
 /* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-exports = module.exports = __webpack_require__(7)(false);
-=======
-exports = module.exports = __webpack_require__(10)(false);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -118914,7 +117783,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(264)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(266)
 /* template */
@@ -118967,11 +117836,7 @@ var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var update = __webpack_require__(8)("437dd684", content, false, {});
-=======
-var update = __webpack_require__(11)("10846595", content, false, {});
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+var update = __webpack_require__(9)("437dd684", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -118990,11 +117855,7 @@ if(false) {
 /* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-exports = module.exports = __webpack_require__(7)(false);
-=======
-exports = module.exports = __webpack_require__(10)(false);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -119243,7 +118104,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(269)
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(271)
 /* template */
@@ -119296,11 +118157,7 @@ var content = __webpack_require__(270);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var update = __webpack_require__(8)("174f2f0a", content, false, {});
-=======
-var update = __webpack_require__(11)("4e7bd74e", content, false, {});
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+var update = __webpack_require__(9)("174f2f0a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -119319,11 +118176,7 @@ if(false) {
 /* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-exports = module.exports = __webpack_require__(7)(false);
-=======
-exports = module.exports = __webpack_require__(10)(false);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -120038,7 +118891,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(274)
 /* template */
@@ -120090,6 +118943,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -120130,7 +118984,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(277)
 /* template */
@@ -120259,7 +119113,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(280)
@@ -120269,13 +119122,6 @@ var normalizeComponent = __webpack_require__(2)
 var __vue_script__ = __webpack_require__(282)
 /* template */
 var __vue_template__ = __webpack_require__(283)
-=======
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(280)
-/* template */
-var __vue_template__ = __webpack_require__(281)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120315,7 +119161,6 @@ module.exports = Component.exports
 
 /***/ }),
 /* 280 */
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -120325,7 +119170,7 @@ var content = __webpack_require__(281);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("05c3ad2c", content, false, {});
+var update = __webpack_require__(9)("05c3ad2c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -120344,7 +119189,7 @@ if(false) {
 /* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -120356,13 +119201,10 @@ exports.push([module.i, "\n#games-main {\n  max-height: 1px;\n}\n\n", ""]);
 
 /***/ }),
 /* 282 */
-=======
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -120404,11 +119246,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 283 */
-=======
-/* 281 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120485,25 +119323,15 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 284 */
-=======
-/* 282 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(285)
 /* template */
 var __vue_template__ = __webpack_require__(286)
-=======
-var __vue_script__ = __webpack_require__(283)
-/* template */
-var __vue_template__ = __webpack_require__(284)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120542,11 +119370,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 285 */
-=======
-/* 283 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120683,11 +119507,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 286 */
-=======
-/* 284 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120968,20 +119788,20 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-d76671ac", module.exports)
   }
 }
 
 /***/ }),
-/* 285 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(286)
+var __vue_script__ = __webpack_require__(288)
 /* template */
-var __vue_template__ = __webpack_require__(287)
+var __vue_template__ = __webpack_require__(289)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120998,7 +119818,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/profileschedule.vue"
+Component.options.__file = "resources\\assets\\js\\components\\profileschedule.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -121007,9 +119827,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-58630679", Component.options)
+    hotAPI.createRecord("data-v-337df139", Component.options)
   } else {
-    hotAPI.reload("data-v-58630679", Component.options)
+    hotAPI.reload("data-v-337df139", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121020,7 +119840,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 286 */
+/* 288 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121085,7 +119905,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 287 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -121153,399 +119973,20 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-337df139", module.exports)
   }
 }
-
-/***/ }),
-/* 288 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(289)
-/* template */
-var __vue_template__ = __webpack_require__(290)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-64aabce8", Component.options)
-  } else {
-    hotAPI.reload("data-v-64aabce8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 289 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      games: null,
-      users: null
-    };
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/api/listusers').then(function (response) {
-      _this.users = response.data;
-    });
-  }
-});
 
 /***/ }),
 /* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-md-2 pt-1", staticStyle: { padding: "0" } },
-    [
-      _c(
-        "div",
-        { staticClass: "container-fluid px-0" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.users, function(user) {
-            return _c(
-              "div",
-              {
-                staticClass: "streamer list-group-item",
-                class: {
-                  "list-group-item": user.now_live,
-                  "list-group-item-secondary": !user.now_live
-                },
-                staticStyle: {
-                  "background-color": "#343a40",
-                  "border-radius": "0px 0px 0rem 0rem"
-                }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "d-flex w-100 justify-content-between" },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticStyle: { color: "#f5f5dc" },
-                        attrs: { href: "/" + user.name }
-                      },
-                      [_vm._v(_vm._s(user.name))]
-                    ),
-                    _c(
-                      "small",
-                      {
-                        staticClass: "text-danger",
-                        class: { "d-none": !user.now_live }
-                      },
-                      [_vm._v("live now")]
-                    )
-                  ]
-                )
-              ]
-            )
-          })
-        ],
-        2
-      )
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "list-group-item",
-        staticStyle: {
-          "background-color": "#f5f5dc",
-          "border-radius": "0px 0px 0rem 0rem",
-          border: "0px"
-        }
-      },
-      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-64aabce8", module.exports)
-  }
-}
-
-/***/ }),
-/* 291 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(292)
-/* template */
-var __vue_template__ = __webpack_require__(293)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/frontpagemain.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0d70c4ea", Component.options)
-  } else {
-    hotAPI.reload("data-v-0d70c4ea", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 292 */
-/***/ (function(module, exports) {
-
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 293 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-5 pt-1" }, [
-      _c("p", [_vm._v(" lots of stuff here soon ")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0d70c4ea", module.exports)
-  }
-}
-
-/***/ }),
-/* 294 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(295)
-/* template */
-var __vue_template__ = __webpack_require__(296)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/profilepagemain.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b8ed07ac", Component.options)
-  } else {
-    hotAPI.reload("data-v-b8ed07ac", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 295 */
-/***/ (function(module, exports) {
-
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 296 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticStyle: { height: "500px" } }, [
-      _c("p", [_vm._v(" lots of stuff here soon ")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-    require("vue-hot-reload-api")      .rerender("data-v-d76671ac", module.exports)
-=======
-    require("vue-hot-reload-api")      .rerender("data-v-b8ed07ac", module.exports)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-  }
-}
-
-/***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */
-=======
-/* 294 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 297 */
->>>>>>> fixed daily streams array in showschedule function
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(291)
 /* template */
 var __vue_template__ = __webpack_require__(292)
-=======
-var __vue_script__ = __webpack_require__(295)
-/* template */
-var __vue_template__ = __webpack_require__(296)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-var __vue_script__ = __webpack_require__(298)
-/* template */
-var __vue_template__ = __webpack_require__(299)
->>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -121562,11 +120003,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 Component.options.__file = "resources\\assets\\js\\components\\nowlivebar.vue"
-=======
-Component.options.__file = "resources/assets/js/components/Stream.vue"
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /* hot reload */
 if (false) {(function () {
@@ -121575,15 +120012,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
     hotAPI.createRecord("data-v-35981a28", Component.options)
   } else {
     hotAPI.reload("data-v-35981a28", Component.options)
-=======
-    hotAPI.createRecord("data-v-5ffd2477", Component.options)
-  } else {
-    hotAPI.reload("data-v-5ffd2477", Component.options)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121594,15 +120025,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 291 */
-=======
-/* 295 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 298 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121625,7 +120048,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -121667,101 +120089,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 292 */
-=======
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	name: 'stream',
-	props: ['streamer', 'followers', 'viewers', 'darkmode'],
-	data: function data() {
-		return {
-			watchstream: true,
-			watchviewers: false,
-			watchfollowers: false
-		};
-	},
-	methods: {
-		showstream: function showstream() {
-			this.watchstream = true;
-			this.watchviewers = false;
-			this.watchfollowers = false;
-		},
-		showviewers: function showviewers() {
-			this.watchstream = false;
-			this.watchviewers = true;
-			this.watchfollowers = false;
-		},
-		showfollowers: function showfollowers() {
-			this.watchstream = false;
-			this.watchviewers = false;
-			this.watchfollowers = true;
-		},
-		toggleDarkMode: function toggleDarkMode() {
-			this.$emit('darkmode');
-		}
-	}
-});
-
-/***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-/* 296 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 299 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
   return _c("div", [
     _c(
       "div",
@@ -121827,286 +120160,24 @@ var render = function() {
       2
     )
   ])
-=======
-  return _c(
-    "div",
-    {
-      staticClass: "col-md-9 pl-1 pt-1",
-      staticStyle: { "overflow-y": "scroll" }
-    },
-    [
-      _c("div", { staticClass: "card", class: { "bg-dark": _vm.darkmode } }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
-            _c(
-              "li",
-              {
-                staticClass: "nav-item px-1",
-                class: { "bg-dark": _vm.darkmode },
-                on: { click: _vm.showstream }
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link active",
-                    class: {
-                      "bg-secondary": _vm.darkmode,
-                      "border-secondary": _vm.darkmode
-                    },
-                    attrs: { href: "#" }
-                  },
-                  [_vm._v(_vm._s(_vm.streamer.name))]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "nav-item px-1",
-                class: { "bg-dark": _vm.darkmode },
-                on: { click: _vm.showviewers }
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link active",
-                    class: {
-                      "bg-secondary": _vm.darkmode,
-                      "border-secondary": _vm.darkmode
-                    },
-                    attrs: { href: "#" }
-                  },
-                  [
-                    _vm._v("viewers "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(_vm.viewers.length))
-                    ])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "nav-item px-1",
-                class: { "bg-dark": _vm.darkmode },
-                on: { click: _vm.showfollowers }
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "nav-link active",
-                    class: {
-                      "bg-secondary": _vm.darkmode,
-                      "border-secondary": _vm.darkmode
-                    },
-                    attrs: { href: "#" }
-                  },
-                  [
-                    _vm._v("followers "),
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(_vm._s(_vm.followers.length))
-                    ])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("li", { staticClass: "ml-auto" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-dark",
-                  attrs: { type: "button" },
-                  on: { click: _vm.toggleDarkMode }
-                },
-                [_vm._v("Dark mode")]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.watchstream,
-                expression: "watchstream"
-              }
-            ]
-          },
-          [
-            _vm.streamer.now_live
-              ? _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "video",
-                    {
-                      staticClass: "video-js",
-                      attrs: {
-                        id: "vid1",
-                        controls: "",
-                        preload: "auto",
-                        "data-setup": '{ "aspectRatio": "16:9" }'
-                      }
-                    },
-                    [
-                      _c("source", {
-                        attrs: {
-                          src:
-                            "http://10.0.0.61:8080/hls/" +
-                            _vm.streamer.stream_token +
-                            ".m3u8",
-                          type: "application/x-mpegURL"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ]
-                  )
-                ])
-              : _c(
-                  "div",
-                  {
-                    staticClass: "card-body",
-                    staticStyle: { "text-align": "center" }
-                  },
-                  [
-                    _c("img", {
-                      staticStyle: { width: "85%" },
-                      attrs: {
-                        src: "/images/offline.png",
-                        alt: "streamer offline"
-                      }
-                    })
-                  ]
-                )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.watchviewers,
-                expression: "watchviewers"
-              }
-            ]
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h1", [_vm._v("\n\t\t\t\t\tWatching now\n\t\t\t\t")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "list-group" },
-                _vm._l(_vm.viewers, function(viewer) {
-                  return _c(
-                    "div",
-                    {
-                      staticClass: "list-group-item",
-                      class: {
-                        "bg-secondary": _vm.darkmode,
-                        "border-secondary": _vm.darkmode
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        { attrs: { href: "/profilepage/" + viewer.name } },
-                        [_vm._v(_vm._s(viewer.name))]
-                      )
-                    ]
-                  )
-                })
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.watchfollowers,
-                expression: "watchfollowers"
-              }
-            ]
-          },
-          [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h1", [
-                _vm._v(
-                  "\n\t\t\t\t\t" +
-                    _vm._s(_vm.streamer.name) +
-                    "'s followers\n\t\t\t\t"
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "list-group" },
-                _vm._l(_vm.followers, function(follower) {
-                  return _c(
-                    "div",
-                    {
-                      staticClass: "list-group-item",
-                      class: {
-                        "bg-secondary": _vm.darkmode,
-                        "border-secondary": _vm.darkmode
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        { attrs: { href: "/profilepage/" + follower.name } },
-                        [_vm._v(_vm._s(follower.name))]
-                      )
-                    ]
-                  )
-                })
-              )
-            ])
-          ]
-        )
-      ])
-    ]
-  )
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "vjs-no-js" }, [
-      _vm._v(
-        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
-      ),
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "http://videojs.com/html5-video-support/",
-            target: "_blank"
-          }
-        },
-        [_vm._v("supports HTML5 video")]
-      )
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Popular streamers")])]
+    )
   }
 ]
 render._withStripped = true
@@ -122114,44 +120185,20 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
     require("vue-hot-reload-api")      .rerender("data-v-35981a28", module.exports)
-=======
-    require("vue-hot-reload-api")      .rerender("data-v-5ffd2477", module.exports)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   }
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 293 */
-=======
-/* 297 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 300 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(294)
 /* template */
 var __vue_template__ = __webpack_require__(295)
-=======
-var __vue_script__ = __webpack_require__(298)
-/* template */
-var __vue_template__ = __webpack_require__(305)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-var __vue_script__ = __webpack_require__(301)
-/* template */
-var __vue_template__ = __webpack_require__(308)
->>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -122168,11 +120215,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 Component.options.__file = "resources\\assets\\js\\components\\frontpagemain.vue"
-=======
-Component.options.__file = "resources/assets/js/components/dashboard.vue"
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /* hot reload */
 if (false) {(function () {
@@ -122181,15 +120224,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
     hotAPI.createRecord("data-v-23c75faa", Component.options)
   } else {
     hotAPI.reload("data-v-23c75faa", Component.options)
-=======
-    hotAPI.createRecord("data-v-2073dee6", Component.options)
-  } else {
-    hotAPI.reload("data-v-2073dee6", Component.options)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122200,343 +120237,15 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 294 */
 /***/ (function(module, exports) {
-=======
-/* 298 */
-=======
-/* 301 */
->>>>>>> fixed daily streams array in showschedule function
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker__ = __webpack_require__(302);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_datepicker__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
 //
 //
 
-<<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
-<<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /***/ }),
 /* 295 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -122563,293 +120272,25 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-23c75faa", module.exports)
-=======
-
-=======
-var state = {
-  date: ''
-};
->>>>>>> schedule add javascript function, and half of vue datapicker
-=======
-
->>>>>>> adding one time events works
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-
-  data: function data() {
-    return {
-      profilecontent: [],
-      schedules: [],
-      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
-      games: [],
-      currentdate: [],
-      streamdash: true,
-      profiledash: false,
-      channeldash: false,
-      scheduledash: false,
-
-      startTime: {
-        time: ''
-      },
-      endtime: {
-        time: ''
-      },
-
-      option: {
-        type: 'day',
-        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: 'YYYY-MM-DD',
-        placeholder: 'when?',
-
-        inputStyle: {
-          'display': 'inline-block',
-          'padding': '6px',
-          'line-height': '22px',
-          'font-size': '16px',
-          'border': '2px solid #fff',
-          'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-          'border-radius': '2px',
-          'color': '#5F5F5F'
-        },
-        color: {
-          header: '#ccc',
-          headerText: '#f00'
-        },
-        buttons: {
-          ok: 'Ok',
-          cancel: 'Cancel'
-        },
-        overlayOpacity: 0.5, // 0.5 as default
-        dismissible: true // as true as default
-      },
-      timeoption: {
-        type: 'min',
-        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: 'YYYY-MM-DD HH:mm'
-      },
-      multiOption: {
-        type: 'multi-day',
-        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        inputName: 'schedule_time',
-        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: "YYYY-MM-DD HH:mm"
-      },
-      limit: [{
-        type: 'fromto',
-        from: '',
-        to: ''
-      }]
-    };
-  },
-
-  components: {
-    'date-picker': __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default.a
-  },
-  props: ['user'],
-  mounted: function mounted() {
-    var _this = this;
-
-    var contenturl = 'api/profilecontent/' + this.user.name;
-    axios.get(contenturl).then(function (response) {
-      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
-    });
-    axios.get('/api/allgames').then(function (response) {
-      _this.games = JSON.parse(JSON.stringify(response.data));
-    });
-    axios.get('/api/currentdate').then(function (response) {
-      _this.currentdate = JSON.parse(JSON.stringify(response.data));
-    });
-    var scheduleurl = '/api/schedule/' + this.user.name;
-    axios.get(scheduleurl).then(function (response) {
-      _this.schedules = JSON.parse(JSON.stringify(response.data));
-      console.log(_this.schedules);
-    });
-  },
-
-
-  methods: {
-    streamkey: function streamkey() {
-
-      axios.post('/api/streamkey', {
-        user_id: this.user.id
-
-      }).then(function (response) {
-        document.getElementById('streamkeymessage').style.display = "block";
-        document.getElementById('streamkey_btn').style.display = "none";
-        document.getElementById('hide_btn').style.display = "block";
-        document.getElementById('schedulemsg').style.display = "block";
-        document.getElementById('streamkeymessage').innerHTML = response.data;
-      });
-    },
-
-    hidekey: function hidekey() {
-      document.getElementById('streamkeymessage').style.display = "none";
-      document.getElementById('hide_btn').style.display = "none";
-      document.getElementById('streamkey_btn').style.display = "block";
-      document.getElementById('streamkeymessage').innerHTML = "";
-    },
-
-    golive: function golive() {
-      axios.post('/api/stream', {
-
-        user_id: this.user.id,
-        stream_title: document.getElementById('streamtitle').value,
-        game_id: document.getElementById('gameselect').value
-
-      });
-    },
-
-    updateAbout: function updateAbout() {
-      var _this2 = this;
-
-      axios.post('/api/updateabout', {
-        about: document.getElementById('aboutinput').value
-      }).then(function (response) {
-        _this2.profilecontent.about = response.data;
-        $('#collapseEdit').collapse("toggle");
-      });
-    },
-    show_form_single: function show_form_single() {
-      document.getElementById('addschedulebuttons').style.display = "none";
-      document.getElementById('schedule_form_single').style.display = "block";
-    },
-    show_form_weekly: function show_form_weekly() {
-      document.getElementById('addschedulebuttons').style.display = "none";
-      document.getElementById('schedule_form_weekly').style.display = "block";
-    },
-    show_form_daily: function show_form_daily() {
-      document.getElementById('addschedulebuttons').style.display = "none";
-      document.getElementById('schedule_form_daily').style.display = "block";
-    },
-    show_back: function show_back() {
-      document.getElementById('addschedulebuttons').style.display = "block";
-      document.getElementById('schedule_form_single').style.display = "none";
-      document.getElementById('schedule_form_weekly').style.display = "none";
-      document.getElementById('schedule_form_daily').style.display = "none";
-    },
-    add_schedule_single: function add_schedule_single() {
-      axios.post('/api/addschedulesingle', {
-        single_title: document.getElementById('single_title').value,
-        single_start: document.getElementById('single_start').value,
-        single_end: document.getElementById('single_end').value,
-        single_tag: document.getElementById('single_tag').value,
-        single_game: document.getElementById('single_game').value
-      }).then(function (response) {
-        document.getElementById('addschedulebuttons').style.display = "block";
-        document.getElementById('schedulemsg').style.display = "block";
-        document.getElementById('schedulemsg').innerHTML = response.data;
-        document.getElementById('schedule_form_single').style.display = "none";
-        document.getElementById('schedule_form_weekly').style.display = "none";
-        document.getElementById('schedule_form_daily').style.display = "none";
-      });
-    },
-    add_schedule_daily: function add_schedule_daily() {
-
-      axios.post('/api/addscheduledaily', {
-        daily_title: document.getElementById('daily_title').value,
-        daily_start: document.getElementById('daily_start').value,
-        daily_end: document.getElementById('daily_end').value,
-        daily_tag: document.getElementById('daily_tag').value,
-        daily_game: document.getElementById('daily_game').value
-      }).then(function (response) {
-        document.getElementById('addschedulebuttons').style.display = "block";
-        document.getElementById('schedulemsg').style.display = "block";
-        document.getElementById('schedulemsg').innerHTML = response.data;
-        document.getElementById('schedule_form_single').style.display = "none";
-        document.getElementById('schedule_form_weekly').style.display = "none";
-        document.getElementById('schedule_form_daily').style.display = "none";
-      });
-    },
-    add_schedule_weekly: function add_schedule_weekly() {
-      axios.post('/api/addscheduleweekly', {
-        weekly_title: document.getElementById('weekly_title').value,
-        weekly_day: document.getElementById('weekly_day').value,
-        weekly_start: document.getElementById('weekly_start').value,
-        weekly_end: document.getElementById('weekly_end').value,
-        weekly_tag: document.getElementById('weekly_tag').value,
-        weekly_game: document.getElementById('weekly_game').value
-      }).then(function (response) {
-        document.getElementById('addschedulebuttons').style.display = "block";
-        document.getElementById('schedulemsg').style.display = "block";
-        document.getElementById('schedulemsg').innerHTML = response.data;
-        document.getElementById('schedule_form_single').style.display = "none";
-        document.getElementById('schedule_form_weekly').style.display = "none";
-        document.getElementById('schedule_form_daily').style.display = "none";
-      });
-    },
-
-    showstreamdash: function showstreamdash() {
-      this.streamdash = true;
-      this.profiledash = false;
-      this.channeldash = false;
-      this.scheduledash = false;
-    },
-    showprofiledash: function showprofiledash() {
-      this.streamdash = false;
-      this.profiledash = true;
-      this.channeldash = false;
-      this.scheduledash = false;
-    },
-    showchanneldash: function showchanneldash() {
-      this.streamdash = false;
-      this.profiledash = false;
-      this.channeldash = true;
-      this.scheduledash = false;
-    },
-    showscheduledash: function showscheduledash() {
-      this.streamdash = false;
-      this.profiledash = false;
-      this.channeldash = false;
-      this.scheduledash = true;
-    }
-
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   }
-});
+}
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 296 */
-=======
-/* 299 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 302 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(303)
-}
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(297)
 /* template */
 var __vue_template__ = __webpack_require__(298)
-=======
-var __vue_script__ = __webpack_require__(302)
-/* template */
-var __vue_template__ = __webpack_require__(304)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-var __vue_script__ = __webpack_require__(305)
-/* template */
-var __vue_template__ = __webpack_require__(307)
->>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-3faef998"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -122860,11 +120301,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 Component.options.__file = "resources\\assets\\js\\components\\profilepagemain.vue"
-=======
-Component.options.__file = "node_modules/vue-datepicker/vue-datepicker.vue"
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 /* hot reload */
 if (false) {(function () {
@@ -122873,15 +120310,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
     hotAPI.createRecord("data-v-7ea466ea", Component.options)
   } else {
     hotAPI.reload("data-v-7ea466ea", Component.options)
-=======
-    hotAPI.createRecord("data-v-3faef998", Component.options)
-  } else {
-    hotAPI.reload("data-v-3faef998", Component.options)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122892,8 +120323,6 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 297 */
 /***/ (function(module, exports) {
 
@@ -122975,64 +120404,16 @@ if (false) {(function () {
     disposed = true
   })
 })()}
-=======
-/* 300 */
-=======
-/* 303 */
->>>>>>> fixed daily streams array in showschedule function
-/***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(304);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(11)("7d981249", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3faef998\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue", function() {
-     var newContent = require("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3faef998\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 304 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(10)(false);
-// imports
-
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-
-// module
-exports.push([module.i, "\n.datepicker-overlay[data-v-3faef998] {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  z-index: 998;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  -webkit-animation: fadein-data-v-3faef998 0.5s;\n  /* Safari, Chrome and Opera > 12.1 */\n  /* Firefox < 16 */\n  /* Internet Explorer */\n  /* Opera < 12.1 */\n  animation: fadein-data-v-3faef998 0.5s;\n}\n@keyframes fadein-data-v-3faef998 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Firefox < 16 */\n/* Safari, Chrome and Opera > 12.1 */\n@-webkit-keyframes fadein-data-v-3faef998 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Internet Explorer */\n/* Opera < 12.1 */\n.cov-date-body[data-v-3faef998] {\n  display: inline-block;\n  background: #3F51B5;\n  overflow: hidden;\n  position: relative;\n  font-size: 16px;\n  font-family: 'Roboto';\n  font-weight: 400;\n  position: fixed;\n  display: block;\n  width: 400px;\n  max-width: 100%;\n  z-index: 999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n}\n.cov-picker-box[data-v-3faef998] {\n  background: #fff;\n  width: 100%;\n  display: inline-block;\n  padding: 25px;\n  box-sizing: border-box !important;\n  -moz-box-sizing: border-box !important;\n  -webkit-box-sizing: border-box !important;\n  -ms-box-sizing: border-box !important;\n  width: 400px;\n  max-width: 100%;\n  height: 280px;\n  text-align: start!important;\n}\n.cov-picker-box td[data-v-3faef998] {\n  height: 34px;\n  width: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-picker-box td[data-v-3faef998]:hover {\n  background: #E6E6E6;\n}\ntable[data-v-3faef998] {\n  border-collapse: collapse;\n  border-spacing: 0;\n  width: 100%;\n}\n.day[data-v-3faef998] {\n  width: 14.2857143%;\n  display: inline-block;\n  text-align: center;\n  cursor: pointer;\n  height: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  vertical-align: middle;\n}\n.week ul[data-v-3faef998] {\n  margin: 0 0 8px;\n  padding: 0;\n  list-style: none;\n}\n.week ul li[data-v-3faef998] {\n  width: 14.2%;\n  display: inline-block;\n  text-align: center;\n  background: transparent;\n  color: #000;\n  font-weight: bold;\n}\n.passive-day[data-v-3faef998] {\n  color: #bbb;\n}\n.checked[data-v-3faef998] {\n  background: #F50057;\n  color: #FFF !important;\n  border-radius: 3px;\n}\n.unavailable[data-v-3faef998] {\n  color: #ccc;\n  cursor: not-allowed;\n}\n.cov-date-monthly[data-v-3faef998] {\n  height: 150px;\n}\n.cov-date-monthly > div[data-v-3faef998] {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  vertical-align: middle;\n  color: #fff;\n  height: 150px;\n  float: left;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-date-previous[data-v-3faef998],\n.cov-date-next[data-v-3faef998] {\n  position: relative;\n  width: 20% !important;\n  text-indent: -300px;\n  overflow: hidden;\n  color: #fff;\n}\n.cov-date-caption[data-v-3faef998] {\n  width: 60%;\n  padding: 50px 0!important;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 24px;\n}\n.cov-date-caption span[data-v-3faef998]:hover {\n  color: rgba(255, 255, 255, 0.7);\n}\n.cov-date-previous[data-v-3faef998]:hover,\n.cov-date-next[data-v-3faef998]:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n.day[data-v-3faef998]:hover {\n  background: #EAEAEA;\n}\n.unavailable[data-v-3faef998]:hover {\n  background: none;\n}\n.checked[data-v-3faef998]:hover {\n  background: #FF4F8E;\n}\n.cov-date-next[data-v-3faef998]::before,\n.cov-date-previous[data-v-3faef998]::before {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  top: 50%;\n  margin-top: -7px;\n  margin-left: -7px;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-next[data-v-3faef998]::after,\n.cov-date-previous[data-v-3faef998]::after {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  margin-top: 6px;\n  margin-left: -7px;\n  top: 50%;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.cov-date-previous[data-v-3faef998]::after {\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-previous[data-v-3faef998]::before {\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.date-item[data-v-3faef998] {\n  text-align: center;\n  font-size: 20px;\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-item[data-v-3faef998]:hover {\n  background: #e0e0e0;\n}\n.date-list[data-v-3faef998] {\n  overflow: auto;\n  vertical-align: top;\n  padding: 0;\n}\n.cov-vue-date[data-v-3faef998] {\n  display: inline-block;\n  color: #5D5D5D;\n}\n.button-box[data-v-3faef998] {\n  background: #fff;\n  vertical-align: top;\n  height: 50px;\n  line-height: 50px;\n  text-align: right;\n  padding-right: 20px;\n}\n.button-box span[data-v-3faef998] {\n  cursor: pointer;\n  padding: 10px 20px;\n}\n.watch-box[data-v-3faef998] {\n  height: 100%;\n  overflow: hidden;\n}\n.hour-box[data-v-3faef998],\n.min-box[data-v-3faef998] {\n  display: inline-block;\n  width: 50%;\n  text-align: center;\n  height: 100%;\n  overflow: auto;\n  float: left;\n}\n.hour-box ul[data-v-3faef998],\n.min-box ul[data-v-3faef998] {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.hour-item[data-v-3faef998],\n.min-item[data-v-3faef998] {\n  padding: 10px;\n  font-size: 36px;\n  cursor: pointer;\n}\n.hour-item[data-v-3faef998]:hover,\n.min-item[data-v-3faef998]:hover {\n  background: #E3E3E3;\n}\n.hour-box .active[data-v-3faef998],\n.min-box .active[data-v-3faef998] {\n  background: #F50057;\n  color: #FFF !important;\n}\n[data-v-3faef998]::-webkit-scrollbar {\n  width: 2px;\n}\n[data-v-3faef998]::-webkit-scrollbar-track {\n  background: #E3E3E3;\n}\n[data-v-3faef998]::-webkit-scrollbar-thumb {\n  background: #C1C1C1;\n  border-radius: 2px;\n}\n", ""]);
-
-// exports
+module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 300 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
-=======
-/* 302 */
-=======
-/* 305 */
->>>>>>> fixed daily streams array in showschedule function
-/***/ (function(module, exports, __webpack_require__) {
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -123098,7 +120479,6 @@ exports.push([module.i, "\n.datepicker-overlay[data-v-3faef998] {\n  position: f
 //
 //
 //
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'stream',
@@ -123482,7 +120862,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-=======
 //
 //
 //
@@ -123500,426 +120879,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
-=======
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
->>>>>>> added dummy schedule table to dashboard.vue
 
 
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* harmony default export */ __webpack_exports__["default"] = ({
-=======
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _moment = __webpack_require__(0);
-
-var _moment2 = _interopRequireDefault(_moment);
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-
-exports.default = {
-  props: {
-    required: false,
-    date: {
-      type: Object,
-      required: true
-    },
-    option: {
-      type: Object,
-      default: function _default() {
-        return {
-          type: 'day',
-          SundayFirst: false,
-          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-          month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-          format: 'YYYY-MM-DD',
-          color: {
-            checked: '#F50057',
-            header: '#3f51b5',
-            headerText: '#fff'
-          },
-          inputStyle: {
-            'display': 'inline-block',
-            'padding': '6px',
-            'line-height': '22px',
-            'font-size': '16px',
-            'border': '2px solid #fff',
-            'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-            'border-radius': '2px',
-            'color': '#5F5F5F'
-          },
-          placeholder: 'when?',
-          buttons: {
-            ok: 'OK',
-            cancel: 'Cancel'
-          },
-          overlayOpacity: 0.5,
-          dismissible: true
-        };
-      }
-    },
-    limit: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    }
-  },
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
   data: function data() {
-    function hours() {
-      var list = [];
-      var hour = 24;
-      while (hour > 0) {
-        hour--;
-        list.push({
-          checked: false,
-          value: hour < 10 ? '0' + hour : hour
-        });
-      }
-      return list;
-    }
-    function mins() {
-      var list = [];
-      var min = 60;
-      while (min > 0) {
-        min--;
-        list.push({
-          checked: false,
-          value: min < 10 ? '0' + min : min
-        });
-      }
-      return list;
-    }
     return {
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
       games: null,
       users: []
-=======
-      profilecontent: [],
-      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
-      games: [],
-      streamdash: true,
-      profiledash: false,
-      channeldash: false,
-      scheduledash: false
->>>>>>> added dummy schedule table to dashboard.vue
     };
   },
 
   mounted: function mounted() {
     var _this = this;
 
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
     axios.get('/api/followings').then(function (response) {
       _this.users = response.data;
-=======
-    var contenturl = 'api/profilecontent/' + this.user.name;
-    axios.get(contenturl).then(function (response) {
-      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
-    });
-    axios.get('/api/allgames').then(function (response) {
-      _this.games = JSON.parse(JSON.stringify(response.data));
->>>>>>> added dummy schedule table to dashboard.vue
     });
     setInterval(function () {
       var _this2 = this;
@@ -124096,18 +121070,1128 @@ if (false) {(function () {
 module.exports = Component.exports
 
 
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
 /***/ }),
 /* 306 */
-/***/ (function(module, exports) {
-=======
-      axios.post('/api/updateabout', {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_datepicker__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+  data: function data() {
+    return {
+      profilecontent: [],
+      schedules: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      currentdate: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false,
+      scheduledash: false,
+
+      startTime: {
+        time: ''
+      },
+      endtime: {
+        time: ''
+      },
+
+      option: {
+        type: 'day',
+        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        format: 'YYYY-MM-DD',
+        placeholder: 'when?',
+
+        inputStyle: {
+          'display': 'inline-block',
+          'padding': '6px',
+          'line-height': '22px',
+          'font-size': '16px',
+          'border': '2px solid #fff',
+          'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
+          'border-radius': '2px',
+          'color': '#5F5F5F'
+        },
+        color: {
+          header: '#ccc',
+          headerText: '#f00'
+        },
+        buttons: {
+          ok: 'Ok',
+          cancel: 'Cancel'
+        },
+        overlayOpacity: 0.5, // 0.5 as default
+        dismissible: true // as true as default
+      },
+      timeoption: {
+        type: 'min',
+        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        format: 'YYYY-MM-DD HH:mm'
+      },
+      multiOption: {
+        type: 'multi-day',
+        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        inputName: 'schedule_time',
+        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        format: "YYYY-MM-DD HH:mm"
+      },
+      limit: [{
+        type: 'fromto',
+        from: '',
+        to: ''
+      }]
+    };
+  },
+
+  components: {
+    'date-picker': __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default.a
+  },
+  props: ['user'],
+  mounted: function mounted() {
+    var _this = this;
+
+    var contenturl = 'api/profilecontent/' + this.user.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/allgames').then(function (response) {
+      _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/currentdate').then(function (response) {
+      _this.currentdate = JSON.parse(JSON.stringify(response.data));
+    });
+    var scheduleurl = '/api/schedule/' + this.user.name;
+    axios.get(scheduleurl).then(function (response) {
+      _this.schedules = JSON.parse(JSON.stringify(response.data));
+      console.log(_this.schedules);
+    });
+  },
+
+
+  methods: {
+    streamkey: function streamkey() {
+
+      axios.post('/api/streamkey', {
+        user_id: this.user.id
+
+      }).then(function (response) {
+        document.getElementById('streamkeymessage').style.display = "block";
+        document.getElementById('streamkey_btn').style.display = "none";
+        document.getElementById('hide_btn').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('streamkeymessage').innerHTML = response.data;
+      });
+    },
+
+    hidekey: function hidekey() {
+      document.getElementById('streamkeymessage').style.display = "none";
+      document.getElementById('hide_btn').style.display = "none";
+      document.getElementById('streamkey_btn').style.display = "block";
+      document.getElementById('streamkeymessage').innerHTML = "";
+    },
+
+    golive: function golive() {
+      axios.post('/api/stream', {
+
+        user_id: this.user.id,
+        stream_title: document.getElementById('streamtitle').value,
+        game_id: document.getElementById('gameselect').value
+
+      });
+    },
+
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+
+      axios.post('/api/profilecontentabout', {
         about: document.getElementById('aboutinput').value
       }).then(function (response) {
         _this2.profilecontent.about = response.data;
         $('#collapseEdit').collapse("toggle");
       });
-=======
+    },
+    show_form_single: function show_form_single() {
+      document.getElementById('addschedulebuttons').style.display = "none";
+      document.getElementById('schedule_form_single').style.display = "block";
+    },
+    show_form_weekly: function show_form_weekly() {
+      document.getElementById('addschedulebuttons').style.display = "none";
+      document.getElementById('schedule_form_weekly').style.display = "block";
+    },
+    show_form_daily: function show_form_daily() {
+      document.getElementById('addschedulebuttons').style.display = "none";
+      document.getElementById('schedule_form_daily').style.display = "block";
+    },
+    show_back: function show_back() {
+      document.getElementById('addschedulebuttons').style.display = "block";
+      document.getElementById('schedule_form_single').style.display = "none";
+      document.getElementById('schedule_form_weekly').style.display = "none";
+      document.getElementById('schedule_form_daily').style.display = "none";
+    },
+    add_schedule_single: function add_schedule_single() {
+      axios.post('/api/addschedulesingle', {
+        single_title: document.getElementById('single_title').value,
+        single_start: document.getElementById('single_start').value,
+        single_end: document.getElementById('single_end').value,
+        single_tag: document.getElementById('single_tag').value,
+        single_game: document.getElementById('single_game').value
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('schedule_form_single').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "none";
+      });
+    },
+    add_schedule_daily: function add_schedule_daily() {
+
+      axios.post('/api/addscheduledaily', {
+        daily_title: document.getElementById('daily_title').value,
+        daily_start: document.getElementById('daily_start').value,
+        daily_end: document.getElementById('daily_end').value,
+        daily_tag: document.getElementById('daily_tag').value,
+        daily_game: document.getElementById('daily_game').value
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('schedule_form_single').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "none";
+      });
+    },
+    add_schedule_weekly: function add_schedule_weekly() {
+      axios.post('/api/addscheduleweekly', {
+        weekly_title: document.getElementById('weekly_title').value,
+        weekly_day: document.getElementById('weekly_day').value,
+        weekly_start: document.getElementById('weekly_start').value,
+        weekly_end: document.getElementById('weekly_end').value,
+        weekly_tag: document.getElementById('weekly_tag').value,
+        weekly_game: document.getElementById('weekly_game').value
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('schedule_form_single').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "none";
+      });
+    },
+
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.scheduledash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+      this.scheduledash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+      this.scheduledash = false;
+    },
+    showscheduledash: function showscheduledash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.scheduledash = true;
+    }
+  }
+});
+
+/***/ }),
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(308)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(310)
+/* template */
+var __vue_template__ = __webpack_require__(312)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-2537a1f8"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules\\vue-datepicker\\vue-datepicker.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2537a1f8", Component.options)
+  } else {
+    hotAPI.reload("data-v-2537a1f8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(309);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("749e3229", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2537a1f8\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue", function() {
+     var newContent = require("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2537a1f8\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.datepicker-overlay[data-v-2537a1f8] {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  z-index: 998;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  -webkit-animation: fadein-data-v-2537a1f8 0.5s;\n  /* Safari, Chrome and Opera > 12.1 */\n  /* Firefox < 16 */\n  /* Internet Explorer */\n  /* Opera < 12.1 */\n  animation: fadein-data-v-2537a1f8 0.5s;\n}\n@keyframes fadein-data-v-2537a1f8 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Firefox < 16 */\n/* Safari, Chrome and Opera > 12.1 */\n@-webkit-keyframes fadein-data-v-2537a1f8 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Internet Explorer */\n/* Opera < 12.1 */\n.cov-date-body[data-v-2537a1f8] {\n  display: inline-block;\n  background: #3F51B5;\n  overflow: hidden;\n  position: relative;\n  font-size: 16px;\n  font-family: 'Roboto';\n  font-weight: 400;\n  position: fixed;\n  display: block;\n  width: 400px;\n  max-width: 100%;\n  z-index: 999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n}\n.cov-picker-box[data-v-2537a1f8] {\n  background: #fff;\n  width: 100%;\n  display: inline-block;\n  padding: 25px;\n  box-sizing: border-box !important;\n  -moz-box-sizing: border-box !important;\n  -webkit-box-sizing: border-box !important;\n  -ms-box-sizing: border-box !important;\n  width: 400px;\n  max-width: 100%;\n  height: 280px;\n  text-align: start!important;\n}\n.cov-picker-box td[data-v-2537a1f8] {\n  height: 34px;\n  width: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-picker-box td[data-v-2537a1f8]:hover {\n  background: #E6E6E6;\n}\ntable[data-v-2537a1f8] {\n  border-collapse: collapse;\n  border-spacing: 0;\n  width: 100%;\n}\n.day[data-v-2537a1f8] {\n  width: 14.2857143%;\n  display: inline-block;\n  text-align: center;\n  cursor: pointer;\n  height: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  vertical-align: middle;\n}\n.week ul[data-v-2537a1f8] {\n  margin: 0 0 8px;\n  padding: 0;\n  list-style: none;\n}\n.week ul li[data-v-2537a1f8] {\n  width: 14.2%;\n  display: inline-block;\n  text-align: center;\n  background: transparent;\n  color: #000;\n  font-weight: bold;\n}\n.passive-day[data-v-2537a1f8] {\n  color: #bbb;\n}\n.checked[data-v-2537a1f8] {\n  background: #F50057;\n  color: #FFF !important;\n  border-radius: 3px;\n}\n.unavailable[data-v-2537a1f8] {\n  color: #ccc;\n  cursor: not-allowed;\n}\n.cov-date-monthly[data-v-2537a1f8] {\n  height: 150px;\n}\n.cov-date-monthly > div[data-v-2537a1f8] {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  vertical-align: middle;\n  color: #fff;\n  height: 150px;\n  float: left;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-date-previous[data-v-2537a1f8],\n.cov-date-next[data-v-2537a1f8] {\n  position: relative;\n  width: 20% !important;\n  text-indent: -300px;\n  overflow: hidden;\n  color: #fff;\n}\n.cov-date-caption[data-v-2537a1f8] {\n  width: 60%;\n  padding: 50px 0!important;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 24px;\n}\n.cov-date-caption span[data-v-2537a1f8]:hover {\n  color: rgba(255, 255, 255, 0.7);\n}\n.cov-date-previous[data-v-2537a1f8]:hover,\n.cov-date-next[data-v-2537a1f8]:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n.day[data-v-2537a1f8]:hover {\n  background: #EAEAEA;\n}\n.unavailable[data-v-2537a1f8]:hover {\n  background: none;\n}\n.checked[data-v-2537a1f8]:hover {\n  background: #FF4F8E;\n}\n.cov-date-next[data-v-2537a1f8]::before,\n.cov-date-previous[data-v-2537a1f8]::before {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  top: 50%;\n  margin-top: -7px;\n  margin-left: -7px;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-next[data-v-2537a1f8]::after,\n.cov-date-previous[data-v-2537a1f8]::after {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  margin-top: 6px;\n  margin-left: -7px;\n  top: 50%;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.cov-date-previous[data-v-2537a1f8]::after {\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-previous[data-v-2537a1f8]::before {\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.date-item[data-v-2537a1f8] {\n  text-align: center;\n  font-size: 20px;\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-item[data-v-2537a1f8]:hover {\n  background: #e0e0e0;\n}\n.date-list[data-v-2537a1f8] {\n  overflow: auto;\n  vertical-align: top;\n  padding: 0;\n}\n.cov-vue-date[data-v-2537a1f8] {\n  display: inline-block;\n  color: #5D5D5D;\n}\n.button-box[data-v-2537a1f8] {\n  background: #fff;\n  vertical-align: top;\n  height: 50px;\n  line-height: 50px;\n  text-align: right;\n  padding-right: 20px;\n}\n.button-box span[data-v-2537a1f8] {\n  cursor: pointer;\n  padding: 10px 20px;\n}\n.watch-box[data-v-2537a1f8] {\n  height: 100%;\n  overflow: hidden;\n}\n.hour-box[data-v-2537a1f8],\n.min-box[data-v-2537a1f8] {\n  display: inline-block;\n  width: 50%;\n  text-align: center;\n  height: 100%;\n  overflow: auto;\n  float: left;\n}\n.hour-box ul[data-v-2537a1f8],\n.min-box ul[data-v-2537a1f8] {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.hour-item[data-v-2537a1f8],\n.min-item[data-v-2537a1f8] {\n  padding: 10px;\n  font-size: 36px;\n  cursor: pointer;\n}\n.hour-item[data-v-2537a1f8]:hover,\n.min-item[data-v-2537a1f8]:hover {\n  background: #E3E3E3;\n}\n.hour-box .active[data-v-2537a1f8],\n.min-box .active[data-v-2537a1f8] {\n  background: #F50057;\n  color: #FFF !important;\n}\n[data-v-2537a1f8]::-webkit-scrollbar {\n  width: 2px;\n}\n[data-v-2537a1f8]::-webkit-scrollbar-track {\n  background: #E3E3E3;\n}\n[data-v-2537a1f8]::-webkit-scrollbar-thumb {\n  background: #C1C1C1;\n  border-radius: 2px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 310 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+
+exports.default = {
+  props: {
+    required: false,
+    date: {
+      type: Object,
+      required: true
+    },
+    option: {
+      type: Object,
+      default: function _default() {
+        return {
+          type: 'day',
+          SundayFirst: false,
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+          month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          format: 'YYYY-MM-DD',
+          color: {
+            checked: '#F50057',
+            header: '#3f51b5',
+            headerText: '#fff'
+          },
+          inputStyle: {
+            'display': 'inline-block',
+            'padding': '6px',
+            'line-height': '22px',
+            'font-size': '16px',
+            'border': '2px solid #fff',
+            'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
+            'border-radius': '2px',
+            'color': '#5F5F5F'
+          },
+          placeholder: 'when?',
+          buttons: {
+            ok: 'OK',
+            cancel: 'Cancel'
+          },
+          overlayOpacity: 0.5,
+          dismissible: true
+        };
+      }
+    },
+    limit: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    }
+  },
+  data: function data() {
+    function hours() {
+      var list = [];
+      var hour = 24;
+      while (hour > 0) {
+        hour--;
+        list.push({
+          checked: false,
+          value: hour < 10 ? '0' + hour : hour
+        });
+      }
+      return list;
+    }
+    function mins() {
+      var list = [];
+      var min = 60;
+      while (min > 0) {
+        min--;
+        list.push({
+          checked: false,
+          value: min < 10 ? '0' + min : min
+        });
+      }
+      return list;
+    }
+    return {
       hours: hours(),
       mins: mins(),
       showInfo: {
@@ -124381,7 +122465,6 @@ module.exports = Component.exports
           _this4.library.year.push(lastYear + 1);
         }
       }, false);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
     },
     setYear: function setYear(year) {
       this.checked.currentMoment = (0, _moment2.default)(year + '-' + this.checked.month + '-' + this.checked.day);
@@ -124473,25 +122556,11 @@ module.exports = Component.exports
         document.querySelector('.min-box').scrollTop = (document.querySelector('.min-item.active').offsetTop || 0) - 250;
       });
     }
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
->>>>>>> added dummy schedule table to dashboard.vue
-
-throw new Error("Module build failed: SyntaxError: D:/xampp/htdocs/Code/Switch/resources/assets/js/components/dashboard.vue: Unexpected token (232:0)\n\n\u001b[0m \u001b[90m 230 | \u001b[39m    props\u001b[33m:\u001b[39m [\u001b[32m'user'\u001b[39m]\u001b[33m,\u001b[39m\n \u001b[90m 231 | \u001b[39m    mounted() {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 232 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m d1d30876f4d8abb2e48688f2bfc4a35c9b5657bb\n \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 233 | \u001b[39m        axios\u001b[33m.\u001b[39mget(\u001b[32m'/api/profilecontent'\u001b[39m)\u001b[33m.\u001b[39mthen(response \u001b[33m=>\u001b[39m {\n \u001b[90m 234 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 235 | \u001b[39m\u001b[0m\n");
-
-/***/ }),
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */
-=======
   }
 };
 
 /***/ }),
-/* 306 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -124754,10 +122823,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 306;
+webpackContext.id = 311;
 
 /***/ }),
-/* 307 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -125078,17 +123147,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3faef998", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2537a1f8", module.exports)
   }
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-/* 305 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 308 */
->>>>>>> fixed daily streams array in showschedule function
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -125598,26 +123662,6 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row" }, [
-<<<<<<< 2e33e833df09edc9845b89d2fbbaf871a2c8b9e1
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
-                _c("div", { staticClass: "row" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "card", staticStyle: { width: "18rem" } },
-                    [
-                      _c("div", { staticClass: "card-body" }, [
-                        _vm._m(6),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "card-body" }),
-                        _vm._v(" "),
-                        _c("form", [
-                          _vm._m(7),
-                          _vm._v(" "),
-=======
-                _vm._m(6),
-=======
                 _c(
                   "div",
                   {
@@ -125684,7 +123728,6 @@ var render = function() {
                     ])
                   ]
                 ),
->>>>>>> schedule is now shown on dashboard
                 _vm._v(" "),
                 _c(
                   "div",
@@ -125694,109 +123737,6 @@ var render = function() {
                       _vm._m(10),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
-<<<<<<< cc99dc043e9122a4aa9411ba6ac2f681177ca31c
-                        _c("form", [
->>>>>>> added dummy schedule table to dashboard.vue
-                          _vm._m(8),
-                          _vm._v(" "),
-<<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
-<<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
-                          _c("div", { staticClass: "form-row" }, [
-                            _c("div", { staticClass: "col" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row" },
-                                  [
-                                    _c("span", [_vm._v("Departure Date：")]),
-                                    _vm._v(" "),
-                                    _c("date-picker", {
-                                      attrs: {
-                                        date: _vm.startTime,
-                                        option: _vm.option,
-                                        limit: _vm.limit
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row" },
-                                  [
-                                    _c("span", [_vm._v("Departure Date：")]),
-                                    _vm._v(" "),
-                                    _c("date-picker", {
-                                      attrs: {
-                                        date: _vm.startTime,
-                                        option: _vm.option,
-                                        limit: _vm.limit
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
-=======
-                          _vm._m(10),
-=======
-=======
->>>>>>> schedule add javascript function, and half of vue datapicker
-                          _vm._m(9),
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-                          _vm._v(" "),
-<<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
->>>>>>> added dummy schedule table to dashboard.vue
-=======
-                          _vm._m(10),
-=======
-                          _c("div", { staticClass: "form-row" }, [
-                            _c("div", { staticClass: "col" }, [
-                              _c("span", [_vm._v("Start：")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                attrs: {
-                                  type: "datetime-local",
-                                  name: "schedule_start",
-                                  id: "schedule_start",
-                                  min: _vm.currentdate
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col" }, [
-                              _c("span", [_vm._v("End：")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                attrs: {
-                                  type: "datetime-local",
-                                  name: "schedule_end",
-                                  id: "schedule_end",
-                                  min: _vm.currentdate
-                                }
-                              })
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(9),
->>>>>>> adding one time events works
-                          _vm._v(" "),
->>>>>>> schedule add javascript function, and half of vue datapicker
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "schedule_game" } }, [
-                              _vm._v("Game:")
-                            ]),
-=======
                         _c(
                           "div",
                           {
@@ -125822,7 +123762,6 @@ var render = function() {
                               },
                               [_vm._v("Daily stream")]
                             ),
->>>>>>> pre npm fix commit
                             _vm._v(" "),
                             _c(
                               "div",
@@ -125830,57 +123769,7 @@ var render = function() {
                                 staticClass: "btn btn-info btn-lg btn-block",
                                 on: { click: _vm.show_form_weekly }
                               },
-<<<<<<< 42a43f61d248b92474d3479ceb360bfa08e878b7
-<<<<<<< cc99dc043e9122a4aa9411ba6ac2f681177ca31c
-                              _vm._l(_vm.games, function(game) {
-                                return _c(
-                                  "option",
-                                  { domProps: { value: game.id } },
-                                  [_vm._v(_vm._s(game.name))]
-                                )
-                              })
-                            )
-                          ]),
-                          _vm._v(" "),
-<<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
-<<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
-                          _vm._m(10),
-=======
-                          _vm._m(11),
->>>>>>> added dummy schedule table to dashboard.vue
-=======
-                          _vm._m(10),
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-                          _vm._m(11),
->>>>>>> schedule add javascript function, and half of vue datapicker
-=======
-                          _vm._m(10),
->>>>>>> adding one time events works
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "btn btn-danger btn-lg btn-block",
-                              attrs: { id: "submitschedulebtn" },
-                              on: { click: _vm.addschedule }
-                            },
-                            [_vm._v("Add event")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "alert alert-success",
-                          staticStyle: { display: "none" },
-                          attrs: { id: "schedulemsg" }
-                        }),
-=======
-                              [_vm._v("Daily stream")]
-=======
                               [_vm._v("Weekly stream")]
->>>>>>> daily schedule save works
                             ),
                             _vm._v(" "),
                             _c("div", {
@@ -125890,7 +123779,6 @@ var render = function() {
                             })
                           ]
                         ),
->>>>>>> pre npm fix commit
                         _vm._v(" "),
                         _c(
                           "div",
@@ -126106,15 +123994,9 @@ var render = function() {
                           ]
                         )
                       ])
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
-                    ]
-                  )
-                ])
-=======
                     ])
                   ]
                 )
->>>>>>> added dummy schedule table to dashboard.vue
               ])
             ]
           )
@@ -126249,185 +124131,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-<<<<<<< 2e33e833df09edc9845b89d2fbbaf871a2c8b9e1
-<<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
-=======
-    return _c(
-      "div",
-      {
-        staticClass: "col-7",
-        staticStyle: { padding: "0px", "padding-left": "1rem" }
-      },
-      [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v("scheduled streams")
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-body", staticStyle: { padding: "0px" } },
-            [
-              _c(
-                "table",
-                {
-                  staticClass: "table table-striped table-dark",
-                  staticStyle: { margin: "0px", "background-color": "#343a40" }
-                },
-                [
-                  _c("thead", [
-                    _c("tr", { staticStyle: { color: "#dc3545" } }, [
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [_vm._v("single")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Dota 2: electric boogaloo")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("1 hour after soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Dota2")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("subscriber games")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-info" }, [
-                          _vm._v("edit")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td")
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [_vm._v("daily")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Daily dose of minecraft")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("1 hour after soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Minecraft")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("evening stream")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-info" }, [
-                          _vm._v("edit")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete all")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [_vm._v("weekly")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("sunday streamtime")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("1 hour after soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("WoW")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("weekend streams")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-info" }, [
-                          _vm._v("edit")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete all")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "row" } }, [
-                        _vm._v("monthly")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("Monthly subscriber stream")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("1 hour after soon")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("PUBG")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("subscriber ama")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-info" }, [
-                          _vm._v("edit")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c("div", { staticClass: "btn btn-danger" }, [
-                          _vm._v("delete all")
-                        ])
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]
-    )
-=======
     return _c("div", { staticClass: "card-header" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v("scheduled streams")])
     ])
@@ -126467,13 +124170,11 @@ var staticRenderFns = [
     return _c("td", [
       _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
     ])
->>>>>>> schedule is now shown on dashboard
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
->>>>>>> added dummy schedule table to dashboard.vue
     return _c("div", { staticClass: "card-header" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v("Add a scheduled event")])
     ])
@@ -126674,35 +124375,15 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 314 */
-=======
-/* 306 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 309 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(315)
 /* template */
 var __vue_template__ = __webpack_require__(316)
-=======
-var __vue_script__ = __webpack_require__(307)
-/* template */
-var __vue_template__ = __webpack_require__(308)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-var __vue_script__ = __webpack_require__(310)
-/* template */
-var __vue_template__ = __webpack_require__(311)
->>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -126741,15 +124422,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 315 */
-=======
-/* 307 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 310 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -126877,15 +124550,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 316 */
-=======
-/* 308 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 311 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -127155,35 +124820,15 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 317 */
-=======
-/* 309 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 312 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(318)
 /* template */
 var __vue_template__ = __webpack_require__(319)
-=======
-var __vue_script__ = __webpack_require__(310)
-/* template */
-var __vue_template__ = __webpack_require__(311)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-var __vue_script__ = __webpack_require__(313)
-/* template */
-var __vue_template__ = __webpack_require__(314)
->>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -127222,15 +124867,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 318 */
-=======
-/* 310 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 313 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127399,15 +125036,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 319 */
-=======
-/* 311 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 314 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -127663,47 +125292,19 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 320 */
-=======
-/* 312 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 315 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
   __webpack_require__(321)
-=======
-  __webpack_require__(313)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 }
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(323)
 /* template */
 var __vue_template__ = __webpack_require__(324)
-=======
-var __vue_script__ = __webpack_require__(315)
-/* template */
-var __vue_template__ = __webpack_require__(316)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-  __webpack_require__(316)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(318)
-/* template */
-var __vue_template__ = __webpack_require__(319)
->>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -127742,37 +125343,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 321 */
-=======
-/* 313 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 316 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("22047796", content, false, {});
-=======
-var content = __webpack_require__(314);
-=======
-var content = __webpack_require__(317);
->>>>>>> fixed daily streams array in showschedule function
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(11)("4b800605", content, false, {});
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+var update = __webpack_require__(9)("22047796", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -127788,21 +125369,10 @@ if(false) {
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
-=======
-/* 314 */
-=======
-/* 317 */
->>>>>>> fixed daily streams array in showschedule function
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(10)(false);
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+exports = module.exports = __webpack_require__(8)(false);
 // imports
 
 
@@ -127813,15 +125383,7 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 323 */
-=======
-/* 315 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 318 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127938,15 +125500,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 324 */
-=======
-/* 316 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 319 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -128055,35 +125609,15 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 325 */
-=======
-/* 317 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 320 */
->>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-var __vue_script__ = __webpack_require__(328)
+var __vue_script__ = __webpack_require__(326)
 /* template */
-var __vue_template__ = __webpack_require__(329)
-=======
-var __vue_script__ = __webpack_require__(318)
-/* template */
-var __vue_template__ = __webpack_require__(319)
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-var __vue_script__ = __webpack_require__(321)
-/* template */
-var __vue_template__ = __webpack_require__(322)
->>>>>>> fixed daily streams array in showschedule function
+var __vue_template__ = __webpack_require__(327)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -128122,17 +125656,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 326 */,
-/* 327 */,
-/* 328 */
-=======
-/* 318 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 321 */
->>>>>>> fixed daily streams array in showschedule function
+/* 326 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -128184,15 +125708,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 329 */
-=======
-/* 319 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 322 */
->>>>>>> fixed daily streams array in showschedule function
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -128265,15 +125781,7 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
-<<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
-/* 330 */
-=======
-/* 320 */
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
-=======
-/* 323 */
->>>>>>> fixed daily streams array in showschedule function
+/* 328 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
