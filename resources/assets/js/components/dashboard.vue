@@ -332,63 +332,6 @@ export default {
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
-<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
-
-          startTime: {
-                time: ''
-              },
-              endtime: {
-                time: ''
-              },
-
-              option: {
-                type: 'day',
-                week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                format: 'YYYY-MM-DD',
-                placeholder: 'when?',
-
-                inputStyle: {
-                  'display': 'inline-block',
-                  'padding': '6px',
-                  'line-height': '22px',
-                  'font-size': '16px',
-                  'border': '2px solid #fff',
-                  'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-                  'border-radius': '2px',
-                  'color': '#5F5F5F'
-                },
-                color: {
-                  header: '#ccc',
-                  headerText: '#f00'
-                },
-                buttons: {
-                  ok: 'Ok',
-                  cancel: 'Cancel'
-                },
-                overlayOpacity: 0.5, // 0.5 as default
-                dismissible: true // as true as default
-              },
-              timeoption: {
-                type: 'min',
-                week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                format: 'YYYY-MM-DD HH:mm'
-              },
-              multiOption: {
-                type: 'multi-day',
-                week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                inputName: 'schedule_time',
-                month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                format:"YYYY-MM-DD HH:mm"
-              },
-              limit: [{
-                type:'fromto',
-                from: '',
-                to: ''
-              }]
-=======
->>>>>>> schedule migration, model, and form in dashboard.vue
       }
     },
 
@@ -397,18 +340,8 @@ export default {
     },
     props: ['user'],
     mounted() {
-<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
        var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
-=======
-<<<<<<< HEAD
-        axios.get('/api/profilecontent').then(response => {
-=======
-
-       var contenturl = 'api/profilecontent/'+this.user.name;
-      axios.get(contenturl).then(response => {
->>>>>>> schedule migration, model, and form in dashboard.vue
->>>>>>> schedule migration, model, and form in dashboard.vue
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/allgames').then(response => {
@@ -536,7 +469,6 @@ export default {
          document.getElementById('schedule_form_daily').style.display = "none";
        })
       },
-
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
@@ -553,12 +485,6 @@ export default {
 				this.streamdash = false;
 				this.profiledash = false;
 				this.channeldash = true;
-<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
-=======
-<<<<<<< HEAD
-			}
-=======
->>>>>>> schedule migration, model, and form in dashboard.vue
         this.scheduledash = false;
 			},
       showscheduledash: function() {
@@ -567,13 +493,6 @@ export default {
         this.channeldash = false;
         this.scheduledash = true;
       },
-<<<<<<< 6c1e94247ab9b63f084dea1b2d25aab9098cc3d4
-=======
-
-
-
->>>>>>> schedule migration, model, and form in dashboard.vue
->>>>>>> schedule migration, model, and form in dashboard.vue
     }
   }
 
