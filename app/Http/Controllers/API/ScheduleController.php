@@ -43,14 +43,14 @@ class ScheduleController extends Controller
       switch ($type) {
         case "once":
           $start = Carbon::parse(request('schedule_start'));
-          $end = Carbon::parse(request('schedule_end'));
+          $stop = Carbon::parse(request('schedule_end'));
 
           Schedule::create([
       			'title' => request('schedule_title'),
             'user_id' =>$user->id,
       			'streamer_name' => $user->name,
       			'start' => $start,
-            'stop' => $end,
+            'stop' => $stop,
             'tag' => request('schedule_tag'),
             'game_id' =>request('schedule_game'),
             'type' => request('schedule_type')
@@ -61,18 +61,74 @@ class ScheduleController extends Controller
         break;
 
         case "daily":
-        /*for ($x = 0; $x <= 10; $x++) {
-          $x
-        }*/
-          echo "daily";
+
+          for ($x = 0; $x <= 365; $x++) {
+
+            $start = Carbon::parse(request('schedule_start'));
+            $stop = Carbon::parse(request('schedule_end'));
+            $startnew = $start->addDays($x);
+            $stopnew = $start->addDays($x);
+
+            Schedule::create([
+              'title' => request('schedule_title'),
+              'user_id' =>$user->id,
+              'streamer_name' => $user->name,
+              'start' => $startnew,
+              'stop' => $stopnew,
+              'tag' => request('schedule_tag'),
+              'game_id' =>request('schedule_game'),
+              'type' => request('schedule_type')
+
+            ]);
+          };
+          return "daily schedule saved";
         break;
 
         case "weekly":
-          echo "weekly";
+        for ($x = 0; $x <= 52; $x++) {
+
+          $start = Carbon::parse(request('schedule_start'));
+          $stop = Carbon::parse(request('schedule_end'));
+          $startnew = $start->addWeeks($x);
+          $stopnew = $start->addWeeks($x);
+
+          Schedule::create([
+      			'title' => request('schedule_title'),
+            'user_id' =>$user->id,
+      			'streamer_name' => $user->name,
+      			'start' => $startnew,
+            'stop' => $stopnew,
+            'tag' => request('schedule_tag'),
+            'game_id' =>request('schedule_game'),
+            'type' => request('schedule_type')
+
+      		]);
+        };
+        return "weekly schedule saved";
         break;
 
         case "monthly":
-          echo "monthly";
+
+        for ($x = 0; $x <= 12; $x++) {
+
+          $start = Carbon::parse(request('schedule_start'));
+          $stop = Carbon::parse(request('schedule_end'));
+          $startnew = $start->addMonths($x);
+          $stopnew = $start->addMonths($x);
+
+          Schedule::create([
+            'title' => request('schedule_title'),
+            'user_id' =>$user->id,
+            'streamer_name' => $user->name,
+            'start' => $startnew,
+            'stop' => $stopnew,
+            'tag' => request('schedule_tag'),
+            'game_id' =>request('schedule_game'),
+            'type' => request('schedule_type')
+
+          ]);
+        };
+        return "monthly schedule saved";
         break;
       }
     }
