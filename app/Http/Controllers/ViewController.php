@@ -44,22 +44,12 @@ class ViewController extends Controller
     return view('dashboard', compact('user'));
   }
 
-  // public function streamdashboard(){
-  //   $user = Auth::user();
-  //   return view('streamdashboard', compact('user'));
-  // }
-
-  // public function profiledashboard(){
-  //       return view('profiledashboard');
-  // }
-
-  // public function channeldashboard(){
-  //       return view('channeldashboard');
-  // }
-
-
   public function test(){
-    return view('dashboard');
+    return view('streamingLivePage');
+  }
+
+  public function streamingLive($streamToken) {
+    return view('streamingLivePage', compact('streamToken'));
   }
 
   public function stream($username)

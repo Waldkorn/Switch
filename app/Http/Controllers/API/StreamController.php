@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Stream;
 use App\User;
 use App\Game;
+use Carbon\Carbon;
 
 class StreamController extends Controller
 {
@@ -27,7 +28,7 @@ class StreamController extends Controller
 
 
     User::where('id', $user_id)->update([
-      'now_live' => TRUE
+      'wants_to_stream' => TRUE
     ]);
 
     Stream::where('user_id', $user_id)->update([
@@ -37,5 +38,30 @@ class StreamController extends Controller
             ]);
   return "you are now live!";
 
-}
+  }
+
+  public function goOffline() {
+
+    if (Auth::check()) {
+
+      $user = Auth::user();
+
+      $user->update(['now_live' => FALSE]);
+      $user->stream()->update(['now_live' => FALSE]);
+
+    }
+
+  }
+
+  public function keepAlive() {
+    $this->validate(request(), [
+      'stream_token' => 'required'
+    ]);
+
+    $streamToken = request('stream_token');
+
+    User::where('stream_token', $streamToken)->update([
+      'last_online' => Carbon::now()
+    ]);
+  }
 }

@@ -15,15 +15,17 @@ class StreamPresence implements PresenceChannel
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
+    public $streamer;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Streamer $streamer)
     {
         $this->user = $user;
+        $this->streamer = $streamer;
     }
 
     /**
@@ -36,7 +38,7 @@ class StreamPresence implements PresenceChannel
         return new PresenceChannel('StreamPresence.'. $this->stream->id));
     }
 
-    public function join(User $user)
+    public function join(User $user, Streamer $streamer)
     {
         return $user->name;
     }

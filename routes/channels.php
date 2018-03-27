@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use App\Stream;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -15,6 +18,17 @@ Broadcast::channel('stream.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('StreamPresence.{id}', function($user) {
+Broadcast::channel('StreamPresence.{id}', function($user, $id) {
+	if($user->id == $id) {
+
+		User::where('id', $id)->update([
+	      'now_live' => TRUE
+	    ]);
+
+    	Stream::where('user_id', $id)->update([
+            'now_live'=> TRUE
+        ]);
+
+	}
 	return ['id' => $user->id, 'name' => $user->name];
 });
