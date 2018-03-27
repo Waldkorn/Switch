@@ -93,6 +93,7 @@ Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->mi
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
 
+
 ////////////////////
 // Comment routes //
 ////////////////////
