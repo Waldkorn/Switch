@@ -28,7 +28,7 @@ class StreamController extends Controller
 
 
     User::where('id', $user_id)->update([
-      'wants_to_stream' => TRUE
+      'now_live' => TRUE
     ]);
 
     Stream::where('user_id', $user_id)->update([

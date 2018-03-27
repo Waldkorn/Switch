@@ -7,6 +7,7 @@ use App\User;
 use App\Game;
 use App\Stream;
 use Auth;
+use Carbon\Carbon;
 
 class ViewController extends Controller
 {
@@ -63,12 +64,7 @@ class ViewController extends Controller
   public function game($gamename) {
     $game = Game::where('name', $gamename)->first();
 
-    $streamers = $game
-    ->streams()
-    ->with(['user' => function($user) {
-      $user->withCount('followers')->orderBy('followers_count');
-    }])
-    ->get();
+    $streamers = $game->users()->where('last_online', '>', Carbon::now()->subMinutes(1))->with('stream')->withCount('followers')->orderBy('followers_count', 'DESC')->get();
 
     return view('gamepage', compact('game', 'streamers'));
   }

@@ -13,13 +13,13 @@ class FrontpageController extends Controller
 {
   public function listusers(){
 
-    $users = User::withCount('followers')->where('last_online', '>', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->limit(10)->get();
+    $users = User::withCount('followers')->where('last_online', '>=', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10)->get();
     foreach ($users as $user) {
     	$user['streaming'] = true;
     }
 
     if (count($users) < 10) {
-    	$offlineUsers = User::withCount('followers')->where('last_online', '<', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->limit(10 - count($users))->get(0);
+    	$offlineUsers = User::withCount('followers')->where('last_online', '<', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10 - count($users))->get(0);
     	foreach ($offlineUsers as $offlineUser) {
     		$offlineUser['streaming'] = false;
 	    	$users[] = $offlineUser;
