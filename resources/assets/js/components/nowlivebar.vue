@@ -32,7 +32,7 @@ export default {
       axios.get('/api/listusers').then(response => {
         this.users = response.data;
       })
-    }.bind(this), 30000);
+    }.bind(this), 5000);
   }
 }
 </script>

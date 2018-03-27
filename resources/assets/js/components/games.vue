@@ -7,7 +7,7 @@
 
           <div class="card-body">
             <h6 class="card-title">{{game.name}}</h6>
-            <small class="text-danger" style="position: absolute; bottom:10px;">{{game.streams_count}} streaming</small>
+            <small class="text-danger" style="position: absolute; bottom:10px;">{{game.users_count}} streaming</small>
           </div>
         </div>
       </a>
@@ -26,7 +26,13 @@
     mounted() {
       axios.get('/api/games').then(response => {
         this.games = response.data;
+        console.log(this.games);
       })
+      setInterval(function(){
+        axios.get('/api/games').then(response => {
+          this.games = response.data;
+        })
+      }.bind(this), 5000);
     }
   }
 </script>

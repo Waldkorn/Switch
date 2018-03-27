@@ -5,13 +5,16 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Game;
+use App\User;
+use Carbon\Carbon;
 
 class GamesController extends Controller
 {
+
     public function get(){
-    	return Game::limit(6)->withCount(['streams' => function($stream) {
-    		$stream->where('now_live', 1);
-    	}])->orderBy('streams_count', 'DESC')->get();
+    	return Game::withCount(['users' => function($user) {
+    		return $user->where('last_online', '>', Carbon::now()->subMinutes(1));
+    	}])->orderBy('users_count', 'DESC')->orderBy('id', 'DESC')->get();
     }
 
     public function getall(){

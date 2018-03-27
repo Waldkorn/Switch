@@ -103003,7 +103003,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     axios.get('/api/games').then(function (response) {
       _this.games = response.data;
+      console.log(_this.games);
     });
+    setInterval(function () {
+      var _this2 = this;
+
+      axios.get('/api/games').then(function (response) {
+        _this2.games = response.data;
+      });
+    }.bind(this), 5000);
   }
 });
 
@@ -103058,7 +103066,7 @@ var render = function() {
                       staticClass: "text-danger",
                       staticStyle: { position: "absolute", bottom: "10px" }
                     },
-                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
+                    [_vm._v(_vm._s(game.users_count) + " streaming")]
                   )
                 ])
               ]
@@ -103641,7 +103649,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get('/api/listusers').then(function (response) {
         _this2.users = response.data;
       });
-    }.bind(this), 30000);
+    }.bind(this), 5000);
   }
 });
 
