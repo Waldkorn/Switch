@@ -14,7 +14,11 @@ use App\Schedule;
 
 class ScheduleController extends Controller
 {
-    public function create(){
+
+  public function create(){
+    return request();
+  }
+    /*public function create(){
       $type = request('type');
       $user = Auth::user();
       $eventname = request('name');
@@ -45,5 +49,10 @@ class ScheduleController extends Controller
         echo "Your favorite color is green!";
         break;
 }
+}*/
+
+    public function currentdate(){
+      $now = Carbon::now()->format('Y-m-d');
+      return $now;
     }
 }
