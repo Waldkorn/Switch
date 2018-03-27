@@ -314,7 +314,9 @@
 </template>
 
 <script>
-
+var state = {
+  date: ''
+}
 import myDatepicker from 'vue-datepicker'
 
 export default {
@@ -344,6 +346,7 @@ export default {
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format: 'YYYY-MM-DD',
                 placeholder: 'when?',
+
                 inputStyle: {
                   'display': 'inline-block',
                   'padding': '6px',
