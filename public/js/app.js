@@ -120871,14 +120871,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
-var state = {
-  date: ''
-};
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -120888,6 +120882,7 @@ var state = {
       profilecontent: [],
       csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
       games: [],
+      currentdate: [],
       streamdash: true,
       profiledash: false,
       channeldash: false,
@@ -120965,6 +120960,7 @@ var state = {
     });
     axios.get('/api/currentdate').then(function (response) {
       _this.currentdate = JSON.parse(JSON.stringify(response.data));
+      //this.currentdate = response.data;
       console.log(_this.currentdate);
     });
   },
@@ -123094,9 +123090,35 @@ var render = function() {
                         _c("form", [
                           _vm._m(8),
                           _vm._v(" "),
-                          _vm._m(9),
+                          _c("div", { staticClass: "form-row" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c("span", [_vm._v("Start：")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: {
+                                  type: "datetime-local",
+                                  name: "schedule_start",
+                                  id: "schedule_start",
+                                  min: _vm.currentdate
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              _c("span", [_vm._v("End：")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: {
+                                  type: "datetime-local",
+                                  name: "schedule_end",
+                                  id: "schedule_end",
+                                  min: _vm.currentdate
+                                }
+                              })
+                            ])
+                          ]),
                           _vm._v(" "),
-                          _vm._m(10),
+                          _vm._m(9),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("label", { attrs: { for: "schedule_game" } }, [
@@ -123122,7 +123144,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(11),
+                          _vm._m(10),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -123472,44 +123494,6 @@ var staticRenderFns = [
           placeholder: "Event Name"
         }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("span", [_vm._v("Start：")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "datetime-local",
-                name: "schedule_start",
-                id: "schedule_start"
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("span", [_vm._v("End：")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "datetime-local",
-                name: "schedule_end",
-                id: "schedule_end"
-              }
-            })
-          ])
-        ])
-      ])
     ])
   },
   function() {
