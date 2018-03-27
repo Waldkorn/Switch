@@ -82,3 +82,4 @@ Route::get('/currentdate','API\ScheduleController@currentdate');
 Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
+
