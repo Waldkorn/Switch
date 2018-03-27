@@ -28,6 +28,13 @@ Route::get('/games', "API\GamesController@get");
 Route::get('/allgames', 'API\GamesController@getall');
 Route::get('/listusers', "API\FrontpageController@listusers");
 
+///////////////////
+// Stream Routes //
+///////////////////
+
+Route::get('/stream/signOff', "API\StreamController@goOffline")->middleware('auth:api');
+Route::post('/stream/alive', 'API\StreamController@keepAlive');
+
 
 ////////////////////////
 // Profilepage Routes //

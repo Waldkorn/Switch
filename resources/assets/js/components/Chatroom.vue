@@ -9,6 +9,7 @@
                         <b v-bind:style="'color:' + activeUsers[ message.user.name ]">{{ message.user.name }}:</b>
 
                         {{ message.message }}
+
                     </p>
                 </div>
             </div>
@@ -16,7 +17,7 @@
 
         <div id="chatfield" class="chatfield" >
 
-            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height: 100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
+            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height:100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
             <input disabled v-else class="form-control mt-auto mb-auto" value="Please log in to chat" style="height:100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
@@ -54,7 +55,7 @@
                 document.getElementById('chatfield').style.backgroundColor = "lightgray";
             }                       
 
-            Echo.join('StreamPresence.' + this.streamer.stream.id)
+            Echo.join('StreamPresence.' + this.streamer.stream.id, this.streamer)
             .here((users) => {
                 this.$emit('user-list', users);
             })
@@ -98,8 +99,6 @@
                 div.scrollTop = div.scrollHeight - div.clientHeight;
             })
         }
-
-
     }
 </script>
 

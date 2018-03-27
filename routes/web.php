@@ -34,6 +34,8 @@ Route::get('/streampage', function () {
     return view('streampage');
 });
 
+Route::get('/streaminglive/{streamtoken}', 'ViewController@streamingLive');
+
 Route::get('/profilepage/{username}', 'ViewController@profile');
 
 Route::get('/dashboard',"ViewController@dashboard");

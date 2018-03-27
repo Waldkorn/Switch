@@ -28,7 +28,6 @@ class DashboardController extends Controller
       echo $streamkey;
     }
 
-
     public function getcontent(){
       $user = Auth::user();
       $profilecontent = Profilecontent::where('user_id',$user->id)->first();
@@ -39,10 +38,9 @@ class DashboardController extends Controller
       $user = Auth::user();
       $newAbout = request('about');
       Profilecontent::where('user_id', $user->id)->update([
-                  'about' =>  $newAbout,
+        'about' =>  $newAbout,
       ]);
       return $newAbout;
     }
-
 
 }
