@@ -15,46 +15,67 @@ use App\Schedule;
 class ScheduleController extends Controller
 {
 
-  public function create(){
+  /*public function create(){
     $date = Carbon::parse(request('schedule_start'));
     return $date;
 
+  }*/
+
+  public function currentdate(){
+    $now = Carbon::now();
+    $currentdate = date("Y-m-d\TH:i:s", strtotime($now));
+
+    return $currentdate;
   }
-    /*public function create(){
-      $type = request('type');
+
+  public function create(){
+
+      $this->validate(request(), [
+  			'schedule_title' => 'required',
+  			'schedule_start' => 'required',
+  			'schedule_type' => 'required',
+        'schedule_tag' => 'required',
+        'schedule_game' => 'required'
+  		]);
+
       $user = Auth::user();
-      $eventname = request('name');
+      $type = request('schedule_type');
       switch ($type) {
-    case "once":
-        for ($x = 0; $x <= 10; $x++) {
-        $x
-        $event = Schedule::create([
-          'title' => request('title'),
-          'user_id' => $user->id,
-          'streamer_name' => $user->name,
-          'game_id' => request('game_id'),
-          'start' => request('start'),
-          'stop' => request('stop'),
-          'type' => $type,
-          'tag' => request('tag'),
-          ]);
-        }
+        case "once":
+          $start = Carbon::parse(request('schedule_start'));
+          $end = Carbon::parse(request('schedule_end'));
+
+          Schedule::create([
+      			'title' => request('schedule_title'),
+            'user_id' =>$user->id,
+      			'streamer_name' => $user->name,
+      			'start' => $start,
+            'stop' => $end,
+            'tag' => request('schedule_tag'),
+            'game_id' =>request('schedule_game'),
+            'type' => request('schedule_type')
+
+      		]);
+          return "event saved";
 
         break;
-    case "daily":
-        echo "Your favorite color is blue!";
-        break;
-    case "weekly":
-        echo "Your favorite color is green!";
-        break;
-    case "monthly":
-        echo "Your favorite color is green!";
-        break;
-}
-}*/
 
-    public function currentdate(){
-      $now = Carbon::now()->format('Y-m-d');
-      return $now;
+        case "daily":
+        /*for ($x = 0; $x <= 10; $x++) {
+          $x
+        }*/
+          echo "daily";
+        break;
+
+        case "weekly":
+          echo "weekly";
+        break;
+
+        case "monthly":
+          echo "monthly";
+        break;
+      }
     }
+
+
 }

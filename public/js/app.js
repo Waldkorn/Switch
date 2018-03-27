@@ -122269,11 +122269,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
+<<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
 <<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /***/ }),
@@ -122309,6 +122306,9 @@ var state = {
   date: ''
 };
 >>>>>>> schedule add javascript function, and half of vue datapicker
+=======
+
+>>>>>>> adding one time events works
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -122318,6 +122318,7 @@ var state = {
       profilecontent: [],
       csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
       games: [],
+      currentdate: [],
       streamdash: true,
       profiledash: false,
       channeldash: false,
@@ -122395,6 +122396,7 @@ var state = {
     });
     axios.get('/api/currentdate').then(function (response) {
       _this.currentdate = JSON.parse(JSON.stringify(response.data));
+      //this.currentdate = response.data;
       console.log(_this.currentdate);
     });
   },
@@ -125279,6 +125281,7 @@ var render = function() {
 >>>>>>> added dummy schedule table to dashboard.vue
                           _vm._m(8),
                           _vm._v(" "),
+<<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
 <<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
                           _c("div", { staticClass: "form-row" }, [
                             _c("div", { staticClass: "col" }, [
@@ -125338,6 +125341,37 @@ var render = function() {
 >>>>>>> added dummy schedule table to dashboard.vue
 =======
                           _vm._m(10),
+=======
+                          _c("div", { staticClass: "form-row" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c("span", [_vm._v("Start：")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: {
+                                  type: "datetime-local",
+                                  name: "schedule_start",
+                                  id: "schedule_start",
+                                  min: _vm.currentdate
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              _c("span", [_vm._v("End：")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                attrs: {
+                                  type: "datetime-local",
+                                  name: "schedule_end",
+                                  id: "schedule_end",
+                                  min: _vm.currentdate
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(9),
+>>>>>>> adding one time events works
                           _vm._v(" "),
 >>>>>>> schedule add javascript function, and half of vue datapicker
                           _c("div", { staticClass: "form-group" }, [
@@ -125364,6 +125398,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
+<<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
 <<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 <<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
@@ -125377,6 +125412,9 @@ var render = function() {
 =======
                           _vm._m(11),
 >>>>>>> schedule add javascript function, and half of vue datapicker
+=======
+                          _vm._m(10),
+>>>>>>> adding one time events works
                           _vm._v(" "),
                           _c(
                             "div",
@@ -125735,44 +125773,6 @@ var staticRenderFns = [
           placeholder: "Event Name"
         }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("span", [_vm._v("Start：")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "datetime-local",
-                name: "schedule_start",
-                id: "schedule_start"
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("span", [_vm._v("End：")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "datetime-local",
-                name: "schedule_end",
-                id: "schedule_end"
-              }
-            })
-          ])
-        ])
-      ])
     ])
   },
   function() {
