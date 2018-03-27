@@ -16,7 +16,6 @@ class ScheduleController extends Controller
 {
   //shows a users schedule for the upcoming 7 days, on their profilepage and dashboard
   public function showuserschedule($username){
-
     $user = User::where('name',$username)->first();
     $games = Game::get();
     $streams= Schedule::
