@@ -9,7 +9,7 @@
 
 	<div id="app">
 
-		<div class="alert alert-success mt-5">
+<!-- 		<div class="alert alert-success mt-5">
 
 			<h1 class="text-center alert-heading">You are now streaming live!</h1>
 
@@ -17,7 +17,7 @@
 
 			<h3 class="text-center py-5">Keep this tab open to let others know you are streaming</h3>
 
-		</div>
+		</div> -->
 
 
 
