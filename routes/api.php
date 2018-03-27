@@ -77,4 +77,8 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 /////////////////
 =======
 Route::get('/currentdate','API\ScheduleController@currentdate');
+<<<<<<< HEAD
 >>>>>>> schedule add javascript function, and half of vue datapicker
+=======
+Route::post('/addschedule','API\ScheduleController@create');
+>>>>>>> carbon now parses datetime-local

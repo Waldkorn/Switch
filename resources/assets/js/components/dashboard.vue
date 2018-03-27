@@ -238,7 +238,7 @@
                   <div class="form-group">
                     <div class="row">
                       <span>Start：</span>
-                      <input type="datetime-local" name="schedule_start">
+                      <input type="datetime-local" name="schedule_start" id="schedule_start">
                     </div>
                   </div>
                 </div>
@@ -246,7 +246,7 @@
                   <div class="form-group">
                     <div class="row">
                       <span>End：</span>
-                      <input type="datetime-local" name="schedule_end">
+                      <input type="datetime-local" name="schedule_end" id="schedule_end">
                     </div>
              </div>
                 </div>
@@ -427,7 +427,7 @@ export default {
           schedule_tag: document.getElementById('schedule_tag').value,
           schedule_game: document.getElementById('schedule_game').value,
           schedule_type: document.getElementById('schedule_type').value,
-       }).then(response => {console.log('schedule sent')
+       }).then(response => {console.log(response.data)
        })
     },
       showstreamdash: function() {
