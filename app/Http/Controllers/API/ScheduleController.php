@@ -159,8 +159,6 @@ class ScheduleController extends Controller
               'type' => $type
         ]);
         return "new daily stream added!";
-
-
       }
       //add weekly events to schedule table
       public function createWeeklyEvent(){
