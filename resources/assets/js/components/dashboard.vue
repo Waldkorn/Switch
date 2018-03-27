@@ -552,6 +552,7 @@ export default {
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format: 'YYYY-MM-DD',
                 placeholder: 'when?',
+
                 inputStyle: {
                   'display': 'inline-block',
                   'padding': '6px',
@@ -582,6 +583,7 @@ export default {
               multiOption: {
                 type: 'multi-day',
                 week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+                inputName: 'schedule_time',
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format:"YYYY-MM-DD HH:mm"
               },
