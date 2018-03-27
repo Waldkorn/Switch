@@ -152,7 +152,7 @@
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
-          <div class="col-8" style="padding:0px;padding-left:1rem">
+          <div class="col-7" style="padding:0px;padding-left:1rem">
             <div class="card">
             <div class="card-header">
               <h5 class="card-title">scheduled streams</h5>
@@ -219,7 +219,7 @@
           </div>
         </div>
         </div>
-            <div class="col-4" style="padding:0px">
+            <div class="col-5" style="padding:0px">
               <div class="card">
 
               <div class="card-header">
@@ -267,8 +267,10 @@
                     <option value="monthly">Monthly</option>
                   </select>
                 </div>
-                <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
+                <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="addschedule">Add event</div>
               </form>
+              <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
+              <div class="btn btn-info" id="schedulenew" style="display:none" v-on:click="showscheduler">schedule another stream?</div>
               </div>
           </div>
             </div>
@@ -423,8 +425,20 @@ export default {
           schedule_tag: document.getElementById('schedule_tag').value,
           schedule_game: document.getElementById('schedule_game').value,
           schedule_type: document.getElementById('schedule_type').value,
-       }).then(response => {console.log(response.data)
+       }).then(response => {
+         document.getElementById('submitschedulebtn').style.display = "none";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('schedulenew').style.display = "block";
        })
+    },
+
+    showscheduler: function () {
+      document.getElementById('submitschedulebtn').style.display = "block";
+      document.getElementById('schedulemsg').style.display = "none";
+      document.getElementById('schedulemsg').innerHTML = "";
+      document.getElementById('schedulenew').style.display = "none";
+
     },
       showstreamdash: function() {
 				this.streamdash = true;
