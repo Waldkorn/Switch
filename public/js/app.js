@@ -120874,8 +120874,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
-
+var state = {
+  date: ''
+};
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -120903,6 +120906,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         format: 'YYYY-MM-DD',
         placeholder: 'when?',
+
         inputStyle: {
           'display': 'inline-block',
           'padding': '6px',
@@ -120933,16 +120937,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       multiOption: {
         type: 'multi-day',
         week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+        inputName: 'schedule_time',
         month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         format: "YYYY-MM-DD HH:mm"
       },
       limit: [{
-        type: 'weekday',
-        available: [1, 2, 3, 4, 5]
-      }, {
         type: 'fromto',
-        from: '2016-02-01',
-        to: '2016-02-20'
+        from: '',
+        to: ''
       }]
     };
   },
@@ -120960,6 +120962,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     });
     axios.get('/api/allgames').then(function (response) {
       _this.games = JSON.parse(JSON.stringify(response.data));
+    });
+    axios.get('/api/currentdate').then(function (response) {
+      _this.currentdate = JSON.parse(JSON.stringify(response.data));
+      console.log(_this.currentdate);
     });
   },
 
@@ -121006,7 +121012,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     addschedule: function addschedule() {
-      console.log("button works");
+      axios.post('/api/addschedule', {
+        schedule_title: document.getElementById('schedule_title').value,
+        schedule_start: document.getElementById('schedule_start').value,
+        schedule_end: document.getElementById('schedule_end').value,
+        schedule_tag: document.getElementById('schedule_tag').value,
+        schedule_game: document.getElementById('schedule_game').value,
+        schedule_type: document.getElementById('schedule_type').value
+      }).then(function (response) {
+        console.log('schedule sent');
+      });
     },
     showstreamdash: function showstreamdash() {
       this.streamdash = true;
@@ -123079,54 +123094,12 @@ var render = function() {
                         _c("form", [
                           _vm._m(8),
                           _vm._v(" "),
-                          _c("div", { staticClass: "form-row" }, [
-                            _c("div", { staticClass: "col" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row" },
-                                  [
-                                    _c("span", [_vm._v("Departure Date：")]),
-                                    _vm._v(" "),
-                                    _c("date-picker", {
-                                      attrs: {
-                                        date: _vm.startTime,
-                                        option: _vm.option,
-                                        limit: _vm.limit
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "row" },
-                                  [
-                                    _c("span", [_vm._v("Departure Date：")]),
-                                    _vm._v(" "),
-                                    _c("date-picker", {
-                                      attrs: {
-                                        date: _vm.startTime,
-                                        option: _vm.option,
-                                        limit: _vm.limit
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              ])
-                            ])
-                          ]),
-                          _vm._v(" "),
                           _vm._m(9),
                           _vm._v(" "),
+                          _vm._m(10),
+                          _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "schedulegame" } }, [
+                            _c("label", { attrs: { for: "schedule_game" } }, [
                               _vm._v("Game:")
                             ]),
                             _vm._v(" "),
@@ -123134,7 +123107,10 @@ var render = function() {
                               "select",
                               {
                                 staticClass: "form-control",
-                                attrs: { id: "schedulegame" }
+                                attrs: {
+                                  id: "schedule_game",
+                                  name: "schedule_game"
+                                }
                               },
                               _vm._l(_vm.games, function(game) {
                                 return _c(
@@ -123146,7 +123122,7 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm._m(10),
+                          _vm._m(11),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -123485,11 +123461,64 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "schedulename" } }, [_vm._v("Name")]),
+      _c("label", { attrs: { for: "schedule_title" } }, [_vm._v("Name")]),
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control",
-        attrs: { type: "text", id: "schedulename", placeholder: "Event Name" }
+        attrs: {
+          type: "text",
+          id: "schedule_title",
+          name: "schedule_title",
+          placeholder: "Event Name"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("span", [_vm._v("Start：")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "datetime-local", name: "schedule_start" }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("span", [_vm._v("End：")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "datetime-local", name: "schedule_end" }
+            })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "schedule_tag" } }, [_vm._v("tag")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "schedule_tag",
+          name: "schedule_tag",
+          placeholder: "idk"
+        }
       })
     ])
   },
@@ -123498,24 +123527,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "scheduletag" } }, [_vm._v("tag")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", id: "scheduletag", placeholder: "idk" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "scheduletype" } }, [_vm._v("type:")]),
+      _c("label", { attrs: { for: "schedule_type" } }, [_vm._v("type:")]),
       _vm._v(" "),
       _c(
         "select",
-        { staticClass: "form-control", attrs: { id: "scheduletype" } },
+        {
+          staticClass: "form-control",
+          attrs: { id: "schedule_type", name: "schedule_type" }
+        },
         [
           _c("option", { attrs: { value: "once" } }, [_vm._v("once")]),
           _vm._v(" "),

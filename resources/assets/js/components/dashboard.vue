@@ -227,43 +227,44 @@
               </div>
               <div class="card-body">
               <form>
+
                 <div class="form-group">
-                  <label for="schedulename">Name</label>
-                  <input type="text" class="form-control" id="schedulename" placeholder="Event Name">
+                  <label for="schedule_title">Name</label>
+                  <input type="text" class="form-control" id="schedule_title" name="schedule_title" placeholder="Event Name">
                 </div>
 
                 <div class="form-row">
                 <div class="col">
                   <div class="form-group">
                     <div class="row">
-                      <span>Departure Date：</span>
-                      <date-picker :date="startTime" :option="option" :limit="limit"></date-picker>
+                      <span>Start：</span>
+                      <input type="datetime-local" name="schedule_start">
                     </div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <div class="row">
-                      <span>Departure Date：</span>
-                      <date-picker :date="startTime" :option="option" :limit="limit"></date-picker>
+                      <span>End：</span>
+                      <input type="datetime-local" name="schedule_end">
                     </div>
              </div>
                 </div>
               </div>
 
                 <div class="form-group">
-                  <label for="scheduletag">tag</label>
-                  <input type="text" class="form-control" id="scheduletag" placeholder="idk">
+                  <label for="schedule_tag">tag</label>
+                  <input type="text" class="form-control" id="schedule_tag" name="schedule_tag" placeholder="idk">
                 </div>
                 <div class="form-group">
-                  <label for="schedulegame">Game:</label>
-                  <select class="form-control" id="schedulegame">
+                  <label for="schedule_game">Game:</label>
+                  <select class="form-control" id="schedule_game" name="schedule_game">
                     <option v-for="game in games" :value="game.id">{{game.name}}</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="scheduletype">type:</label>
-                  <select class="form-control" id="scheduletype">
+                  <label for="schedule_type">type:</label>
+                  <select class="form-control" id="schedule_type" name="schedule_type">
                     <option value="once">once</option>
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
@@ -282,7 +283,9 @@
 </template>
 
 <script>
-
+var state = {
+  date: ''
+}
 import myDatepicker from 'vue-datepicker'
 
 export default {
@@ -310,6 +313,7 @@ export default {
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format: 'YYYY-MM-DD',
                 placeholder: 'when?',
+
                 inputStyle: {
                   'display': 'inline-block',
                   'padding': '6px',
@@ -340,17 +344,14 @@ export default {
               multiOption: {
                 type: 'multi-day',
                 week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+                inputName: 'schedule_time',
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format:"YYYY-MM-DD HH:mm"
               },
               limit: [{
-                type: 'weekday',
-                available: [1, 2, 3, 4, 5]
-              },
-              {
-                type: 'fromto',
-                from: '2016-02-01',
-                to: '2016-02-20'
+                type:'fromto',
+                from: '',
+                to: ''
               }]
       }
     },
@@ -367,7 +368,11 @@ export default {
       });
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
-      })
+      });
+      axios.get('/api/currentdate').then(response => {
+        this.currentdate = JSON.parse(JSON.stringify(response.data));
+        console.log(this.currentdate);
+      });
     },
 
     methods: {
@@ -412,7 +417,15 @@ export default {
        })
       },
       addschedule: function () {
-      console.log("button works");
+        axios.post('/api/addschedule', {
+          schedule_title: document.getElementById('schedule_title').value,
+          schedule_start: document.getElementById('schedule_start').value,
+          schedule_end: document.getElementById('schedule_end').value,
+          schedule_tag: document.getElementById('schedule_tag').value,
+          schedule_game: document.getElementById('schedule_game').value,
+          schedule_type: document.getElementById('schedule_type').value,
+       }).then(response => {console.log('schedule sent')
+       })
     },
       showstreamdash: function() {
 				this.streamdash = true;
