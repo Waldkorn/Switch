@@ -152,20 +152,12 @@
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
-<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
           <div class="col-7" style="padding:0px;padding-left:1rem">
-=======
-          <div class="col-8" style="padding:0px;padding-left:1rem">
->>>>>>> stream table dummy css
             <div class="card">
             <div class="card-header">
               <h5 class="card-title">scheduled streams</h5>
             </div>
             <div class="card-body" style="padding:0px">
-<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
-
-=======
->>>>>>> stream table dummy css
               <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
   <thead>
     <tr style="color:#dc3545">
@@ -178,7 +170,6 @@
     </tr>
   </thead>
   <tbody>
-<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
     <tr v-for="schedule in schedules">
       <th scope="row">{{schedule.type}}</th>
       <td>{{schedule.title}}</td>
@@ -189,51 +180,6 @@
       <td><div class="btn btn-info">edit</div></td>
       <td><div class="btn btn-danger">delete</div></td>
       <td></td>
-=======
-    <tr>
-      <th scope="row">single</th>
-      <td>Dota 2: electric boogaloo</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>Dota2</td>
-      <td>subscriber games</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">daily</th>
-      <td>Daily dose of minecraft</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>Minecraft</td>
-      <td>evening stream</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-    <tr>
-      <th scope="row">weekly</th>
-      <td>sunday streamtime</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>WoW</td>
-      <td>weekend streams</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-    <tr>
-      <th scope="row">monthly</th>
-      <td>Monthly subscriber stream</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>PUBG</td>
-      <td>subscriber ama</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
->>>>>>> stream table dummy css
     </tr>
 
   </tbody>
@@ -263,7 +209,6 @@
                   <input type="text" class="form-control" id="single_title" name="single_title" placeholder="Event Name">
                 </div>
                 <div class="form-row">
-<<<<<<< 84547d4b1d31833de7630e11f624809d7c42d213
                   <div class="col">
                       <span>Start：</span>
                       <input type="datetime-local" name="single_start" id="single_start" :min="currentdate">
@@ -271,23 +216,6 @@
                 <div class="col">
                       <span>End：</span>
                       <input type="datetime-local" name="single_end" id="single_end" :min="currentdate">
-=======
-                <div class="col">
-                  <div class="form-group">
-                    <div class="row">
-                      <span>Departure Date：</span>
-                      <date-picker :date="startTime" :option="option" :limit="limit"></date-picker>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <div class="row">
-                      <span>Departure Date：</span>
-                      <date-picker :date="startTime" :option="option" :limit="limit"></date-picker>
-                    </div>
-             </div>
->>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
                 </div>
                 </div>
                 <div class="form-group">
@@ -300,11 +228,7 @@
                     <option v-for="game in games" :value="game.id">{{game.name}}</option>
                   </select>
                 </div>
-<<<<<<< 9a876ec7a63db6cd715523bc862a2b76b47fdd58
                 <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_single">Add event</div>
-=======
-                <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
->>>>>>> stream table dummy css
               </form>
             </div>
 
@@ -391,7 +315,9 @@
 </template>
 
 <script>
-
+var state = {
+  date: ''
+}
 import myDatepicker from 'vue-datepicker'
 
 export default {
@@ -421,6 +347,7 @@ export default {
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format: 'YYYY-MM-DD',
                 placeholder: 'when?',
+
                 inputStyle: {
                   'display': 'inline-block',
                   'padding': '6px',
@@ -451,17 +378,14 @@ export default {
               multiOption: {
                 type: 'multi-day',
                 week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+                inputName: 'schedule_time',
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format:"YYYY-MM-DD HH:mm"
               },
               limit: [{
-                type: 'weekday',
-                available: [1, 2, 3, 4, 5]
-              },
-              {
-                type: 'fromto',
-                from: '2016-02-01',
-                to: '2016-02-20'
+                type:'fromto',
+                from: '',
+                to: ''
               }]
       }
     },

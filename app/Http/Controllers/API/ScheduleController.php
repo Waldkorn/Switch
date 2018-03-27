@@ -124,7 +124,6 @@ class ScheduleController extends Controller
 
       		]);
           return request('single_title')." saved";
-
     }
     //adds daily event to schedule tale
     public function createDailyEvent(){
