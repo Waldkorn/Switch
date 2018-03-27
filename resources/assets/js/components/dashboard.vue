@@ -235,20 +235,16 @@
 
                 <div class="form-row">
                 <div class="col">
-                  <div class="form-group">
-                    <div class="row">
+
                       <span>Start：</span>
-                      <input type="datetime-local" name="schedule_start" id="schedule_start">
-                    </div>
-                  </div>
+                      <input type="datetime-local" name="schedule_start" id="schedule_start" :min="currentdate">
+
                 </div>
                 <div class="col">
-                  <div class="form-group">
-                    <div class="row">
+
                       <span>End：</span>
-                      <input type="datetime-local" name="schedule_end" id="schedule_end">
-                    </div>
-             </div>
+                      <input type="datetime-local" name="schedule_end" id="schedule_end" :min="currentdate">
+
                 </div>
               </div>
 
@@ -283,9 +279,7 @@
 </template>
 
 <script>
-var state = {
-  date: ''
-}
+
 import myDatepicker from 'vue-datepicker'
 
 export default {
@@ -295,6 +289,7 @@ export default {
           profilecontent : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
+          currentdate :[],
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
@@ -375,6 +370,7 @@ export default {
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
+        //this.currentdate = response.data;
         console.log(this.currentdate);
       });
     },
