@@ -73,6 +73,7 @@ Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('
 Route::post('/stream', 'API\StreamController@golive');
 Route::get('/currentdate','API\ScheduleController@currentdate');
 
+
 Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
 Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 
