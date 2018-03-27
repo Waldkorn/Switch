@@ -74,3 +74,5 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 /////////////////
 // Auth Routes //
 /////////////////
+
+Route::get('/currentdate','API\ScheduleController@currentdate');
