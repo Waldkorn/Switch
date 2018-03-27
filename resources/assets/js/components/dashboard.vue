@@ -315,9 +315,7 @@
 </template>
 
 <script>
-var state = {
-  date: ''
-}
+
 import myDatepicker from 'vue-datepicker'
 
 export default {
@@ -405,8 +403,6 @@ export default {
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
-
-
       });
       var scheduleurl = '/api/schedule/'+this.user.name;
       axios.get(scheduleurl).then(response => {
