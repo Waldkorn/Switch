@@ -11,7 +11,7 @@ class Game extends Model
 {
     public function streams()
     {
-    	return $this->belongsTo(Stream::class, 'game_id', 'id');
+    	return $this->hasMany(Stream::class);
     }
 
     public function users()

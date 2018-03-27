@@ -19,7 +19,7 @@ class Stream extends Model
 
   	public function game()
   	{
-  		return $this->belongsTo(Game::class, 'id', 'game_id');
+  		return $this->belongsTo(Game::class);
   	}
 
 }

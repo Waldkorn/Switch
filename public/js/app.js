@@ -106592,6 +106592,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['game', 'streamers'],
@@ -106602,7 +106606,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-
+    console.log(this.streamers);
     function compare(a, b) {
       if (a.user.followers_count < b.user.followers_count) return -1;
       if (a.user.followers_count > b.user.followers_count) return 1;
@@ -106628,7 +106632,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "col-md-10 d-flex flex-wrap justify-content-end px-5",
+      staticClass: "col-md-10 d-flex flex-wrap px-5",
       staticStyle: { "padding-right": "0" }
     },
     _vm._l(_vm.streamers, function(streamer) {
@@ -106639,47 +106643,47 @@ var render = function() {
           staticStyle: { padding: "0", margin: "0", float: "right" }
         },
         [
-          _c("a", { attrs: { href: "/" + streamer.user.name } }, [
-            _c(
-              "div",
-              {
-                staticClass: "card",
-                staticStyle: { width: "175px", height: "100%" }
-              },
-              [
+          _c(
+            "div",
+            {
+              staticClass: "card",
+              staticStyle: { width: "175px", height: "100%" }
+            },
+            [
+              _c("a", { attrs: { href: "/" + streamer.name } }, [
                 _c("img", {
                   staticClass: "card-img-top",
                   attrs: {
                     src: _vm.imageLink,
-                    alt: streamer.user.name,
+                    alt: streamer.name,
                     height: "150",
                     width: "150"
                   }
-                }),
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("a", { attrs: { href: "/" + streamer.name } }, [
+                  _c("h6", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(streamer.stream.title))
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(streamer.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("h6", [_vm._v(_vm._s(streamer.user.name))]),
-                  _vm._v(" "),
-                  _c(
-                    "small",
-                    {
-                      staticClass: "text-danger",
-                      staticStyle: { position: "absolute", bottom: "10px" }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(streamer.user.followers_count) + " followers"
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ])
+                _c("a", { attrs: { href: "/profilepage/" + streamer.name } }, [
+                  _c("h6", [_vm._v(_vm._s(streamer.name))])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "small",
+                  {
+                    staticClass: "text-danger",
+                    staticStyle: { position: "absolute", bottom: "10px" }
+                  },
+                  [_vm._v(_vm._s(streamer.followers_count) + " followers")]
+                )
+              ])
+            ]
+          )
         ]
       )
     })
