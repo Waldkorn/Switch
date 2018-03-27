@@ -76,3 +76,4 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 /////////////////
 
 Route::get('/currentdate','API\ScheduleController@currentdate');
+Route::post('/addschedule','API\ScheduleController@create');

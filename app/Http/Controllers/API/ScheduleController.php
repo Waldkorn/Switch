@@ -16,7 +16,9 @@ class ScheduleController extends Controller
 {
 
   public function create(){
-    return request();
+    $date = Carbon::parse(request('schedule_start'));
+    return $date;
+
   }
     /*public function create(){
       $type = request('type');

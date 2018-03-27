@@ -122434,7 +122434,7 @@ var state = {
         schedule_game: document.getElementById('schedule_game').value,
         schedule_type: document.getElementById('schedule_type').value
       }).then(function (response) {
-        console.log('schedule sent');
+        console.log(response.data);
       });
     },
     showstreamdash: function showstreamdash() {
@@ -125620,7 +125620,11 @@ var staticRenderFns = [
             _c("span", [_vm._v("Start：")]),
             _vm._v(" "),
             _c("input", {
-              attrs: { type: "datetime-local", name: "schedule_start" }
+              attrs: {
+                type: "datetime-local",
+                name: "schedule_start",
+                id: "schedule_start"
+              }
             })
           ])
         ])
@@ -125632,7 +125636,11 @@ var staticRenderFns = [
             _c("span", [_vm._v("End：")]),
             _vm._v(" "),
             _c("input", {
-              attrs: { type: "datetime-local", name: "schedule_end" }
+              attrs: {
+                type: "datetime-local",
+                name: "schedule_end",
+                id: "schedule_end"
+              }
             })
           ])
         ])
