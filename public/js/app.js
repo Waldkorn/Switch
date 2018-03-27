@@ -122436,8 +122436,18 @@ var state = {
         schedule_game: document.getElementById('schedule_game').value,
         schedule_type: document.getElementById('schedule_type').value
       }).then(function (response) {
-        console.log(response.data);
+        document.getElementById('submitschedulebtn').style.display = "none";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('schedulenew').style.display = "block";
       });
+    },
+
+    showscheduler: function showscheduler() {
+      document.getElementById('submitschedulebtn').style.display = "block";
+      document.getElementById('schedulemsg').style.display = "none";
+      document.getElementById('schedulemsg').innerHTML = "";
+      document.getElementById('schedulenew').style.display = "none";
     },
     showstreamdash: function showstreamdash() {
       this.streamdash = true;
@@ -123355,6 +123365,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+//
+//
 //
 //
 //
@@ -125222,7 +125234,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "col-4", staticStyle: { padding: "0px" } },
+                  { staticClass: "col-5", staticStyle: { padding: "0px" } },
                   [
                     _c("div", { staticClass: "card" }, [
                       _vm._m(7),
@@ -125290,13 +125302,30 @@ var render = function() {
                           _c(
                             "div",
                             {
-                              staticClass: "btn danger",
-                              attrs: { type: "submit" },
+                              staticClass: "btn btn-danger btn-lg btn-block",
+                              attrs: { id: "submitschedulebtn" },
                               on: { click: _vm.addschedule }
                             },
                             [_vm._v("Add event")]
                           )
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", {
+                          staticClass: "alert alert-success",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "schedulemsg" }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn btn-info",
+                            staticStyle: { display: "none" },
+                            attrs: { id: "schedulenew" },
+                            on: { click: _vm.showscheduler }
+                          },
+                          [_vm._v("schedule another stream?")]
+                        )
                       ])
                     ])
                   ]
@@ -125438,7 +125467,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "col-8",
+        staticClass: "col-7",
         staticStyle: { padding: "0px", "padding-left": "1rem" }
       },
       [
