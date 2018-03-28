@@ -19,16 +19,9 @@ Broadcast::channel('stream.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('StreamPresence.{id}', function($user, $id) {
-	if($user->id == $id) {
-
-		User::where('id', $id)->update([
-	      'now_live' => TRUE
-	    ]);
-
-    	Stream::where('user_id', $id)->update([
-            'now_live'=> TRUE
-        ]);
-
+	if(isset($user)) {
+		return ['id' => $user->id, 'name' => $user->name];
+	} else {
+		return ['id' => '0', 'name' => 'guest'];
 	}
-	return ['id' => $user->id, 'name' => $user->name];
 });

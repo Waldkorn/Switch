@@ -59,9 +59,11 @@ class StreamController extends Controller
     ]);
 
     $streamToken = request('stream_token');
-
+    $viewerCount = request('viewer_count');
+    
     User::where('stream_token', $streamToken)->update([
-      'last_online' => Carbon::now()
+      'last_online' => Carbon::now(),
+      'viewer_count' => $viewerCount    
     ]);
   }
 }
