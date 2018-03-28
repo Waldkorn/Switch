@@ -12,9 +12,9 @@ class GamesController extends Controller
 {
 
     public function get(){
-    	return Game::withCount(['users' => function($user) {
-    		return $user->where('last_online', '>', Carbon::now()->subMinutes(1));
-    	}])->orderBy('users_count', 'DESC')->orderBy('id', 'DESC')->get();
+    	return Game::limit(6)->withCount(['streams' => function($stream) {
+    		$stream->where('now_live', 1);
+    	}])->orderBy('streams_count', 'DESC')->get();
     }
 
     public function getall(){

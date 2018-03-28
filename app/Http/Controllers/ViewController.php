@@ -44,10 +44,6 @@ class ViewController extends Controller
     return view('dashboard', compact('user'));
   }
 
-  public function test(){
-    return view('streamingLivePage');
-  }
-
   public function streamingLive($streamToken) {
     $streamer = User::where('stream_token', $streamToken)->with('stream')->first();
     return view('streamingLivePage', compact('streamToken', 'streamer'));
@@ -57,17 +53,23 @@ class ViewController extends Controller
   {
   	$streamer = User::where('name', $username)->with('stream.game')->first();
   	$followers = $streamer->followers()->get();
-
     return view('streampage', compact('streamer', 'followers'));
   }
 
   public function game($gamename) {
+
     $game = Game::where('name', $gamename)->first();
 
-    $streamers = $game->users()->where('last_online', '>', Carbon::now()->subMinutes(1))->with('stream')->withCount('followers')->orderBy('followers_count', 'DESC')->get();
+    $streamers = $game
+    ->streams()
+    ->with(['user' => function($user) {
+      $user->withCount('followers')->orderBy('followers_count');
+    }])
+    ->get();
 
     return view('gamepage', compact('game', 'streamers'));
+
   }
 
-  
+
 }

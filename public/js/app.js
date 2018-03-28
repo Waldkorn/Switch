@@ -103066,7 +103066,7 @@ var render = function() {
                       staticClass: "text-danger",
                       staticStyle: { position: "absolute", bottom: "10px" }
                     },
-                    [_vm._v(_vm._s(game.users_count) + " streaming")]
+                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
                   )
                 ])
               ]
@@ -103140,7 +103140,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -103611,7 +103610,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -104820,8 +104818,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
-    var contenturl = 'api/profilecontent/' + this.user.name;
-    axios.get(contenturl).then(function (response) {
+    axios.get('/api/profilecontent').then(function (response) {
       _this.profilecontent = JSON.parse(JSON.stringify(response.data));
     });
     axios.get('/api/allgames').then(function (response) {
@@ -104864,7 +104861,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateAbout: function updateAbout() {
       var _this2 = this;
 
-      axios.post('/api/updateabout', {
+      axios.post('/api/profilecontentabout', {
         about: document.getElementById('aboutinput').value
       }).then(function (response) {
         _this2.profilecontent.about = response.data;
@@ -104886,7 +104883,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.profiledash = false;
       this.channeldash = true;
     }
-
   }
 });
 
@@ -105640,6 +105636,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -105681,6 +105681,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     golive: function golive() {
+
       axios.post('/api/stream', {
 
         user_id: this.user.id,
@@ -105703,94 +105704,98 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      {
-        staticClass: "card",
-        staticStyle: {
-          width: "100%",
-          "margin-bottom": "1rem",
-          "text-align": "center"
-        }
-      },
-      [
-        _c("h5", { staticClass: "card-header" }, [_vm._v("Stream Preview")]),
-        _vm._v(" "),
-        _c(
-          "video",
-          {
-            staticClass: "video-js",
-            attrs: {
-              id: "vid1",
-              controls: "",
-              preload: "auto",
-              "data-setup": '{ "aspectRatio": "16:9" }'
-            }
-          },
-          [
-            _c("source", {
-              attrs: {
-                src:
-                  "http://10.0.0.61:8080/hls/" +
-                  _vm.user.stream_token +
-                  ".m3u8",
-                type: "application/x-mpegURL"
-              }
-            }),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "card",
-        staticStyle: { width: "100%", "text-align": "center" }
-      },
-      [
-        _c("h5", { staticClass: "card-header" }, [_vm._v("Start streaming?")]),
-        _vm._v(" "),
-        _c("form", { staticStyle: { "text-align": "left" } }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "gameselect" } }, [_vm._v("Game:")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              { staticClass: "form-control", attrs: { id: "gameselect" } },
-              _vm._l(_vm.games, function(game) {
-                return _c("option", { domProps: { value: game.id } }, [
-                  _vm._v(_vm._s(game.name))
-                ])
-              })
-            )
-          ]),
+    _c("div", { staticClass: "col-9" }, [
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: {
+            width: "100%",
+            "margin-bottom": "1rem",
+            "text-align": "center"
+          }
+        },
+        [
+          _c("h5", { staticClass: "card-header" }, [_vm._v("Stream Preview")]),
           _vm._v(" "),
           _c(
-            "div",
+            "video",
             {
-              staticClass: "form-group",
-              staticStyle: { "text-align": "center" }
+              staticClass: "video-js",
+              attrs: {
+                id: "vid1",
+                controls: "",
+                preload: "auto",
+                "data-setup": '{ "aspectRatio": "16:9" }'
+              }
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "btn btn-success",
-                  attrs: { type: "submit" },
-                  on: { click: _vm.golive }
-                },
-                [_vm._v("GO LIVE!")]
-              )
+              _c("source", {
+                attrs: {
+                  src:
+                    "http://10.0.0.61:8080/hls/" +
+                    _vm.user.stream_token +
+                    ".m3u8",
+                  type: "application/x-mpegURL"
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0)
             ]
           )
-        ])
-      ]
-    ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card",
+          staticStyle: { width: "100%", "text-align": "center" }
+        },
+        [
+          _c("h5", { staticClass: "card-header" }, [
+            _vm._v("Start streaming?")
+          ]),
+          _vm._v(" "),
+          _c("form", { staticStyle: { "text-align": "left" } }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "gameselect" } }, [_vm._v("Game:")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                { staticClass: "form-control", attrs: { id: "gameselect" } },
+                _vm._l(_vm.games, function(game) {
+                  return _c("option", { domProps: { value: game.id } }, [
+                    _vm._v(_vm._s(game.name))
+                  ])
+                })
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "form-group",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "submit" },
+                    on: { click: _vm.golive }
+                  },
+                  [_vm._v("GO LIVE!")]
+                )
+              ]
+            )
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-3" }, [
       _c("div", { staticClass: "card" }, [
@@ -106165,7 +106170,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     updateAbout: function updateAbout() {
       var _this2 = this;
 
-      axios.post('/api/updateabout', {
+      axios.post('/api/profilecontentabout', {
         about: document.getElementById('aboutinput').value
       }).then(function (response) {
         _this2.profilecontent.about = response.data;
@@ -106826,7 +106831,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    console.log(this.streamers);
     function compare(a, b) {
       if (a.user.followers_count < b.user.followers_count) return -1;
       if (a.user.followers_count > b.user.followers_count) return 1;
@@ -106885,12 +106889,12 @@ var render = function() {
               _c("div", { staticClass: "card-body" }, [
                 _c("a", { attrs: { href: "/" + streamer.name } }, [
                   _c("h6", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(streamer.stream.title))
+                    _vm._v(_vm._s(streamer.title))
                   ])
                 ]),
                 _vm._v(" "),
                 _c("a", { attrs: { href: "/profilepage/" + streamer.name } }, [
-                  _c("h6", [_vm._v(_vm._s(streamer.name))])
+                  _c("h6", [_vm._v(_vm._s(streamer.user.name))])
                 ]),
                 _vm._v(" "),
                 _c(
@@ -106899,7 +106903,7 @@ var render = function() {
                     staticClass: "text-danger",
                     staticStyle: { position: "absolute", bottom: "10px" }
                   },
-                  [_vm._v(_vm._s(streamer.followers_count) + " followers")]
+                  [_vm._v(_vm._s(streamer.user.followers_count) + " followers")]
                 )
               ])
             ]

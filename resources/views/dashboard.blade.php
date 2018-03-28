@@ -30,7 +30,6 @@
       color:#dc3545;
       text-decoration: underline;
     }
-
     #navbarToggleExternalContent{
     margin-top:0.9rem;
     background-color: #343a40;

@@ -18,10 +18,6 @@ Broadcast::channel('stream.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('StreamPresence.{id}', function($user, $id) {
-	if(isset($user)) {
-		return ['id' => $user->id, 'name' => $user->name];
-	} else {
-		return ['id' => '0', 'name' => 'guest'];
-	}
+Broadcast::channel('StreamPresence.{id}', function($user) {
+	return ['id' => $user->id, 'name' => $user->name];
 });

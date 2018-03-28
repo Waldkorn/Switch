@@ -17,7 +17,7 @@
 
         <div id="chatfield" class="chatfield" >
 
-            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height:100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
+            <input type="text" class="form-control mt-auto mb-auto" v-on:keydown.enter="createChatMessage" id="messageField" v-if="loggedIn" style="height: 100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 
             <input disabled v-else class="form-control mt-auto mb-auto" value="Please log in to chat" style="height:100%;" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 

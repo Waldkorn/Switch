@@ -7,7 +7,7 @@
 
           <div class="card-body">
             <h6 class="card-title">{{game.name}}</h6>
-            <small class="text-danger" style="position: absolute; bottom:10px;">{{game.users_count}} streaming</small>
+            <small class="text-danger" style="position: absolute; bottom:10px;">{{game.streams_count}} streaming</small>
           </div>
         </div>
       </a>

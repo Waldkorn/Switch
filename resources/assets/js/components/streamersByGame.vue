@@ -8,12 +8,12 @@
 
         <div class="card-body">
           <a v-bind:href="'/' + streamer.name">
-            <h6 class="card-title">{{streamer.stream.title}}</h6>
+            <h6 class="card-title">{{streamer.title}}</h6>
           </a>
           <a v-bind:href="'/profilepage/' + streamer.name">
-            <h6>{{streamer.name}}</h6>
+            <h6>{{streamer.user.name}}</h6>
           </a>
-          <small class="text-danger" style="position: absolute; bottom:10px;">{{streamer.followers_count}} followers</small>
+          <small class="text-danger" style="position: absolute; bottom:10px;">{{streamer.user.followers_count}} followers</small>
         </div>
       </div>
     </div>
@@ -30,7 +30,6 @@
       }
     },
     mounted() {
-      console.log(this.streamers);
       function compare(a, b) {
         if (a.user.followers_count < b.user.followers_count)
           return -1;
@@ -44,7 +43,7 @@
       }
 
       this.streamers = this.sortable.sort(compare).reverse();
-      
+
     }
   }
 </script>
