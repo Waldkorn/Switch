@@ -103637,20 +103637,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       users: []
     };
   },
-
+  props: ['user'],
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/listusers').then(function (response) {
-      _this.users = response.data;
-    });
-    setInterval(function () {
-      var _this2 = this;
-
+    if (this.user != undefined) {
       axios.get('/api/listusers').then(function (response) {
-        _this2.users = response.data;
+        _this.users = response.data;
       });
-    }.bind(this), 5000);
+      setInterval(function () {
+        var _this2 = this;
+
+        axios.get('/api/listusers').then(function (response) {
+          _this2.users = response.data;
+        });
+      }.bind(this), 5000);
+    } else {
+      axios.get('/api/listusersunauthenticated').then(function (response) {
+        _this.users = response.data;
+      });
+      setInterval(function () {
+        var _this3 = this;
+
+        axios.get('/api/listusersunauthenticated').then(function (response) {
+          _this3.users = response.data;
+        });
+      }.bind(this), 5000);
+    }
   }
 });
 

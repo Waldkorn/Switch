@@ -14,7 +14,7 @@ class GamesController extends Controller
     public function get(){
     	return Game::limit(6)->withCount(['streams' => function($stream) {
     		$stream->where('now_live', 1);
-    	}])->orderBy('streams_count', 'DESC')->get();
+    	}])->orderBy('streams_count', 'DESC')->orderBy('id', 'DESC')->get();
     }
 
     public function getall(){
