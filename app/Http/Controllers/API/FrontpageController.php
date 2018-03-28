@@ -26,7 +26,7 @@ class FrontpageController extends Controller
     }
 
     if (count($users) < 10) {
-    	$offlineUsers = User::whereNotIn('id', $followingsIds)->withCount('followers')->where('last_online', '<', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10 - count($users))->get(0);
+    	$offlineUsers = User::whereNotIn('id', $followingsIds)->withCount('followers')->where('last_online', '<', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10 - count($users))->get();
     	foreach ($offlineUsers as $offlineUser) {
     		$offlineUser['streaming'] = false;
 	    	$users[] = $offlineUser;

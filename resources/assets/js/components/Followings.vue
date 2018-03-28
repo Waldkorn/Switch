@@ -1,6 +1,6 @@
 <template>
   <div v-show="users.length != 0">
-    <div class="container-fluid px-0 py-2">
+    <div class="container-fluid px-0 pb-1">
 
       <div class="list-group-item" style="background-color:#f5f5dc;border-radius: 0px 0px 0rem 0rem;border:0px">
         <h4 class="mb-1" >Followed channels</h4>

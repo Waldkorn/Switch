@@ -103004,7 +103004,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     axios.get('/api/games').then(function (response) {
       _this.games = response.data;
-      console.log(_this.games);
     });
     setInterval(function () {
       var _this2 = this;
@@ -104498,7 +104497,7 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "container-fluid px-0 py-2" },
+        { staticClass: "container-fluid px-0 pb-1" },
         [
           _vm._m(0),
           _vm._v(" "),
