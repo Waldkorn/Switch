@@ -49,7 +49,8 @@ class ViewController extends Controller
   }
 
   public function streamingLive($streamToken) {
-    return view('streamingLivePage', compact('streamToken'));
+    $streamer = User::where('stream_token', $streamToken)->with('stream')->first();
+    return view('streamingLivePage', compact('streamToken', 'streamer'));
   }
 
   public function stream($username)

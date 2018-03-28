@@ -25,14 +25,25 @@
 
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script>
-		axios.post('/api/stream/alive', {
-            stream_token: "{{ $streamToken }}"
-        });
+		Echo.join('StreamPresence.' + {{ $streamer->stream->id }}, "{{ $streamer }}")
+            .here((users) => {
+	            axios.post('/api/stream/alive', {
+		            stream_token: "{{ $streamToken }}",
+		            viewer_count: users.length
+		        });
+		        Echo.leave('StreamPresence.' + {{ $streamer->stream->id }})
+	        })
+	        
 		setInterval(function(){
-	        axios.post('/api/stream/alive', {
-	            stream_token: "{{ $streamToken }}"
-	        });
-        }, 30000);
+	        Echo.join('StreamPresence.' + {{ $streamer->stream->id }}, "{{ $streamer }}")
+            .here((users) => {
+	            axios.post('/api/stream/alive', {
+		            stream_token: "{{ $streamToken }}",
+		            viewer_count: users.length
+		        });
+		        Echo.leave('StreamPresence.' + {{ $streamer->stream->id }})
+	        })
+        }.bind(this), 30000);
 	</script>
 </body>
 </html>
