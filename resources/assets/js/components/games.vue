@@ -26,7 +26,6 @@
     mounted() {
       axios.get('/api/games').then(response => {
         this.games = response.data;
-        console.log(this.games);
       })
       setInterval(function(){
         axios.get('/api/games').then(response => {

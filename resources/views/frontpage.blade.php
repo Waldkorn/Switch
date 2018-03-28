@@ -55,7 +55,10 @@ hr {
 
 	<div id="app">
 		<div class="row" style="width:100%;margin:0">
-			<nowlivebar></nowlivebar>
+			<div class="col-md-2 pt-1" style="padding:0;">
+				<Followings></Followings>
+				<nowlivebar></nowlivebar>
+			</div>
 			<frontpagemain></frontpagemain>
 			<games></games>
 		</div>

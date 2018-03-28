@@ -37,7 +37,8 @@ Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
 Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
 Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
 Vue.component('profilepagemain', require('./components/profilepagemain.vue'));
-Vue.component('stream', require('./components/stream.vue'));
+Vue.component('stream', require('./components/Stream.vue'));
+Vue.component('followings', require('./components/Followings.vue'));
 
 //dashboard//
 Vue.component('dashboard', require('./components/dashboard.vue'));

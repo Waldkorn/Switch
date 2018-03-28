@@ -26,7 +26,8 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/games', "API\GamesController@get");
 Route::get('/allgames', 'API\GamesController@getall');
-Route::get('/listusers', "API\FrontpageController@listusers");
+Route::get('/listusers', "API\FrontpageController@listusers")->middleware('auth:api');
+Route::get('/followings', 'API\FrontpageController@getFollowings')->middleware('auth:api');
 
 ///////////////////
 // Stream Routes //

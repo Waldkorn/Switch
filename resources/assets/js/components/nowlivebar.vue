@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-2 pt-1" style="padding:0;">
+  <div>
     <div class="container-fluid px-0">
 
       <div class="list-group-item" style="background-color:#f5f5dc;border-radius: 0px 0px 0rem 0rem;border:0px">
@@ -8,7 +8,10 @@
 
       <div class="streamer list-group-item" v-for="user in users" v-bind:class="{ 'list-group-item': user.now_live, 'list-group-item-secondary': !user.now_live }"style="background-color:#343a40;border-radius: 0px 0px 0rem 0rem;">
         <div class="d-flex w-100 justify-content-between">
-          <a :href="'/' + user.name" style="color:#f5f5dc">{{ user.name }}</a><small class="text-danger" v-show="user.streaming">live now</small>
+          <a :href="'/' + user.name" style="color:#f5f5dc">
+            {{ user.name }}
+          </a>
+          <small class="text-danger" v-show="user.streaming">live &nbsp; &nbsp; <img width="16px" src="/images/viewingIcon.png"> {{ user.viewer_count }}</small>
         </div>
       </div>
     </div>
