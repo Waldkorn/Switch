@@ -26,16 +26,27 @@ export default {
       users : []
     }
   },
-
+  props: ['user'],
   mounted() {
-    axios.get('/api/listusers').then(response => {
-        this.users = response.data;
-    })
-    setInterval(function(){
+    if(this.user != undefined) {
       axios.get('/api/listusers').then(response => {
-        this.users = response.data;
+          this.users = response.data;
       })
-    }.bind(this), 5000);
+      setInterval(function(){
+        axios.get('/api/listusers').then(response => {
+          this.users = response.data;
+        })
+      }.bind(this), 5000);
+    } else {
+      axios.get('/api/listusersunauthenticated').then(response => {
+            this.users = response.data;
+        })
+        setInterval(function(){
+          axios.get('/api/listusersunauthenticated').then(response => {
+            this.users = response.data;
+          })
+      }.bind(this), 5000);
+    }
   }
 }
 </script>
