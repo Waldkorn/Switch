@@ -120081,7 +120081,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -120411,7 +120410,7 @@ var render = function() {
     "div",
     {
       staticClass: "col-md-5 d-flex flex-wrap justify-content-end",
-      staticStyle: { "padding-right": "0" },
+      staticStyle: { "padding-right": "0", "max-height": "1px" },
       attrs: { id: "games-main" }
     },
     _vm._l(_vm.games, function(game) {
@@ -120425,10 +120424,7 @@ var render = function() {
           _c("a", { attrs: { href: "/game/" + game.name } }, [
             _c(
               "div",
-              {
-                staticClass: "card",
-                staticStyle: { width: "175px", height: "100%" }
-              },
+              { staticClass: "card", staticStyle: { width: "175px" } },
               [
                 _c("img", {
                   staticClass: "card-img-top",
@@ -121450,7 +121446,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/api/listusersunauthenticated').then(function (response) {
           _this3.users = response.data;
         });
-        console.log(this.users);
       }.bind(this), 5000);
     }
   }
@@ -127784,47 +127779,42 @@ var render = function() {
           staticStyle: { padding: "0", margin: "0", float: "right" }
         },
         [
-          _c(
-            "div",
-            {
-              staticClass: "card",
-              staticStyle: { width: "175px", height: "100%" }
-            },
-            [
-              _c("a", { attrs: { href: "/" + streamer.name } }, [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: _vm.imageLink,
-                    alt: streamer.name,
-                    height: "150",
-                    width: "150"
-                  }
-                })
+          _c("div", { staticClass: "card", staticStyle: { width: "175px" } }, [
+            _c("a", { attrs: { href: "/" + streamer.user.name } }, [
+              _c("img", {
+                staticClass: "card-img-top",
+                attrs: {
+                  src: _vm.imageLink,
+                  alt: streamer.name,
+                  height: "150",
+                  width: "150"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("a", { attrs: { href: "/" + streamer.user.name } }, [
+                _c("h6", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(streamer.title))
+                ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("a", { attrs: { href: "/" + streamer.name } }, [
-                  _c("h6", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(streamer.title))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { attrs: { href: "/profilepage/" + streamer.name } }, [
-                  _c("h6", [_vm._v(_vm._s(streamer.user.name))])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "small",
-                  {
-                    staticClass: "text-danger",
-                    staticStyle: { position: "absolute", bottom: "10px" }
-                  },
-                  [_vm._v(_vm._s(streamer.user.followers_count) + " followers")]
-                )
-              ])
-            ]
-          )
+              _c(
+                "a",
+                { attrs: { href: "/profilepage/" + streamer.user.name } },
+                [_c("h6", [_vm._v(_vm._s(streamer.user.name))])]
+              ),
+              _vm._v(" "),
+              _c(
+                "small",
+                {
+                  staticClass: "text-danger",
+                  staticStyle: { position: "absolute", bottom: "10px" }
+                },
+                [_vm._v(_vm._s(streamer.user.followers_count) + " followers")]
+              )
+            ])
+          ])
         ]
       )
     })
