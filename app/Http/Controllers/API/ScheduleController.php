@@ -173,6 +173,7 @@ class ScheduleController extends Controller
 
           $user = Auth::user();
           $type = 'weekly';
+
           //time string has to be altered from raw html input: hours and minutes are separated into strings.
           //carbon is used to recombine hours, minutes, and seconds
           $start_hours =   substr(request('weekly_start'), 0, 2);

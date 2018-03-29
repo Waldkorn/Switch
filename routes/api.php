@@ -53,6 +53,8 @@ Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
 
+Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
+
 
 ////////////////////////
 // Chatmessage Routes //
