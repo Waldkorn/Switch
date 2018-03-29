@@ -84,7 +84,6 @@ class ScheduleController extends Controller
       Schedule::create([
       			'title' => request('single_title'),
             'user_id' =>$user->id,
-      			'streamer_name' => $user->name,
       			'start_date' => $start,
             'end_date' => $stop,
             'tag' => request('single_tag'),
@@ -118,7 +117,6 @@ class ScheduleController extends Controller
         Schedule::create([
               'title' => request('daily_title'),
               'user_id' =>$user->id,
-              'streamer_name' => $user->name,
               'start_time' => $start,
               'end_time' => $end,
               'tag' => request('daily_tag'),
@@ -153,7 +151,6 @@ class ScheduleController extends Controller
           Schedule::create([
                 'title' => request('weekly_title'),
                 'user_id' =>$user->id,
-                'streamer_name' => $user->name,
                 'day'=>request('weekly_day'),
                 'start_time' => $start,
                 'end_time' => $end,
