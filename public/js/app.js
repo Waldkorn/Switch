@@ -103111,7 +103111,7 @@ var render = function() {
                       staticClass: "text-danger",
                       staticStyle: { position: "absolute", bottom: "10px" }
                     },
-                    [_vm._v(_vm._s(game.streams_count) + " streaming")]
+                    [_vm._v(_vm._s(game.users_count) + " streaming")]
                   )
                 ])
               ]
