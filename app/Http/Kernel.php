@@ -43,10 +43,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
-
-        'channels' => [
-            \App\Http\Middleware\AuthenticateGuest::class,
-        ]
+        
     ];
 
     /**

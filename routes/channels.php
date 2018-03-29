@@ -26,5 +26,4 @@ Broadcast::channel('StreamPresence.{id}', function($user) {
 		$user = User::first();
 		return ['id' => $user->id, 'name' => $user->name];
 	}
-
 });

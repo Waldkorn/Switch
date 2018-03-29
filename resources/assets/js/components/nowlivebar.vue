@@ -28,6 +28,7 @@ export default {
   },
   props: ['user'],
   mounted() {
+    console.log(this.user);
     if(this.user != undefined) {
       axios.get('/api/listusers').then(response => {
           this.users = response.data;
@@ -45,6 +46,7 @@ export default {
           axios.get('/api/listusersunauthenticated').then(response => {
             this.users = response.data;
           })
+          console.log(this.users);
       }.bind(this), 5000);
     }
   }
