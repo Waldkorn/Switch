@@ -361,7 +361,7 @@ export default {
                 },
                 buttons: {
                   ok: 'Ok',
-                  cancel: 'Cancel'
+                  cancel: 'Cancel'@jules.com
                 },
                 overlayOpacity: 0.5, // 0.5 as default
                 dismissible: true // as true as default
