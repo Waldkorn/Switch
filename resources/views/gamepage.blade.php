@@ -13,7 +13,9 @@
 
 	<div id="app">
 		<div class="row" style="width:100%;margin:0">
-			<nowlivebar></nowlivebar>
+			<div class="col-md-2">
+				<nowlivebar></nowlivebar>
+			</div>
 			<streams :game="{{json_encode($game)}}" :streamers="{{json_encode($streamers)}}"></streams>
 		</div>
 	</div>
