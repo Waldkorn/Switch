@@ -36,13 +36,12 @@ class ScheduleController extends Controller
   			'single_title' => 'required',
   			'single_start' => 'required',
         'single_end' => 'required',
-  			'single_type' => 'required',
-        'single_tag' => 'required',
+  		  'single_tag' => 'required',
         'single_game' => 'required'
   		]);
 
       $user = Auth::user();
-      $type = request('single_type');
+      $type = 'single';
       $start = Carbon::parse(request('single_start'));
       $stop = Carbon::parse(request('single_end'));
 
@@ -54,7 +53,7 @@ class ScheduleController extends Controller
             'end_date' => $stop,
             'tag' => request('single_tag'),
             'game_id' =>request('single_game'),
-            'type' => request('single_type')
+            'type' => $type
 
       		]);
           return request('single_title')." saved";
@@ -66,44 +65,47 @@ class ScheduleController extends Controller
           'daily_title' => 'required',
           'daily_start' => 'required',
           'daily_end' => 'required',
-          'daily_type' => 'required',
           'daily_tag' => 'required',
           'daily_game' => 'required'
         ]);
 
         $user = Auth::user();
-        $type = request('daily_type');
-        $start = Carbon::parse(request('daily_start'));
-        $stop = Carbon::parse(request('daily_end'));
+        $type = 'daily';
+        $start_hours =   substr(request('daily_start'), 0, 2);
+        $start_minutes =   substr(request('daily_start'), 3, 2);
+        $end_hours = substr(request('daily_end'), 0, 2);
+        $end_minutes = substr(request('daily_end'), 3, 2);
+
+        $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
+        $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
 
         Schedule::create([
               'title' => request('daily_title'),
               'user_id' =>$user->id,
               'streamer_name' => $user->name,
               'start_time' => $start,
-              'end_time' => $stop,
+              'end_time' => $end,
               'tag' => request('daily_tag'),
               'game_id' =>request('daily_game'),
-              'type' => request('daily_type')
+              'type' => $type
         ]);
+        return "new daily stream added!";
 
-        return request('daily_title')."daily stream saved";
 
       }
       public function createWeeklyEvent(){
 
           $this->validate(request(), [
             'weekly_title' => 'required',
-            'weekly_start' => 'required',
             'weekly_day' => 'required',
+            'weekly_start' => 'required',
             'weekly_end' => 'required',
-            'weekly_type' => 'required',
             'weekly_tag' => 'required',
             'weekly_game' => 'required'
           ]);
 
           $user = Auth::user();
-          $type = request('weekly_type');
+          $type = 'weekly';
           $start = Carbon::parse(request('weekly_start'));
           $stop = Carbon::parse(request('weekly_end'));
 
@@ -116,7 +118,7 @@ class ScheduleController extends Controller
                 'end_time' => $stop,
                 'tag' => request('weekly_tag'),
                 'game_id' =>request('weekly_game'),
-                'type' => request('weekly_type')
+                'type' => $type
           ]);
 
           return "weekly stream saved";
