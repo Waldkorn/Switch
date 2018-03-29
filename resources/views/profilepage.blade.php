@@ -65,8 +65,13 @@
 		</div>
 
     <div class="col-9">
+			<div class="row">
       <profilepagemain></profilepagemain>
     </div>
+		<div class="row">
+			<profileschedule :profile="{{$user}}"></profileschedule>
+		</div>
+	</div>
 
   </div>
 </div>
