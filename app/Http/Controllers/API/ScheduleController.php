@@ -21,6 +21,8 @@ class ScheduleController extends Controller
 
   }*/
 
+  //echo new Carbon('this thursday');
+
   public function currentdate(){
     $now = Carbon::now();
     $currentdate = date("Y-m-d\TH:i:s", strtotime($now));
@@ -28,110 +30,97 @@ class ScheduleController extends Controller
     return $currentdate;
   }
 
-  public function create(){
+  public function createSingleEvent(){
 
       $this->validate(request(), [
-  			'schedule_title' => 'required',
-  			'schedule_start' => 'required',
-  			'schedule_type' => 'required',
-        'schedule_tag' => 'required',
-        'schedule_game' => 'required'
+  			'single_title' => 'required',
+  			'single_start' => 'required',
+        'single_end' => 'required',
+  			'single_type' => 'required',
+        'single_tag' => 'required',
+        'single_game' => 'required'
   		]);
 
       $user = Auth::user();
-      $type = request('schedule_type');
-      switch ($type) {
-        case "once":
-          $start = Carbon::parse(request('schedule_start'));
-          $stop = Carbon::parse(request('schedule_end'));
+      $type = request('single_type');
+      $start = Carbon::parse(request('single_start'));
+      $stop = Carbon::parse(request('single_end'));
 
-          Schedule::create([
-      			'title' => request('schedule_title'),
+      Schedule::create([
+      			'title' => request('single_title'),
             'user_id' =>$user->id,
       			'streamer_name' => $user->name,
-      			'start' => $start,
-            'stop' => $stop,
-            'tag' => request('schedule_tag'),
-            'game_id' =>request('schedule_game'),
-            'type' => request('schedule_type')
+      			'start_date' => $start,
+            'end_date' => $stop,
+            'tag' => request('single_tag'),
+            'game_id' =>request('single_game'),
+            'type' => request('single_type')
 
       		]);
-          return "event saved";
+          return request('single_title')." saved";
 
-        break;
+    }
+    public function createDailyEvent(){
 
-        case "daily":
+        $this->validate(request(), [
+          'daily_title' => 'required',
+          'daily_start' => 'required',
+          'daily_end' => 'required',
+          'daily_type' => 'required',
+          'daily_tag' => 'required',
+          'daily_game' => 'required'
+        ]);
 
-          for ($x = 0; $x <= 365; $x++) {
+        $user = Auth::user();
+        $type = request('daily_type');
+        $start = Carbon::parse(request('daily_start'));
+        $stop = Carbon::parse(request('daily_end'));
 
-            $start = Carbon::parse(request('schedule_start'));
-            $stop = Carbon::parse(request('schedule_end'));
-            $startnew = $start->addDays($x);
-            $stopnew = $start->addDays($x);
-
-            Schedule::create([
-              'title' => request('schedule_title'),
+        Schedule::create([
+              'title' => request('daily_title'),
               'user_id' =>$user->id,
               'streamer_name' => $user->name,
-              'start' => $startnew,
-              'stop' => $stopnew,
-              'tag' => request('schedule_tag'),
-              'game_id' =>request('schedule_game'),
-              'type' => request('schedule_type')
+              'start_time' => $start,
+              'end_time' => $stop,
+              'tag' => request('daily_tag'),
+              'game_id' =>request('daily_game'),
+              'type' => request('daily_type')
+        ]);
 
-            ]);
-          };
-          return "daily schedule saved";
-        break;
+        return request('daily_title')."daily stream saved";
 
-        case "weekly":
-        for ($x = 0; $x <= 52; $x++) {
-
-          $start = Carbon::parse(request('schedule_start'));
-          $stop = Carbon::parse(request('schedule_end'));
-          $startnew = $start->addWeeks($x);
-          $stopnew = $start->addWeeks($x);
-
-          Schedule::create([
-      			'title' => request('schedule_title'),
-            'user_id' =>$user->id,
-      			'streamer_name' => $user->name,
-      			'start' => $startnew,
-            'stop' => $stopnew,
-            'tag' => request('schedule_tag'),
-            'game_id' =>request('schedule_game'),
-            'type' => request('schedule_type')
-
-      		]);
-        };
-        return "weekly schedule saved";
-        break;
-
-        case "monthly":
-
-        for ($x = 0; $x <= 12; $x++) {
-
-          $start = Carbon::parse(request('schedule_start'));
-          $stop = Carbon::parse(request('schedule_end'));
-          $startnew = $start->addMonths($x);
-          $stopnew = $start->addMonths($x);
-
-          Schedule::create([
-            'title' => request('schedule_title'),
-            'user_id' =>$user->id,
-            'streamer_name' => $user->name,
-            'start' => $startnew,
-            'stop' => $stopnew,
-            'tag' => request('schedule_tag'),
-            'game_id' =>request('schedule_game'),
-            'type' => request('schedule_type')
-
-          ]);
-        };
-        return "monthly schedule saved";
-        break;
       }
-    }
+      public function createWeeklyEvent(){
 
+          $this->validate(request(), [
+            'weekly_title' => 'required',
+            'weekly_start' => 'required',
+            'weekly_day' => 'required',
+            'weekly_end' => 'required',
+            'weekly_type' => 'required',
+            'weekly_tag' => 'required',
+            'weekly_game' => 'required'
+          ]);
+
+          $user = Auth::user();
+          $type = request('weekly_type');
+          $start = Carbon::parse(request('weekly_start'));
+          $stop = Carbon::parse(request('weekly_end'));
+
+          Schedule::create([
+                'title' => request('weekly_title'),
+                'user_id' =>$user->id,
+                'streamer_name' => $user->name,
+                'day'=>request('weekly_day'),
+                'start_time' => $start,
+                'end_time' => $stop,
+                'tag' => request('weekly_tag'),
+                'game_id' =>request('weekly_game'),
+                'type' => request('weekly_type')
+          ]);
+
+          return "weekly stream saved";
+
+        }
 
 }
