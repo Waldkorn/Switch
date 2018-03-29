@@ -39,6 +39,12 @@ class StreamPresence implements PresenceChannel
 
     public function join(User $user)
     {
-        return $user->name;
+        if (Auth::check()) {
+            return ['id' => $user->id, 'name' => $user->name];
+        } else {
+            Auth::loginUsingId(1);
+            $user = Auth::user();
+            return ['id' => $user->id, 'name' => $user->name];
+        }
     }
 }
