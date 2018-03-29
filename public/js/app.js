@@ -103084,7 +103084,10 @@ var render = function() {
           _c("a", { attrs: { href: "/game/" + game.name } }, [
             _c(
               "div",
-              { staticClass: "card", staticStyle: { width: "175px" } },
+              {
+                staticClass: "card",
+                staticStyle: { width: "175px", height: "100%" }
+              },
               [
                 _c("img", {
                   staticClass: "card-img-top",
