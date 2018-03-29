@@ -66,13 +66,7 @@ Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
 Route::get('/currentdate','API\ScheduleController@currentdate');
-Route::post('/addschedule','API\ScheduleController@create')->middleware('auth:api');
-Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
 
-
-Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
-
-
-/////////////////
-// Auth Routes //
-/////////////////
+Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
+Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
+Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
