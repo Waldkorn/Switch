@@ -569,7 +569,7 @@ export default {
                 },
                 buttons: {
                   ok: 'Ok',
-                  cancel: 'Cancel'@jules.com
+                  cancel: 'Cancel'
                 },
                 overlayOpacity: 0.5, // 0.5 as default
                 dismissible: true // as true as default
