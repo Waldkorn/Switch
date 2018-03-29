@@ -15,13 +15,49 @@ use App\Schedule;
 class ScheduleController extends Controller
 {
 
-  /*public function create(){
-    $date = Carbon::parse(request('schedule_start'));
-    return $date;
+  public function showuserschedule($username){
+    $user = User::where('name',$username)->first();
+    $streams= Schedule::
+    where('user_id',$user->id)
+    ->whereDate('start_date', '>=', Carbon::now('Europe/Stockholm'))
+    ->orWhere('type','daily')
+    ->orWhere('type','weekly')
+    ->get();
 
-  }*/
+    $singlestreams = $streams->where('type',"single");
+    $weeklystreams = $streams->where('type',"weekly");
+    $dailystreams = $streams->where('type',"daily");
 
-  //echo new Carbon('this thursday');
+    $allstreams = collect();
+
+    foreach ($singlestreams as $singlestream) {
+       $allstreams ->push($singlestream);
+    };
+
+    foreach ($weeklystreams as $weeklystream) {
+       $date = Carbon::parse($weeklystream->day)->toDateString();
+       $start_date = $date." ".$weeklystream->start_time;
+       $end_date = $date." ".$weeklystream->end_time;
+       $weeklystream->start_date = $start_date;
+       $weeklystream->end_date = $end_date;
+       $allstreams ->push($weeklystream);
+    };
+
+    foreach ($dailystreams as $dailystream) {
+      for ($x = 0; $x <= 6; $x++) {
+        $date = Carbon::now()->addDays($x)->toDateString();
+        $start_date = $date." ".$dailystream->start_time;
+        $end_date = $date." ".$dailystream->end_time;
+        $dailystream->start_date = $start_date;
+        $dailystream->end_date = $end_date;
+
+        $allstreams ->push($dailystream);
+      };
+   };
+   //
+   return $allstreams->sortBy('start_date');
+
+  }
 
   public function currentdate(){
     $now = Carbon::now();
@@ -106,8 +142,13 @@ class ScheduleController extends Controller
 
           $user = Auth::user();
           $type = 'weekly';
-          $start = Carbon::parse(request('weekly_start'));
-          $stop = Carbon::parse(request('weekly_end'));
+          $start_hours =   substr(request('weekly_start'), 0, 2);
+          $start_minutes =   substr(request('weekly_start'), 3, 2);
+          $end_hours = substr(request('weekly_end'), 0, 2);
+          $end_minutes = substr(request('weekly_end'), 3, 2);
+
+          $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
+          $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
 
           Schedule::create([
                 'title' => request('weekly_title'),
@@ -115,7 +156,7 @@ class ScheduleController extends Controller
                 'streamer_name' => $user->name,
                 'day'=>request('weekly_day'),
                 'start_time' => $start,
-                'end_time' => $stop,
+                'end_time' => $end,
                 'tag' => request('weekly_tag'),
                 'game_id' =>request('weekly_game'),
                 'type' => $type
