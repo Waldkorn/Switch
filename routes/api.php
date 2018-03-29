@@ -76,4 +76,7 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 /////////////////
 
 Route::get('/currentdate','API\ScheduleController@currentdate');
-Route::post('/addschedule','API\ScheduleController@create')->middleware('auth:api');
+
+Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
+Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
+Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');

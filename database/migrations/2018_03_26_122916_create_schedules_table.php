@@ -19,8 +19,8 @@ class CreateSchedulesTable extends Migration
             $table->string('streamer_name');
             $table->string('title');
             $table->string('day')->nullable();
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->string('type');
