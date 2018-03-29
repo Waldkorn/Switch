@@ -120394,7 +120394,11 @@ var render = function() {
     "div",
     {
       staticClass: "col-md-5 d-flex flex-wrap justify-content-end",
-      staticStyle: { "padding-right": "0", "max-height": "1px" },
+      staticStyle: {
+        "padding-right": "0",
+        "max-height": "1px",
+        float: "right"
+      },
       attrs: { id: "games-main" }
     },
     _vm._l(_vm.games, function(game) {
