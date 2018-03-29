@@ -158,6 +158,7 @@
               <h5 class="card-title">scheduled streams</h5>
             </div>
             <div class="card-body" style="padding:0px">
+
               <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
   <thead>
     <tr style="color:#dc3545">
@@ -170,50 +171,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">single</th>
-      <td>Dota 2: electric boogaloo</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>Dota2</td>
-      <td>subscriber games</td>
+    <tr v-for="schedule in schedules">
+      <th scope="row">{{schedule.type}}</th>
+      <td>{{schedule.title}}</td>
+      <td>{{schedule.start_date}}</td>
+      <td>{{schedule.end_date}}</td>
+      <td>{{schedule.game}}</td>
+      <td>{{schedule.tag}}</td>
       <td><div class="btn btn-info">edit</div></td>
       <td><div class="btn btn-danger">delete</div></td>
       <td></td>
     </tr>
-    <tr>
-      <th scope="row">daily</th>
-      <td>Daily dose of minecraft</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>Minecraft</td>
-      <td>evening stream</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-    <tr>
-      <th scope="row">weekly</th>
-      <td>sunday streamtime</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>WoW</td>
-      <td>weekend streams</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-    <tr>
-      <th scope="row">monthly</th>
-      <td>Monthly subscriber stream</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>PUBG</td>
-      <td>subscriber ama</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
+
   </tbody>
 </table>
           </div>
@@ -355,6 +324,7 @@ export default {
     data:function(){
       return{
           profilecontent : [],
+          schedules : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
           currentdate :[],
@@ -430,11 +400,17 @@ export default {
       });
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
+
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
-        //this.currentdate = response.data;
-        console.log(this.currentdate);
+
+
+      });
+      var scheduleurl = '/api/schedule/'+this.user.name;
+      axios.get(scheduleurl).then(response => {
+        this.schedules= JSON.parse(JSON.stringify(response.data));
+        console.log(this.schedules);
       });
     },
 
@@ -547,7 +523,7 @@ export default {
          document.getElementById('schedule_form_daily').style.display = "none";
        })
       },
-    
+
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;

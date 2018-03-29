@@ -17,6 +17,7 @@ class ScheduleController extends Controller
 
   public function showuserschedule($username){
     $user = User::where('name',$username)->first();
+    $games = Game::get();
     $streams= Schedule::
     where('user_id',$user->id)
     ->whereDate('start_date', '>=', Carbon::now('Europe/Stockholm'))
@@ -31,7 +32,13 @@ class ScheduleController extends Controller
     $allstreams = collect();
 
     foreach ($singlestreams as $singlestream) {
-       $allstreams ->push($singlestream);
+      $gameobjs = $games->where('id',$singlestream->game_id)->pluck('name');
+      $game_name = '';
+      foreach($gameobjs as $gameobj){
+        $game_name = $gameobj;
+      }
+      $singlestream->game = $game_name;
+      $allstreams->push($singlestream);
     };
 
     foreach ($weeklystreams as $weeklystream) {
@@ -40,7 +47,13 @@ class ScheduleController extends Controller
        $end_date = $date." ".$weeklystream->end_time;
        $weeklystream->start_date = $start_date;
        $weeklystream->end_date = $end_date;
-       $allstreams ->push($weeklystream);
+       $gameobjs = $games->where('id',$weeklystream->game_id)->pluck('name');
+       $game_name = '';
+       foreach($gameobjs as $gameobj){
+         $game_name = $gameobj;
+       }
+       $weeklystream->game = $game_name;
+       $allstreams->push($weeklystream);
     };
 
     foreach ($dailystreams as $dailystream) {
@@ -50,8 +63,13 @@ class ScheduleController extends Controller
         $end_date = $date." ".$dailystream->end_time;
         $dailystream->start_date = $start_date;
         $dailystream->end_date = $end_date;
-
-        $allstreams ->push($dailystream);
+        $gameobjs = $games->where('id',$dailystream->game_id)->pluck('name');
+        $game_name = '';
+        foreach($gameobjs as $gameobj){
+          $game_name = $gameobj;
+        }
+        $dailystream->game = $game_name;
+        $allstreams->push($dailystream);
       };
    };
    //
