@@ -64843,6 +64843,7 @@ Vue.component('chatroom', __webpack_require__(320));
 Vue.component('streams', __webpack_require__(325));
 =======
 Vue.component('profilesidebar', __webpack_require__(282));
+Vue.component('profileschedule', __webpack_require__(324));
 Vue.component('nowlivebar', __webpack_require__(285));
 Vue.component('frontpagemain', __webpack_require__(288));
 Vue.component('profilepagemain', __webpack_require__(291));
@@ -127930,6 +127931,216 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(325)
+/* template */
+var __vue_template__ = __webpack_require__(326)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/profileschedule.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-58630679", Component.options)
+  } else {
+    hotAPI.reload("data-v-58630679", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 325 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['profile'],
+  data: function data() {
+    return {
+      schedules: [],
+      sortable: []
+
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var scheduleurl = '/api/schedule/' + this.profile.name;
+    axios.get(scheduleurl).then(function (response) {
+      _this.schedules = JSON.parse(JSON.stringify(response.data));
+
+      function compare(a, b) {
+        if (a.start_date < b.start_date) return -1;
+        if (a.start_date > b.start_date) return 1;
+        return 0;
+      }
+
+      for (var schedule in _this.schedules) {
+        _this.sortable.push(_this.schedules[schedule]);
+      }
+
+      _this.schedules = _this.sortable.sort(compare);
+    });
+  }
+});
+
+/***/ }),
+/* 326 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "table",
+    {
+      staticClass: "table table-striped table-dark",
+      staticStyle: { margin: "0px", "background-color": "#343a40" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.schedules, function(schedule) {
+          return _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(schedule.type))
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.title))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.start_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.end_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.game))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.tag))]),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _vm._m(2, true),
+            _vm._v(" "),
+            _c("td")
+          ])
+        })
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticStyle: { color: "#dc3545" } }, [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

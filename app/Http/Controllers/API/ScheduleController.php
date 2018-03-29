@@ -29,7 +29,7 @@ class ScheduleController extends Controller
     $weeklystreams = $streams->where('type',"weekly");
     $dailystreams = $streams->where('type',"daily");
 
-    $allstreams = collect();
+    $allstreams = array();
 
     foreach ($singlestreams as $singlestream) {
       $gameobjs = $games->where('id',$singlestream->game_id)->pluck('name');
@@ -38,7 +38,7 @@ class ScheduleController extends Controller
         $game_name = $gameobj;
       }
       $singlestream->game = $game_name;
-      $allstreams->push($singlestream);
+      $allstreams[] = $singlestream;
     };
 
     foreach ($weeklystreams as $weeklystream) {
@@ -53,7 +53,7 @@ class ScheduleController extends Controller
          $game_name = $gameobj;
        }
        $weeklystream->game = $game_name;
-       $allstreams->push($weeklystream);
+       $allstreams[] = $weeklystream;
     };
 
     foreach ($dailystreams as $dailystream) {
@@ -69,11 +69,11 @@ class ScheduleController extends Controller
           $game_name = $gameobj;
         }
         $dailystream->game = $game_name;
-        $allstreams->push($dailystream);
+        $allstreams[] = $dailystream;
       };
    };
    //
-   return $allstreams->sortBy('start_date');
+   return $allstreams;
 
   }
 
