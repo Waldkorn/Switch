@@ -9,6 +9,7 @@
                         <b v-bind:style="'color:' + activeUsers[ message.user.name ]">{{ message.user.name }}:</b>
 
                         {{ message.message }}
+
                     </p>
                 </div>
             </div>
@@ -54,7 +55,7 @@
                 document.getElementById('chatfield').style.backgroundColor = "lightgray";
             }                       
 
-            Echo.join('StreamPresence.' + this.streamer.stream.id)
+            Echo.join('StreamPresence.' + this.streamer.stream.id, this.streamer)
             .here((users) => {
                 this.$emit('user-list', users);
             })
@@ -98,8 +99,6 @@
                 div.scrollTop = div.scrollHeight - div.clientHeight;
             })
         }
-
-
     }
 </script>
 

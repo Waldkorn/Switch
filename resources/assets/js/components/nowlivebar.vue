@@ -1,14 +1,16 @@
 <template>
-  <div class="col-md-2 pt-1" style="padding:0;">
+  <div>
     <div class="container-fluid px-0">
-
       <div class="list-group-item" style="background-color:#f5f5dc;border-radius: 0px 0px 0rem 0rem;border:0px">
         <h4 class="mb-1" >Popular streamers</h4>
       </div>
 
       <div class="streamer list-group-item" v-for="user in users" v-bind:class="{ 'list-group-item': user.now_live, 'list-group-item-secondary': !user.now_live }"style="background-color:#343a40;border-radius: 0px 0px 0rem 0rem;">
         <div class="d-flex w-100 justify-content-between">
-          <a :href="'/' + user.name" style="color:#f5f5dc">{{ user.name }}</a><small class="text-danger" v-bind:class="{ 'd-none': !user.now_live }">live now</small>
+          <a :href="'/' + user.name" style="color:#f5f5dc">
+            {{ user.name }}
+          </a>
+          <small class="text-danger" v-show="user.streaming">live &nbsp; &nbsp; <img width="16px" src="/images/viewingIcon.png"> {{ user.viewer_count }}</small>
         </div>
       </div>
     </div>
@@ -20,15 +22,30 @@ export default {
   data:function(){
     return{
       games : null,
-      users : null
+      users : []
     }
   },
-
+  props: ['user'],
   mounted() {
-    axios.get('/api/listusers').then(response => {
-      this.users = response.data;
-    })
-
+    if(this.user != undefined) {
+      axios.get('/api/listusers').then(response => {
+          this.users = response.data;
+      })
+      setInterval(function(){
+        axios.get('/api/listusers').then(response => {
+          this.users = response.data;
+        })
+      }.bind(this), 5000);
+    } else {
+      axios.get('/api/listusersunauthenticated').then(response => {
+            this.users = response.data;
+        })
+        setInterval(function(){
+          axios.get('/api/listusersunauthenticated').then(response => {
+            this.users = response.data;
+          })
+      }.bind(this), 5000);
+    }
   }
 }
 </script>

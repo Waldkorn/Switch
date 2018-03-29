@@ -172,9 +172,7 @@ export default {
     },
     props: ['user'],
     mounted() {
-      
-       var contenturl = 'api/profilecontent/'+this.user.name;
-      axios.get(contenturl).then(response => {
+        axios.get('/api/profilecontent').then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/allgames').then(response => {
@@ -215,8 +213,7 @@ export default {
       },
 
       updateAbout: function() {
-
-        axios.post('/api/updateabout', {
+        axios.post('/api/profilecontentabout', {
           about: document.getElementById('aboutinput').value,
        }).then(response => {
          this.profilecontent.about = response.data;
@@ -238,9 +235,6 @@ export default {
 				this.profiledash = false;
 				this.channeldash = true;
 			}
-
-
-
     }
   }
 </script>

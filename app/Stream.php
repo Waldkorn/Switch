@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class Stream extends Model
 {
   	protected $fillable = [
-    	'title', 'game_id', 'user_id'
+    	'title', 'game_id', 'user_id', 'now_live'
   	];
 
   	public function user()
@@ -17,6 +19,7 @@ class Stream extends Model
 
   	public function game()
   	{
-  		return $this->hasOne(Game::class, 'id', 'game_id');
+  		return $this->belongsTo(Game::class);
   	}
+
 }

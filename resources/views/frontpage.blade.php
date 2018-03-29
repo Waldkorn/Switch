@@ -55,8 +55,17 @@ hr {
 
 	<div id="app">
 		<div class="row" style="width:100%;margin:0">
-			<nowlivebar></nowlivebar>
-			<frontpagemain></frontpagemain>
+			<div class="col-md-2 pt-1" style="padding:0;">
+				@if (Auth::check())
+				<Followings></Followings>
+					@endif
+				<nowlivebar></nowlivebar>
+			</div>
+			@if (Auth::check()) 
+				<frontpagemain :user="{{ Auth::user() }}"></frontpagemain>
+			@else
+				<frontpagemain></frontpagemain>
+			@endif
 			<games></games>
 		</div>
 	</div>

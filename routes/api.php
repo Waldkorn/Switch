@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
 Auth::routes();
 
 Route::get('/user', function (Request $request) {
@@ -26,7 +25,16 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/games', "API\GamesController@get");
 Route::get('/allgames', 'API\GamesController@getall');
-Route::get('/listusers', "API\FrontpageController@listusers");
+Route::get('/listusers', "API\FrontpageController@listusers")->middleware('auth:api');
+Route::get('/followings', 'API\FrontpageController@getFollowings')->middleware('auth:api');
+Route::get('/listusersunauthenticated', "API\FrontpageController@listusers");
+
+///////////////////
+// Stream Routes //
+///////////////////
+
+Route::get('/stream/signOff', "API\StreamController@goOffline")->middleware('auth:api');
+Route::post('/stream/alive', 'API\StreamController@keepAlive');
 
 
 ////////////////////////
@@ -48,11 +56,21 @@ Route::get('/following/{username}', 'API\ProfileController@following');
 Route::get('/chatmessages/{streamid}/{highestid}', 'API\ChatmessagesController@get');
 Route::post('/chatmessages/create', 'API\ChatmessagesController@create');
 
-////////////////////////
+//////////////////////
 // Dashboard Routes //
-////////////////////////
+//////////////////////
 
 Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
+
+Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
+
+
+Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
+
+
+/////////////////
+// Auth Routes //
+/////////////////
