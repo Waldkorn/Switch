@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-5 d-flex flex-wrap justify-content-end" style="padding-right:0">
+  <div id="games-main" class="col-md-5 d-flex flex-wrap justify-content-end" style="padding-right:0">
     <div class="p-1" style="padding:0;margin:0;float:right" v-for="game in games">
       <a v-bind:href="'/game/' + game.name">
         <div class="card" style="width: 175px; height:100%;">
@@ -35,3 +35,11 @@
     }
   }
 </script>
+
+<style>
+
+  #games-main {
+    max-height: 1px;
+  }
+
+</style>
