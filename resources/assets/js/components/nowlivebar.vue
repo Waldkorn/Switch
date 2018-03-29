@@ -45,7 +45,6 @@ export default {
           axios.get('/api/listusersunauthenticated').then(response => {
             this.users = response.data;
           })
-          console.log(this.users);
       }.bind(this), 5000);
     }
   }
