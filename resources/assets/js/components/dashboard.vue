@@ -161,6 +161,7 @@
               <h5 class="card-title">scheduled streams</h5>
             </div>
             <div class="card-body" style="padding:0px">
+
               <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
   <thead>
     <tr style="color:#dc3545">
@@ -605,6 +606,7 @@ export default {
       });
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
+
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
