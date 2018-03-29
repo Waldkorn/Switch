@@ -122308,37 +122308,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 <<<<<<< 202a99ef0c8d6ba5f24d979c52b82c1c1500652f
 <<<<<<< 53626b15370d7d94c857f113bbc2b36502fa2fe8
@@ -122386,6 +122355,7 @@ var state = {
   data: function data() {
     return {
       profilecontent: [],
+      schedules: [],
       csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
       games: [],
       currentdate: [],
@@ -122466,8 +122436,11 @@ var state = {
     });
     axios.get('/api/currentdate').then(function (response) {
       _this.currentdate = JSON.parse(JSON.stringify(response.data));
-      //this.currentdate = response.data;
-      console.log(_this.currentdate);
+    });
+    var scheduleurl = '/api/schedule/' + this.user.name;
+    axios.get(scheduleurl).then(function (response) {
+      _this.schedules = JSON.parse(JSON.stringify(response.data));
+      console.log(_this.schedules);
     });
   },
 
@@ -125378,6 +125351,7 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row" }, [
+<<<<<<< 2e33e833df09edc9845b89d2fbbaf871a2c8b9e1
 <<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
                 _c("div", { staticClass: "row" }),
                 _vm._v(" "),
@@ -125396,13 +125370,81 @@ var render = function() {
                           _vm._v(" "),
 =======
                 _vm._m(6),
+=======
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-7",
+                    staticStyle: { padding: "0px", "padding-left": "1rem" }
+                  },
+                  [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card-body",
+                          staticStyle: { padding: "0px" }
+                        },
+                        [
+                          _c(
+                            "table",
+                            {
+                              staticClass: "table table-striped table-dark",
+                              staticStyle: {
+                                margin: "0px",
+                                "background-color": "#343a40"
+                              }
+                            },
+                            [
+                              _vm._m(7),
+                              _vm._v(" "),
+                              _c(
+                                "tbody",
+                                _vm._l(_vm.schedules, function(schedule) {
+                                  return _c("tr", [
+                                    _c("th", { attrs: { scope: "row" } }, [
+                                      _vm._v(_vm._s(schedule.type))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(schedule.title))]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(schedule.start_date))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(schedule.end_date))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(schedule.game))]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(schedule.tag))]),
+                                    _vm._v(" "),
+                                    _vm._m(8, true),
+                                    _vm._v(" "),
+                                    _vm._m(9, true),
+                                    _vm._v(" "),
+                                    _c("td")
+                                  ])
+                                })
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                ),
+>>>>>>> schedule is now shown on dashboard
                 _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "col-5", staticStyle: { padding: "0px" } },
                   [
                     _c("div", { staticClass: "card" }, [
-                      _vm._m(7),
+                      _vm._m(10),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
 <<<<<<< cc99dc043e9122a4aa9411ba6ac2f681177ca31c
@@ -125621,7 +125663,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(8),
+                              _vm._m(11),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-row" }, [
                                 _c("div", { staticClass: "col" }, [
@@ -125651,7 +125693,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _vm._m(9),
+                              _vm._m(12),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "single_game" } }, [
@@ -125709,11 +125751,11 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(10),
+                              _vm._m(13),
                               _vm._v(" "),
-                              _vm._m(11),
+                              _vm._m(14),
                               _vm._v(" "),
-                              _vm._m(12),
+                              _vm._m(15),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "daily_game" } }, [
@@ -125771,13 +125813,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(13),
-                              _vm._v(" "),
-                              _vm._m(14),
-                              _vm._v(" "),
-                              _vm._m(15),
-                              _vm._v(" "),
                               _vm._m(16),
+                              _vm._v(" "),
+                              _vm._m(17),
+                              _vm._v(" "),
+                              _vm._m(18),
+                              _vm._v(" "),
+                              _vm._m(19),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "weekly_game" } }, [
@@ -125960,6 +126002,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+<<<<<<< 2e33e833df09edc9845b89d2fbbaf871a2c8b9e1
 <<<<<<< ab3713465ad17c144dbd30c06735aa566398c62a
 =======
     return _c(
@@ -126137,6 +126180,47 @@ var staticRenderFns = [
         ])
       ]
     )
+=======
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title" }, [_vm._v("scheduled streams")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticStyle: { color: "#dc3545" } }, [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
+    ])
+>>>>>>> schedule is now shown on dashboard
   },
   function() {
     var _vm = this
