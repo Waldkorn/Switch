@@ -18,8 +18,11 @@ class CreateSchedulesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('streamer_name');
             $table->string('title');
-            $table->dateTime('start');
-            $table->dateTime('stop');
+            $table->string('day')->nullable();
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
             $table->string('type');
             $table->integer('game_id')->nullable()->unsigned();
             $table->string('tag');
