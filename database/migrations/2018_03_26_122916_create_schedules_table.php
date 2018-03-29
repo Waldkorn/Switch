@@ -16,7 +16,6 @@ class CreateSchedulesTable extends Migration
       Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('streamer_name');
             $table->string('title');
             $table->string('day')->nullable();
             $table->time('start_time')->nullable();
