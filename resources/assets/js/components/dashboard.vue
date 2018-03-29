@@ -226,28 +226,30 @@
                 <h5 class="card-title">Add a scheduled event</h5>
               </div>
               <div class="card-body">
-              <form>
+                <div class="container-fluid" id="addschedulebuttons">
+                  <div class="btn btn-warning" v-on:click="show_form_single">Single event</div>
+                  <div class="btn btn-info" v-on:click="show_form_weekly">Weekly stream</div>
+                  <div class="btn btn-secondary" v-on:click="show_form_daily">Daily stream</div>
+                  <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
 
+                </div>
+              <div class="container-fluid" id="schedule_form_single" style="display:hidden">
+                  <div class="btn btn-danger" v-on:click="show_back" style="display:none">Back</div>
+                <form>
                 <div class="form-group">
                   <label for="schedule_title">Name</label>
                   <input type="text" class="form-control" id="schedule_title" name="schedule_title" placeholder="Event Name">
                 </div>
-
                 <div class="form-row">
-                <div class="col">
-
+                  <div class="col">
                       <span>Start：</span>
                       <input type="datetime-local" name="schedule_start" id="schedule_start" :min="currentdate">
-
                 </div>
                 <div class="col">
-
                       <span>End：</span>
                       <input type="datetime-local" name="schedule_end" id="schedule_end" :min="currentdate">
-
                 </div>
-              </div>
-
+                </div>
                 <div class="form-group">
                   <label for="schedule_tag">tag</label>
                   <input type="text" class="form-control" id="schedule_tag" name="schedule_tag" placeholder="idk">
@@ -269,8 +271,9 @@
                 </div>
                 <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="addschedule">Add event</div>
               </form>
-              <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
-              <div class="btn btn-info" id="schedulenew" style="display:none" v-on:click="showscheduler">schedule another stream?</div>
+
+
+            </div>
               </div>
           </div>
             </div>
@@ -327,7 +330,7 @@ export default {
                 },
                 buttons: {
                   ok: 'Ok',
-                  cancel: 'Cancel'
+                  cancel: 'Cancel'@jules.com
                 },
                 overlayOpacity: 0.5, // 0.5 as default
                 dismissible: true // as true as default
@@ -383,6 +386,7 @@ export default {
             document.getElementById('streamkeymessage').style.display = "block";
             document.getElementById('streamkey_btn').style.display = "none";
             document.getElementById('hide_btn').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
             document.getElementById('streamkeymessage').innerHTML = response.data;
 
             })
@@ -414,6 +418,24 @@ export default {
          $('#collapseEdit').collapse("toggle");
        })
       },
+      show_form_single: function(){
+        document.getElementById('addschedulebuttons').style.display = "none";
+        document.getElementById('schedule_form_single').style.display = "block";
+      },
+      show_form_weekly: function(){
+        document.getElementById('addschedulebuttons').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "block";
+      },
+      show_form_daily: function(){
+        document.getElementById('addschedulebuttons').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "block";
+      },
+      show_back:function(){
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedule_form_single').style.display = "block";
+        document.getElementById('schedule_form_weekly').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "block";
+      },
       addschedule: function () {
         axios.post('/api/addschedule', {
           schedule_title: document.getElementById('schedule_title').value,
@@ -423,7 +445,7 @@ export default {
           schedule_game: document.getElementById('schedule_game').value,
           schedule_type: document.getElementById('schedule_type').value,
        }).then(response => {
-         document.getElementById('submitschedulebtn').style.display = "none";
+         document.getElementById('addschedulebuttons').style.display = "none";
          document.getElementById('schedulemsg').style.display = "block";
          document.getElementById('schedulemsg').innerHTML = response.data;
          document.getElementById('schedulenew').style.display = "block";
