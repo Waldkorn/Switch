@@ -29,3 +29,12 @@ $factory->define(App\Chatmessage::class, function (Faker $faker) {
 		'chat_id' => "2"
 	];
 });
+
+$factory->define(App\Stream::class, function (Faker $faker, $user) {
+    return [
+        'game_id' => random_int(1,7),
+        'title' => $faker->sentence($nbWords = 6),
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s'),
+    ];
+});
