@@ -79,6 +79,7 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 Route::get('/currentdate','API\ScheduleController@currentdate');
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> schedule add javascript function, and half of vue datapicker
 =======
 Route::post('/addschedule','API\ScheduleController@create');
@@ -86,3 +87,9 @@ Route::post('/addschedule','API\ScheduleController@create');
 =======
 Route::post('/addschedule','API\ScheduleController@create')->middleware('auth:api');
 >>>>>>> adding one time events works
+=======
+
+Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
+Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
+Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
+>>>>>>> daily schedule save works
