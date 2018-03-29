@@ -74,7 +74,6 @@ class ScheduleController extends Controller
         $end_date = $date." ".$dailystream->end_time;
         $dailystream->start_date = $start_date;
         $dailystream->end_date = $end_date;
-
         $gameobjs = $games->where('id',$dailystream->game_id)->pluck('name');
         $game_name = '';
 
