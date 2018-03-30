@@ -50,15 +50,7 @@ class ProfileController extends Controller
   public function unfollow_user(){
     $user = User::find(request('user_id'));
     $unfollower = Auth::user();
-    if(! $user) {
-      return redirect()->back()->with('error', 'User does not exist.');
-    }
-    $user->followers()->detach($unfollower->id);
-    $message = "you unfollowed " . $user->name;
-    return $message;
-  }
-  //subscribing and unsubscribing
-  public function subscribe(){
+    $unfollower = User::find(request('unfollower_id'));
 
     $user = User::find(request('user_id'));
     $subscriber= Auth::user();
