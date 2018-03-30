@@ -63879,9 +63879,15 @@ __webpack_require__(191);
  */
 
 try {
+<<<<<<< HEAD
   window.$ = window.jQuery = __webpack_require__(46);
 
   __webpack_require__(232);
+=======
+  window.$ = window.jQuery = __webpack_require__(44);
+
+  __webpack_require__(109);
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 } catch (e) {}
 
 /**
@@ -116787,7 +116793,11 @@ var content = __webpack_require__(259);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< HEAD
 var update = __webpack_require__(9)("2a28cc49", content, false, {});
+=======
+var update = __webpack_require__(10)("2a28cc49", content, false, {});
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -117836,7 +117846,11 @@ var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< HEAD
 var update = __webpack_require__(9)("10846595", content, false, {});
+=======
+var update = __webpack_require__(10)("10846595", content, false, {});
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -118157,7 +118171,11 @@ var content = __webpack_require__(270);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< HEAD
 var update = __webpack_require__(9)("4e7bd74e", content, false, {});
+=======
+var update = __webpack_require__(10)("4e7bd74e", content, false, {});
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -119170,7 +119188,11 @@ var content = __webpack_require__(281);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< HEAD
 var update = __webpack_require__(9)("fe0d5e34", content, false, {});
+=======
+var update = __webpack_require__(10)("fe0d5e34", content, false, {});
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -120184,7 +120206,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< HEAD
     require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
   }
 }
 
@@ -121961,6 +121987,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.announcements = response.data;
       });
     },
+<<<<<<< HEAD
     showscheduledash: function showscheduledash() {
       this.streamdash = false;
       this.profiledash = false;
@@ -121968,6 +121995,103 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.scheduledash = true;
       this.announcementsdash = false;
     }
+=======
+    [
+      _c(
+        "div",
+        { staticClass: "container-fluid px-0 pb-1" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user) {
+            return _c(
+              "div",
+              {
+                staticClass: "streamer list-group-item",
+                class: {
+                  "list-group-item": user.now_live,
+                  "list-group-item-secondary": !user.now_live
+                },
+                staticStyle: {
+                  "background-color": "#343a40",
+                  "border-radius": "0px 0px 0rem 0rem"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "d-flex w-100 justify-content-between" },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#f5f5dc" },
+                        attrs: { href: "/" + user.name }
+                      },
+                      [_vm._v(_vm._s(user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: user.streaming,
+                            expression: "user.streaming"
+                          }
+                        ],
+                        staticClass: "text-danger"
+                      },
+                      [
+                        _vm._v("live     "),
+                        _c("img", {
+                          attrs: {
+                            width: "16px",
+                            src: "/images/viewingIcon.png"
+                          }
+                        }),
+                        _vm._v(" " + _vm._s(user.viewer_count))
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Followed channels")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-37f8dc79", module.exports)
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
   }
 });
 
@@ -122001,7 +122125,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< HEAD
 Component.options.__file = "node_modules/vue-datepicker/vue-datepicker.vue"
+=======
+Component.options.__file = "resources/assets/js/components/dashboard.vue"
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 
 /* hot reload */
 if (false) {(function () {
@@ -122010,9 +122138,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< HEAD
     hotAPI.createRecord("data-v-3faef998", Component.options)
   } else {
     hotAPI.reload("data-v-3faef998", Component.options)
+=======
+    hotAPI.createRecord("data-v-2073dee6", Component.options)
+  } else {
+    hotAPI.reload("data-v-2073dee6", Component.options)
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -125866,7 +126000,11 @@ var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< HEAD
 var update = __webpack_require__(9)("4b800605", content, false, {});
+=======
+var update = __webpack_require__(10)("4b800605", content, false, {});
+>>>>>>> 0c546b6650dd26524c6eb7d074e5bae0b20d553b
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
