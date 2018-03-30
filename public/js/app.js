@@ -120480,8 +120480,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      announcements: [],
-      profiledetails: []
+      announcements: []
     };
   },
   mounted: function mounted() {
@@ -120489,11 +120488,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     axios.get('/api/announcements').then(function (response) {
       _this.announcements = response.data;
-      console.log(_this.announcements);
-      for (var i = 0; i < _this.announcements.length; i++) {
-        _this.profiledetails[_this.announcements[i].user.name] = _this.announcements[i].user.profilecontent;
-      }
-      console.log(_this.profiledetails);
     });
   }
 });
@@ -122379,6 +122373,58 @@ exports.push([module.i, "\n.datepicker-overlay[data-v-2537a1f8] {\n  position: f
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -122468,6 +122514,7 @@ exports.default = {
       return list;
     }
     return {
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
       hours: hours(),
       mins: mins(),
       showInfo: {
@@ -122496,6 +122543,16 @@ exports.default = {
       },
       dayList: [],
       selectedDays: []
+=======
+      profilecontent: [],
+      csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
+      games: [],
+      announcements: [],
+      streamdash: true,
+      profiledash: false,
+      channeldash: false,
+      announcementsdash: false
+>>>>>>> users can now post announcements
     };
   },
 
@@ -122694,6 +122751,7 @@ exports.default = {
         _this3.addYear();
       });
     },
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
     showOne: function showOne(type) {
       switch (type) {
         case 'year':
@@ -122777,6 +122835,10 @@ exports.default = {
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
       var _iteratorError2 = undefined;
+=======
+    updateAbout: function updateAbout() {
+      var _this2 = this;
+>>>>>>> users can now post announcements
 
       try {
         for (var _iterator2 = list[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
@@ -122803,6 +122865,7 @@ exports.default = {
         }
       }
     },
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
     picked: function picked() {
       if (this.option.type === 'day' || this.option.type === 'min') {
         var ctime = this.checked.year + '-' + this.checked.month + '-' + this.checked.day + ' ' + this.checked.hour + ':' + this.checked.min;
@@ -122830,6 +122893,35 @@ exports.default = {
         }
         document.querySelector('.hour-box').scrollTop = (document.querySelector('.hour-item.active').offsetTop || 0) - 250;
         document.querySelector('.min-box').scrollTop = (document.querySelector('.min-item.active').offsetTop || 0) - 250;
+=======
+    showstreamdash: function showstreamdash() {
+      this.streamdash = true;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.announcementsdash = false;
+    },
+    showprofiledash: function showprofiledash() {
+      this.streamdash = false;
+      this.profiledash = true;
+      this.channeldash = false;
+      this.announcementsdash = false;
+    },
+    showchanneldash: function showchanneldash() {
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = true;
+      this.announcementsdash = false;
+    },
+    showannouncementdash: function showannouncementdash() {
+      var _this3 = this;
+
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.announcementsdash = true;
+      axios.get('/api/personalannouncements').then(function (response) {
+        _this3.announcements = response.data;
+>>>>>>> users can now post announcements
       });
     }
   }
@@ -123472,6 +123564,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "li",
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
           { staticClass: "nav-item", on: { click: _vm.showscheduledash } },
           [
             _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
@@ -123479,6 +123572,17 @@ var render = function() {
             ])
           ]
         )
+=======
+          { staticClass: "nav-item", on: { click: _vm.showannouncementdash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Announcements")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+>>>>>>> users can now post announcements
       ]),
       _vm._v(" "),
       _c(
@@ -123930,6 +124034,7 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
                   value: _vm.scheduledash,
                   expression: "scheduledash"
                 }
@@ -124265,13 +124370,134 @@ var render = function() {
                                   on: { click: _vm.add_schedule_weekly }
                                 },
                                 [_vm._v("Add event")]
+=======
+                  value: _vm.announcementsdash,
+                  expression: "announcementsdash"
+                }
+              ]
+            },
+            [
+              _c("div", { staticClass: "row px-2" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "h3",
+                    {
+                      staticClass: "display-4",
+                      staticStyle: { color: "#343a40" }
+                    },
+                    [_vm._v("New announcement")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      attrs: { action: "/announcements/post", method: "POST" }
+                    },
+                    [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_token",
+                            id: "csrf-token"
+                          },
+                          domProps: { value: _vm.csrftoken }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger float-right",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-6" },
+                  [
+                    _c(
+                      "h3",
+                      {
+                        staticClass: "display-4",
+                        staticStyle: { color: "#343a40" }
+                      },
+                      [_vm._v("Your recent announcements")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.announcements, function(announcement) {
+                      return _c("div", { staticClass: "card mb-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "card-body bg-dark",
+                            staticStyle: { color: "rgb(245, 245, 220)" }
+                          },
+                          [
+                            _c("div", { staticClass: "card-title" }, [
+                              _c("img", {
+                                attrs: {
+                                  height: "32px",
+                                  src: announcement.user.profilecontent.img_url
+                                }
+                              }),
+                              _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/profilepage/" + announcement.user.name
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass: "ml-2",
+                                        staticStyle: { display: "inline" }
+                                      },
+                                      [_vm._v(_vm._s(announcement.user.name))]
+                                    )
+                                  ]
+                                ),
+                                _c("br"),
+                                _c("h5", { staticClass: "pt-1" }, [
+                                  _vm._v(_vm._s(announcement.title))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "card-text" }, [
+                              _vm._v(
+                                "\r\n                  " +
+                                  _vm._s(announcement.message) +
+                                  "\r\n                "
+>>>>>>> users can now post announcements
                               )
                             ])
                           ]
                         )
                       ])
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
                     ])
                   ]
+=======
+                    })
+                  ],
+                  2
+>>>>>>> users can now post announcements
                 )
               ])
             ]
@@ -124407,6 +124633,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
     return _c("div", { staticClass: "card-header" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v("scheduled streams")])
     ])
@@ -124564,6 +124791,14 @@ var staticRenderFns = [
           name: "weekly_title",
           placeholder: "Stream Name"
         }
+=======
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "Title" } }, [_vm._v("Title")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "title", placeholder: "Enter title" }
+>>>>>>> users can now post announcements
       })
     ])
   },
@@ -124572,6 +124807,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group" }, [
+<<<<<<< 28f598f478314818d76797ab69a6bbbcd037608c
       _c("label", { attrs: { for: "weekly_day" } }, [_vm._v("Day:")]),
       _vm._v(" "),
       _c(
@@ -124636,6 +124872,15 @@ var staticRenderFns = [
           id: "weekly_tag",
           name: "weekly_tag",
           placeholder: "idk"
+=======
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: {
+          type: "textarea",
+          name: "message",
+          placeholder: "Announcement",
+          rows: "5"
+>>>>>>> users can now post announcements
         }
       })
     ])
