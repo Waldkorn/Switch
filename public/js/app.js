@@ -122832,6 +122832,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< 2ef6152f4e1034e25771d17f9ff076883650049e
 <<<<<<< f7aff9fef4f7916cbb2b0a3257321a2ff31913c6
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -122867,6 +122868,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 =======
 =======
 >>>>>>> subscribe function works with paypal
+=======
+//
+//
+//
+>>>>>>> unsubscribe button
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['profile', 'loggedin', 'isfollowing', 'issubscribed'],
@@ -123198,6 +123204,26 @@ var render = function() {
                             )
                           ])
                         : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href:
+                              "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
+                          },
+                          on: { click: _vm.unsubscribe }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
+                              BORDER: "0"
+                            }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.issubscribed == 1
                         ? _c(
