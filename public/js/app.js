@@ -103892,8 +103892,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      announcements: [],
-      profiledetails: []
+      announcements: []
     };
   },
   mounted: function mounted() {
@@ -103901,11 +103900,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     axios.get('/api/announcements').then(function (response) {
       _this.announcements = response.data;
-      console.log(_this.announcements);
-      for (var i = 0; i < _this.announcements.length; i++) {
-        _this.profiledetails[_this.announcements[i].user.name] = _this.announcements[i].user.profilecontent;
-      }
-      console.log(_this.profiledetails);
     });
   }
 });
@@ -104937,6 +104931,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -104946,10 +104992,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       profilecontent: [],
       csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
       games: [],
+      announcements: [],
       streamdash: true,
       profiledash: false,
-      channeldash: false
-
+      channeldash: false,
+      announcementsdash: false
     };
   },
   props: ['user'],
@@ -104995,7 +105042,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       });
     },
-
     updateAbout: function updateAbout() {
       var _this2 = this;
 
@@ -105010,16 +105056,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.streamdash = true;
       this.profiledash = false;
       this.channeldash = false;
+      this.announcementsdash = false;
     },
     showprofiledash: function showprofiledash() {
       this.streamdash = false;
       this.profiledash = true;
       this.channeldash = false;
+      this.announcementsdash = false;
     },
     showchanneldash: function showchanneldash() {
       this.streamdash = false;
       this.profiledash = false;
       this.channeldash = true;
+      this.announcementsdash = false;
+    },
+    showannouncementdash: function showannouncementdash() {
+      var _this3 = this;
+
+      this.streamdash = false;
+      this.profiledash = false;
+      this.channeldash = false;
+      this.announcementsdash = true;
+      axios.get('/api/personalannouncements').then(function (response) {
+        _this3.announcements = response.data;
+      });
     }
   }
 });
@@ -105063,6 +105123,16 @@ var render = function() {
           [
             _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
               _vm._v("Channel")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "nav-item", on: { click: _vm.showannouncementdash } },
+          [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _vm._v("Announcements")
             ])
           ]
         ),
@@ -105510,6 +105580,139 @@ var render = function() {
               attrs: { id: "nav-channel" }
             },
             [_vm._v("channel settings here")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.announcementsdash,
+                  expression: "announcementsdash"
+                }
+              ]
+            },
+            [
+              _c("div", { staticClass: "row px-2" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "h3",
+                    {
+                      staticClass: "display-4",
+                      staticStyle: { color: "#343a40" }
+                    },
+                    [_vm._v("New announcement")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      attrs: { action: "/announcements/post", method: "POST" }
+                    },
+                    [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("input", {
+                          attrs: {
+                            type: "hidden",
+                            name: "_token",
+                            id: "csrf-token"
+                          },
+                          domProps: { value: _vm.csrftoken }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger float-right",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-6" },
+                  [
+                    _c(
+                      "h3",
+                      {
+                        staticClass: "display-4",
+                        staticStyle: { color: "#343a40" }
+                      },
+                      [_vm._v("Your recent announcements")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.announcements, function(announcement) {
+                      return _c("div", { staticClass: "card mb-2" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "card-body bg-dark",
+                            staticStyle: { color: "rgb(245, 245, 220)" }
+                          },
+                          [
+                            _c("div", { staticClass: "card-title" }, [
+                              _c("img", {
+                                attrs: {
+                                  height: "32px",
+                                  src: announcement.user.profilecontent.img_url
+                                }
+                              }),
+                              _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        "/profilepage/" + announcement.user.name
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass: "ml-2",
+                                        staticStyle: { display: "inline" }
+                                      },
+                                      [_vm._v(_vm._s(announcement.user.name))]
+                                    )
+                                  ]
+                                ),
+                                _c("br"),
+                                _c("h5", { staticClass: "pt-1" }, [
+                                  _vm._v(_vm._s(announcement.title))
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("hr"),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "card-text" }, [
+                              _vm._v(
+                                "\r\n                  " +
+                                  _vm._s(announcement.message) +
+                                  "\r\n                "
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            ]
           )
         ]
       )
@@ -105647,6 +105850,35 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "Title" } }, [_vm._v("Title")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", name: "title", placeholder: "Enter title" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("textarea", {
+        staticClass: "form-control",
+        attrs: {
+          type: "textarea",
+          name: "message",
+          placeholder: "Announcement",
+          rows: "5"
+        }
+      })
+    ])
   }
 ]
 render._withStripped = true

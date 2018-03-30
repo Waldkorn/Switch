@@ -2,18 +2,21 @@
 <div class="container-fluid" style="padding:0px">
 
   <ul class="nav nav-pills nav-fill navbar-dark bg-dark">
-      <li class="nav-item" v-on:click="showstreamdash">
-        <a class="nav-link" href="#" >Stream</a>
-      </li>
-    <li class="nav-item"v-on:click="showprofiledash">
-        <a class="nav-link" href="#" >Profile</a>
-      </li>
-      <li class="nav-item" v-on:click="showchanneldash">
-        <a class="nav-link" href="#" >Channel</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">schedule</a>
-      </li>
+    <li class="nav-item" v-on:click="showstreamdash">
+      <a class="nav-link" href="#" >Stream</a>
+    </li>
+    <li class="nav-item" v-on:click="showprofiledash">
+      <a class="nav-link" href="#" >Profile</a>
+    </li>
+    <li class="nav-item" v-on:click="showchanneldash">
+      <a class="nav-link" href="#" >Channel</a>
+    </li>
+    <li class="nav-item" v-on:click="showannouncementdash">
+      <a class="nav-link" href="#" >Announcements</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">schedule</a>
+    </li>
   </ul>
 
 <div class="container-fluid" style="padding:0px">
@@ -150,6 +153,55 @@
         </div>
       </div>
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
+
+      <div v-show="announcementsdash">
+        <div class="row px-2">
+
+          <div class="col-md-6">
+
+            <h3 class="display-4" style="color: #343a40;">New announcement</h3>
+
+            <form action="/announcements/post" method="POST">
+
+              <div class="form-group">
+               <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
+             </div>
+
+              <div class="form-group">
+                <label for="Title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter title">
+              </div>
+
+              <div class="form-group">
+                <textarea type="textarea" class="form-control" name="message" placeholder="Announcement" rows="5"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-danger float-right">Submit</button>
+
+            </form>
+            
+          </div>
+
+          <div class="col-md-6">
+
+            <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
+
+            <div class="card mb-2" v-for="announcement in announcements">
+              <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
+                <div class="card-title">
+                  <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
+                </div>
+                <hr>
+                <div class="card-text">
+                  {{ announcement.message }}
+                </div>
+              </div>
+            </div>  
+
+          </div>
+
+        </div>
+      </div>
 </div>
 </div>
 </template>
@@ -164,10 +216,11 @@ export default {
           profilecontent : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
+          announcements : [],
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
-
+          announcementsdash: false,
       }
     },
     props: ['user'],
@@ -211,7 +264,6 @@ export default {
 
        })
       },
-
       updateAbout: function() {
         axios.post('/api/profilecontentabout', {
           about: document.getElementById('aboutinput').value,
@@ -224,17 +276,29 @@ export default {
 				this.streamdash = true;
 				this.profiledash = false;
 				this.channeldash = false;
+        this.announcementsdash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
 				this.channeldash = false;
+        this.announcementsdash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
 				this.profiledash = false;
 				this.channeldash = true;
-			}
+        this.announcementsdash = false;
+			},
+      showannouncementdash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.channeldash = false;
+        this.announcementsdash = true;
+        axios.get('/api/personalannouncements').then((response) => {
+          this.announcements = response.data;
+        })
+      }
     }
   }
 </script>

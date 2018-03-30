@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::post('/uploadimage','UploadController@updateimage');
+Route::post('/announcements/post', 'UploadController@create');
 
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');

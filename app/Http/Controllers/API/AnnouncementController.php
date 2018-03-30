@@ -11,11 +11,18 @@ use App\User;
 
 class AnnouncementController extends Controller
 {
-    public function get()
+    public function readFollowerAnnouncements()
     {
     	$user = Auth::user();
     	$followings = $user->followings()->pluck('streamer_id');
-    	$announcements = Announcement::whereIn('user_id', $followings)->with('user.profilecontent')->get();
+    	$announcements = Announcement::whereIn('user_id', $followings)->with('user.profilecontent')->Latest()->limit(10)->get();
     	return $announcements;
     }
+
+    public function read()
+    {
+    	$user = Auth::user();
+    	return $user->announcements()->with('user.profilecontent')->Latest()->get();
+    }
+
 }
