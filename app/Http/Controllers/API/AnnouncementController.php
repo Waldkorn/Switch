@@ -25,5 +25,5 @@ class AnnouncementController extends Controller
     	$user = Auth::user();
     	return $user->announcements()->with('user.profilecontent')->Latest()->get();
     }
-    
+
 }

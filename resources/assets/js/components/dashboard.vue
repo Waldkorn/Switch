@@ -522,6 +522,56 @@
           </div>
             </div>
           </div>
+
+
+      <div v-show="announcementsdash">
+        <div class="row px-2">
+
+          <div class="col-md-6">
+
+            <h3 class="display-4" style="color: #343a40;">New announcement</h3>
+
+            <form action="/announcements/post" method="POST">
+
+              <div class="form-group">
+               <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
+             </div>
+
+              <div class="form-group">
+                <label for="Title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter title">
+              </div>
+
+              <div class="form-group">
+                <textarea type="textarea" class="form-control" name="message" placeholder="Announcement" rows="5"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-danger float-right">Submit</button>
+
+            </form>
+            
+          </div>
+
+          <div class="col-md-6">
+
+            <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
+
+            <div class="card mb-2" v-for="announcement in announcements">
+              <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
+                <div class="card-title">
+                  <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
+                </div>
+                <hr>
+                <div class="card-text">
+                  {{ announcement.message }}
+                </div>
+              </div>
+            </div>  
+
+          </div>
+
+        </div>
+
       </div>
 </div>
 </div>
@@ -734,6 +784,7 @@ export default {
 				this.profiledash = false;
 				this.channeldash = true;
         this.scheduledash = false;
+        this.announcementsdash = false;
 			},
       showannouncementdash: function() {
         this.streamdash = false;
@@ -750,7 +801,18 @@ export default {
         this.profiledash = false;
         this.channeldash = false;
         this.scheduledash = true;
-      },
+        this.announcementsdash = false;
+			},
+      showannouncementdash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.channeldash = false;
+        this.scheduledash = false;
+        this.announcementsdash = true;
+        axios.get('/api/personalannouncements').then((response) => {
+          this.announcements = response.data;
+        })
+      }
     }
   }
 </script>
