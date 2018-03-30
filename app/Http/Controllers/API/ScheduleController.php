@@ -16,10 +16,6 @@ class ScheduleController extends Controller
 {
   //shows a users schedule for the upcoming 7 days, on their profilepage and dashboard
   public function showuserschedule($username){
-<<<<<<< b6ec2a391fe0369231000e942144184a74cecae7
-=======
-
->>>>>>> I forgot to save something, no idea what
     $user = User::where('name',$username)->first();
     $games = Game::get();
     $streams= Schedule::
@@ -127,10 +123,6 @@ class ScheduleController extends Controller
 
       		]);
           return request('single_title')." saved";
-<<<<<<< b6ec2a391fe0369231000e942144184a74cecae7
-=======
-
->>>>>>> I forgot to save something, no idea what
     }
     //adds daily event to schedule tale
     public function createDailyEvent(){
@@ -166,11 +158,6 @@ class ScheduleController extends Controller
               'type' => $type
         ]);
         return "new daily stream added!";
-<<<<<<< b6ec2a391fe0369231000e942144184a74cecae7
-=======
-
-
->>>>>>> I forgot to save something, no idea what
       }
       //add weekly events to schedule table
       public function createWeeklyEvent(){
