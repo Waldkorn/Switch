@@ -38,3 +38,13 @@ $factory->define(App\Stream::class, function (Faker $faker, $user) {
         'updated_at' => date('Y-m-d H:i:s'),
     ];
 });
+
+$factory->define(App\Announcement::class, function(Faker $faker) {
+    return [
+        'user_id' => random_int(2,4),
+        'title' => $faker->sentence($nbWords = 6),
+        'message' => $faker->realText($maxNbChars = 1000, $indexSize = 2),
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+});

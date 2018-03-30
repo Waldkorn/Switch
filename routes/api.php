@@ -74,3 +74,9 @@ Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->midd
 Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
+
+////////////////////////
+// Annoucement routes //
+////////////////////////
+
+Route::get('/announcements', 'API\AnnouncementController@get')->middleware('auth:api');

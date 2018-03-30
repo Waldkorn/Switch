@@ -123776,12 +123776,17 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< e2a6d43c30299d29df7fc34f0ae5906e0b41777e
 /* 306 */
 >>>>>>> fixed bugs in dashboard.vue
+=======
+/* 168 */
+>>>>>>> frontpage now displays announcements of followed streamers
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+<<<<<<< e2a6d43c30299d29df7fc34f0ae5906e0b41777e
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_datepicker__);
 //
@@ -123977,6 +123982,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+=======
+>>>>>>> frontpage now displays announcements of followed streamers
 //
 //
 //
@@ -123998,6 +124005,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 <<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 =======
 
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      announcements: [],
+      profiledetails: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/announcements').then(function (response) {
+      _this.announcements = response.data;
+      console.log(_this.announcements);
+      for (var i = 0; i < _this.announcements.length; i++) {
+        _this.profiledetails[_this.announcements[i].user.name] = _this.announcements[i].user.profilecontent;
+      }
+      console.log(_this.profiledetails);
+    });
+  }
+});
+
 /***/ }),
 /* 169 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -124006,18 +124034,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "col-md-5 pt-1" },
+    _vm._l(_vm.announcements, function(announcement) {
+      return _c("div", { staticClass: "card mb-2" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card-body bg-dark",
+            staticStyle: { color: "rgb(245, 245, 220)" }
+          },
+          [
+            _c("div", { staticClass: "card-title" }, [
+              _c("img", {
+                attrs: {
+                  height: "32px",
+                  src: announcement.user.profilecontent.img_url
+                }
+              }),
+              _c("span", [
+                _c(
+                  "a",
+                  { attrs: { href: "/profilepage/" + announcement.user.name } },
+                  [
+                    _c(
+                      "h3",
+                      {
+                        staticClass: "ml-2",
+                        staticStyle: { display: "inline" }
+                      },
+                      [_vm._v(_vm._s(announcement.user.name))]
+                    )
+                  ]
+                ),
+                _c("br"),
+                _c("h5", { staticClass: "pt-1" }, [
+                  _vm._v(_vm._s(announcement.title))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-text" }, [
+              _vm._v("\n  \t\t\t" + _vm._s(announcement.message) + "\n  \t\t")
+            ])
+          ]
+        )
+      ])
+    })
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-5 pt-1" }, [
-      _c("p", [_vm._v(" lots of stuff here soon ")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
