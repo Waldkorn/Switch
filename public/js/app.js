@@ -127552,7 +127552,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             activeUsers: [],
             colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
             index: 0,
-            loggedIn: false
+            loggedIn: false,
+            emotes: [{ shortcut: "smileyFace", replacement: "<img height='16px' src='/images/emoticons/smiling_face.png'>" }, { shortcut: "laughingFace", replacement: "<img height='16px' src=/images/emoticons/laughing_face.png>" }, { shortcut: "tongueFace", replacement: "<img height='16px' src='/images/emoticons/tongue_face.png'>" }]
         };
     },
     props: ['user', 'streamer', 'viewers', 'darkmode'],
@@ -127604,8 +127605,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             Echo.channel('stream.' + this.streamer.stream.id).listen('NewChatmessage', function (chatmessage) {
                 _this2.assignColorToUsers(chatmessage);
+                chatmessage.message = _this2.expandText(chatmessage.message);
                 _this2.messages = _this2.messages.concat(chatmessage);
             });
+        },
+        expandText: function expandText(text) {
+            for (var i = 0; i < this.emotes.length; i++) {
+                text = text.replace(new RegExp("\\b" + this.emotes[i].shortcut + "\\b", 'g'), this.emotes[i].replacement);
+            }
+
+            return text;
         }
     },
     updated: function updated() {
@@ -127672,11 +127681,10 @@ var render = function() {
                       { style: "color:" + _vm.activeUsers[message.user.name] },
                       [_vm._v(_vm._s(message.user.name) + ":")]
                     ),
-                    _vm._v(
-                      "\n\n                    " +
-                        _vm._s(message.message) +
-                        "\n\n                "
-                    )
+                    _vm._v(" "),
+                    _c("span", {
+                      domProps: { innerHTML: _vm._s(message.message) }
+                    })
                   ])
                 ]
               )
