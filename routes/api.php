@@ -47,7 +47,6 @@ Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
 Route::get('/profilecontent/{username}', 'API\ProfileController@getcontent');
 Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');
-
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
 
 
@@ -66,32 +65,14 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
-<<<<<<< HEAD
-
-Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
-
-
-Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
-
-
-/////////////////
-// Auth Routes //
-/////////////////
-=======
 Route::get('/currentdate','API\ScheduleController@currentdate');
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> schedule add javascript function, and half of vue datapicker
-=======
-Route::post('/addschedule','API\ScheduleController@create');
->>>>>>> carbon now parses datetime-local
-=======
-Route::post('/addschedule','API\ScheduleController@create')->middleware('auth:api');
->>>>>>> adding one time events works
-=======
+Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
+Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 
 Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
->>>>>>> daily schedule save works
+
+/////////////////
+// Auth Routes //
+/////////////////
