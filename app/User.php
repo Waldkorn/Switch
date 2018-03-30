@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'stream_token', 'now_live'
+        'name', 'email', 'password', 'stream_token'
     ];
 
     /**
@@ -27,8 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token'
     ];
-  //streamkey
 
+    //followers
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'streamer_id', 'follower_id');
@@ -40,6 +40,20 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id')->withTimestamps();
     }
+
+    //subscriptionss
+    public function subscribers()
+    {
+        return $this->belongsToMany(User::class, 'subscribers', 'leader_id', 'subscriber_id');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function subscriptions()
+    {
+        return $this->belongsToMany(User::class, 'subscribers', 'subscriber_id', 'leader_id')->withTimestamps();
+    }
+
 
     public function chatmessages()
     {
