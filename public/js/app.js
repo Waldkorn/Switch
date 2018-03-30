@@ -29991,7 +29991,6 @@ module.exports = {
   METADATA_STREAM_TYPE: 0x15
 };
 
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 /***/ }),
 /* 12 */
@@ -30015,31 +30014,6 @@ if (typeof document !== 'undefined') {
 
 module.exports = doccy;
 
-=======
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
-    typeof window !== 'undefined' ? window : {}
-var minDoc = __webpack_require__(179);
-
-var doccy;
-
-if (typeof document !== 'undefined') {
-    doccy = document;
-} else {
-    doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'];
-
-    if (!doccy) {
-        doccy = topLevel['__GLOBAL_DOCUMENT_CACHE@4'] = minDoc;
-    }
-}
-
-module.exports = doccy;
-
->>>>>>> fixed rebase issues
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
@@ -40019,7 +39993,6 @@ var SegmentLoader = (function (_videojs$EventTarget) {
       if (this.checkBufferTimeout_) {
         _globalWindow2['default'].clearTimeout(this.checkBufferTimeout_);
       }
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
       this.checkBufferTimeout_ = _globalWindow2['default'].setTimeout(this.monitorBufferTick_.bind(this), CHECK_BUFFER_DELAY);
     }
@@ -40073,61 +40046,6 @@ var SegmentLoader = (function (_videojs$EventTarget) {
         segmentInfo.timestampOffset = segmentInfo.startOfSegment;
       }
 
-=======
-
-      this.checkBufferTimeout_ = _globalWindow2['default'].setTimeout(this.monitorBufferTick_.bind(this), CHECK_BUFFER_DELAY);
-    }
-
-    /**
-     * fill the buffer with segements unless the sourceBuffers are
-     * currently updating
-     *
-     * Note: this function should only ever be called by monitorBuffer_
-     * and never directly
-     *
-     * @private
-     */
-  }, {
-    key: 'fillBuffer_',
-    value: function fillBuffer_() {
-      if (this.sourceUpdater_.updating()) {
-        return;
-      }
-
-      if (!this.syncPoint_) {
-        this.syncPoint_ = this.syncController_.getSyncPoint(this.playlist_, this.duration_(), this.currentTimeline_, this.currentTime_());
-      }
-
-      // see if we need to begin loading immediately
-      var segmentInfo = this.checkBuffer_(this.buffered_(), this.playlist_, this.mediaIndex, this.hasPlayed_(), this.currentTime_(), this.syncPoint_);
-
-      if (!segmentInfo) {
-        return;
-      }
-
-      var isEndOfStream = detectEndOfStream(this.playlist_, this.mediaSource_, segmentInfo.mediaIndex);
-
-      if (isEndOfStream) {
-        this.endOfStream();
-        return;
-      }
-
-      if (segmentInfo.mediaIndex === this.playlist_.segments.length - 1 && this.mediaSource_.readyState === 'ended' && !this.seeking_()) {
-        return;
-      }
-
-      // We will need to change timestampOffset of the sourceBuffer if either of
-      // the following conditions are true:
-      // - The segment.timeline !== this.currentTimeline
-      //   (we are crossing a discontinuity somehow)
-      // - The "timestampOffset" for the start of this segment is less than
-      //   the currently set timestampOffset
-      if (segmentInfo.timeline !== this.currentTimeline_ || segmentInfo.startOfSegment !== null && segmentInfo.startOfSegment < this.sourceUpdater_.timestampOffset()) {
-        this.syncController_.reset();
-        segmentInfo.timestampOffset = segmentInfo.startOfSegment;
-      }
-
->>>>>>> fixed rebase issues
       this.loadSegment_(segmentInfo);
     }
 
@@ -40332,501 +40250,6 @@ var SegmentLoader = (function (_videojs$EventTarget) {
       // is larger than the estimated time until the player runs out of forward buffer
       if (requestTimeRemaining <= timeUntilRebuffer) {
         return false;
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-      }
-
-      var switchCandidate = (0, _playlistSelectors.minRebufferMaxBandwidthSelector)({
-        master: this.hls_.playlists.master,
-        currentTime: currentTime,
-        bandwidth: measuredBandwidth,
-        duration: this.duration_(),
-        segmentDuration: segmentDuration,
-        timeUntilRebuffer: timeUntilRebuffer,
-        currentTimeline: this.currentTimeline_,
-        syncController: this.syncController_
-      });
-
-      if (!switchCandidate) {
-        return;
-      }
-
-      var rebufferingImpact = requestTimeRemaining - timeUntilRebuffer;
-
-      var timeSavedBySwitching = rebufferingImpact - switchCandidate.rebufferingImpact;
-
-      var minimumTimeSaving = 0.5;
-
-      // If we are already rebuffering, increase the amount of variance we add to the
-      // potential round trip time of the new request so that we are not too aggressive
-      // with switching to a playlist that might save us a fraction of a second.
-      if (timeUntilRebuffer <= _ranges.TIME_FUDGE_FACTOR) {
-        minimumTimeSaving = 1;
-      }
-
-      if (!switchCandidate.playlist || switchCandidate.playlist.uri === this.playlist_.uri || timeSavedBySwitching < minimumTimeSaving) {
-        return false;
-      }
-
-      // set the bandwidth to that of the desired playlist being sure to scale by
-      // BANDWIDTH_VARIANCE and add one so the playlist selector does not exclude it
-      // don't trigger a bandwidthupdate as the bandwidth is artifial
-      this.bandwidth = switchCandidate.playlist.attributes.BANDWIDTH * _config2['default'].BANDWIDTH_VARIANCE + 1;
-      this.abort();
-      this.trigger('earlyabort');
-      return true;
-    }
-
-    /**
-     * XHR `progress` event handler
-     *
-     * @param {Event}
-     *        The XHR `progress` event
-     * @param {Object} simpleSegment
-     *        A simplified segment object copy
-     * @private
-     */
-  }, {
-    key: 'handleProgress_',
-    value: function handleProgress_(event, simpleSegment) {
-      if (!this.pendingSegment_ || simpleSegment.requestId !== this.pendingSegment_.requestId || this.abortRequestEarly_(simpleSegment.stats)) {
-        return;
-      }
-
-      this.trigger('progress');
-    }
-
-    /**
-     * load a specific segment from a request into the buffer
-     *
-     * @private
-     */
-  }, {
-    key: 'loadSegment_',
-    value: function loadSegment_(segmentInfo) {
-      this.state = 'WAITING';
-      this.pendingSegment_ = segmentInfo;
-      this.trimBackBuffer_(segmentInfo);
-
-      segmentInfo.abortRequests = (0, _mediaSegmentRequest.mediaSegmentRequest)(this.hls_.xhr, this.xhrOptions_, this.decrypter_, this.createSimplifiedSegmentObj_(segmentInfo),
-      // progress callback
-      this.handleProgress_.bind(this), this.segmentRequestFinished_.bind(this));
-    }
-
-    /**
-     * trim the back buffer so that we don't have too much data
-     * in the source buffer
-     *
-     * @private
-     *
-     * @param {Object} segmentInfo - the current segment
-     */
-  }, {
-    key: 'trimBackBuffer_',
-    value: function trimBackBuffer_(segmentInfo) {
-      var removeToTime = safeBackBufferTrimTime(this.seekable_(), this.currentTime_(), this.playlist_.targetDuration || 10);
-
-      // Chrome has a hard limit of 150MB of
-      // buffer and a very conservative "garbage collector"
-      // We manually clear out the old buffer to ensure
-      // we don't trigger the QuotaExceeded error
-      // on the source buffer during subsequent appends
-
-      if (removeToTime > 0) {
-        this.remove(0, removeToTime);
-      }
-    }
-
-    /**
-     * created a simplified copy of the segment object with just the
-     * information necessary to perform the XHR and decryption
-     *
-     * @private
-     *
-     * @param {Object} segmentInfo - the current segment
-     * @returns {Object} a simplified segment object copy
-     */
-  }, {
-    key: 'createSimplifiedSegmentObj_',
-    value: function createSimplifiedSegmentObj_(segmentInfo) {
-      var segment = segmentInfo.segment;
-      var simpleSegment = {
-        resolvedUri: segment.resolvedUri,
-        byterange: segment.byterange,
-        requestId: segmentInfo.requestId
-      };
-
-      if (segment.key) {
-        // if the media sequence is greater than 2^32, the IV will be incorrect
-        // assuming 10s segments, that would be about 1300 years
-        var iv = segment.key.iv || new Uint32Array([0, 0, 0, segmentInfo.mediaIndex + segmentInfo.playlist.mediaSequence]);
-
-        simpleSegment.key = {
-          resolvedUri: segment.key.resolvedUri,
-          iv: iv
-        };
-      }
-
-      if (segment.map) {
-        simpleSegment.map = this.initSegment(segment.map);
-      }
-
-      return simpleSegment;
-    }
-
-    /**
-     * Handle the callback from the segmentRequest function and set the
-     * associated SegmentLoader state and errors if necessary
-     *
-     * @private
-     */
-  }, {
-    key: 'segmentRequestFinished_',
-    value: function segmentRequestFinished_(error, simpleSegment) {
-      // every request counts as a media request even if it has been aborted
-      // or canceled due to a timeout
-      this.mediaRequests += 1;
-
-      if (simpleSegment.stats) {
-        this.mediaBytesTransferred += simpleSegment.stats.bytesReceived;
-        this.mediaTransferDuration += simpleSegment.stats.roundTripTime;
-      }
-
-      // The request was aborted and the SegmentLoader has already been reset
-      if (!this.pendingSegment_) {
-        this.mediaRequestsAborted += 1;
-        return;
-      }
-
-      // the request was aborted and the SegmentLoader has already started
-      // another request. this can happen when the timeout for an aborted
-      // request triggers due to a limitation in the XHR library
-      // do not count this as any sort of request or we risk double-counting
-      if (simpleSegment.requestId !== this.pendingSegment_.requestId) {
-        return;
-      }
-
-      // an error occurred from the active pendingSegment_ so reset everything
-      if (error) {
-        this.pendingSegment_ = null;
-        this.state = 'READY';
-
-        // the requests were aborted just record the aborted stat and exit
-        // this is not a true error condition and nothing corrective needs
-        // to be done
-        if (error.code === _mediaSegmentRequest.REQUEST_ERRORS.ABORTED) {
-          this.mediaRequestsAborted += 1;
-          return;
-        }
-
-        this.pause();
-
-        // the error is really just that at least one of the requests timed-out
-        // set the bandwidth to a very low value and trigger an ABR switch to
-        // take emergency action
-        if (error.code === _mediaSegmentRequest.REQUEST_ERRORS.TIMEOUT) {
-          this.mediaRequestsTimedout += 1;
-          this.bandwidth = 1;
-          this.roundTrip = NaN;
-          this.trigger('bandwidthupdate');
-          return;
-        }
-
-        // if control-flow has arrived here, then the error is real
-        // emit an error event to blacklist the current playlist
-        this.mediaRequestsErrored += 1;
-        this.error(error);
-        this.trigger('error');
-        return;
-      }
-
-      // the response was a success so set any bandwidth stats the request
-      // generated for ABR purposes
-      this.bandwidth = simpleSegment.stats.bandwidth;
-      this.roundTrip = simpleSegment.stats.roundTripTime;
-
-      // if this request included an initialization segment, save that data
-      // to the initSegment cache
-      if (simpleSegment.map) {
-        simpleSegment.map = this.initSegment(simpleSegment.map, true);
-      }
-
-      this.processSegmentResponse_(simpleSegment);
-    }
-
-    /**
-     * Move any important data from the simplified segment object
-     * back to the real segment object for future phases
-     *
-     * @private
-     */
-  }, {
-    key: 'processSegmentResponse_',
-    value: function processSegmentResponse_(simpleSegment) {
-      var segmentInfo = this.pendingSegment_;
-
-      segmentInfo.bytes = simpleSegment.bytes;
-      if (simpleSegment.map) {
-        segmentInfo.segment.map.bytes = simpleSegment.map.bytes;
-      }
-
-      segmentInfo.endOfAllRequests = simpleSegment.endOfAllRequests;
-      this.handleSegment_();
-    }
-
-    /**
-     * append a decrypted segement to the SourceBuffer through a SourceUpdater
-     *
-     * @private
-     */
-  }, {
-    key: 'handleSegment_',
-    value: function handleSegment_() {
-      var _this3 = this;
-
-      if (!this.pendingSegment_) {
-        this.state = 'READY';
-        return;
-      }
-
-      var segmentInfo = this.pendingSegment_;
-      var segment = segmentInfo.segment;
-      var timingInfo = this.syncController_.probeSegmentInfo(segmentInfo);
-
-      // When we have our first timing info, determine what media types this loader is
-      // dealing with. Although we're maintaining extra state, it helps to preserve the
-      // separation of segment loader from the actual source buffers.
-      if (typeof this.startingMedia_ === 'undefined' && timingInfo && (
-      // Guard against cases where we're not getting timing info at all until we are
-      // certain that all streams will provide it.
-      timingInfo.containsAudio || timingInfo.containsVideo)) {
-        this.startingMedia_ = {
-          containsAudio: timingInfo.containsAudio,
-          containsVideo: timingInfo.containsVideo
-        };
-      }
-
-      var illegalMediaSwitchError = illegalMediaSwitch(this.loaderType_, this.startingMedia_, timingInfo);
-
-      if (illegalMediaSwitchError) {
-        this.error({
-          message: illegalMediaSwitchError,
-          blacklistDuration: Infinity
-        });
-        this.trigger('error');
-        return;
-      }
-
-      if (segmentInfo.isSyncRequest) {
-        this.trigger('syncinfoupdate');
-        this.pendingSegment_ = null;
-        this.state = 'READY';
-        return;
-      }
-
-      if (segmentInfo.timestampOffset !== null && segmentInfo.timestampOffset !== this.sourceUpdater_.timestampOffset()) {
-        this.sourceUpdater_.timestampOffset(segmentInfo.timestampOffset);
-        // fired when a timestamp offset is set in HLS (can also identify discontinuities)
-        this.trigger('timestampoffset');
-      }
-
-      var timelineMapping = this.syncController_.mappingForTimeline(segmentInfo.timeline);
-
-      if (timelineMapping !== null) {
-        this.trigger({
-          type: 'segmenttimemapping',
-          mapping: timelineMapping
-        });
-      }
-
-      this.state = 'APPENDING';
-
-      // if the media initialization segment is changing, append it
-      // before the content segment
-      if (segment.map) {
-        (function () {
-          var initId = (0, _binUtils.initSegmentId)(segment.map);
-
-          if (!_this3.activeInitSegmentId_ || _this3.activeInitSegmentId_ !== initId) {
-            var initSegment = _this3.initSegment(segment.map);
-
-            _this3.sourceUpdater_.appendBuffer(initSegment.bytes, function () {
-              _this3.activeInitSegmentId_ = initId;
-            });
-          }
-        })();
-      }
-
-      segmentInfo.byteLength = segmentInfo.bytes.byteLength;
-      if (typeof segment.start === 'number' && typeof segment.end === 'number') {
-        this.mediaSecondsLoaded += segment.end - segment.start;
-      } else {
-        this.mediaSecondsLoaded += segment.duration;
-      }
-
-      this.sourceUpdater_.appendBuffer(segmentInfo.bytes, this.handleUpdateEnd_.bind(this));
-    }
-
-    /**
-     * callback to run when appendBuffer is finished. detects if we are
-     * in a good state to do things with the data we got, or if we need
-     * to wait for more
-     *
-     * @private
-     */
-  }, {
-    key: 'handleUpdateEnd_',
-    value: function handleUpdateEnd_() {
-      this.logger_('handleUpdateEnd_', 'segmentInfo:', this.pendingSegment_);
-
-      if (!this.pendingSegment_) {
-        this.state = 'READY';
-        if (!this.paused()) {
-          this.monitorBuffer_();
-        }
-        return;
-      }
-
-      var segmentInfo = this.pendingSegment_;
-      var segment = segmentInfo.segment;
-      var isWalkingForward = this.mediaIndex !== null;
-
-      this.pendingSegment_ = null;
-      this.recordThroughput_(segmentInfo);
-      this.addSegmentMetadataCue_(segmentInfo);
-
-      this.state = 'READY';
-
-      this.mediaIndex = segmentInfo.mediaIndex;
-      this.fetchAtBuffer_ = true;
-      this.currentTimeline_ = segmentInfo.timeline;
-
-      // We must update the syncinfo to recalculate the seekable range before
-      // the following conditional otherwise it may consider this a bad "guess"
-      // and attempt to resync when the post-update seekable window and live
-      // point would mean that this was the perfect segment to fetch
-      this.trigger('syncinfoupdate');
-
-      // If we previously appended a segment that ends more than 3 targetDurations before
-      // the currentTime_ that means that our conservative guess was too conservative.
-      // In that case, reset the loader state so that we try to use any information gained
-      // from the previous request to create a new, more accurate, sync-point.
-      if (segment.end && this.currentTime_() - segment.end > segmentInfo.playlist.targetDuration * 3) {
-        this.resetEverything();
-        return;
-      }
-
-      // Don't do a rendition switch unless we have enough time to get a sync segment
-      // and conservatively guess
-      if (isWalkingForward) {
-        this.trigger('bandwidthupdate');
-      }
-      this.trigger('progress');
-
-      // any time an update finishes and the last segment is in the
-      // buffer, end the stream. this ensures the "ended" event will
-      // fire if playback reaches that point.
-      var isEndOfStream = detectEndOfStream(segmentInfo.playlist, this.mediaSource_, segmentInfo.mediaIndex + 1);
-
-      if (isEndOfStream) {
-        this.endOfStream();
-      }
-
-      if (!this.paused()) {
-        this.monitorBuffer_();
-      }
-    }
-
-    /**
-     * Records the current throughput of the decrypt, transmux, and append
-     * portion of the semgment pipeline. `throughput.rate` is a the cumulative
-     * moving average of the throughput. `throughput.count` is the number of
-     * data points in the average.
-     *
-     * @private
-     * @param {Object} segmentInfo the object returned by loadSegment
-     */
-  }, {
-    key: 'recordThroughput_',
-    value: function recordThroughput_(segmentInfo) {
-      var rate = this.throughput.rate;
-      // Add one to the time to ensure that we don't accidentally attempt to divide
-      // by zero in the case where the throughput is ridiculously high
-      var segmentProcessingTime = Date.now() - segmentInfo.endOfAllRequests + 1;
-      // Multiply by 8000 to convert from bytes/millisecond to bits/second
-      var segmentProcessingThroughput = Math.floor(segmentInfo.byteLength / segmentProcessingTime * 8 * 1000);
-
-      // This is just a cumulative moving average calculation:
-      //   newAvg = oldAvg + (sample - oldAvg) / (sampleCount + 1)
-      this.throughput.rate += (segmentProcessingThroughput - rate) / ++this.throughput.count;
-    }
-
-    /**
-     * A debugging logger noop that is set to console.log only if debugging
-     * is enabled globally
-     *
-     * @private
-     */
-  }, {
-    key: 'logger_',
-    value: function logger_() {}
-
-    /**
-     * Adds a cue to the segment-metadata track with some metadata information about the
-     * segment
-     *
-     * @private
-     * @param {Object} segmentInfo
-     *        the object returned by loadSegment
-     * @method addSegmentMetadataCue_
-     */
-  }, {
-    key: 'addSegmentMetadataCue_',
-    value: function addSegmentMetadataCue_(segmentInfo) {
-      if (!this.segmentMetadataTrack_) {
-        return;
-      }
-
-      var segment = segmentInfo.segment;
-      var start = segment.start;
-      var end = segment.end;
-
-      // Do not try adding the cue if the start and end times are invalid.
-      if (!finite(start) || !finite(end)) {
-        return;
-      }
-
-      (0, _videojsContribMediaSourcesEs5RemoveCuesFromTrackJs2['default'])(start, end, this.segmentMetadataTrack_);
-
-      var Cue = _globalWindow2['default'].WebKitDataCue || _globalWindow2['default'].VTTCue;
-      var value = {
-        uri: segmentInfo.uri,
-        timeline: segmentInfo.timeline,
-        playlist: segmentInfo.playlist.uri,
-        start: start,
-        end: end
-      };
-      var data = JSON.stringify(value);
-      var cue = new Cue(start, end, data);
-
-      // Attach the metadata to the value property of the cue to keep consistency between
-      // the differences of WebKitDataCue in safari and VTTCue in other browsers
-      cue.value = value;
-
-      this.segmentMetadataTrack_.addCue(cue);
-    }
-  }]);
-
-  return SegmentLoader;
-})(_videoJs2['default'].EventTarget);
-
-exports['default'] = SegmentLoader;
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-=======
       }
 
       var switchCandidate = (0, _playlistSelectors.minRebufferMaxBandwidthSelector)({
@@ -41352,43 +40775,6 @@ var _utilCodecsJs = __webpack_require__(44);
  */
 var safeGetComputedStyle = function safeGetComputedStyle(el, property) {
   var result = undefined;
->>>>>>> fixed rebase issues
-
-  if (!el) {
-    return '';
-  }
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _config = __webpack_require__(15);
-
-var _config2 = _interopRequireDefault(_config);
-
-var _playlist = __webpack_require__(7);
-
-var _playlist2 = _interopRequireDefault(_playlist);
-
-var _utilCodecsJs = __webpack_require__(44);
-
-// Utilities
-
-/**
- * Returns the CSS value for the specified property on an element
- * using `getComputedStyle`. Firefox has a long-standing issue where
- * getComputedStyle() may return null when running in an iframe with
- * `display: none`.
- *
- * @see https://bugzilla.mozilla.org/show_bug.cgi?id=548397
- * @param {HTMLElement} el the htmlelement to work on
- * @param {string} the proprety to get the style for
- */
-var safeGetComputedStyle = function safeGetComputedStyle(el, property) {
-  var result = undefined;
 
   if (!el) {
     return '';
@@ -41420,65 +40806,9 @@ var stableSort = function stableSort(array, sortFn) {
     }
     return cmp;
   });
-=======
-  result = window.getComputedStyle(el);
-  if (!result) {
-    return '';
-  }
-
-  return result[property];
 };
 
 /**
- * Resuable stable sort function
- *
- * @param {Playlists} array
- * @param {Function} sortFn Different comparators
- * @function stableSort
- */
-var stableSort = function stableSort(array, sortFn) {
-  var newArray = array.slice();
-
-  array.sort(function (left, right) {
-    var cmp = sortFn(left, right);
-
-    if (cmp === 0) {
-      return newArray.indexOf(left) - newArray.indexOf(right);
-    }
-    return cmp;
-  });
-};
-
-/**
- * A comparator function to sort two playlist object by bandwidth.
- *
- * @param {Object} left a media playlist object
- * @param {Object} right a media playlist object
- * @return {Number} Greater than zero if the bandwidth attribute of
- * left is greater than the corresponding attribute of right. Less
- * than zero if the bandwidth of right is greater than left and
- * exactly zero if the two are equal.
- */
-var comparePlaylistBandwidth = function comparePlaylistBandwidth(left, right) {
-  var leftBandwidth = undefined;
-  var rightBandwidth = undefined;
-
-  if (left.attributes.BANDWIDTH) {
-    leftBandwidth = left.attributes.BANDWIDTH;
-  }
-  leftBandwidth = leftBandwidth || window.Number.MAX_VALUE;
-  if (right.attributes.BANDWIDTH) {
-    rightBandwidth = right.attributes.BANDWIDTH;
-  }
-  rightBandwidth = rightBandwidth || window.Number.MAX_VALUE;
-
-  return leftBandwidth - rightBandwidth;
->>>>>>> fixed rebase issues
-};
-
-exports.comparePlaylistBandwidth = comparePlaylistBandwidth;
-/**
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
  * A comparator function to sort two playlist object by bandwidth.
  *
  * @param {Object} left a media playlist object
@@ -41554,56 +40884,6 @@ exports.comparePlaylistResolution = comparePlaylistResolution;
  * currently detected bandwidth, accounting for some amount of
  * bandwidth variance
  */
-=======
- * A comparator function to sort two playlist object by resolution (width).
- * @param {Object} left a media playlist object
- * @param {Object} right a media playlist object
- * @return {Number} Greater than zero if the resolution.width attribute of
- * left is greater than the corresponding attribute of right. Less
- * than zero if the resolution.width of right is greater than left and
- * exactly zero if the two are equal.
- */
-var comparePlaylistResolution = function comparePlaylistResolution(left, right) {
-  var leftWidth = undefined;
-  var rightWidth = undefined;
-
-  if (left.attributes.RESOLUTION && left.attributes.RESOLUTION.width) {
-    leftWidth = left.attributes.RESOLUTION.width;
-  }
-
-  leftWidth = leftWidth || window.Number.MAX_VALUE;
-
-  if (right.attributes.RESOLUTION && right.attributes.RESOLUTION.width) {
-    rightWidth = right.attributes.RESOLUTION.width;
-  }
-
-  rightWidth = rightWidth || window.Number.MAX_VALUE;
-
-  // NOTE - Fallback to bandwidth sort as appropriate in cases where multiple renditions
-  // have the same media dimensions/ resolution
-  if (leftWidth === rightWidth && left.attributes.BANDWIDTH && right.attributes.BANDWIDTH) {
-    return left.attributes.BANDWIDTH - right.attributes.BANDWIDTH;
-  }
-  return leftWidth - rightWidth;
-};
-
-exports.comparePlaylistResolution = comparePlaylistResolution;
-/**
- * Chooses the appropriate media playlist based on bandwidth and player size
- *
- * @param {Object} master
- *        Object representation of the master manifest
- * @param {Number} playerBandwidth
- *        Current calculated bandwidth of the player
- * @param {Number} playerWidth
- *        Current width of the player element
- * @param {Number} playerHeight
- *        Current height of the player element
- * @return {Playlist} the highest bitrate playlist less than the
- * currently detected bandwidth, accounting for some amount of
- * bandwidth variance
- */
->>>>>>> fixed rebase issues
 var simpleSelector = function simpleSelector(master, playerBandwidth, playerWidth, playerHeight) {
   // convert the playlists to an intermediary representation to make comparisons easier
   var sortedPlaylistReps = master.playlists.map(function (playlist) {
@@ -41802,7 +41082,6 @@ var minRebufferMaxBandwidthSelector = function minRebufferMaxBandwidthSelector(s
   var timeUntilRebuffer = settings.timeUntilRebuffer;
   var currentTimeline = settings.currentTimeline;
   var syncController = settings.syncController;
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
   // filter out any playlists that have been excluded due to
   // incompatible configurations
@@ -41814,19 +41093,6 @@ var minRebufferMaxBandwidthSelector = function minRebufferMaxBandwidthSelector(s
   // api or blacklisted temporarily due to playback errors.
   var enabledPlaylists = compatiblePlaylists.filter(_playlist2['default'].isEnabled);
 
-=======
-
-  // filter out any playlists that have been excluded due to
-  // incompatible configurations
-  var compatiblePlaylists = master.playlists.filter(function (playlist) {
-    return !_playlist2['default'].isIncompatible(playlist);
-  });
-
-  // filter out any playlists that have been disabled manually through the representations
-  // api or blacklisted temporarily due to playback errors.
-  var enabledPlaylists = compatiblePlaylists.filter(_playlist2['default'].isEnabled);
-
->>>>>>> fixed rebase issues
   if (!enabledPlaylists.length) {
     // if there are no enabled playlists, then they have all been blacklisted or disabled
     // by the user through the representations api. In this case, ignore blacklisting and
@@ -44948,7 +44214,6 @@ var rootjQuery,
 
 			// Match html or make sure no context is specified for #id
 			if ( match && ( match[ 1 ] || !context ) ) {
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 				// HANDLE: $(html) -> $(array)
 				if ( match[ 1 ] ) {
@@ -45177,236 +44442,6 @@ jQuery.each( {
 	jQuery.fn[ name ] = function( until, selector ) {
 		var matched = jQuery.map( this, fn, until );
 
-=======
-
-				// HANDLE: $(html) -> $(array)
-				if ( match[ 1 ] ) {
-					context = context instanceof jQuery ? context[ 0 ] : context;
-
-					// Option to run scripts is true for back-compat
-					// Intentionally let the error be thrown if parseHTML is not present
-					jQuery.merge( this, jQuery.parseHTML(
-						match[ 1 ],
-						context && context.nodeType ? context.ownerDocument || context : document,
-						true
-					) );
-
-					// HANDLE: $(html, props)
-					if ( rsingleTag.test( match[ 1 ] ) && jQuery.isPlainObject( context ) ) {
-						for ( match in context ) {
-
-							// Properties of context are called as methods if possible
-							if ( isFunction( this[ match ] ) ) {
-								this[ match ]( context[ match ] );
-
-							// ...and otherwise set as attributes
-							} else {
-								this.attr( match, context[ match ] );
-							}
-						}
-					}
-
-					return this;
-
-				// HANDLE: $(#id)
-				} else {
-					elem = document.getElementById( match[ 2 ] );
-
-					if ( elem ) {
-
-						// Inject the element directly into the jQuery object
-						this[ 0 ] = elem;
-						this.length = 1;
-					}
-					return this;
-				}
-
-			// HANDLE: $(expr, $(...))
-			} else if ( !context || context.jquery ) {
-				return ( context || root ).find( selector );
-
-			// HANDLE: $(expr, context)
-			// (which is just equivalent to: $(context).find(expr)
-			} else {
-				return this.constructor( context ).find( selector );
-			}
-
-		// HANDLE: $(DOMElement)
-		} else if ( selector.nodeType ) {
-			this[ 0 ] = selector;
-			this.length = 1;
-			return this;
-
-		// HANDLE: $(function)
-		// Shortcut for document ready
-		} else if ( isFunction( selector ) ) {
-			return root.ready !== undefined ?
-				root.ready( selector ) :
-
-				// Execute immediately if ready is not present
-				selector( jQuery );
-		}
-
-		return jQuery.makeArray( selector, this );
-	};
-
-// Give the init function the jQuery prototype for later instantiation
-init.prototype = jQuery.fn;
-
-// Initialize central reference
-rootjQuery = jQuery( document );
-
-
-var rparentsprev = /^(?:parents|prev(?:Until|All))/,
-
-	// Methods guaranteed to produce a unique set when starting from a unique set
-	guaranteedUnique = {
-		children: true,
-		contents: true,
-		next: true,
-		prev: true
-	};
-
-jQuery.fn.extend( {
-	has: function( target ) {
-		var targets = jQuery( target, this ),
-			l = targets.length;
-
-		return this.filter( function() {
-			var i = 0;
-			for ( ; i < l; i++ ) {
-				if ( jQuery.contains( this, targets[ i ] ) ) {
-					return true;
-				}
-			}
-		} );
-	},
-
-	closest: function( selectors, context ) {
-		var cur,
-			i = 0,
-			l = this.length,
-			matched = [],
-			targets = typeof selectors !== "string" && jQuery( selectors );
-
-		// Positional selectors never match, since there's no _selection_ context
-		if ( !rneedsContext.test( selectors ) ) {
-			for ( ; i < l; i++ ) {
-				for ( cur = this[ i ]; cur && cur !== context; cur = cur.parentNode ) {
-
-					// Always skip document fragments
-					if ( cur.nodeType < 11 && ( targets ?
-						targets.index( cur ) > -1 :
-
-						// Don't pass non-elements to Sizzle
-						cur.nodeType === 1 &&
-							jQuery.find.matchesSelector( cur, selectors ) ) ) {
-
-						matched.push( cur );
-						break;
-					}
-				}
-			}
-		}
-
-		return this.pushStack( matched.length > 1 ? jQuery.uniqueSort( matched ) : matched );
-	},
-
-	// Determine the position of an element within the set
-	index: function( elem ) {
-
-		// No argument, return index in parent
-		if ( !elem ) {
-			return ( this[ 0 ] && this[ 0 ].parentNode ) ? this.first().prevAll().length : -1;
-		}
-
-		// Index in selector
-		if ( typeof elem === "string" ) {
-			return indexOf.call( jQuery( elem ), this[ 0 ] );
-		}
-
-		// Locate the position of the desired element
-		return indexOf.call( this,
-
-			// If it receives a jQuery object, the first element is used
-			elem.jquery ? elem[ 0 ] : elem
-		);
-	},
-
-	add: function( selector, context ) {
-		return this.pushStack(
-			jQuery.uniqueSort(
-				jQuery.merge( this.get(), jQuery( selector, context ) )
-			)
-		);
-	},
-
-	addBack: function( selector ) {
-		return this.add( selector == null ?
-			this.prevObject : this.prevObject.filter( selector )
-		);
-	}
-} );
-
-function sibling( cur, dir ) {
-	while ( ( cur = cur[ dir ] ) && cur.nodeType !== 1 ) {}
-	return cur;
-}
-
-jQuery.each( {
-	parent: function( elem ) {
-		var parent = elem.parentNode;
-		return parent && parent.nodeType !== 11 ? parent : null;
-	},
-	parents: function( elem ) {
-		return dir( elem, "parentNode" );
-	},
-	parentsUntil: function( elem, i, until ) {
-		return dir( elem, "parentNode", until );
-	},
-	next: function( elem ) {
-		return sibling( elem, "nextSibling" );
-	},
-	prev: function( elem ) {
-		return sibling( elem, "previousSibling" );
-	},
-	nextAll: function( elem ) {
-		return dir( elem, "nextSibling" );
-	},
-	prevAll: function( elem ) {
-		return dir( elem, "previousSibling" );
-	},
-	nextUntil: function( elem, i, until ) {
-		return dir( elem, "nextSibling", until );
-	},
-	prevUntil: function( elem, i, until ) {
-		return dir( elem, "previousSibling", until );
-	},
-	siblings: function( elem ) {
-		return siblings( ( elem.parentNode || {} ).firstChild, elem );
-	},
-	children: function( elem ) {
-		return siblings( elem.firstChild );
-	},
-	contents: function( elem ) {
-        if ( nodeName( elem, "iframe" ) ) {
-            return elem.contentDocument;
-        }
-
-        // Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
-        // Treat the template element as a regular one in browsers that
-        // don't support it.
-        if ( nodeName( elem, "template" ) ) {
-            elem = elem.content || elem;
-        }
-
-        return jQuery.merge( [], elem.childNodes );
-	}
-}, function( name, fn ) {
-	jQuery.fn[ name ] = function( until, selector ) {
-		var matched = jQuery.map( this, fn, until );
-
->>>>>>> fixed rebase issues
 		if ( name.slice( -5 ) !== "Until" ) {
 			selector = until;
 		}
@@ -46719,7 +45754,6 @@ var isHiddenWithinTree = function( elem, el ) {
 		// Inline style trumps all
 		return elem.style.display === "none" ||
 			elem.style.display === "" &&
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 			// Otherwise, check computed style
 			// Support: Firefox <=43 - 45
@@ -46804,92 +45838,6 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 	if ( valueParts ) {
 		initialInUnit = +initialInUnit || +initial || 0;
 
-=======
-
-			// Otherwise, check computed style
-			// Support: Firefox <=43 - 45
-			// Disconnected elements can have computed display: none, so first confirm that elem is
-			// in the document.
-			jQuery.contains( elem.ownerDocument, elem ) &&
-
-			jQuery.css( elem, "display" ) === "none";
-	};
-
-var swap = function( elem, options, callback, args ) {
-	var ret, name,
-		old = {};
-
-	// Remember the old values, and insert the new ones
-	for ( name in options ) {
-		old[ name ] = elem.style[ name ];
-		elem.style[ name ] = options[ name ];
-	}
-
-	ret = callback.apply( elem, args || [] );
-
-	// Revert the old values
-	for ( name in options ) {
-		elem.style[ name ] = old[ name ];
-	}
-
-	return ret;
-};
-
-
-
-
-function adjustCSS( elem, prop, valueParts, tween ) {
-	var adjusted, scale,
-		maxIterations = 20,
-		currentValue = tween ?
-			function() {
-				return tween.cur();
-			} :
-			function() {
-				return jQuery.css( elem, prop, "" );
-			},
-		initial = currentValue(),
-		unit = valueParts && valueParts[ 3 ] || ( jQuery.cssNumber[ prop ] ? "" : "px" ),
-
-		// Starting value computation is required for potential unit mismatches
-		initialInUnit = ( jQuery.cssNumber[ prop ] || unit !== "px" && +initial ) &&
-			rcssNum.exec( jQuery.css( elem, prop ) );
-
-	if ( initialInUnit && initialInUnit[ 3 ] !== unit ) {
-
-		// Support: Firefox <=54
-		// Halve the iteration target value to prevent interference from CSS upper bounds (gh-2144)
-		initial = initial / 2;
-
-		// Trust units reported by jQuery.css
-		unit = unit || initialInUnit[ 3 ];
-
-		// Iteratively approximate from a nonzero starting point
-		initialInUnit = +initial || 1;
-
-		while ( maxIterations-- ) {
-
-			// Evaluate and update our best guess (doubling guesses that zero out).
-			// Finish if the scale equals or crosses 1 (making the old*new product non-positive).
-			jQuery.style( elem, prop, initialInUnit + unit );
-			if ( ( 1 - scale ) * ( 1 - ( scale = currentValue() / initial || 0.5 ) ) <= 0 ) {
-				maxIterations = 0;
-			}
-			initialInUnit = initialInUnit / scale;
-
-		}
-
-		initialInUnit = initialInUnit * 2;
-		jQuery.style( elem, prop, initialInUnit + unit );
-
-		// Make sure we update the tween properties later on
-		valueParts = valueParts || [];
-	}
-
-	if ( valueParts ) {
-		initialInUnit = +initialInUnit || +initial || 0;
-
->>>>>>> fixed rebase issues
 		// Apply relative offset (+=/-=) if specified
 		adjusted = valueParts[ 1 ] ?
 			initialInUnit + ( valueParts[ 1 ] + 1 ) * valueParts[ 2 ] :
@@ -47485,7 +46433,6 @@ jQuery.event = {
 		}
 
 		event.delegateTarget = this;
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 		// Call the preDispatch hook for the mapped type, and let it bail if desired
 		if ( special.preDispatch && special.preDispatch.call( this, event ) === false ) {
@@ -47495,17 +46442,6 @@ jQuery.event = {
 		// Determine handlers
 		handlerQueue = jQuery.event.handlers.call( this, event, handlers );
 
-=======
-
-		// Call the preDispatch hook for the mapped type, and let it bail if desired
-		if ( special.preDispatch && special.preDispatch.call( this, event ) === false ) {
-			return;
-		}
-
-		// Determine handlers
-		handlerQueue = jQuery.event.handlers.call( this, event, handlers );
-
->>>>>>> fixed rebase issues
 		// Run delegates first; they may want to stop propagation beneath us
 		i = 0;
 		while ( ( matched = handlerQueue[ i++ ] ) && !event.isPropagationStopped() ) {
@@ -48330,7 +47266,6 @@ jQuery.fn.extend( {
 				// If using innerHTML throws an exception, use the fallback method
 				} catch ( e ) {}
 			}
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 			if ( elem ) {
 				this.empty().append( value );
@@ -48511,188 +47446,6 @@ function curCSS( elem, name, computed ) {
 	if ( computed ) {
 		ret = computed.getPropertyValue( name ) || computed[ name ];
 
-=======
-
-			if ( elem ) {
-				this.empty().append( value );
-			}
-		}, null, value, arguments.length );
-	},
-
-	replaceWith: function() {
-		var ignored = [];
-
-		// Make the changes, replacing each non-ignored context element with the new content
-		return domManip( this, arguments, function( elem ) {
-			var parent = this.parentNode;
-
-			if ( jQuery.inArray( this, ignored ) < 0 ) {
-				jQuery.cleanData( getAll( this ) );
-				if ( parent ) {
-					parent.replaceChild( elem, this );
-				}
-			}
-
-		// Force callback invocation
-		}, ignored );
-	}
-} );
-
-jQuery.each( {
-	appendTo: "append",
-	prependTo: "prepend",
-	insertBefore: "before",
-	insertAfter: "after",
-	replaceAll: "replaceWith"
-}, function( name, original ) {
-	jQuery.fn[ name ] = function( selector ) {
-		var elems,
-			ret = [],
-			insert = jQuery( selector ),
-			last = insert.length - 1,
-			i = 0;
-
-		for ( ; i <= last; i++ ) {
-			elems = i === last ? this : this.clone( true );
-			jQuery( insert[ i ] )[ original ]( elems );
-
-			// Support: Android <=4.0 only, PhantomJS 1 only
-			// .get() because push.apply(_, arraylike) throws on ancient WebKit
-			push.apply( ret, elems.get() );
-		}
-
-		return this.pushStack( ret );
-	};
-} );
-var rnumnonpx = new RegExp( "^(" + pnum + ")(?!px)[a-z%]+$", "i" );
-
-var getStyles = function( elem ) {
-
-		// Support: IE <=11 only, Firefox <=30 (#15098, #14150)
-		// IE throws on elements created in popups
-		// FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-		var view = elem.ownerDocument.defaultView;
-
-		if ( !view || !view.opener ) {
-			view = window;
-		}
-
-		return view.getComputedStyle( elem );
-	};
-
-var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
-
-
-
-( function() {
-
-	// Executing both pixelPosition & boxSizingReliable tests require only one layout
-	// so they're executed at the same time to save the second computation.
-	function computeStyleTests() {
-
-		// This is a singleton, we need to execute it only once
-		if ( !div ) {
-			return;
-		}
-
-		container.style.cssText = "position:absolute;left:-11111px;width:60px;" +
-			"margin-top:1px;padding:0;border:0";
-		div.style.cssText =
-			"position:relative;display:block;box-sizing:border-box;overflow:scroll;" +
-			"margin:auto;border:1px;padding:1px;" +
-			"width:60%;top:1%";
-		documentElement.appendChild( container ).appendChild( div );
-
-		var divStyle = window.getComputedStyle( div );
-		pixelPositionVal = divStyle.top !== "1%";
-
-		// Support: Android 4.0 - 4.3 only, Firefox <=3 - 44
-		reliableMarginLeftVal = roundPixelMeasures( divStyle.marginLeft ) === 12;
-
-		// Support: Android 4.0 - 4.3 only, Safari <=9.1 - 10.1, iOS <=7.0 - 9.3
-		// Some styles come back with percentage values, even though they shouldn't
-		div.style.right = "60%";
-		pixelBoxStylesVal = roundPixelMeasures( divStyle.right ) === 36;
-
-		// Support: IE 9 - 11 only
-		// Detect misreporting of content dimensions for box-sizing:border-box elements
-		boxSizingReliableVal = roundPixelMeasures( divStyle.width ) === 36;
-
-		// Support: IE 9 only
-		// Detect overflow:scroll screwiness (gh-3699)
-		div.style.position = "absolute";
-		scrollboxSizeVal = div.offsetWidth === 36 || "absolute";
-
-		documentElement.removeChild( container );
-
-		// Nullify the div so it wouldn't be stored in the memory and
-		// it will also be a sign that checks already performed
-		div = null;
-	}
-
-	function roundPixelMeasures( measure ) {
-		return Math.round( parseFloat( measure ) );
-	}
-
-	var pixelPositionVal, boxSizingReliableVal, scrollboxSizeVal, pixelBoxStylesVal,
-		reliableMarginLeftVal,
-		container = document.createElement( "div" ),
-		div = document.createElement( "div" );
-
-	// Finish early in limited (non-browser) environments
-	if ( !div.style ) {
-		return;
-	}
-
-	// Support: IE <=9 - 11 only
-	// Style of cloned element affects source element cloned (#8908)
-	div.style.backgroundClip = "content-box";
-	div.cloneNode( true ).style.backgroundClip = "";
-	support.clearCloneStyle = div.style.backgroundClip === "content-box";
-
-	jQuery.extend( support, {
-		boxSizingReliable: function() {
-			computeStyleTests();
-			return boxSizingReliableVal;
-		},
-		pixelBoxStyles: function() {
-			computeStyleTests();
-			return pixelBoxStylesVal;
-		},
-		pixelPosition: function() {
-			computeStyleTests();
-			return pixelPositionVal;
-		},
-		reliableMarginLeft: function() {
-			computeStyleTests();
-			return reliableMarginLeftVal;
-		},
-		scrollboxSize: function() {
-			computeStyleTests();
-			return scrollboxSizeVal;
-		}
-	} );
-} )();
-
-
-function curCSS( elem, name, computed ) {
-	var width, minWidth, maxWidth, ret,
-
-		// Support: Firefox 51+
-		// Retrieving style before computed somehow
-		// fixes an issue with getting wrong values
-		// on detached elements
-		style = elem.style;
-
-	computed = computed || getStyles( elem );
-
-	// getPropertyValue is needed for:
-	//   .css('filter') (IE 9 only, #12537)
-	//   .css('--customProperty) (#3144)
-	if ( computed ) {
-		ret = computed.getPropertyValue( name ) || computed[ name ];
-
->>>>>>> fixed rebase issues
 		if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
 			ret = jQuery.style( elem, name );
 		}
@@ -49030,51 +47783,6 @@ jQuery.extend( {
 			// If a hook was provided get the non-computed value from there
 			if ( hooks && "get" in hooks &&
 				( ret = hooks.get( elem, false, extra ) ) !== undefined ) {
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-
-				return ret;
-			}
-
-			// Otherwise just get the value from the style object
-			return style[ name ];
-		}
-	},
-
-	css: function( elem, name, extra, styles ) {
-		var val, num, hooks,
-			origName = camelCase( name ),
-			isCustomProp = rcustomProp.test( name );
-
-		// Make sure that we're working with the right name. We don't
-		// want to modify the value if it is a CSS custom property
-		// since they are user-defined.
-		if ( !isCustomProp ) {
-			name = finalPropName( origName );
-		}
-
-		// Try prefixed name followed by the unprefixed name
-		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
-
-		// If a hook was provided get the computed value from there
-		if ( hooks && "get" in hooks ) {
-			val = hooks.get( elem, true, extra );
-		}
-
-		// Otherwise, if a way to get the computed value exists, use that
-		if ( val === undefined ) {
-			val = curCSS( elem, name, styles );
-		}
-
-		// Convert "normal" to computed value
-		if ( val === "normal" && name in cssNormalTransform ) {
-			val = cssNormalTransform[ name ];
-		}
-
-		// Make numeric if forced or a qualifier was provided and val looks numeric
-		if ( extra === "" || extra ) {
-			num = parseFloat( val );
-			return extra === true || isFinite( num ) ? num || 0 : val;
-=======
 
 				return ret;
 			}
@@ -49216,106 +47924,6 @@ jQuery.each( {
 			}
 
 			return expanded;
->>>>>>> fixed rebase issues
-		}
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-		return val;
-	}
-} );
-
-jQuery.each( [ "height", "width" ], function( i, dimension ) {
-	jQuery.cssHooks[ dimension ] = {
-		get: function( elem, computed, extra ) {
-			if ( computed ) {
-
-				// Certain elements can have dimension info if we invisibly show them
-				// but it must have a current display style that would benefit
-				return rdisplayswap.test( jQuery.css( elem, "display" ) ) &&
-
-					// Support: Safari 8+
-					// Table columns in Safari have non-zero offsetWidth & zero
-					// getBoundingClientRect().width unless display is changed.
-					// Support: IE <=11 only
-					// Running getBoundingClientRect on a disconnected node
-					// in IE throws an error.
-					( !elem.getClientRects().length || !elem.getBoundingClientRect().width ) ?
-						swap( elem, cssShow, function() {
-							return getWidthOrHeight( elem, dimension, extra );
-						} ) :
-						getWidthOrHeight( elem, dimension, extra );
-			}
-		},
-
-		set: function( elem, value, extra ) {
-			var matches,
-				styles = getStyles( elem ),
-				isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
-				subtract = extra && boxModelAdjustment(
-					elem,
-					dimension,
-					extra,
-					isBorderBox,
-					styles
-				);
-
-			// Account for unreliable border-box dimensions by comparing offset* to computed and
-			// faking a content-box to get border and padding (gh-3699)
-			if ( isBorderBox && support.scrollboxSize() === styles.position ) {
-				subtract -= Math.ceil(
-					elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
-					parseFloat( styles[ dimension ] ) -
-					boxModelAdjustment( elem, dimension, "border", false, styles ) -
-					0.5
-				);
-			}
-
-			// Convert to pixels if value adjustment is needed
-			if ( subtract && ( matches = rcssNum.exec( value ) ) &&
-				( matches[ 3 ] || "px" ) !== "px" ) {
-
-				elem.style[ dimension ] = value;
-				value = jQuery.css( elem, dimension );
-			}
-
-			return setPositiveNumber( elem, value, subtract );
-		}
-	};
-} );
-
-jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
-	function( elem, computed ) {
-		if ( computed ) {
-			return ( parseFloat( curCSS( elem, "marginLeft" ) ) ||
-				elem.getBoundingClientRect().left -
-					swap( elem, { marginLeft: 0 }, function() {
-						return elem.getBoundingClientRect().left;
-					} )
-				) + "px";
-		}
-	}
-);
-
-// These hooks are used by animate to expand properties
-jQuery.each( {
-	margin: "",
-	padding: "",
-	border: "Width"
-}, function( prefix, suffix ) {
-	jQuery.cssHooks[ prefix + suffix ] = {
-		expand: function( value ) {
-			var i = 0,
-				expanded = {},
-
-				// Assumes a single number if not a string
-				parts = typeof value === "string" ? value.split( " " ) : [ value ];
-
-			for ( ; i < 4; i++ ) {
-				expanded[ prefix + cssExpand[ i ] + suffix ] =
-					parts[ i ] || parts[ i - 2 ] || parts[ 0 ];
-			}
-
-			return expanded;
 		}
 	};
 
@@ -49346,89 +47954,9 @@ jQuery.fn.extend( {
 				jQuery.style( elem, name, value ) :
 				jQuery.css( elem, name );
 		}, name, value, arguments.length > 1 );
-=======
-	if ( prefix !== "margin" ) {
-		jQuery.cssHooks[ prefix + suffix ].set = setPositiveNumber;
 	}
 } );
 
-jQuery.fn.extend( {
-	css: function( name, value ) {
-		return access( this, function( elem, name, value ) {
-			var styles, len,
-				map = {},
-				i = 0;
-
-			if ( Array.isArray( name ) ) {
-				styles = getStyles( elem );
-				len = name.length;
-
-				for ( ; i < len; i++ ) {
-					map[ name[ i ] ] = jQuery.css( elem, name[ i ], false, styles );
-				}
-
-				return map;
-			}
-
-			return value !== undefined ?
-				jQuery.style( elem, name, value ) :
-				jQuery.css( elem, name );
-		}, name, value, arguments.length > 1 );
-	}
-} );
-
-
-function Tween( elem, options, prop, end, easing ) {
-	return new Tween.prototype.init( elem, options, prop, end, easing );
-}
-jQuery.Tween = Tween;
-
-Tween.prototype = {
-	constructor: Tween,
-	init: function( elem, options, prop, end, easing, unit ) {
-		this.elem = elem;
-		this.prop = prop;
-		this.easing = easing || jQuery.easing._default;
-		this.options = options;
-		this.start = this.now = this.cur();
-		this.end = end;
-		this.unit = unit || ( jQuery.cssNumber[ prop ] ? "" : "px" );
-	},
-	cur: function() {
-		var hooks = Tween.propHooks[ this.prop ];
-
-		return hooks && hooks.get ?
-			hooks.get( this ) :
-			Tween.propHooks._default.get( this );
-	},
-	run: function( percent ) {
-		var eased,
-			hooks = Tween.propHooks[ this.prop ];
-
-		if ( this.options.duration ) {
-			this.pos = eased = jQuery.easing[ this.easing ](
-				percent, this.options.duration * percent, 0, 1, this.options.duration
-			);
-		} else {
-			this.pos = eased = percent;
-		}
-		this.now = ( this.end - this.start ) * eased + this.start;
-
-		if ( this.options.step ) {
-			this.options.step.call( this.elem, this.now, this );
-		}
-
-		if ( hooks && hooks.set ) {
-			hooks.set( this );
-		} else {
-			Tween.propHooks._default.set( this );
-		}
-		return this;
->>>>>>> fixed rebase issues
-	}
-};
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 function Tween( elem, options, prop, end, easing ) {
 	return new Tween.prototype.init( elem, options, prop, end, easing );
@@ -49546,75 +48074,6 @@ jQuery.fx = Tween.prototype.init;
 jQuery.fx.step = {};
 
 
-=======
-Tween.prototype.init.prototype = Tween.prototype;
-
-Tween.propHooks = {
-	_default: {
-		get: function( tween ) {
-			var result;
-
-			// Use a property on the element directly when it is not a DOM element,
-			// or when there is no matching style property that exists.
-			if ( tween.elem.nodeType !== 1 ||
-				tween.elem[ tween.prop ] != null && tween.elem.style[ tween.prop ] == null ) {
-				return tween.elem[ tween.prop ];
-			}
-
-			// Passing an empty string as a 3rd parameter to .css will automatically
-			// attempt a parseFloat and fallback to a string if the parse fails.
-			// Simple values such as "10px" are parsed to Float;
-			// complex values such as "rotate(1rad)" are returned as-is.
-			result = jQuery.css( tween.elem, tween.prop, "" );
-
-			// Empty strings, null, undefined and "auto" are converted to 0.
-			return !result || result === "auto" ? 0 : result;
-		},
-		set: function( tween ) {
-
-			// Use step hook for back compat.
-			// Use cssHook if its there.
-			// Use .style if available and use plain properties where available.
-			if ( jQuery.fx.step[ tween.prop ] ) {
-				jQuery.fx.step[ tween.prop ]( tween );
-			} else if ( tween.elem.nodeType === 1 &&
-				( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null ||
-					jQuery.cssHooks[ tween.prop ] ) ) {
-				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
-			} else {
-				tween.elem[ tween.prop ] = tween.now;
-			}
-		}
-	}
-};
-
-// Support: IE <=9 only
-// Panic based approach to setting things on disconnected nodes
-Tween.propHooks.scrollTop = Tween.propHooks.scrollLeft = {
-	set: function( tween ) {
-		if ( tween.elem.nodeType && tween.elem.parentNode ) {
-			tween.elem[ tween.prop ] = tween.now;
-		}
-	}
-};
-
-jQuery.easing = {
-	linear: function( p ) {
-		return p;
-	},
-	swing: function( p ) {
-		return 0.5 - Math.cos( p * Math.PI ) / 2;
-	},
-	_default: "swing"
-};
-
-jQuery.fx = Tween.prototype.init;
-
-// Back compat <1.8 extension point
-jQuery.fx.step = {};
-
-
->>>>>>> fixed rebase issues
 
 
 var
@@ -50780,15 +49239,9 @@ jQuery.fn.extend( {
 		return false;
 	}
 } );
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 
 
-=======
-
-
-
->>>>>>> fixed rebase issues
 
 var rreturn = /\r/g;
 
@@ -51398,7 +49851,6 @@ function addToPrefiltersOrTransports( structure ) {
 			func = dataTypeExpression;
 			dataTypeExpression = "*";
 		}
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 		var dataType,
 			i = 0,
@@ -51479,88 +49931,6 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 		contents = s.contents,
 		dataTypes = s.dataTypes;
 
-=======
-
-		var dataType,
-			i = 0,
-			dataTypes = dataTypeExpression.toLowerCase().match( rnothtmlwhite ) || [];
-
-		if ( isFunction( func ) ) {
-
-			// For each dataType in the dataTypeExpression
-			while ( ( dataType = dataTypes[ i++ ] ) ) {
-
-				// Prepend if requested
-				if ( dataType[ 0 ] === "+" ) {
-					dataType = dataType.slice( 1 ) || "*";
-					( structure[ dataType ] = structure[ dataType ] || [] ).unshift( func );
-
-				// Otherwise append
-				} else {
-					( structure[ dataType ] = structure[ dataType ] || [] ).push( func );
-				}
-			}
-		}
-	};
-}
-
-// Base inspection function for prefilters and transports
-function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {
-
-	var inspected = {},
-		seekingTransport = ( structure === transports );
-
-	function inspect( dataType ) {
-		var selected;
-		inspected[ dataType ] = true;
-		jQuery.each( structure[ dataType ] || [], function( _, prefilterOrFactory ) {
-			var dataTypeOrTransport = prefilterOrFactory( options, originalOptions, jqXHR );
-			if ( typeof dataTypeOrTransport === "string" &&
-				!seekingTransport && !inspected[ dataTypeOrTransport ] ) {
-
-				options.dataTypes.unshift( dataTypeOrTransport );
-				inspect( dataTypeOrTransport );
-				return false;
-			} else if ( seekingTransport ) {
-				return !( selected = dataTypeOrTransport );
-			}
-		} );
-		return selected;
-	}
-
-	return inspect( options.dataTypes[ 0 ] ) || !inspected[ "*" ] && inspect( "*" );
-}
-
-// A special extend for ajax options
-// that takes "flat" options (not to be deep extended)
-// Fixes #9887
-function ajaxExtend( target, src ) {
-	var key, deep,
-		flatOptions = jQuery.ajaxSettings.flatOptions || {};
-
-	for ( key in src ) {
-		if ( src[ key ] !== undefined ) {
-			( flatOptions[ key ] ? target : ( deep || ( deep = {} ) ) )[ key ] = src[ key ];
-		}
-	}
-	if ( deep ) {
-		jQuery.extend( true, target, deep );
-	}
-
-	return target;
-}
-
-/* Handles responses to an ajax request:
- * - finds the right dataType (mediates between content-type and expected dataType)
- * - returns the corresponding response
- */
-function ajaxHandleResponses( s, jqXHR, responses ) {
-
-	var ct, type, finalDataType, firstDataType,
-		contents = s.contents,
-		dataTypes = s.dataTypes;
-
->>>>>>> fixed rebase issues
 	// Remove auto dataType and get content-type in the process
 	while ( dataTypes[ 0 ] === "*" ) {
 		dataTypes.shift();
@@ -54194,21 +52564,12 @@ var arLy = moment.defineLocale('ar-ly', {
         doy : 12  // The week that contains Jan 1st is the first week of the year.
     }
 });
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 return arLy;
 
 })));
 
 
-=======
-
-return arLy;
-
-})));
-
-
->>>>>>> fixed rebase issues
 /***/ }),
 /* 58 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -56748,7 +55109,6 @@ var eo = moment.defineLocale('eo', {
         } else {
             return isLower ? 'a.t.m.' : 'A.T.M.';
         }
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
     },
     calendar : {
         sameDay : '[Hodiaŭ je] LT',
@@ -56774,33 +55134,6 @@ var eo = moment.defineLocale('eo', {
         y : 'jaro',
         yy : '%d jaroj'
     },
-=======
-    },
-    calendar : {
-        sameDay : '[Hodiaŭ je] LT',
-        nextDay : '[Morgaŭ je] LT',
-        nextWeek : 'dddd [je] LT',
-        lastDay : '[Hieraŭ je] LT',
-        lastWeek : '[pasinta] dddd [je] LT',
-        sameElse : 'L'
-    },
-    relativeTime : {
-        future : 'post %s',
-        past : 'antaŭ %s',
-        s : 'sekundoj',
-        ss : '%d sekundoj',
-        m : 'minuto',
-        mm : '%d minutoj',
-        h : 'horo',
-        hh : '%d horoj',
-        d : 'tago',//ne 'diurno', ĉar estas uzita por proksimumo
-        dd : '%d tagoj',
-        M : 'monato',
-        MM : '%d monatoj',
-        y : 'jaro',
-        yy : '%d jaroj'
-    },
->>>>>>> fixed rebase issues
     dayOfMonthOrdinalParse: /\d{1,2}a/,
     ordinal : '%da',
     week : {
@@ -58846,7 +57179,6 @@ var hyAm = moment.defineLocale('hy-am', {
             return 'առավոտվա';
         } else if (hour < 17) {
             return 'ցերեկվա';
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
         } else {
             return 'երեկոյան';
         }
@@ -58951,122 +57283,6 @@ var id = moment.defineLocale('id', {
         MM : '%d bulan',
         y : 'setahun',
         yy : '%d tahun'
-=======
-        } else {
-            return 'երեկոյան';
-        }
-    },
-    dayOfMonthOrdinalParse: /\d{1,2}|\d{1,2}-(ին|րդ)/,
-    ordinal: function (number, period) {
-        switch (period) {
-            case 'DDD':
-            case 'w':
-            case 'W':
-            case 'DDDo':
-                if (number === 1) {
-                    return number + '-ին';
-                }
-                return number + '-րդ';
-            default:
-                return number;
-        }
->>>>>>> fixed rebase issues
-    },
-    week : {
-        dow : 1, // Monday is the first day of the week.
-        doy : 7  // The week that contains Jan 1st is the first week of the year.
-    }
-});
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-return id;
-=======
-return hyAm;
->>>>>>> fixed rebase issues
-
-})));
-
-
-/***/ }),
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-/* 108 */
-=======
-/* 107 */
->>>>>>> fixed rebase issues
-/***/ (function(module, exports, __webpack_require__) {
-
-//! moment.js locale configuration
-
-;(function (global, factory) {
-    true ? factory(__webpack_require__(0)) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
-
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-=======
-var id = moment.defineLocale('id', {
-    months : 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split('_'),
-    monthsShort : 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Agt_Sep_Okt_Nov_Des'.split('_'),
-    weekdays : 'Minggu_Senin_Selasa_Rabu_Kamis_Jumat_Sabtu'.split('_'),
-    weekdaysShort : 'Min_Sen_Sel_Rab_Kam_Jum_Sab'.split('_'),
-    weekdaysMin : 'Mg_Sn_Sl_Rb_Km_Jm_Sb'.split('_'),
-    longDateFormat : {
-        LT : 'HH.mm',
-        LTS : 'HH.mm.ss',
-        L : 'DD/MM/YYYY',
-        LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY [pukul] HH.mm',
-        LLLL : 'dddd, D MMMM YYYY [pukul] HH.mm'
-    },
-    meridiemParse: /pagi|siang|sore|malam/,
-    meridiemHour : function (hour, meridiem) {
-        if (hour === 12) {
-            hour = 0;
-        }
-        if (meridiem === 'pagi') {
-            return hour;
-        } else if (meridiem === 'siang') {
-            return hour >= 11 ? hour : hour + 12;
-        } else if (meridiem === 'sore' || meridiem === 'malam') {
-            return hour + 12;
-        }
-    },
-    meridiem : function (hours, minutes, isLower) {
-        if (hours < 11) {
-            return 'pagi';
-        } else if (hours < 15) {
-            return 'siang';
-        } else if (hours < 19) {
-            return 'sore';
-        } else {
-            return 'malam';
-        }
-    },
-    calendar : {
-        sameDay : '[Hari ini pukul] LT',
-        nextDay : '[Besok pukul] LT',
-        nextWeek : 'dddd [pukul] LT',
-        lastDay : '[Kemarin pukul] LT',
-        lastWeek : 'dddd [lalu pukul] LT',
-        sameElse : 'L'
-    },
-    relativeTime : {
-        future : 'dalam %s',
-        past : '%s yang lalu',
-        s : 'beberapa detik',
-        ss : '%d detik',
-        m : 'semenit',
-        mm : '%d menit',
-        h : 'sejam',
-        hh : '%d jam',
-        d : 'sehari',
-        dd : '%d hari',
-        M : 'sebulan',
-        MM : '%d bulan',
-        y : 'setahun',
-        yy : '%d tahun'
     },
     week : {
         dow : 1, // Monday is the first day of the week.
@@ -59092,7 +57308,6 @@ return id;
 }(this, (function (moment) { 'use strict';
 
 
->>>>>>> fixed rebase issues
 function plural(n) {
     if (n % 100 === 11) {
         return true;
@@ -59751,7 +57966,6 @@ var kn = moment.defineLocale('kn', {
     weekdaysShort : 'ಭಾನು_ಸೋಮ_ಮಂಗಳ_ಬುಧ_ಗುರು_ಶುಕ್ರ_ಶನಿ'.split('_'),
     weekdaysMin : 'ಭಾ_ಸೋ_ಮಂ_ಬು_ಗು_ಶು_ಶ'.split('_'),
     longDateFormat : {
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
         LT : 'A h:mm',
         LTS : 'A h:mm:ss',
         L : 'DD/MM/YYYY',
@@ -60298,8 +58512,6 @@ var lt = moment.defineLocale('lt', {
     weekdaysMin : 'S_P_A_T_K_Pn_Š'.split('_'),
     weekdaysParseExact : true,
     longDateFormat : {
-=======
->>>>>>> fixed rebase issues
         LT : 'HH:mm',
         LTS : 'HH:mm:ss',
         L : 'YYYY-MM-DD',
@@ -61684,13 +59896,8 @@ var nlBe = moment.defineLocale('nl-be', {
 return nlBe;
 
 })));
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 
 
-=======
-
-
->>>>>>> fixed rebase issues
 /***/ }),
 /* 135 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -64681,8 +62888,6 @@ function weekdaysCaseReplace(m, format) {
         'nominative': 'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split('_'),
         'accusative': 'неділю_понеділок_вівторок_середу_четвер_п’ятницю_суботу'.split('_'),
         'genitive': 'неділі_понеділка_вівторка_середи_четверга_п’ятниці_суботи'.split('_')
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-=======
     };
 
     if (!m) {
@@ -64699,29 +62904,9 @@ function weekdaysCaseReplace(m, format) {
 function processHoursFunction(str) {
     return function () {
         return str + 'о' + (this.hours() === 11 ? 'б' : '') + '] LT';
->>>>>>> fixed rebase issues
-    };
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-    if (!m) {
-        return weekdays['nominative'];
-    }
-
-    var nounCase = (/(\[[ВвУу]\]) ?dddd/).test(format) ?
-        'accusative' :
-        ((/\[?(?:минулої|наступної)? ?\] ?dddd/).test(format) ?
-            'genitive' :
-            'nominative');
-    return weekdays[nounCase][m.day()];
-}
-function processHoursFunction(str) {
-    return function () {
-        return str + 'о' + (this.hours() === 11 ? 'б' : '') + '] LT';
     };
 }
 
-=======
->>>>>>> fixed rebase issues
 var uk = moment.defineLocale('uk', {
     months : {
         'format': 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split('_'),
@@ -65047,7 +63232,6 @@ return uzLatn;
 /* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
 //! moment.js locale configuration
 
 ;(function (global, factory) {
@@ -65131,8 +63315,6 @@ return vi;
 /* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
-=======
->>>>>>> fixed rebase issues
 //! moment.js locale configuration
 
 ;(function (global, factory) {
@@ -65142,149 +63324,6 @@ return vi;
 }(this, (function (moment) { 'use strict';
 
 
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-var xPseudo = moment.defineLocale('x-pseudo', {
-    months : 'J~áñúá~rý_F~ébrú~árý_~Márc~h_Áp~ríl_~Máý_~Júñé~_Júl~ý_Áú~gúst~_Sép~témb~ér_Ó~ctób~ér_Ñ~óvém~bér_~Décé~mbér'.split('_'),
-    monthsShort : 'J~áñ_~Féb_~Már_~Ápr_~Máý_~Júñ_~Júl_~Áúg_~Sép_~Óct_~Ñóv_~Déc'.split('_'),
-    monthsParseExact : true,
-    weekdays : 'S~úñdá~ý_Mó~ñdáý~_Túé~sdáý~_Wéd~ñésd~áý_T~húrs~dáý_~Fríd~áý_S~átúr~dáý'.split('_'),
-    weekdaysShort : 'S~úñ_~Móñ_~Túé_~Wéd_~Thú_~Frí_~Sát'.split('_'),
-    weekdaysMin : 'S~ú_Mó~_Tú_~Wé_T~h_Fr~_Sá'.split('_'),
-    weekdaysParseExact : true,
-    longDateFormat : {
-        LT : 'HH:mm',
-        L : 'DD/MM/YYYY',
-        LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY HH:mm',
-        LLLL : 'dddd, D MMMM YYYY HH:mm'
-    },
-    calendar : {
-        sameDay : '[T~ódá~ý át] LT',
-        nextDay : '[T~ómó~rró~w át] LT',
-        nextWeek : 'dddd [át] LT',
-        lastDay : '[Ý~ést~érdá~ý át] LT',
-        lastWeek : '[L~ást] dddd [át] LT',
-        sameElse : 'L'
-    },
-    relativeTime : {
-        future : 'í~ñ %s',
-        past : '%s á~gó',
-        s : 'á ~féw ~sécó~ñds',
-        ss : '%d s~écóñ~ds',
-        m : 'á ~míñ~úté',
-        mm : '%d m~íñú~tés',
-        h : 'á~ñ hó~úr',
-        hh : '%d h~óúrs',
-        d : 'á ~dáý',
-        dd : '%d d~áýs',
-        M : 'á ~móñ~th',
-        MM : '%d m~óñt~hs',
-        y : 'á ~ýéár',
-        yy : '%d ý~éárs'
-    },
-    dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
-    ordinal : function (number) {
-        var b = number % 10,
-            output = (~~(number % 100 / 10) === 1) ? 'th' :
-            (b === 1) ? 'st' :
-            (b === 2) ? 'nd' :
-            (b === 3) ? 'rd' : 'th';
-        return number + output;
-=======
-var vi = moment.defineLocale('vi', {
-    months : 'tháng 1_tháng 2_tháng 3_tháng 4_tháng 5_tháng 6_tháng 7_tháng 8_tháng 9_tháng 10_tháng 11_tháng 12'.split('_'),
-    monthsShort : 'Th01_Th02_Th03_Th04_Th05_Th06_Th07_Th08_Th09_Th10_Th11_Th12'.split('_'),
-    monthsParseExact : true,
-    weekdays : 'chủ nhật_thứ hai_thứ ba_thứ tư_thứ năm_thứ sáu_thứ bảy'.split('_'),
-    weekdaysShort : 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
-    weekdaysMin : 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
-    weekdaysParseExact : true,
-    meridiemParse: /sa|ch/i,
-    isPM : function (input) {
-        return /^ch$/i.test(input);
-    },
-    meridiem : function (hours, minutes, isLower) {
-        if (hours < 12) {
-            return isLower ? 'sa' : 'SA';
-        } else {
-            return isLower ? 'ch' : 'CH';
-        }
-    },
-    longDateFormat : {
-        LT : 'HH:mm',
-        LTS : 'HH:mm:ss',
-        L : 'DD/MM/YYYY',
-        LL : 'D MMMM [năm] YYYY',
-        LLL : 'D MMMM [năm] YYYY HH:mm',
-        LLLL : 'dddd, D MMMM [năm] YYYY HH:mm',
-        l : 'DD/M/YYYY',
-        ll : 'D MMM YYYY',
-        lll : 'D MMM YYYY HH:mm',
-        llll : 'ddd, D MMM YYYY HH:mm'
-    },
-    calendar : {
-        sameDay: '[Hôm nay lúc] LT',
-        nextDay: '[Ngày mai lúc] LT',
-        nextWeek: 'dddd [tuần tới lúc] LT',
-        lastDay: '[Hôm qua lúc] LT',
-        lastWeek: 'dddd [tuần rồi lúc] LT',
-        sameElse: 'L'
-    },
-    relativeTime : {
-        future : '%s tới',
-        past : '%s trước',
-        s : 'vài giây',
-        ss : '%d giây' ,
-        m : 'một phút',
-        mm : '%d phút',
-        h : 'một giờ',
-        hh : '%d giờ',
-        d : 'một ngày',
-        dd : '%d ngày',
-        M : 'một tháng',
-        MM : '%d tháng',
-        y : 'một năm',
-        yy : '%d năm'
-    },
-    dayOfMonthOrdinalParse: /\d{1,2}/,
-    ordinal : function (number) {
-        return number;
->>>>>>> fixed rebase issues
-    },
-    week : {
-        dow : 1, // Monday is the first day of the week.
-        doy : 4  // The week that contains Jan 4th is the first week of the year.
-    }
-});
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-return xPseudo;
-=======
-return vi;
->>>>>>> fixed rebase issues
-
-})));
-
-
-/***/ }),
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-/* 171 */
-=======
-/* 170 */
->>>>>>> fixed rebase issues
-/***/ (function(module, exports, __webpack_require__) {
-
-//! moment.js locale configuration
-
-;(function (global, factory) {
-    true ? factory(__webpack_require__(0)) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
-}(this, (function (moment) { 'use strict';
-
-
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-=======
 var xPseudo = moment.defineLocale('x-pseudo', {
     months : 'J~áñúá~rý_F~ébrú~árý_~Márc~h_Áp~ríl_~Máý_~Júñé~_Júl~ý_Áú~gúst~_Sép~témb~ér_Ó~ctób~ér_Ñ~óvém~bér_~Décé~mbér'.split('_'),
     monthsShort : 'J~áñ_~Féb_~Már_~Ápr_~Máý_~Júñ_~Júl_~Áúg_~Sép_~Óct_~Ñóv_~Déc'.split('_'),
@@ -65357,7 +63396,6 @@ return xPseudo;
 }(this, (function (moment) { 'use strict';
 
 
->>>>>>> fixed rebase issues
 var yo = moment.defineLocale('yo', {
     months : 'Sẹ́rẹ́_Èrèlè_Ẹrẹ̀nà_Ìgbé_Èbibi_Òkùdu_Agẹmo_Ògún_Owewe_Ọ̀wàrà_Bélú_Ọ̀pẹ̀̀'.split('_'),
     monthsShort : 'Sẹ́r_Èrl_Ẹrn_Ìgb_Èbi_Òkù_Agẹ_Ògú_Owe_Ọ̀wà_Bél_Ọ̀pẹ̀̀'.split('_'),
@@ -65841,15 +63879,9 @@ __webpack_require__(191);
  */
 
 try {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
     window.$ = window.jQuery = __webpack_require__(46);
 
     __webpack_require__(232);
-=======
-  window.$ = window.jQuery = __webpack_require__(46);
-
-  __webpack_require__(232);
->>>>>>> fixed bugs in dashboard.vue
 } catch (e) {}
 
 /**
@@ -65871,9 +63903,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -65887,10 +63919,10 @@ if (token) {
 window.Pusher = __webpack_require__(253);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
-  broadcaster: 'pusher',
-  key: '8f0d4c8f929781d570a0',
-  cluster: 'eu',
-  encrypted: true
+    broadcaster: 'pusher',
+    key: '8f0d4c8f929781d570a0',
+    cluster: 'eu',
+    encrypted: true
 });
 
 /***/ }),
@@ -118712,7 +116744,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-5d1d7d82"
+var __vue_scopeId__ = "data-v-3f99fc75"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -118723,7 +116755,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/passport/Clients.vue"
+Component.options.__file = "resources\\assets\\js\\components\\passport\\Clients.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -118732,9 +116764,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5d1d7d82", Component.options)
+    hotAPI.createRecord("data-v-3f99fc75", Component.options)
   } else {
-    hotAPI.reload("data-v-5d1d7d82", Component.options)
+    hotAPI.reload("data-v-3f99fc75", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -118755,21 +116787,13 @@ var content = __webpack_require__(259);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var update = __webpack_require__(9)("a44a1dd2", content, false, {});
-=======
-var update = __webpack_require__(9)("2a28cc49", content, false, {});
->>>>>>> fixed bugs in dashboard.vue
-=======
-var update = __webpack_require__(9)("2a28cc49", content, false, {});
->>>>>>> fixed rebase issues
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f99fc75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f99fc75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -118787,7 +116811,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-3f99fc75] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -119746,7 +117770,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5d1d7d82", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3f99fc75", module.exports)
   }
 }
 
@@ -119769,7 +117793,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-2ee9fe67"
+var __vue_scopeId__ = "data-v-0b76a99a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -119780,7 +117804,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/passport/AuthorizedClients.vue"
+Component.options.__file = "resources\\assets\\js\\components\\passport\\AuthorizedClients.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -119789,9 +117813,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2ee9fe67", Component.options)
+    hotAPI.createRecord("data-v-0b76a99a", Component.options)
   } else {
-    hotAPI.reload("data-v-2ee9fe67", Component.options)
+    hotAPI.reload("data-v-0b76a99a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -119812,21 +117836,13 @@ var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var update = __webpack_require__(9)("437dd684", content, false, {});
-=======
-var update = __webpack_require__(9)("10846595", content, false, {});
->>>>>>> fixed bugs in dashboard.vue
-=======
-var update = __webpack_require__(9)("10846595", content, false, {});
->>>>>>> fixed rebase issues
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b76a99a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -119844,7 +117860,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-0b76a99a] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -120075,7 +118091,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2ee9fe67", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0b76a99a", module.exports)
   }
 }
 
@@ -120098,7 +118114,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-89c53f18"
+var __vue_scopeId__ = "data-v-50e40461"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -120109,7 +118125,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/passport/PersonalAccessTokens.vue"
+Component.options.__file = "resources\\assets\\js\\components\\passport\\PersonalAccessTokens.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -120118,9 +118134,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-89c53f18", Component.options)
+    hotAPI.createRecord("data-v-50e40461", Component.options)
   } else {
-    hotAPI.reload("data-v-89c53f18", Component.options)
+    hotAPI.reload("data-v-50e40461", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -120141,21 +118157,13 @@ var content = __webpack_require__(270);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var update = __webpack_require__(9)("174f2f0a", content, false, {});
-=======
-var update = __webpack_require__(9)("4e7bd74e", content, false, {});
->>>>>>> fixed bugs in dashboard.vue
-=======
-var update = __webpack_require__(9)("4e7bd74e", content, false, {});
->>>>>>> fixed rebase issues
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50e40461\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -120173,7 +118181,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.action-link[data-v-50e40461] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -120874,7 +118882,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-89c53f18", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-50e40461", module.exports)
   }
 }
 
@@ -120904,7 +118912,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/test.vue"
+Component.options.__file = "resources\\assets\\js\\components\\test.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -120913,9 +118921,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bd7c2fae", Component.options)
+    hotAPI.createRecord("data-v-dc63952e", Component.options)
   } else {
-    hotAPI.reload("data-v-bd7c2fae", Component.options)
+    hotAPI.reload("data-v-dc63952e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -120967,7 +118975,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-bd7c2fae", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-dc63952e", module.exports)
   }
 }
 
@@ -120997,7 +119005,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -121006,9 +119014,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-0ca92eac", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-0ca92eac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121096,7 +119104,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
   }
 }
 
@@ -121130,7 +119138,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/games.vue"
+Component.options.__file = "resources\\assets\\js\\components\\games.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -121139,9 +119147,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0caa52ba", Component.options)
+    hotAPI.createRecord("data-v-2da7ad7a", Component.options)
   } else {
-    hotAPI.reload("data-v-0caa52ba", Component.options)
+    hotAPI.reload("data-v-2da7ad7a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121162,17 +119170,13 @@ var content = __webpack_require__(281);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var update = __webpack_require__(9)("05c3ad2c", content, false, {});
-=======
-var update = __webpack_require__(9)("fe0d5e34", content, false, {});
->>>>>>> fixed bugs in dashboard.vue
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0caa52ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0caa52ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2da7ad7a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2da7ad7a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -121314,7 +119318,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0caa52ba", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2da7ad7a", module.exports)
   }
 }
 
@@ -121344,7 +119348,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/profilesidebar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\profilesidebar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -121353,9 +119357,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-405fec2c", Component.options)
+    hotAPI.createRecord("data-v-d76671ac", Component.options)
   } else {
-    hotAPI.reload("data-v-405fec2c", Component.options)
+    hotAPI.reload("data-v-d76671ac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121415,9 +119419,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['profile', 'loggedin', 'isfollowing'],
+  props: ['profile', 'loggedin', 'isfollowing', 'issubscribed'],
 
   data: function data() {
     return {
@@ -121425,7 +119438,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       profilecontent: [],
       followers: [],
       followings: [],
-      auth: []
+      auth: [],
+      auth_user: []
     };
   },
 
@@ -121453,7 +119467,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     });
 
     axios.get('/api/user').then(function (response) {
-      _this.auth_user = response.data;
+      _this.auth_user = JSON.parse(JSON.stringify(response.data));
     });
   },
 
@@ -121462,8 +119476,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     follow: function follow() {
       console.log(document.getElementById('follow_btn').value);
       axios.post('/api/profilepage/follow', {
-        user_id: document.getElementById('follow_btn').value,
-        follower_id: this.auth_user.id
+        user_id: document.getElementById('follow_btn').value
+
       }).then(function (response) {
         document.getElementById('follow_btn').style.display = "none";
         document.getElementById('followmsg').style.display = "block";
@@ -121473,11 +119487,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     unfollow: function unfollow() {
 
       axios.post('/api/profilepage/unfollow', {
-        user_id: document.getElementById('unfollow_btn').value,
-        unfollower_id: this.auth_user.id
+        user_id: document.getElementById('unfollow_btn').value
+
       }).then(function (response) {
         document.getElementById('unfollowmsg').style.display = "block";
         document.getElementById('unfollow_btn').style.display = "none";
+      });
+    },
+    subscribe: function subscribe() {
+
+      axios.post('/api/profilepage/subscribe', {
+        user_id: document.getElementById('subscribe_btn').value
+
+      }).then(function (response) {
+
+        document.getElementById('subscribe_btn').style.display = "none";
+        document.getElementById('subscribemsg').style.display = "block";
+      });
+    },
+
+    unsubscribe: function unsubscribe() {
+
+      axios.post('/api/profilepage/unsubscribe', {
+        user_id: document.getElementById('unsubscribe_btn').value
+
+      }).then(function (response) {
+        document.getElementById('unsubscribemsg').style.display = "block";
+        document.getElementById('unsubscribe_btn').style.display = "none";
       });
     },
 
@@ -121668,6 +119704,83 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "container-fluid" }, [
+          _vm.loggedin == 1
+            ? _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: { "text-align": "center" },
+                  attrs: { id: "subscribe_unsubscribe" }
+                },
+                [
+                  _vm.issubscribed == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-info btn-lg",
+                          attrs: { id: "subscribe_btn", value: _vm.user.id },
+                          on: { click: _vm.subscribe }
+                        },
+                        [_vm._v("subscribe")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.issubscribed == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-lg",
+                          attrs: { id: "unsubscribe_btn", value: _vm.user.id },
+                          on: { click: _vm.unsubscribe }
+                        },
+                        [_vm._v("unsubscribe")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-info",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "subscribemsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        "You are now subscribed to " + _vm._s(_vm.user.name)
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unsubscribemsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer subscribed to " +
+                          _vm._s(_vm.user.name)
+                      )
+                    ]
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
+                _vm._v(
+                  " Please log in or register to subscribe to " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("hr"),
           _vm._v(" "),
@@ -121784,16 +119897,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-d76671ac", module.exports)
   }
 }
 
 /***/ }),
 /* 287 */
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-=======
->>>>>>> fixed rebase issues
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -121979,164 +120088,6 @@ if (false) {
 
 /***/ }),
 /* 290 */
-=======
->>>>>>> fixed bugs in dashboard.vue
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-var __vue_script__ = __webpack_require__(291)
-/* template */
-var __vue_template__ = __webpack_require__(292)
-=======
-var __vue_script__ = __webpack_require__(288)
-/* template */
-var __vue_template__ = __webpack_require__(289)
->>>>>>> fixed bugs in dashboard.vue
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/profileschedule.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-58630679", Component.options)
-  } else {
-    hotAPI.reload("data-v-58630679", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-=======
-/* 288 */
-=======
-/* 291 */
->>>>>>> fixed rebase issues
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      games: null,
-      users: []
-    };
-  },
-  props: ['user'],
-  mounted: function mounted() {
-    var _this = this;
-
-    if (this.user != undefined) {
-      axios.get('/api/listusers').then(function (response) {
-        _this.users = response.data;
-      });
-      setInterval(function () {
-        var _this2 = this;
-
-        axios.get('/api/listusers').then(function (response) {
-          _this2.users = response.data;
-        });
-      }.bind(this), 5000);
-    } else {
-      axios.get('/api/listusersunauthenticated').then(function (response) {
-        _this.users = response.data;
-      });
-      setInterval(function () {
-        var _this3 = this;
-
-        axios.get('/api/listusersunauthenticated').then(function (response) {
-          _this3.users = response.data;
-        });
-      }.bind(this), 5000);
-    }
-  }
-});
-
-/***/ }),
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-/* 289 */
-=======
-/* 292 */
->>>>>>> fixed rebase issues
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "container-fluid px-0" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
-  }
-}
-
-/***/ }),
-/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -122161,7 +120112,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
+Component.options.__file = "resources\\assets\\js\\components\\nowlivebar.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -122170,9 +120121,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-64aabce8", Component.options)
+    hotAPI.createRecord("data-v-35981a28", Component.options)
   } else {
-    hotAPI.reload("data-v-64aabce8", Component.options)
+    hotAPI.reload("data-v-35981a28", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122183,7 +120134,6 @@ module.exports = Component.exports
 
 
 /***/ }),
->>>>>>> fixed bugs in dashboard.vue
 /* 291 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -122261,8 +120211,6 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-=======
->>>>>>> fixed rebase issues
         _vm._l(_vm.users, function(user) {
           return _c(
             "div",
@@ -122346,7 +120294,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-64aabce8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-35981a28", module.exports)
   }
 }
 
@@ -122376,7 +120324,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/frontpagemain.vue"
+Component.options.__file = "resources\\assets\\js\\components\\frontpagemain.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -122385,9 +120333,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0d70c4ea", Component.options)
+    hotAPI.createRecord("data-v-23c75faa", Component.options)
   } else {
-    hotAPI.reload("data-v-0d70c4ea", Component.options)
+    hotAPI.reload("data-v-23c75faa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122432,7 +120380,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0d70c4ea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-23c75faa", module.exports)
   }
 }
 
@@ -122462,7 +120410,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/profilepagemain.vue"
+Component.options.__file = "resources\\assets\\js\\components\\profilepagemain.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -122471,9 +120419,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b8ed07ac", Component.options)
+    hotAPI.createRecord("data-v-7ea466ea", Component.options)
   } else {
-    hotAPI.reload("data-v-b8ed07ac", Component.options)
+    hotAPI.reload("data-v-7ea466ea", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122518,7 +120466,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b8ed07ac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7ea466ea", module.exports)
   }
 }
 
@@ -122548,7 +120496,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Stream.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Stream.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -122557,9 +120505,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5ffd2477", Component.options)
+    hotAPI.createRecord("data-v-5eab21b7", Component.options)
   } else {
-    hotAPI.reload("data-v-5ffd2477", Component.options)
+    hotAPI.reload("data-v-5eab21b7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122966,7 +120914,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5ffd2477", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5eab21b7", module.exports)
   }
 }
 
@@ -122996,7 +120944,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Followings.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Followings.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -123005,9 +120953,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-37f8dc79", Component.options)
+    hotAPI.createRecord("data-v-08e639b9", Component.options)
   } else {
-    hotAPI.reload("data-v-37f8dc79", Component.options)
+    hotAPI.reload("data-v-08e639b9", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -123180,11 +121128,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
     require("vue-hot-reload-api")      .rerender("data-v-08e639b9", module.exports)
-=======
-    require("vue-hot-reload-api")      .rerender("data-v-37f8dc79", module.exports)
->>>>>>> fixed bugs in dashboard.vue
   }
 }
 
@@ -123214,11 +121158,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 Component.options.__file = "resources\\assets\\js\\components\\dashboard.vue"
-=======
-Component.options.__file = "resources/assets/js/components/dashboard.vue"
->>>>>>> fixed bugs in dashboard.vue
 
 /* hot reload */
 if (false) {(function () {
@@ -123227,15 +121167,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
     hotAPI.createRecord("data-v-49180b4d", Component.options)
   } else {
     hotAPI.reload("data-v-49180b4d", Component.options)
-=======
-    hotAPI.createRecord("data-v-2073dee6", Component.options)
-  } else {
-    hotAPI.reload("data-v-2073dee6", Component.options)
->>>>>>> fixed bugs in dashboard.vue
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -123570,15 +121504,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-
-
-=======
->>>>>>> fixed rebase issues
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
   data: function data() {
     return {
       profilecontent: [],
@@ -123589,12 +121517,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       streamdash: true,
       profiledash: false,
       channeldash: false,
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-      scheduledash: false
-    };
-  },
-
-=======
       scheduledash: false,
       startTime: {
         time: ''
@@ -123649,7 +121571,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }]
     };
   },
->>>>>>> fixed bugs in dashboard.vue
   components: {
     'date-picker': __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default.a
   },
@@ -123674,20 +121595,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     });
   },
 
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-
-  methods: {
-    streamkey: function streamkey() {
-
-      axios.post('/api/streamkey', {
-        user_id: this.user.id
-
-=======
   methods: {
     streamkey: function streamkey() {
       axios.post('/api/streamkey', {
         user_id: this.user.id
->>>>>>> fixed bugs in dashboard.vue
       }).then(function (response) {
         document.getElementById('streamkeymessage').style.display = "block";
         document.getElementById('streamkey_btn').style.display = "none";
@@ -123696,39 +121607,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('streamkeymessage').innerHTML = response.data;
       });
     },
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-
-=======
->>>>>>> fixed bugs in dashboard.vue
     hidekey: function hidekey() {
       document.getElementById('streamkeymessage').style.display = "none";
       document.getElementById('hide_btn').style.display = "none";
       document.getElementById('streamkey_btn').style.display = "block";
       document.getElementById('streamkeymessage').innerHTML = "";
     },
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-
-    golive: function golive() {
-      axios.post('/api/stream', {
-
-        user_id: this.user.id,
-        stream_title: document.getElementById('streamtitle').value,
-        game_id: document.getElementById('gameselect').value
-
-      });
-    },
-
-    updateAbout: function updateAbout() {
-      var _this2 = this;
-
-      axios.post('/api/profilecontentabout', {
-        about: document.getElementById('aboutinput').value
-      }).then(function (response) {
-        _this2.profilecontent.about = response.data;
-        $('#collapseEdit').collapse("toggle");
-      });
-    },
-=======
     golive: function golive() {
       axios.post('/api/stream', {
         user_id: this.user.id,
@@ -123746,7 +121630,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('#collapseEdit').collapse("toggle");
       });
     },
->>>>>>> fixed bugs in dashboard.vue
     show_form_single: function show_form_single() {
       document.getElementById('addschedulebuttons').style.display = "none";
       document.getElementById('schedule_form_single').style.display = "block";
@@ -123782,10 +121665,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     add_schedule_daily: function add_schedule_daily() {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
-
-=======
->>>>>>> fixed bugs in dashboard.vue
       axios.post('/api/addscheduledaily', {
         daily_title: document.getElementById('daily_title').value,
         daily_start: document.getElementById('daily_start').value,
@@ -123864,11 +121743,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var __vue_scopeId__ = "data-v-2537a1f8"
-=======
-var __vue_scopeId__ = "data-v-3faef998"
->>>>>>> fixed bugs in dashboard.vue
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -123879,11 +121754,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 Component.options.__file = "node_modules\\vue-datepicker\\vue-datepicker.vue"
-=======
-Component.options.__file = "node_modules/vue-datepicker/vue-datepicker.vue"
->>>>>>> fixed bugs in dashboard.vue
 
 /* hot reload */
 if (false) {(function () {
@@ -123892,15 +121763,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
     hotAPI.createRecord("data-v-2537a1f8", Component.options)
   } else {
     hotAPI.reload("data-v-2537a1f8", Component.options)
-=======
-    hotAPI.createRecord("data-v-3faef998", Component.options)
-  } else {
-    hotAPI.reload("data-v-3faef998", Component.options)
->>>>>>> fixed bugs in dashboard.vue
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -123921,22 +121786,13 @@ var content = __webpack_require__(309);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var update = __webpack_require__(9)("749e3229", content, false, {});
-=======
-var update = __webpack_require__(9)("7d981249", content, false, {});
->>>>>>> fixed bugs in dashboard.vue
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
    module.hot.accept("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2537a1f8\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue", function() {
      var newContent = require("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2537a1f8\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue");
-=======
-   module.hot.accept("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3faef998\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue", function() {
-     var newContent = require("!!../css-loader/index.js!../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3faef998\",\"scoped\":true,\"hasInlineConfig\":true}!../vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue");
->>>>>>> fixed bugs in dashboard.vue
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -123954,11 +121810,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 exports.push([module.i, "\n.datepicker-overlay[data-v-2537a1f8] {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  z-index: 998;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  -webkit-animation: fadein-data-v-2537a1f8 0.5s;\n  /* Safari, Chrome and Opera > 12.1 */\n  /* Firefox < 16 */\n  /* Internet Explorer */\n  /* Opera < 12.1 */\n  animation: fadein-data-v-2537a1f8 0.5s;\n}\n@keyframes fadein-data-v-2537a1f8 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Firefox < 16 */\n/* Safari, Chrome and Opera > 12.1 */\n@-webkit-keyframes fadein-data-v-2537a1f8 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Internet Explorer */\n/* Opera < 12.1 */\n.cov-date-body[data-v-2537a1f8] {\n  display: inline-block;\n  background: #3F51B5;\n  overflow: hidden;\n  position: relative;\n  font-size: 16px;\n  font-family: 'Roboto';\n  font-weight: 400;\n  position: fixed;\n  display: block;\n  width: 400px;\n  max-width: 100%;\n  z-index: 999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n}\n.cov-picker-box[data-v-2537a1f8] {\n  background: #fff;\n  width: 100%;\n  display: inline-block;\n  padding: 25px;\n  box-sizing: border-box !important;\n  -moz-box-sizing: border-box !important;\n  -webkit-box-sizing: border-box !important;\n  -ms-box-sizing: border-box !important;\n  width: 400px;\n  max-width: 100%;\n  height: 280px;\n  text-align: start!important;\n}\n.cov-picker-box td[data-v-2537a1f8] {\n  height: 34px;\n  width: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-picker-box td[data-v-2537a1f8]:hover {\n  background: #E6E6E6;\n}\ntable[data-v-2537a1f8] {\n  border-collapse: collapse;\n  border-spacing: 0;\n  width: 100%;\n}\n.day[data-v-2537a1f8] {\n  width: 14.2857143%;\n  display: inline-block;\n  text-align: center;\n  cursor: pointer;\n  height: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  vertical-align: middle;\n}\n.week ul[data-v-2537a1f8] {\n  margin: 0 0 8px;\n  padding: 0;\n  list-style: none;\n}\n.week ul li[data-v-2537a1f8] {\n  width: 14.2%;\n  display: inline-block;\n  text-align: center;\n  background: transparent;\n  color: #000;\n  font-weight: bold;\n}\n.passive-day[data-v-2537a1f8] {\n  color: #bbb;\n}\n.checked[data-v-2537a1f8] {\n  background: #F50057;\n  color: #FFF !important;\n  border-radius: 3px;\n}\n.unavailable[data-v-2537a1f8] {\n  color: #ccc;\n  cursor: not-allowed;\n}\n.cov-date-monthly[data-v-2537a1f8] {\n  height: 150px;\n}\n.cov-date-monthly > div[data-v-2537a1f8] {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  vertical-align: middle;\n  color: #fff;\n  height: 150px;\n  float: left;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-date-previous[data-v-2537a1f8],\n.cov-date-next[data-v-2537a1f8] {\n  position: relative;\n  width: 20% !important;\n  text-indent: -300px;\n  overflow: hidden;\n  color: #fff;\n}\n.cov-date-caption[data-v-2537a1f8] {\n  width: 60%;\n  padding: 50px 0!important;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 24px;\n}\n.cov-date-caption span[data-v-2537a1f8]:hover {\n  color: rgba(255, 255, 255, 0.7);\n}\n.cov-date-previous[data-v-2537a1f8]:hover,\n.cov-date-next[data-v-2537a1f8]:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n.day[data-v-2537a1f8]:hover {\n  background: #EAEAEA;\n}\n.unavailable[data-v-2537a1f8]:hover {\n  background: none;\n}\n.checked[data-v-2537a1f8]:hover {\n  background: #FF4F8E;\n}\n.cov-date-next[data-v-2537a1f8]::before,\n.cov-date-previous[data-v-2537a1f8]::before {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  top: 50%;\n  margin-top: -7px;\n  margin-left: -7px;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-next[data-v-2537a1f8]::after,\n.cov-date-previous[data-v-2537a1f8]::after {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  margin-top: 6px;\n  margin-left: -7px;\n  top: 50%;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.cov-date-previous[data-v-2537a1f8]::after {\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-previous[data-v-2537a1f8]::before {\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.date-item[data-v-2537a1f8] {\n  text-align: center;\n  font-size: 20px;\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-item[data-v-2537a1f8]:hover {\n  background: #e0e0e0;\n}\n.date-list[data-v-2537a1f8] {\n  overflow: auto;\n  vertical-align: top;\n  padding: 0;\n}\n.cov-vue-date[data-v-2537a1f8] {\n  display: inline-block;\n  color: #5D5D5D;\n}\n.button-box[data-v-2537a1f8] {\n  background: #fff;\n  vertical-align: top;\n  height: 50px;\n  line-height: 50px;\n  text-align: right;\n  padding-right: 20px;\n}\n.button-box span[data-v-2537a1f8] {\n  cursor: pointer;\n  padding: 10px 20px;\n}\n.watch-box[data-v-2537a1f8] {\n  height: 100%;\n  overflow: hidden;\n}\n.hour-box[data-v-2537a1f8],\n.min-box[data-v-2537a1f8] {\n  display: inline-block;\n  width: 50%;\n  text-align: center;\n  height: 100%;\n  overflow: auto;\n  float: left;\n}\n.hour-box ul[data-v-2537a1f8],\n.min-box ul[data-v-2537a1f8] {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.hour-item[data-v-2537a1f8],\n.min-item[data-v-2537a1f8] {\n  padding: 10px;\n  font-size: 36px;\n  cursor: pointer;\n}\n.hour-item[data-v-2537a1f8]:hover,\n.min-item[data-v-2537a1f8]:hover {\n  background: #E3E3E3;\n}\n.hour-box .active[data-v-2537a1f8],\n.min-box .active[data-v-2537a1f8] {\n  background: #F50057;\n  color: #FFF !important;\n}\n[data-v-2537a1f8]::-webkit-scrollbar {\n  width: 2px;\n}\n[data-v-2537a1f8]::-webkit-scrollbar-track {\n  background: #E3E3E3;\n}\n[data-v-2537a1f8]::-webkit-scrollbar-thumb {\n  background: #C1C1C1;\n  border-radius: 2px;\n}\n", ""]);
-=======
-exports.push([module.i, "\n.datepicker-overlay[data-v-3faef998] {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  z-index: 998;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  -webkit-animation: fadein-data-v-3faef998 0.5s;\n  /* Safari, Chrome and Opera > 12.1 */\n  /* Firefox < 16 */\n  /* Internet Explorer */\n  /* Opera < 12.1 */\n  animation: fadein-data-v-3faef998 0.5s;\n}\n@keyframes fadein-data-v-3faef998 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Firefox < 16 */\n/* Safari, Chrome and Opera > 12.1 */\n@-webkit-keyframes fadein-data-v-3faef998 {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Internet Explorer */\n/* Opera < 12.1 */\n.cov-date-body[data-v-3faef998] {\n  display: inline-block;\n  background: #3F51B5;\n  overflow: hidden;\n  position: relative;\n  font-size: 16px;\n  font-family: 'Roboto';\n  font-weight: 400;\n  position: fixed;\n  display: block;\n  width: 400px;\n  max-width: 100%;\n  z-index: 999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n}\n.cov-picker-box[data-v-3faef998] {\n  background: #fff;\n  width: 100%;\n  display: inline-block;\n  padding: 25px;\n  box-sizing: border-box !important;\n  -moz-box-sizing: border-box !important;\n  -webkit-box-sizing: border-box !important;\n  -ms-box-sizing: border-box !important;\n  width: 400px;\n  max-width: 100%;\n  height: 280px;\n  text-align: start!important;\n}\n.cov-picker-box td[data-v-3faef998] {\n  height: 34px;\n  width: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-picker-box td[data-v-3faef998]:hover {\n  background: #E6E6E6;\n}\ntable[data-v-3faef998] {\n  border-collapse: collapse;\n  border-spacing: 0;\n  width: 100%;\n}\n.day[data-v-3faef998] {\n  width: 14.2857143%;\n  display: inline-block;\n  text-align: center;\n  cursor: pointer;\n  height: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  vertical-align: middle;\n}\n.week ul[data-v-3faef998] {\n  margin: 0 0 8px;\n  padding: 0;\n  list-style: none;\n}\n.week ul li[data-v-3faef998] {\n  width: 14.2%;\n  display: inline-block;\n  text-align: center;\n  background: transparent;\n  color: #000;\n  font-weight: bold;\n}\n.passive-day[data-v-3faef998] {\n  color: #bbb;\n}\n.checked[data-v-3faef998] {\n  background: #F50057;\n  color: #FFF !important;\n  border-radius: 3px;\n}\n.unavailable[data-v-3faef998] {\n  color: #ccc;\n  cursor: not-allowed;\n}\n.cov-date-monthly[data-v-3faef998] {\n  height: 150px;\n}\n.cov-date-monthly > div[data-v-3faef998] {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  vertical-align: middle;\n  color: #fff;\n  height: 150px;\n  float: left;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-date-previous[data-v-3faef998],\n.cov-date-next[data-v-3faef998] {\n  position: relative;\n  width: 20% !important;\n  text-indent: -300px;\n  overflow: hidden;\n  color: #fff;\n}\n.cov-date-caption[data-v-3faef998] {\n  width: 60%;\n  padding: 50px 0!important;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  font-size: 24px;\n}\n.cov-date-caption span[data-v-3faef998]:hover {\n  color: rgba(255, 255, 255, 0.7);\n}\n.cov-date-previous[data-v-3faef998]:hover,\n.cov-date-next[data-v-3faef998]:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n.day[data-v-3faef998]:hover {\n  background: #EAEAEA;\n}\n.unavailable[data-v-3faef998]:hover {\n  background: none;\n}\n.checked[data-v-3faef998]:hover {\n  background: #FF4F8E;\n}\n.cov-date-next[data-v-3faef998]::before,\n.cov-date-previous[data-v-3faef998]::before {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  top: 50%;\n  margin-top: -7px;\n  margin-left: -7px;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-next[data-v-3faef998]::after,\n.cov-date-previous[data-v-3faef998]::after {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  margin-top: 6px;\n  margin-left: -7px;\n  top: 50%;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.cov-date-previous[data-v-3faef998]::after {\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-previous[data-v-3faef998]::before {\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.date-item[data-v-3faef998] {\n  text-align: center;\n  font-size: 20px;\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-item[data-v-3faef998]:hover {\n  background: #e0e0e0;\n}\n.date-list[data-v-3faef998] {\n  overflow: auto;\n  vertical-align: top;\n  padding: 0;\n}\n.cov-vue-date[data-v-3faef998] {\n  display: inline-block;\n  color: #5D5D5D;\n}\n.button-box[data-v-3faef998] {\n  background: #fff;\n  vertical-align: top;\n  height: 50px;\n  line-height: 50px;\n  text-align: right;\n  padding-right: 20px;\n}\n.button-box span[data-v-3faef998] {\n  cursor: pointer;\n  padding: 10px 20px;\n}\n.watch-box[data-v-3faef998] {\n  height: 100%;\n  overflow: hidden;\n}\n.hour-box[data-v-3faef998],\n.min-box[data-v-3faef998] {\n  display: inline-block;\n  width: 50%;\n  text-align: center;\n  height: 100%;\n  overflow: auto;\n  float: left;\n}\n.hour-box ul[data-v-3faef998],\n.min-box ul[data-v-3faef998] {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.hour-item[data-v-3faef998],\n.min-item[data-v-3faef998] {\n  padding: 10px;\n  font-size: 36px;\n  cursor: pointer;\n}\n.hour-item[data-v-3faef998]:hover,\n.min-item[data-v-3faef998]:hover {\n  background: #E3E3E3;\n}\n.hour-box .active[data-v-3faef998],\n.min-box .active[data-v-3faef998] {\n  background: #F50057;\n  color: #FFF !important;\n}\n[data-v-3faef998]::-webkit-scrollbar {\n  width: 2px;\n}\n[data-v-3faef998]::-webkit-scrollbar-track {\n  background: #E3E3E3;\n}\n[data-v-3faef998]::-webkit-scrollbar-thumb {\n  background: #C1C1C1;\n  border-radius: 2px;\n}\n", ""]);
->>>>>>> fixed bugs in dashboard.vue
 
 // exports
 
@@ -125387,11 +123239,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
     require("vue-hot-reload-api")      .rerender("data-v-2537a1f8", module.exports)
-=======
-    require("vue-hot-reload-api")      .rerender("data-v-3faef998", module.exports)
->>>>>>> fixed bugs in dashboard.vue
   }
 }
 
@@ -126256,7 +124104,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "vjs-no-js" }, [
       _vm._v(
-        "\n      \t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n      \t\t\t\t    \t"
+        "\r\n      \t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\r\n      \t\t\t\t    \t"
       ),
       _c(
         "a",
@@ -126333,7 +124181,7 @@ var staticRenderFns = [
             },
             [
               _vm._v(
-                "\n                            Upload new image\n                          "
+                "\r\n                            Upload new image\r\n                          "
               )
             ]
           )
@@ -126363,7 +124211,7 @@ var staticRenderFns = [
             },
             [
               _vm._v(
-                "\n                            Edit about section:\n                          "
+                "\r\n                            Edit about section:\r\n                          "
               )
             ]
           )
@@ -126614,7 +124462,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2073dee6", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-49180b4d", module.exports)
   }
 }
 
@@ -126644,7 +124492,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/dashboardstream.vue"
+Component.options.__file = "resources\\assets\\js\\components\\dashboardstream.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -126653,9 +124501,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2d04944d", Component.options)
+    hotAPI.createRecord("data-v-081f7f0d", Component.options)
   } else {
-    hotAPI.reload("data-v-2d04944d", Component.options)
+    hotAPI.reload("data-v-081f7f0d", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -127059,7 +124907,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2d04944d", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-081f7f0d", module.exports)
   }
 }
 
@@ -127089,7 +124937,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/dashboardprofile.vue"
+Component.options.__file = "resources\\assets\\js\\components\\dashboardprofile.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -127098,9 +124946,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1fc4342c", Component.options)
+    hotAPI.createRecord("data-v-aff2bd28", Component.options)
   } else {
-    hotAPI.reload("data-v-1fc4342c", Component.options)
+    hotAPI.reload("data-v-aff2bd28", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -127531,7 +125379,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1fc4342c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-aff2bd28", module.exports)
   }
 }
 
@@ -127565,7 +125413,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Chatroom.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Chatroom.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -127574,9 +125422,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-14a1cfea", Component.options)
+    hotAPI.createRecord("data-v-1fc57d2a", Component.options)
   } else {
-    hotAPI.reload("data-v-14a1cfea", Component.options)
+    hotAPI.reload("data-v-1fc57d2a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -127597,21 +125445,13 @@ var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-<<<<<<< 12dbfe765a0b9ed6279163ba26fc77e1ee6e8d93
-<<<<<<< 9bdcbe4fdc669d9252eff09f954ff933582fe557
 var update = __webpack_require__(9)("22047796", content, false, {});
-=======
-var update = __webpack_require__(9)("4b800605", content, false, {});
->>>>>>> fixed bugs in dashboard.vue
-=======
-var update = __webpack_require__(9)("4b800605", content, false, {});
->>>>>>> fixed rebase issues
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-14a1cfea\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1fc57d2a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Chatroom.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -127856,7 +125696,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-14a1cfea", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1fc57d2a", module.exports)
   }
 }
 
@@ -127886,7 +125726,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/streamersByGame.vue"
+Component.options.__file = "resources\\assets\\js\\components\\streamersByGame.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -127895,9 +125735,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2235ae28", Component.options)
+    hotAPI.createRecord("data-v-055ece30", Component.options)
   } else {
-    hotAPI.reload("data-v-2235ae28", Component.options)
+    hotAPI.reload("data-v-055ece30", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -128028,7 +125868,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2235ae28", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-055ece30", module.exports)
   }
 }
 
