@@ -79,4 +79,5 @@ Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->mi
 // Annoucement routes //
 ////////////////////////
 
-Route::get('/announcements', 'API\AnnouncementController@get')->middleware('auth:api');
+Route::get('/announcements', 'API\AnnouncementController@readFollowerAnnouncements')->middleware('auth:api');
+Route::get('/personalannouncements', 'API\AnnouncementController@read')->middleware('auth:api');

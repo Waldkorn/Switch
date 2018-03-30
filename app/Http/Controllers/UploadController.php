@@ -10,6 +10,7 @@ use Illuminate\Http\File;
 
 use App\Profilecontent;
 use App\User;
+use App\Announcement;
 use Auth;
 
 class UploadController extends Controller
@@ -26,4 +27,29 @@ class UploadController extends Controller
     return back();
 
   }
+
+
+    public function create()
+    {
+
+      $user = Auth::user();
+
+      $this->validate(request(), [
+
+      'title' => 'required',
+      'message' => 'required'
+
+    ]);
+
+    $announcement = Announcement::create([
+
+      'user_id' => $user->id,
+      'title' => request('title'),
+      'message' => request('message')
+
+    ]);
+
+    return back();
+      
+    }
 }
