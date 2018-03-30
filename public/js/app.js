@@ -122816,7 +122816,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< f7aff9fef4f7916cbb2b0a3257321a2ff31913c6
 <<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
+=======
+>>>>>>> subscribe function works with paypal
 //
 //
 //
@@ -122829,6 +122832,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< f7aff9fef4f7916cbb2b0a3257321a2ff31913c6
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'stream',
@@ -122861,6 +122865,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		}
 	}
 =======
+=======
+>>>>>>> subscribe function works with paypal
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['profile', 'loggedin', 'isfollowing', 'issubscribed'],
@@ -122872,7 +122878,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       followers: [],
       followings: [],
       auth: [],
-      auth_user: []
+      showsubscribeform: []
     };
   },
 
@@ -122897,10 +122903,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var followingsurl = '/api/following/' + this.profile.name;
     axios.get(followingsurl).then(function (response) {
       _this.followings = JSON.parse(JSON.stringify(response.data));
-    });
-
-    axios.get('/api/user').then(function (response) {
-      _this.auth_user = JSON.parse(JSON.stringify(response.data));
     });
   },
 
@@ -122930,7 +122932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     subscribe: function subscribe() {
 
       axios.post('/api/profilepage/subscribe', {
-        user_id: document.getElementById('subscribe_btn').value
+        user_id: this.user.id
 
       }).then(function (response) {
 
@@ -122942,7 +122944,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     unsubscribe: function unsubscribe() {
 
       axios.post('/api/profilepage/unsubscribe', {
-        user_id: document.getElementById('unsubscribe_btn').value
+        user_id: this.user.id
 
       }).then(function (response) {
         document.getElementById('unsubscribemsg').style.display = "block";
@@ -122961,6 +122963,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     togglefollowings: function togglefollowings() {
       var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+    togglesubscribe: function togglesubscribe() {
+      var x = document.getElementById("subscribe_btn");
       if (x.style.display === "none") {
         x.style.display = "block";
       } else {
@@ -123094,82 +123104,159 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "container-fluid" }, [
-          _vm.loggedin == 1
-            ? _c(
-                "div",
-                {
-                  staticClass: "container-fluid",
-                  staticStyle: { "text-align": "center" },
-                  attrs: { id: "subscribe_unsubscribe" }
-                },
-                [
-                  _vm.issubscribed == 0
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-lg",
-                          attrs: { id: "subscribe_btn", value: _vm.user.id },
-                          on: { click: _vm.subscribe }
-                        },
-                        [_vm._v("subscribe")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.issubscribed == 1
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-lg",
-                          attrs: { id: "unsubscribe_btn", value: _vm.user.id },
-                          on: { click: _vm.unsubscribe }
-                        },
-                        [_vm._v("unsubscribe")]
-                      )
-                    : _vm._e(),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
+        _vm.loggedin == 1
+          ? _c("div", { staticClass: "container-fluid" }, [
+              _vm.loggedin == 1
+                ? _c(
                     "div",
                     {
-                      staticClass: "alert alert-info",
-                      staticStyle: { display: "none" },
-                      attrs: { id: "subscribemsg", role: "alert" }
+                      staticClass: "container-fluid",
+                      staticStyle: { "text-align": "center" },
+                      attrs: { id: "subscribe_unsubscribe" }
                     },
                     [
-                      _vm._v(
-                        "You are now subscribed to " + _vm._s(_vm.user.name)
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-danger",
-                      staticStyle: { display: "none" },
-                      attrs: { id: "unsubscribemsg", role: "alert" }
-                    },
-                    [
-                      _vm._v(
-                        " You are no longer subscribed to " +
-                          _vm._s(_vm.user.name)
+                      _vm.issubscribed == 0
+                        ? _c("div", { staticClass: "container-fluid" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-info btn-lg",
+                                on: { click: _vm.togglesubscribe }
+                              },
+                              [
+                                _vm._v(
+                                  " Want to subscribe to " +
+                                    _vm._s(_vm.user.name) +
+                                    "?"
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  id: "subscribe_btn",
+                                  value: _vm.user.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      action:
+                                        "https://www.sandbox.paypal.com/cgi-bin/webscr",
+                                      method: "post",
+                                      target: "_top"
+                                    }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "cmd",
+                                        value: "_s-xclick"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "hosted_button_id",
+                                        value: "Z9ASYGPTDUF7J"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "image",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif",
+                                        border: "0",
+                                        name: "submit",
+                                        alt:
+                                          "PayPal - The safer, easier way to pay online!"
+                                      },
+                                      on: { click: _vm.subscribe }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      attrs: {
+                                        alt: "",
+                                        border: "0",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif",
+                                        width: "1",
+                                        height: "1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.issubscribed == 1
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "btn btn-danger btn-lg",
+                              attrs: {
+                                id: "unsubscribe_btn",
+                                value: _vm.user.id
+                              },
+                              on: { click: _vm.unsubscribe }
+                            },
+                            [_vm._v("unsubscribe")]
+                          )
+                        : _vm._e(),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-info",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "subscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "You are now subscribed to " + _vm._s(_vm.user.name)
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-danger",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "unsubscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            " You are no longer subscribed to " +
+                              _vm._s(_vm.user.name)
+                          )
+                        ]
                       )
                     ]
                   )
-                ]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.loggedin == 0
-            ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
-                _vm._v(
-                  " Please log in or register to subscribe to " +
-                    _vm._s(_vm.user.name)
-                )
-              ])
-            : _vm._e()
-        ]),
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loggedin == 0
+                ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
+                    _vm._v(
+                      " Please log in or register to subscribe to " +
+                        _vm._s(_vm.user.name)
+                    )
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("hr"),
