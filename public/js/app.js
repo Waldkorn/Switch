@@ -119818,41 +119818,27 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href:
-                              "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
-                          },
-                          on: { click: _vm.unsubscribe }
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src:
-                                "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
-                              BORDER: "0"
-                            }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
                       _vm.issubscribed == 1
                         ? _c(
-                            "div",
+                            "a",
                             {
-                              staticClass: "btn btn-danger btn-lg",
                               attrs: {
-                                id: "unsubscribe_btn",
-                                value: _vm.user.id
+                                href:
+                                  "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
                               },
                               on: { click: _vm.unsubscribe }
                             },
-                            [_vm._v("unsubscribe")]
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
+                                  BORDER: "0"
+                                }
+                              })
+                            ]
                           )
                         : _vm._e(),
-                      _c("br"),
                       _vm._v(" "),
                       _c(
                         "div",
