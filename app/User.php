@@ -75,7 +75,8 @@ class User extends Authenticatable
     public function announcements()
     {
         return $this->hasMany(Announcement::class);
-        
+    }
+    
     public function schedule()
     {
         return $this->hasOne(Schedule::class, 'user_id', 'id');
