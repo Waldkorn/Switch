@@ -20,8 +20,8 @@
       </div>
       <div class="container-fluid">
         <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
-          <button class="btn btn-info btn-lg" id="subscribe_btn" v-on:click="follow" :value="user.id" v-if="issubscribed == 0">subscribe</button>
-          <button class="btn btn-danger btn-lg"id="unsubscribe_btn" v-on:click="unfollow" :value="user.id" v-if="issubscribed == 1">unsubscribe</button><br>
+          <button class="btn btn-info btn-lg" id="subscribe_btn" v-on:click="subscribe" :value="user.id" v-if="issubscribed == 0">subscribe</button>
+          <button class="btn btn-danger btn-lg"id="unsubscribe_btn" v-on:click="unsubscribe" :value="user.id" v-if="issubscribed == 1">unsubscribe</button><br>
           <div class="alert alert-info" id="subscribemsg" role="alert" style="display:none">You are now subscribed to {{user.name}}</div>
           <div class="alert alert-danger" id="unsubscribemsg" role="alert" style="display:none"> You are no longer subscribed to {{user.name}}</div>
         </div>
