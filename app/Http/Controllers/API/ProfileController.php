@@ -62,7 +62,6 @@ class ProfileController extends Controller
 
     $user = User::find(request('user_id'));
     $subscriber= Auth::user();
-  
 
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');

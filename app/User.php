@@ -56,7 +56,6 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'subscribers', 'subscriber_id', 'leader_id')->withTimestamps();
     }
 
-
     public function chatmessages()
     {
         return $this->hasMany(Chatmessage::class);
