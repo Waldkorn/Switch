@@ -316,11 +316,8 @@
 </template>
 
 <script>
-
 import myDatepicker from 'vue-datepicker'
-
 export default {
-
     data:function(){
       return{
           profilecontent : [],
@@ -332,21 +329,18 @@ export default {
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
-
           startTime: {
                 time: ''
               },
               endtime: {
                 time: ''
               },
-
               option: {
                 type: 'day',
                 week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format: 'YYYY-MM-DD',
                 placeholder: 'when?',
-
                 inputStyle: {
                   'display': 'inline-block',
                   'padding': '6px',
@@ -388,7 +382,6 @@ export default {
               }]
       }
     },
-
     components: {
     'date-picker': myDatepicker
     },
@@ -400,7 +393,6 @@ export default {
       });
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
-
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
@@ -411,40 +403,31 @@ export default {
         console.log(this.schedules);
       });
     },
-
     methods: {
       streamkey: function() {
-
           axios.post('/api/streamkey', {
            user_id: this.user.id,
-
           }).then(function (response) {
             document.getElementById('streamkeymessage').style.display = "block";
             document.getElementById('streamkey_btn').style.display = "none";
             document.getElementById('hide_btn').style.display = "block";
          document.getElementById('schedulemsg').style.display = "block";
             document.getElementById('streamkeymessage').innerHTML = response.data;
-
             })
           },
-
       hidekey: function() {
           document.getElementById('streamkeymessage').style.display = "none";
           document.getElementById('hide_btn').style.display = "none";
           document.getElementById('streamkey_btn').style.display = "block";
           document.getElementById('streamkeymessage').innerHTML = "";
       },
-
       golive: function() {
         axios.post('/api/stream', {
-
           user_id: this.user.id,
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
-
        })
       },
-
       updateAbout: function() {
         axios.post('/api/profilecontentabout', {
           about: document.getElementById('aboutinput').value,
@@ -488,7 +471,6 @@ export default {
        })
       },
       add_schedule_daily: function () {
-
         axios.post('/api/addscheduledaily', {
           daily_title: document.getElementById('daily_title').value,
           daily_start: document.getElementById('daily_start').value,
@@ -547,5 +529,4 @@ export default {
       },
     }
   }
-
 </script>
