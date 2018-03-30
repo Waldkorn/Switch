@@ -71,6 +71,8 @@ Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware(
 Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 
 
-/////////////////
-// Auth Routes //
-/////////////////
+////////////////////////
+// Annoucement routes //
+////////////////////////
+
+Route::get('/announcements', 'API\AnnouncementController@get')->middleware('auth:api');

@@ -6,6 +6,8 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Announcement;
+
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
@@ -38,7 +40,7 @@ class User extends Authenticatable
      */
     public function followings()
     {
-        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id');
     }
 
     public function chatmessages()
@@ -54,5 +56,10 @@ class User extends Authenticatable
     public function Profilecontent()
     {
         return $this->hasOne(Profilecontent::class, 'user_id', 'id');
+    }
+
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
     }
 }
