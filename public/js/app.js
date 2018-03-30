@@ -103253,6 +103253,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['profile', 'loggedin', 'isfollowing', 'issubscribed'],
@@ -103627,6 +103630,26 @@ var render = function() {
                             )
                           ])
                         : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href:
+                              "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
+                          },
+                          on: { click: _vm.unsubscribe }
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src:
+                                "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
+                              BORDER: "0"
+                            }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.issubscribed == 1
                         ? _c(
