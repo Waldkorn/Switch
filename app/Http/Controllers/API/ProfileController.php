@@ -36,7 +36,7 @@ class ProfileController extends Controller
 //following and unfollowing users
   public function follow_user(){
     $user = User::find(request('user_id'));
-    $follower= User::find(request('follower_id'));
+    $follower= Auth::user();
 
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');
@@ -49,7 +49,7 @@ class ProfileController extends Controller
 
   public function unfollow_user(){
     $user = User::find(request('user_id'));
-    $unfollower = User::find(request('unfollower_id'));
+    $unfollower = Auth::user();
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');
     }
@@ -59,8 +59,10 @@ class ProfileController extends Controller
   }
   //subscribing and unsubscribing
   public function subscribe(){
+
     $user = User::find(request('user_id'));
-    $subscriber= User::find(request('subscriber_id'));
+    $subscriber= Auth::user();
+  
 
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');
@@ -73,7 +75,7 @@ class ProfileController extends Controller
 
   public function unsubscribe(){
     $user = User::find(request('user_id'));
-    $unsubscriber = User::find(request('unsubscriber_id'));
+    $unsubscriber = Auth::user();
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');
     }
