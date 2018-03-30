@@ -18,15 +18,27 @@
         </div>
         <div id="follow_unfollow" v-if="loggedin == 0" > Please log in or register to follow {{user.name}}</div>
       </div>
-      <div class="container-fluid">
+
+      <div class="container-fluid" v-if="loggedin == 1">
         <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
-          <button class="btn btn-info btn-lg" id="subscribe_btn" v-on:click="subscribe" :value="user.id" v-if="issubscribed == 0">subscribe</button>
-          <button class="btn btn-danger btn-lg"id="unsubscribe_btn" v-on:click="unsubscribe" :value="user.id" v-if="issubscribed == 1">unsubscribe</button><br>
+          <div  class="container-fluid" v-if="issubscribed == 0">
+          <div class="btn btn-info btn-lg" v-on:click="togglesubscribe"> Want to subscribe to {{user.name}}?</div>
+          <div  id="subscribe_btn" :value="user.id" style="display:none"  >
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="Z9ASYGPTDUF7J">
+              <input  v-on:click="subscribe" type="image" src="https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </div>
+        </div>
+          <div class="btn btn-danger btn-lg"id="unsubscribe_btn" v-on:click="unsubscribe" :value="user.id" v-if="issubscribed == 1">unsubscribe</div><br>
           <div class="alert alert-info" id="subscribemsg" role="alert" style="display:none">You are now subscribed to {{user.name}}</div>
           <div class="alert alert-danger" id="unsubscribemsg" role="alert" style="display:none"> You are no longer subscribed to {{user.name}}</div>
         </div>
         <div id="subscribe_unsubscribe" v-if="loggedin == 0" > Please log in or register to subscribe to {{user.name}}</div>
-      </div>
+
+    </div>
 
       <div class="container-fluid" v-if="loggedin == 1">
         <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
