@@ -18,8 +18,6 @@
     <td>{{schedule.end_date}}</td>
     <td>{{schedule.game}}</td>
     <td>{{schedule.tag}}</td>
-    <td><div class="btn btn-info">edit</div></td>
-    <td><div class="btn btn-danger">delete</div></td>
     <td></td>
     </tr>
   </tbody>
