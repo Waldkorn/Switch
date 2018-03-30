@@ -18,6 +18,15 @@
         </div>
         <div id="follow_unfollow" v-if="loggedin == 0" > Please log in or register to follow {{user.name}}</div>
       </div>
+      <div class="container-fluid">
+        <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
+          <button class="btn btn-info btn-lg" id="subscribe_btn" v-on:click="follow" :value="user.id" v-if="issubscribed == 0">subscribe</button>
+          <button class="btn btn-danger btn-lg"id="unsubscribe_btn" v-on:click="unfollow" :value="user.id" v-if="issubscribed == 1">unsubscribe</button><br>
+          <div class="alert alert-info" id="subscribemsg" role="alert" style="display:none">You are now subscribed to {{user.name}}</div>
+          <div class="alert alert-danger" id="unsubscribemsg" role="alert" style="display:none"> You are no longer subscribed to {{user.name}}</div>
+        </div>
+        <div id="subscribe_unsubscribe" v-if="loggedin == 0" > Please log in or register to subscribe to {{user.name}}</div>
+      </div>
 
       <div class="card-body"><hr>
         <h3 class="card-title"> About: </h3>
@@ -26,7 +35,7 @@
 
       <div class="list-group" id="followerslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
         <p class="list-group-item list-group-item-dark"><strong>Followers:</strong></p>
-        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">     
+        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">
           <a v-for="follower in followers" :href="'/profilepage/' + follower.name" class="list-group-item list-group-item-action" > {{follower.name}}</a>
         </div>
       </div>
@@ -44,7 +53,7 @@
 
 <script>
 export default {
-  props: ['profile','loggedin','isfollowing'],
+  props: ['profile','loggedin','isfollowing','issubscribed'],
 
   data:function(){
     return{

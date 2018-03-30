@@ -58,7 +58,7 @@
   <div class="row" style="width:100%">
   	<div class="col-3">
 			@if (auth::check())
-			<profilesidebar :profile="{{$user}}":loggedin="{{$loggedin}}" :isfollowing="{{$isfollowing}}"></profilesidebar>
+			<profilesidebar :profile="{{$user}}":loggedin="{{$loggedin}}" :isfollowing="{{$isfollowing}}" :issubscribed="{{$issubscribed}}"></profilesidebar>
 			@else
 			<profilesidebar  :profile="{{$user}}" v-bind:loggedin="{{$loggedin}}"></profilesidebar>
 			@endif
