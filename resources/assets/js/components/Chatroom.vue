@@ -8,7 +8,8 @@
                     <p>
                         <b v-bind:style="'color:' + activeUsers[ message.user.name ]">{{ message.user.name }}:</b>
 
-                        {{ message.message }}
+                        <span v-html="message.message"></span>
+
                     </p>
                 </div>
             </div>
@@ -35,7 +36,12 @@
                 activeUsers : [],
                 colors: ["Blue", "Coral", "DodgerBlue", "SpringGreen", "YellowGreen", "Green", "OrangeRed", "Red", "GoldenRod", "HotPink", "CadetBlue", "SeaGreen", "Chocolate", "BlueViolet", "Firebrick"],
                 index: 0,
-                loggedIn: false
+                loggedIn: false,
+                emotes: [ 
+                    { shortcut: "smileyFace", replacement: "<img height='16px' src='/images/emoticons/smiling_face.png'>" },
+                    { shortcut: "laughingFace", replacement: "<img height='16px' src=/images/emoticons/laughing_face.png>"},
+                    { shortcut: "tongueFace", replacement: "<img height='16px' src='/images/emoticons/tongue_face.png'>" }
+                ]
             }
         },
         props: [ 'user', 'streamer', 'viewers', 'darkmode' ],
@@ -54,7 +60,7 @@
                 document.getElementById('chatfield').style.backgroundColor = "lightgray";
             }                       
 
-            Echo.join('StreamPresence.' + this.streamer.stream.id)
+            Echo.join('StreamPresence.' + this.streamer.stream.id, this.streamer)
             .here((users) => {
                 this.$emit('user-list', users);
             })
@@ -88,8 +94,16 @@
                 Echo.channel('stream.' + this.streamer.stream.id)
                     .listen('NewChatmessage', (chatmessage) => {
                         this.assignColorToUsers(chatmessage);
+                        chatmessage.message = this.expandText(chatmessage.message);
                         this.messages = this.messages.concat(chatmessage);
                     })
+            },
+            expandText(text){
+               for (var i = 0; i < this.emotes.length; i++){
+                    text = text.replace(new RegExp("\\b" + this.emotes[i].shortcut + "\\b", 'g'), this.emotes[i].replacement);
+                }
+
+                return text;
             }
         },
         updated: function() {
@@ -98,8 +112,6 @@
                 div.scrollTop = div.scrollHeight - div.clientHeight;
             })
         }
-
-
     }
 </script>
 

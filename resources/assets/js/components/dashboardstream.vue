@@ -1,5 +1,7 @@
 <template>
   <div class="row">
+
+    <div class="col-9">
       <div class="card" style="width:100%;margin-bottom:1rem;text-align:center">
         <h5 class="card-header">Stream Preview</h5>
         <video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
@@ -10,6 +12,7 @@
 				    </p>
 				</video>
       </div>
+
       <div class="card" style="width:100%;text-align:center">
         <h5 class="card-header">Start streaming?</h5>
         <form style="text-align:left">
@@ -32,7 +35,7 @@
         </form>
       </div>
 
-    
+    </div>
 
     <div class="col-3">
       <div class="card">
@@ -50,6 +53,7 @@
             <div class="btn btn-danger"id="hide_btn" style="margin-top:1rem;display:none" v-on:click="hidekey">hide streamkey</div>
             <div class="alert alert-danger" id="streamkeymessage" role="alert" style="display:none"></div>
           </div>
+
           <p class="alert alert-danger">(This is your personal streamkey, never show it to anyone!)</p>
           <h5 class="card-title">Step Three: connect to the server</h5>
           <p class="card-text">After you've entered your url and streamkey, you can start streaming to our server</p>
@@ -99,6 +103,7 @@ export default {
       },
 
       golive: function() {
+
         axios.post('/api/stream', {
 
           user_id: this.user.id,

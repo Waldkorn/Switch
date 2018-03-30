@@ -12,7 +12,14 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
       DB::table('users')->insert([
-
+                [
+                    'name' => 'guest',
+                    'email' => 'guest@guest.com',
+                    'stream_token' => 'guest',
+                    'password' => bcrypt('secret'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
                 [
                     'name' => 'streamer',
                     'email' => 'streamer@test.com',

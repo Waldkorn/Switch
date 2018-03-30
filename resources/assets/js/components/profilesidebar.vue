@@ -37,7 +37,6 @@
           <a v-for="following in followings" :href="'/profilepage/' + following.name" class="list-group-item list-group-item-action" > {{following.name}}</a>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -66,13 +65,11 @@ export default {
     var url = '/api/profilepage/'+this.profile.name;
     axios.get(url).then(response => {
     this.user = JSON.parse(JSON.stringify(response.data));
-
     });
 
     var followersurl = '/api/followers/'+this.profile.name;
     axios.get(followersurl).then(response => {
     this.followers = JSON.parse(JSON.stringify(response.data));
-
     });
 
     var followingsurl = '/api/following/'+this.profile.name;
