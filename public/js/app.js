@@ -1912,7 +1912,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(303)("./" + name);
+            __webpack_require__(306)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -64788,11 +64788,15 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(176);
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 module.exports = __webpack_require__(330);
 =======
 module.exports = __webpack_require__(320);
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+module.exports = __webpack_require__(323);
+>>>>>>> fixed daily streams array in showschedule function
 
 
 /***/ }),
@@ -64843,21 +64847,25 @@ Vue.component('chatroom', __webpack_require__(320));
 Vue.component('streams', __webpack_require__(325));
 =======
 Vue.component('profilesidebar', __webpack_require__(282));
-Vue.component('profileschedule', __webpack_require__(324));
-Vue.component('nowlivebar', __webpack_require__(285));
-Vue.component('frontpagemain', __webpack_require__(288));
-Vue.component('profilepagemain', __webpack_require__(291));
-Vue.component('stream', __webpack_require__(294));
+Vue.component('profileschedule', __webpack_require__(285));
+Vue.component('nowlivebar', __webpack_require__(288));
+Vue.component('frontpagemain', __webpack_require__(291));
+Vue.component('profilepagemain', __webpack_require__(294));
+Vue.component('stream', __webpack_require__(297));
 
 //dashboard//
-Vue.component('dashboard', __webpack_require__(297));
-Vue.component('dashboardstream', __webpack_require__(306));
-Vue.component('dashboardprofile', __webpack_require__(309));
+Vue.component('dashboard', __webpack_require__(300));
+Vue.component('dashboardstream', __webpack_require__(309));
+Vue.component('dashboardprofile', __webpack_require__(312));
 
-Vue.component('chatroom', __webpack_require__(312));
+Vue.component('chatroom', __webpack_require__(315));
 
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 Vue.component('streams', __webpack_require__(317));
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+Vue.component('streams', __webpack_require__(320));
+>>>>>>> fixed daily streams array in showschedule function
 
 var app = new Vue({
     el: '#app',
@@ -120990,6 +120998,213 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/assets/js/components/profileschedule.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-58630679", Component.options)
+  } else {
+    hotAPI.reload("data-v-58630679", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 286 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['profile'],
+  data: function data() {
+    return {
+      schedules: [],
+      sortable: []
+
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var scheduleurl = '/api/schedule/' + this.profile.name;
+    axios.get(scheduleurl).then(function (response) {
+      _this.schedules = JSON.parse(JSON.stringify(response.data));
+
+      function compare(a, b) {
+        if (a.start_date < b.start_date) return -1;
+        if (a.start_date > b.start_date) return 1;
+        return 0;
+      }
+
+      for (var schedule in _this.schedules) {
+        _this.sortable.push(_this.schedules[schedule]);
+      }
+
+      _this.schedules = _this.sortable.sort(compare);
+    });
+  }
+});
+
+/***/ }),
+/* 287 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "table",
+    {
+      staticClass: "table table-striped table-dark",
+      staticStyle: { margin: "0px", "background-color": "#343a40" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.schedules, function(schedule) {
+          return _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(schedule.type))
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.title))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.start_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.end_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.game))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(schedule.tag))]),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _vm._m(2, true),
+            _vm._v(" "),
+            _c("td")
+          ])
+        })
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticStyle: { color: "#dc3545" } }, [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
+  }
+}
+
+/***/ }),
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(289)
+/* template */
+var __vue_template__ = __webpack_require__(290)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
 
 /* hot reload */
@@ -121012,7 +121227,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 286 */
+/* 289 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121053,7 +121268,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 287 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -121145,15 +121360,15 @@ if (false) {
 }
 
 /***/ }),
-/* 288 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(289)
+var __vue_script__ = __webpack_require__(292)
 /* template */
-var __vue_template__ = __webpack_require__(290)
+var __vue_template__ = __webpack_require__(293)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -121192,7 +121407,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 289 */
+/* 292 */
 /***/ (function(module, exports) {
 
 //
@@ -121202,7 +121417,7 @@ module.exports = Component.exports
 //
 
 /***/ }),
-/* 290 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -121231,15 +121446,15 @@ if (false) {
 }
 
 /***/ }),
-/* 291 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(292)
+var __vue_script__ = __webpack_require__(295)
 /* template */
-var __vue_template__ = __webpack_require__(293)
+var __vue_template__ = __webpack_require__(296)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -121278,7 +121493,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 292 */
+/* 295 */
 /***/ (function(module, exports) {
 
 //
@@ -121288,7 +121503,7 @@ module.exports = Component.exports
 //
 
 /***/ }),
-/* 293 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -121321,6 +121536,7 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 287 */,
 /* 288 */,
@@ -121329,11 +121545,15 @@ if (false) {
 =======
 /* 294 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 297 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(291)
 /* template */
@@ -121343,6 +121563,11 @@ var __vue_script__ = __webpack_require__(295)
 /* template */
 var __vue_template__ = __webpack_require__(296)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+var __vue_script__ = __webpack_require__(298)
+/* template */
+var __vue_template__ = __webpack_require__(299)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -121391,11 +121616,15 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 291 */
 =======
 /* 295 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 298 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121543,8 +121772,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 /* 296 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 299 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -121913,16 +122146,21 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 293 */
 =======
 /* 297 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 300 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(294)
 /* template */
@@ -121932,6 +122170,11 @@ var __vue_script__ = __webpack_require__(298)
 /* template */
 var __vue_template__ = __webpack_require__(305)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+var __vue_script__ = __webpack_require__(301)
+/* template */
+var __vue_template__ = __webpack_require__(308)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -121980,17 +122223,21 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 294 */
 /***/ (function(module, exports) {
 =======
 /* 298 */
+=======
+/* 301 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_datepicker__);
 //
 //
@@ -122587,20 +122834,25 @@ var state = {
 });
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 296 */
 =======
 /* 299 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 302 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(300)
+  __webpack_require__(303)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(297)
 /* template */
@@ -122610,6 +122862,11 @@ var __vue_script__ = __webpack_require__(302)
 /* template */
 var __vue_template__ = __webpack_require__(304)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+var __vue_script__ = __webpack_require__(305)
+/* template */
+var __vue_template__ = __webpack_require__(307)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -122658,6 +122915,7 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 297 */
 /***/ (function(module, exports) {
@@ -122742,12 +123000,15 @@ if (false) {(function () {
 })()}
 =======
 /* 300 */
+=======
+/* 303 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(301);
+var content = __webpack_require__(304);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -122767,7 +123028,7 @@ if(false) {
 }
 
 /***/ }),
-/* 301 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)(false);
@@ -122782,11 +123043,15 @@ exports.push([module.i, "\n.datepicker-overlay[data-v-3faef998] {\n  position: f
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 300 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 =======
 /* 302 */
+=======
+/* 305 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
 
@@ -124249,7 +124514,7 @@ throw new Error("Module build failed: SyntaxError: D:/xampp/htdocs/Code/Switch/r
 };
 
 /***/ }),
-/* 303 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -124512,10 +124777,10 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 303;
+webpackContext.id = 306;
 
 /***/ }),
-/* 304 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -124841,8 +125106,12 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 /* 305 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 308 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -126428,16 +126697,21 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 314 */
 =======
 /* 306 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 309 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(315)
 /* template */
@@ -126447,6 +126721,11 @@ var __vue_script__ = __webpack_require__(307)
 /* template */
 var __vue_template__ = __webpack_require__(308)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+var __vue_script__ = __webpack_require__(310)
+/* template */
+var __vue_template__ = __webpack_require__(311)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -126485,11 +126764,15 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 315 */
 =======
 /* 307 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 310 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -126617,11 +126900,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 316 */
 =======
 /* 308 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 311 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -126891,16 +127178,21 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 317 */
 =======
 /* 309 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 312 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(318)
 /* template */
@@ -126910,6 +127202,11 @@ var __vue_script__ = __webpack_require__(310)
 /* template */
 var __vue_template__ = __webpack_require__(311)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+var __vue_script__ = __webpack_require__(313)
+/* template */
+var __vue_template__ = __webpack_require__(314)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -126948,11 +127245,15 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 318 */
 =======
 /* 310 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 313 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127121,11 +127422,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 319 */
 =======
 /* 311 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 314 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -127381,16 +127686,21 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 320 */
 =======
 /* 312 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 315 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
   __webpack_require__(321)
 =======
@@ -127408,6 +127718,15 @@ var __vue_script__ = __webpack_require__(315)
 /* template */
 var __vue_template__ = __webpack_require__(316)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+  __webpack_require__(316)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(318)
+/* template */
+var __vue_template__ = __webpack_require__(319)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -127446,16 +127765,21 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 321 */
 =======
 /* 313 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 316 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
@@ -127464,6 +127788,9 @@ if(content.locals) module.exports = content.locals;
 var update = __webpack_require__(8)("22047796", content, false, {});
 =======
 var content = __webpack_require__(314);
+=======
+var content = __webpack_require__(317);
+>>>>>>> fixed daily streams array in showschedule function
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -127484,6 +127811,7 @@ if(false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 322 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -127491,6 +127819,9 @@ if(false) {
 exports = module.exports = __webpack_require__(7)(false);
 =======
 /* 314 */
+=======
+/* 317 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)(false);
@@ -127505,11 +127836,15 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 323 */
 =======
 /* 315 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 318 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127626,11 +127961,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 324 */
 =======
 /* 316 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 319 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -127739,16 +128078,21 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 325 */
 =======
 /* 317 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 320 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 var __vue_script__ = __webpack_require__(328)
 /* template */
@@ -127758,6 +128102,11 @@ var __vue_script__ = __webpack_require__(318)
 /* template */
 var __vue_template__ = __webpack_require__(319)
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+var __vue_script__ = __webpack_require__(321)
+/* template */
+var __vue_template__ = __webpack_require__(322)
+>>>>>>> fixed daily streams array in showschedule function
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -127796,6 +128145,7 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 326 */,
 /* 327 */,
@@ -127803,6 +128153,9 @@ module.exports = Component.exports
 =======
 /* 318 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 321 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127854,11 +128207,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 329 */
 =======
 /* 319 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 322 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -127931,224 +128288,18 @@ if (false) {
 }
 
 /***/ }),
+<<<<<<< be8c1278690d03e23d75f9b04714d1bdc356055d
 <<<<<<< bce90ccd8b016529307699083bbb27534e96bdd8
 /* 330 */
 =======
 /* 320 */
 >>>>>>> added npm vue date picker and moment, reinstalled npm again, added date+time picker to dashboard.vue
+=======
+/* 323 */
+>>>>>>> fixed daily streams array in showschedule function
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(325)
-/* template */
-var __vue_template__ = __webpack_require__(326)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/profileschedule.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-58630679", Component.options)
-  } else {
-    hotAPI.reload("data-v-58630679", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 325 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['profile'],
-  data: function data() {
-    return {
-      schedules: [],
-      sortable: []
-
-    };
-  },
-
-  mounted: function mounted() {
-    var _this = this;
-
-    var scheduleurl = '/api/schedule/' + this.profile.name;
-    axios.get(scheduleurl).then(function (response) {
-      _this.schedules = JSON.parse(JSON.stringify(response.data));
-
-      function compare(a, b) {
-        if (a.start_date < b.start_date) return -1;
-        if (a.start_date > b.start_date) return 1;
-        return 0;
-      }
-
-      for (var schedule in _this.schedules) {
-        _this.sortable.push(_this.schedules[schedule]);
-      }
-
-      _this.schedules = _this.sortable.sort(compare);
-    });
-  }
-});
-
-/***/ }),
-/* 326 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "table",
-    {
-      staticClass: "table table-striped table-dark",
-      staticStyle: { margin: "0px", "background-color": "#343a40" }
-    },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.schedules, function(schedule) {
-          return _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [
-              _vm._v(_vm._s(schedule.type))
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(schedule.title))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(schedule.start_date))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(schedule.end_date))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(schedule.game))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(schedule.tag))]),
-            _vm._v(" "),
-            _vm._m(1, true),
-            _vm._v(" "),
-            _vm._m(2, true),
-            _vm._v(" "),
-            _c("td")
-          ])
-        })
-      )
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", { staticStyle: { color: "#dc3545" } }, [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);
