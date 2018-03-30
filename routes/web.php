@@ -31,9 +31,12 @@ Route::get('/profilepage/{username}',"ViewController@profile");
 Route::get('/dashboard',"ViewController@dashboard");
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> solved merge conflicts
 //////////////////
 // Image upload //
 //////////////////
