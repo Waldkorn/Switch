@@ -15,7 +15,7 @@
       <a class="nav-link" href="#" >Announcements</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link disabled" href="#">schedule</a>
+      <a class="nav-link" href="#" v-on:click="showscheduledash">schedule</a>
     </li>
   </ul>
 
@@ -202,66 +202,234 @@
 
         </div>
       </div>
+
+      <div  id="nav-channel" v-show="scheduledash">
+        <div class="row">
+          <div class="col-7" style="padding:0px;padding-left:1rem">
+            <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">scheduled streams</h5>
+            </div>
+            <div class="card-body" style="padding:0px">
+
+              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
+  <thead>
+    <tr style="color:#dc3545">
+      <th scope="col">type</th>
+      <th scope="col">name</th>
+      <th scope="col">start</th>
+      <th scope="col">end</th>
+      <th scope="col">game</th>
+      <th scope="col">tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="schedule in schedules">
+      <th scope="row">{{schedule.type}}</th>
+      <td>{{schedule.title}}</td>
+      <td>{{schedule.start_date}}</td>
+      <td>{{schedule.end_date}}</td>
+      <td>{{schedule.game}}</td>
+      <td>{{schedule.tag}}</td>
+      <td><div class="btn btn-info">edit</div></td>
+      <td><div class="btn btn-danger">delete</div></td>
+      <td></td>
+    </tr>
+
+  </tbody>
+</table>
+          </div>
+        </div>
+        </div>
+            <div class="col-5" style="padding:0px">
+              <div class="card">
+
+              <div class="card-header">
+                <h5 class="card-title">Add a scheduled event</h5>
+              </div>
+              <div class="card-body">
+                <div class="container-fluid" id="addschedulebuttons">
+                  <div class="btn btn-warning btn-lg btn-block" v-on:click="show_form_single">Single event</div>
+                  <div class="btn btn-secondary btn-lg btn-block" v-on:click="show_form_daily">Daily stream</div>
+                  <div class="btn btn-info btn-lg btn-block" v-on:click="show_form_weekly">Weekly stream</div>
+                  <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
+
+                </div>
+              <div class="container-fluid" id="schedule_form_single" style="display:none">
+                  <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+                <form>
+                <div class="form-group">
+                  <label for="single_title">Name</label>
+                  <input type="text" class="form-control" id="single_title" name="single_title" placeholder="Event Name">
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                      <span>Start：</span>
+                      <input type="datetime-local" name="single_start" id="single_start" :min="currentdate">
+                </div>
+                <div class="col">
+                      <span>End：</span>
+                      <input type="datetime-local" name="single_end" id="single_end" :min="currentdate">
+                </div>
+                </div>
+                <div class="form-group">
+                  <label for="single_tag">tag</label>
+                  <input type="text" class="form-control" id="single_tag" name="single_tag" placeholder="idk">
+                </div>
+                <div class="form-group">
+                  <label for="single_game">Game:</label>
+                  <select class="form-control" id="single_game" name="single_game">
+                    <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                  </select>
+                </div>
+                <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_single">Add event</div>
+              </form>
+            </div>
+
+            <div class="container-fluid" id="schedule_form_daily" style="display:none">
+                <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+              <form>
+              <div class="form-group">
+                <label for="daily_title">Name</label>
+                <input type="text" class="form-control" id="daily_title" name="daily_title" placeholder="Event Name">
+              </div>
+              <div class="form-row">
+                <div class="col">
+                    <span>Start：</span>
+                    <input type="time" name="daily_start" id="daily_start">
+              </div>
+              <div class="col">
+                    <span>End：</span>
+                    <input type="time" name="daily_end" id="daily_end">
+              </div>
+              </div>
+              <div class="form-group">
+                <label for="daily_tag">tag</label>
+                <input type="text" class="form-control" id="daily_tag" name="daily_tag" placeholder="idk">
+              </div>
+              <div class="form-group">
+                <label for="daily_game">Game:</label>
+                <select class="form-control" id="daily_game" name="daily_game">
+                  <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                </select>
+              </div>
+              <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_daily">Add event</div>
+            </form>
+          </div>
+
+          <div class="container-fluid" id="schedule_form_weekly" style="display:none">
+              <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+            <form>
+            <div class="form-group">
+              <label for="weekly_title">Name</label>
+              <input type="text" class="form-control" id="weekly_title" name="weekly_title" placeholder="Stream Name">
+            </div>
+            <div class="form-group">
+              <label for="weekly_day">Day:</label>
+              <select class="form-control" id="weekly_day" name="weekly_day">
+                <option value="monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                  <span>Start：</span>
+                  <input type="time" name="weekly_start" id="weekly_start">
+            </div>
+            <div class="col">
+                  <span>End：</span>
+                  <input type="time" name="weekly_end" id="weekly_end">
+            </div>
+            </div>
+            <div class="form-group">
+              <label for="weekly_tag">tag</label>
+              <input type="text" class="form-control" id="weekly_tag" name="weekly_tag" placeholder="idk">
+            </div>
+            <div class="form-group">
+              <label for="weekly_game">Game:</label>
+              <select class="form-control" id="weekly_game" name="weekly_game">
+                <option v-for="game in games" :value="game.id">{{game.name}}</option>
+              </select>
+            </div>
+            <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_weekly">Add event</div>
+          </form>
+        </div>
+      </div>
+          </div>
+            </div>
+          </div>
+      </div>
 </div>
 </div>
 </template>
 
 <script>
-
+import myDatepicker from 'vue-datepicker'
 export default {
-
-
     data:function(){
       return{
           profilecontent : [],
+          schedules : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
           announcements : [],
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
+          scheduledash: false,
           announcementsdash: false,
+          currentdate: null
       }
+    },
+    components: {
+    'date-picker': myDatepicker
     },
     props: ['user'],
     mounted() {
-        axios.get('/api/profilecontent').then(response => {
+       var contenturl = 'api/profilecontent/'+this.user.name;
+      axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
-      })
+      });
+      axios.get('/api/currentdate').then(response => {
+        this.currentdate = JSON.parse(JSON.stringify(response.data));
+      });
+      var scheduleurl = '/api/schedule/'+this.user.name;
+      axios.get(scheduleurl).then(response => {
+        this.schedules= JSON.parse(JSON.stringify(response.data));
+        console.log(this.schedules);
+      });
     },
-
     methods: {
       streamkey: function() {
-
           axios.post('/api/streamkey', {
            user_id: this.user.id,
-
           }).then(function (response) {
             document.getElementById('streamkeymessage').style.display = "block";
             document.getElementById('streamkey_btn').style.display = "none";
             document.getElementById('hide_btn').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
             document.getElementById('streamkeymessage').innerHTML = response.data;
-
             })
           },
-
       hidekey: function() {
           document.getElementById('streamkeymessage').style.display = "none";
           document.getElementById('hide_btn').style.display = "none";
           document.getElementById('streamkey_btn').style.display = "block";
           document.getElementById('streamkeymessage').innerHTML = "";
       },
-
       golive: function() {
         axios.post('/api/stream', {
-
           user_id: this.user.id,
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
-
        })
       },
       updateAbout: function() {
@@ -272,22 +440,92 @@ export default {
          $('#collapseEdit').collapse("toggle");
        })
       },
+      show_form_single: function(){
+        document.getElementById('addschedulebuttons').style.display = "none";
+        document.getElementById('schedule_form_single').style.display = "block";
+      },
+      show_form_weekly: function(){
+        document.getElementById('addschedulebuttons').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "block";
+      },
+      show_form_daily: function(){
+        document.getElementById('addschedulebuttons').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "block";
+      },
+      show_back:function(){
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedule_form_single').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "none";
+        document.getElementById('schedule_form_daily').style.display = "none";
+      },
+      add_schedule_single: function () {
+        axios.post('/api/addschedulesingle', {
+          single_title: document.getElementById('single_title').value,
+          single_start: document.getElementById('single_start').value,
+          single_end: document.getElementById('single_end').value,
+          single_tag: document.getElementById('single_tag').value,
+          single_game: document.getElementById('single_game').value,
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('schedule_form_single').style.display = "none";
+         document.getElementById('schedule_form_weekly').style.display = "none";
+         document.getElementById('schedule_form_daily').style.display = "none";
+       })
+      },
+      add_schedule_daily: function () {
+        axios.post('/api/addscheduledaily', {
+          daily_title: document.getElementById('daily_title').value,
+          daily_start: document.getElementById('daily_start').value,
+          daily_end: document.getElementById('daily_end').value,
+          daily_tag: document.getElementById('daily_tag').value,
+          daily_game: document.getElementById('daily_game').value,
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('schedule_form_single').style.display = "none";
+         document.getElementById('schedule_form_weekly').style.display = "none";
+         document.getElementById('schedule_form_daily').style.display = "none";
+       })
+      },
+      add_schedule_weekly: function () {
+        axios.post('/api/addscheduleweekly', {
+          weekly_title: document.getElementById('weekly_title').value,
+          weekly_day: document.getElementById('weekly_day').value,
+          weekly_start: document.getElementById('weekly_start').value,
+          weekly_end: document.getElementById('weekly_end').value,
+          weekly_tag: document.getElementById('weekly_tag').value,
+          weekly_game: document.getElementById('weekly_game').value,
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('schedule_form_single').style.display = "none";
+         document.getElementById('schedule_form_weekly').style.display = "none";
+         document.getElementById('schedule_form_daily').style.display = "none";
+       })
+      },
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
 				this.channeldash = false;
         this.announcementsdash = false;
+        this.scheduledash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
 				this.channeldash = false;
         this.announcementsdash = false;
+        this.scheduledash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
 				this.profiledash = false;
 				this.channeldash = true;
+        this.scheduledash = false;
         this.announcementsdash = false;
 			},
       showannouncementdash: function() {
@@ -295,10 +533,20 @@ export default {
         this.profiledash = false;
         this.channeldash = false;
         this.announcementsdash = true;
+        this.scheduledash = false;
         axios.get('/api/personalannouncements').then((response) => {
           this.announcements = response.data;
         })
-      }
+			},
+      showscheduledash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.channeldash = false;
+        this.scheduledash = true;
+        this.announcementsdash = false;
+      },
     }
   }
+  
+
 </script>
