@@ -47,7 +47,6 @@ Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
 Route::get('/profilecontent/{username}', 'API\ProfileController@getcontent');
 Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');
-
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
 
 
@@ -68,10 +67,11 @@ Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('
 Route::post('/stream', 'API\StreamController@golive');
 
 Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
-
-
 Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 
+Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
+Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
+Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
 
 /////////////////
 // Auth Routes //
