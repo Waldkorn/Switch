@@ -57,9 +57,11 @@ hr {
 		<div class="row" style="width:100%;margin:0">
 			<div class="col-md-2 pt-1" style="padding:0;">
 				@if (Auth::check())
-				<Followings></Followings>
+					<Followings></Followings>
+					<nowlivebar :user="{{ Auth::user() }}"></nowlivebar>
+				@else
+					<nowlivebar></nowlivebar>
 				@endif
-				<nowlivebar :user="{{ Auth::user() }}"></nowlivebar>
 			</div>
 			@if (Auth::check()) 
 				<frontpagemain :user="{{ Auth::user() }}"></frontpagemain>

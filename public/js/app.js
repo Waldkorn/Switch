@@ -103689,7 +103689,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
-    console.log(this.user);
     if (this.user != undefined) {
       axios.get('/api/listusers').then(function (response) {
         _this.users = response.data;
