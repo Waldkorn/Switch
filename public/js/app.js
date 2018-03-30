@@ -120522,7 +120522,10 @@ var render = function() {
               _c("span", [
                 _c(
                   "a",
-                  { attrs: { href: "/profilepage/" + announcement.user.name } },
+                  {
+                    staticStyle: { color: "#dc3545" },
+                    attrs: { href: "/profilepage/" + announcement.user.name }
+                  },
                   [
                     _c(
                       "h3",
