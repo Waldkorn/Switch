@@ -31,6 +31,7 @@ Route::get('/profilepage/{username}',"ViewController@profile");
 
 Route::get('/dashboard',"ViewController@dashboard");
 
+
 //////////////////
 // Image upload //
 //////////////////
