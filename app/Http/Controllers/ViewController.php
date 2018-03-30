@@ -22,11 +22,15 @@ class ViewController extends Controller
     $authuser = Auth::user();
     $loggedin = 0;
     $isfollowing = 0;
+    $issubscribed = 0;
 
     if (Auth::check()){
       $loggedin=1;
+      $loggedin=1;
       $followings = $authuser->followings()->pluck('streamer_id');
+      $subscriptions = $authuser->subscriptions()->pluck('leader_id');
       $followed=array();
+      $subscribed=array();
 
       foreach ($followings as $following){
         $followed[]=$following;
@@ -35,8 +39,15 @@ class ViewController extends Controller
       if (in_array($user->id, $followed)) {
         $isfollowing=1;
       }
+      foreach ($subscriptions as $subscription){
+        $subscribed[]=$subscription;
+      }
+
+      if (in_array($user->id, $subscribed)) {
+        $issubscribed=1;
+      }
     }
-    return view('profilepage', compact('user','loggedin','isfollowing'));
+    return view('profilepage', compact('user','loggedin','isfollowing','issubscribed'));
   }
 
 
