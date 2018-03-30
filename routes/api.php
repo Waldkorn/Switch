@@ -68,19 +68,11 @@ Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
 Route::get('/currentdate','API\ScheduleController@currentdate');
-<<<<<<< HEAD
+
 Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
 Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
-=======
->>>>>>> 5f18cc33e5a3f0739bf269f3f737a5dfc3011a35
+
 
 Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
-<<<<<<< HEAD
-
-/////////////////
-// Auth Routes //
-/////////////////
-=======
->>>>>>> 5f18cc33e5a3f0739bf269f3f737a5dfc3011a35
