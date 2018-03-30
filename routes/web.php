@@ -12,6 +12,14 @@
 */
 Auth::routes();
 
+<<<<<<< HEAD
+=======
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::post('/uploadimage','UploadController@updateimage');
+Route::post('/announcements/post', 'UploadController@create');
+
+>>>>>>> users can now post announcements
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
 Route::get('/profilepage/{username}',"ViewController@profile");

@@ -20,19 +20,12 @@
 	export default {
     data:function(){
       return{
-        announcements : [],
-        profiledetails : []
+        announcements : []
       }
     },
     mounted() {
       axios.get('/api/announcements').then(response => {
         this.announcements = response.data;
-        console.log(this.announcements);
-        for (var i = 0 ; i < this.announcements.length ; i++)
-        {
-        	this.profiledetails[this.announcements[i].user.name] = this.announcements[i].user.profilecontent;
-        }
-        console.log(this.profiledetails);
       })
     }
   }
