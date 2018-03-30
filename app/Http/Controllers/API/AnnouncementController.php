@@ -11,6 +11,7 @@ use App\User;
 
 class AnnouncementController extends Controller
 {
+
     public function readFollowerAnnouncements()
     {
     	$user = Auth::user();
@@ -24,5 +25,5 @@ class AnnouncementController extends Controller
     	$user = Auth::user();
     	return $user->announcements()->with('user.profilecontent')->Latest()->get();
     }
-
+    
 }

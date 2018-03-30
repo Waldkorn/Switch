@@ -80,12 +80,14 @@ Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->mi
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
 
+
 ////////////////////////
 // Annoucement routes //
 ////////////////////////
 
 Route::get('/announcements', 'API\AnnouncementController@readFollowerAnnouncements')->middleware('auth:api');
 Route::get('/personalannouncements', 'API\AnnouncementController@read')->middleware('auth:api');
+
 
 /////////////////////
 // Schedule routes //

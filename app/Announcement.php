@@ -11,6 +11,7 @@ class Announcement extends Model
     {
     	return $this->belongsTo(User::class);
     }
+<<<<<<< 46b2a80d8e5b7b1ee317e9c9da87d32414d8c305
 
     public function comments()
     {
@@ -20,4 +21,6 @@ class Announcement extends Model
     protected $fillable = [
         'user_id', 'title', 'message'
     ];
+=======
+>>>>>>> frontpage now displays announcements of followed streamers
 }
