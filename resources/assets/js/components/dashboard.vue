@@ -553,7 +553,6 @@ export default {
                 month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 format: 'YYYY-MM-DD',
                 placeholder: 'when?',
-
                 inputStyle: {
                   'display': 'inline-block',
                   'padding': '6px',
@@ -606,7 +605,6 @@ export default {
       });
       axios.get('/api/allgames').then(response => {
         this.games = JSON.parse(JSON.stringify(response.data));
-
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
@@ -755,5 +753,4 @@ export default {
       },
     }
   }
-
 </script>
