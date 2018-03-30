@@ -121035,8 +121035,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['profile'],
@@ -121105,10 +121103,6 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(schedule.tag))]),
             _vm._v(" "),
-            _vm._m(1, true),
-            _vm._v(" "),
-            _vm._m(2, true),
-            _vm._v(" "),
             _c("td")
           ])
         })
@@ -121135,22 +121129,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
     ])
   }
 ]
