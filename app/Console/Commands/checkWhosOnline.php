@@ -31,24 +31,24 @@ class checkWhosOnline extends Command
     public function __construct()
     {
         parent::__construct();
-        $streams = Stream::where('now_live', TRUE)->get();
-        $users = User::where('now_live', TRUE)->get();
+        // $streams = Stream::where('now_live', TRUE)->get();
+        // $users = User::where('now_live', TRUE)->get();
 
-        foreach ($users as $user) {
-            $user->update([
-                'now_live' => FALSE
-            ]);
-        }
+        // foreach ($users as $user) {
+        //     $user->update([
+        //         'now_live' => FALSE
+        //     ]);
+        // }
 
-        foreach ($streams as $stream) {
-            $stream->update([
-                'now_live' => FALSE
-            ]);
-        }
+        // foreach ($streams as $stream) {
+        //     $stream->update([
+        //         'now_live' => FALSE
+        //     ]);
+        // }
 
-        User::where('id', 1)->update([
-            'name' => 'testje'
-        ]);
+        // User::where('id', 1)->update([
+        //     'name' => 'testje'
+        // ]);
     }
 
     /**
