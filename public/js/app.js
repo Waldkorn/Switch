@@ -47747,6 +47747,7 @@ jQuery.Event = function( src, props ) {
 	this[ jQuery.expando ] = true;
 };
 
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 // jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
 // https://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
 jQuery.Event.prototype = {
@@ -47758,6 +47759,13 @@ jQuery.Event.prototype = {
 
 	preventDefault: function() {
 		var e = this.originalEvent;
+=======
+try {
+  window.$ = window.jQuery = __webpack_require__(44);
+
+  __webpack_require__(109);
+} catch (e) {}
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 		this.isDefaultPrevented = returnTrue;
 
@@ -47779,9 +47787,17 @@ jQuery.Event.prototype = {
 
 		this.isImmediatePropagationStopped = returnTrue;
 
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 		if ( e && !this.isSimulated ) {
 			e.stopImmediatePropagation();
 		}
+=======
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 		this.stopPropagation();
 	}
@@ -47827,11 +47843,20 @@ jQuery.each( {
 			return event.charCode != null ? event.charCode : event.keyCode;
 		}
 
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 		// Add which for click: 1 === left; 2 === middle; 3 === right
 		if ( !event.which && button !== undefined && rmouseEvent.test( event.type ) ) {
 			if ( button & 1 ) {
 				return 1;
 			}
+=======
+window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
+  broadcaster: 'pusher',
+  key: '8f0d4c8f929781d570a0',
+  cluster: 'eu',
+  encrypted: true
+});
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 			if ( button & 2 ) {
 				return 3;
@@ -119711,7 +119736,11 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 var __vue_scopeId__ = "data-v-2ee9fe67"
+=======
+var __vue_scopeId__ = "data-v-5d1d7d82"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -119722,7 +119751,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/passport/AuthorizedClients.vue"
+=======
+Component.options.__file = "resources/assets/js/components/passport/Clients.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -119731,9 +119764,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-2ee9fe67", Component.options)
   } else {
     hotAPI.reload("data-v-2ee9fe67", Component.options)
+=======
+    hotAPI.createRecord("data-v-5d1d7d82", Component.options)
+  } else {
+    hotAPI.reload("data-v-5d1d7d82", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -119754,6 +119793,7 @@ var content = __webpack_require__(265);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 <<<<<<< 0497835bf8a69319580b941fc2c80e993537740b
 <<<<<<< ace432b9c9743b977ef02368cbd80eedbec5aeed
 var update = __webpack_require__(9)("437dd684", content, false, {});
@@ -119763,12 +119803,20 @@ var update = __webpack_require__(9)("10846595", content, false, {});
 =======
 var update = __webpack_require__(9)("10846595", content, false, {});
 >>>>>>> fixed rebase issues
+=======
+var update = __webpack_require__(10)("2a28cc49", content, false, {});
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
+=======
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5d1d7d82\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Clients.vue");
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -119786,7 +119834,11 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;\n}\n", ""]);
+=======
+exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;\n}\n", ""]);
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 // exports
 
@@ -120816,7 +120868,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-89c53f18", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-5d1d7d82", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -121061,7 +121117,11 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 var __vue_scopeId__ = null
+=======
+var __vue_scopeId__ = "data-v-2ee9fe67"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -121072,7 +121132,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/games.vue"
+=======
+Component.options.__file = "resources/assets/js/components/passport/AuthorizedClients.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -121081,9 +121145,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-0caa52ba", Component.options)
   } else {
     hotAPI.reload("data-v-0caa52ba", Component.options)
+=======
+    hotAPI.createRecord("data-v-2ee9fe67", Component.options)
+  } else {
+    hotAPI.reload("data-v-2ee9fe67", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121104,17 +121174,26 @@ var content = __webpack_require__(281);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 <<<<<<< ace432b9c9743b977ef02368cbd80eedbec5aeed
 var update = __webpack_require__(9)("05c3ad2c", content, false, {});
 =======
 var update = __webpack_require__(9)("fe0d5e34", content, false, {});
 >>>>>>> fixed bugs in dashboard.vue
+=======
+var update = __webpack_require__(10)("10846595", content, false, {});
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
    module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0caa52ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue", function() {
      var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0caa52ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue");
+=======
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2ee9fe67\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AuthorizedClients.vue");
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -121132,7 +121211,11 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 exports.push([module.i, "\n#games-main {\n  max-height: 1px;\n}\n\n", ""]);
+=======
+exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;\n}\n", ""]);
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 // exports
 
@@ -121256,7 +121339,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-0caa52ba", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-2ee9fe67", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -121275,7 +121362,11 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = null
 /* scopeId */
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 var __vue_scopeId__ = null
+=======
+var __vue_scopeId__ = "data-v-89c53f18"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -121286,7 +121377,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/profilesidebar.vue"
+=======
+Component.options.__file = "resources/assets/js/components/passport/PersonalAccessTokens.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -121295,9 +121390,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-405fec2c", Component.options)
   } else {
     hotAPI.reload("data-v-405fec2c", Component.options)
+=======
+    hotAPI.createRecord("data-v-89c53f18", Component.options)
+  } else {
+    hotAPI.reload("data-v-89c53f18", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121308,7 +121409,51 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 /* 285 */
+=======
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(147);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(10)("4e7bd74e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-89c53f18\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./PersonalAccessTokens.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 148 */
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121726,7 +121871,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-89c53f18", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -121760,7 +121909,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources\\assets\\js\\components\\profileschedule.vue"
+=======
+Component.options.__file = "resources/assets/js/components/test.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -121769,9 +121922,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-337df139", Component.options)
   } else {
     hotAPI.reload("data-v-337df139", Component.options)
+=======
+    hotAPI.createRecord("data-v-bd7c2fae", Component.options)
+  } else {
+    hotAPI.reload("data-v-bd7c2fae", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121915,7 +122074,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-337df139", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-bd7c2fae", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -121953,7 +122116,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/profileschedule.vue"
+=======
+Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -121962,9 +122129,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-58630679", Component.options)
   } else {
     hotAPI.reload("data-v-58630679", Component.options)
+=======
+    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+  } else {
+    hotAPI.reload("data-v-7168fb6a", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122073,7 +122246,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-58630679", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -122103,7 +122280,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
+=======
+Component.options.__file = "resources/assets/js/components/games.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -122112,9 +122293,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-64aabce8", Component.options)
   } else {
     hotAPI.reload("data-v-64aabce8", Component.options)
+=======
+    hotAPI.createRecord("data-v-0caa52ba", Component.options)
+  } else {
+    hotAPI.reload("data-v-0caa52ba", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122125,8 +122312,52 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 >>>>>>> fixed bugs in dashboard.vue
 /* 291 */
+=======
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(158);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(10)("fe0d5e34", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0caa52ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0caa52ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./games.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(9)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#games-main {\n  max-height: 1px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 159 */
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -122460,7 +122691,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-b8ed07ac", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-0caa52ba", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -122490,7 +122725,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/Stream.vue"
+=======
+Component.options.__file = "resources/assets/js/components/profilesidebar.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -122499,9 +122738,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-5ffd2477", Component.options)
   } else {
     hotAPI.reload("data-v-5ffd2477", Component.options)
+=======
+    hotAPI.createRecord("data-v-405fec2c", Component.options)
+  } else {
+    hotAPI.reload("data-v-405fec2c", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -122571,6 +122816,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 //
 //
 //
@@ -122614,6 +122860,116 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$emit('darkmode');
 		}
 	}
+=======
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['profile', 'loggedin', 'isfollowing', 'issubscribed'],
+
+  data: function data() {
+    return {
+      user: [],
+      profilecontent: [],
+      followers: [],
+      followings: [],
+      auth: [],
+      auth_user: []
+    };
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var contenturl = '/api/profilecontent/' + this.profile.name;
+    axios.get(contenturl).then(function (response) {
+      _this.profilecontent = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var url = '/api/profilepage/' + this.profile.name;
+    axios.get(url).then(function (response) {
+      _this.user = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followersurl = '/api/followers/' + this.profile.name;
+    axios.get(followersurl).then(function (response) {
+      _this.followers = JSON.parse(JSON.stringify(response.data));
+    });
+
+    var followingsurl = '/api/following/' + this.profile.name;
+    axios.get(followingsurl).then(function (response) {
+      _this.followings = JSON.parse(JSON.stringify(response.data));
+    });
+
+    axios.get('/api/user').then(function (response) {
+      _this.auth_user = JSON.parse(JSON.stringify(response.data));
+    });
+  },
+
+
+  methods: {
+    follow: function follow() {
+      console.log(document.getElementById('follow_btn').value);
+      axios.post('/api/profilepage/follow', {
+        user_id: document.getElementById('follow_btn').value
+
+      }).then(function (response) {
+        document.getElementById('follow_btn').style.display = "none";
+        document.getElementById('followmsg').style.display = "block";
+      });
+    },
+
+    unfollow: function unfollow() {
+
+      axios.post('/api/profilepage/unfollow', {
+        user_id: document.getElementById('unfollow_btn').value
+
+      }).then(function (response) {
+        document.getElementById('unfollowmsg').style.display = "block";
+        document.getElementById('unfollow_btn').style.display = "none";
+      });
+    },
+    subscribe: function subscribe() {
+
+      axios.post('/api/profilepage/subscribe', {
+        user_id: document.getElementById('subscribe_btn').value
+
+      }).then(function (response) {
+
+        document.getElementById('subscribe_btn').style.display = "none";
+        document.getElementById('subscribemsg').style.display = "block";
+      });
+    },
+
+    unsubscribe: function unsubscribe() {
+
+      axios.post('/api/profilepage/unsubscribe', {
+        user_id: document.getElementById('unsubscribe_btn').value
+
+      }).then(function (response) {
+        document.getElementById('unsubscribemsg').style.display = "block";
+        document.getElementById('unsubscribe_btn').style.display = "none";
+      });
+    },
+
+    togglefollowers: function togglefollowers() {
+      var x = document.getElementById("followerslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
+
+    togglefollowings: function togglefollowings() {
+      var x = document.getElementById("followingslist");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+
+  }
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 });
 
 /***/ }),
@@ -122723,7 +123079,106 @@ var render = function() {
                 },
                 [_vm._v("Dark mode")]
               )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
             ])
+=======
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "follow_unfollow" } }, [
+                _vm._v(
+                  " Please log in or register to follow " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "container-fluid" }, [
+          _vm.loggedin == 1
+            ? _c(
+                "div",
+                {
+                  staticClass: "container-fluid",
+                  staticStyle: { "text-align": "center" },
+                  attrs: { id: "subscribe_unsubscribe" }
+                },
+                [
+                  _vm.issubscribed == 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-info btn-lg",
+                          attrs: { id: "subscribe_btn", value: _vm.user.id },
+                          on: { click: _vm.subscribe }
+                        },
+                        [_vm._v("subscribe")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.issubscribed == 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-lg",
+                          attrs: { id: "unsubscribe_btn", value: _vm.user.id },
+                          on: { click: _vm.unsubscribe }
+                        },
+                        [_vm._v("unsubscribe")]
+                      )
+                    : _vm._e(),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-info",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "subscribemsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        "You are now subscribed to " + _vm._s(_vm.user.name)
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      staticStyle: { display: "none" },
+                      attrs: { id: "unsubscribemsg", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        " You are no longer subscribed to " +
+                          _vm._s(_vm.user.name)
+                      )
+                    ]
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.loggedin == 0
+            ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
+                _vm._v(
+                  " Please log in or register to subscribe to " +
+                    _vm._s(_vm.user.name)
+                )
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h3", { staticClass: "card-title" }, [_vm._v(" About: ")]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.profilecontent.about))
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
           ])
         ]),
         _vm._v(" "),
@@ -122909,7 +123364,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-5ffd2477", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-405fec2c", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -122939,7 +123398,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/Followings.vue"
+=======
+Component.options.__file = "resources/assets/js/components/nowlivebar.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -122948,9 +123411,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-37f8dc79", Component.options)
   } else {
     hotAPI.reload("data-v-37f8dc79", Component.options)
+=======
+    hotAPI.createRecord("data-v-64aabce8", Component.options)
+  } else {
+    hotAPI.reload("data-v-64aabce8", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -123128,7 +123597,11 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     require("vue-hot-reload-api")      .rerender("data-v-37f8dc79", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-64aabce8", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 }
 
@@ -123158,7 +123631,11 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 Component.options.__file = "resources/assets/js/components/dashboard.vue"
+=======
+Component.options.__file = "resources/assets/js/components/frontpagemain.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -123167,9 +123644,15 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     hotAPI.createRecord("data-v-2073dee6", Component.options)
   } else {
     hotAPI.reload("data-v-2073dee6", Component.options)
+=======
+    hotAPI.createRecord("data-v-0d70c4ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-0d70c4ea", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -123399,11 +123882,181 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
+=======
+
+/***/ }),
+/* 169 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-5 pt-1" }, [
+      _c("p", [_vm._v(" lots of stuff here soon ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0d70c4ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 170 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(171)
+/* template */
+var __vue_template__ = __webpack_require__(172)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/profilepagemain.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b8ed07ac", Component.options)
+  } else {
+    hotAPI.reload("data-v-b8ed07ac", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 171 */
+/***/ (function(module, exports) {
+
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 //
 //
 //
 //
 //
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
+=======
+
+/***/ }),
+/* 172 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { height: "500px" } }, [
+      _c("p", [_vm._v(" lots of stuff here soon ")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b8ed07ac", module.exports)
+  }
+}
+
+/***/ }),
+/* 173 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(174)
+/* template */
+var __vue_template__ = __webpack_require__(175)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Stream.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5ffd2477", Component.options)
+  } else {
+    hotAPI.reload("data-v-5ffd2477", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 174 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 //
 //
 //
@@ -124679,6 +125332,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.channeldash = false;
       this.scheduledash = false;
     },
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
     showprofiledash: function showprofiledash() {
       this.streamdash = false;
       this.profiledash = true;
@@ -124697,6 +125351,103 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.channeldash = false;
       this.scheduledash = true;
     }
+=======
+    [
+      _c(
+        "div",
+        { staticClass: "container-fluid px-0 pb-1" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user) {
+            return _c(
+              "div",
+              {
+                staticClass: "streamer list-group-item",
+                class: {
+                  "list-group-item": user.now_live,
+                  "list-group-item-secondary": !user.now_live
+                },
+                staticStyle: {
+                  "background-color": "#343a40",
+                  "border-radius": "0px 0px 0rem 0rem"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "d-flex w-100 justify-content-between" },
+                  [
+                    _c(
+                      "a",
+                      {
+                        staticStyle: { color: "#f5f5dc" },
+                        attrs: { href: "/" + user.name }
+                      },
+                      [_vm._v(_vm._s(user.name))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: user.streaming,
+                            expression: "user.streaming"
+                          }
+                        ],
+                        staticClass: "text-danger"
+                      },
+                      [
+                        _vm._v("live     "),
+                        _c("img", {
+                          attrs: {
+                            width: "16px",
+                            src: "/images/viewingIcon.png"
+                          }
+                        }),
+                        _vm._v(" " + _vm._s(user.viewer_count))
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          })
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "list-group-item",
+        staticStyle: {
+          "background-color": "#f5f5dc",
+          "border-radius": "0px 0px 0rem 0rem",
+          border: "0px"
+        }
+      },
+      [_c("h4", { staticClass: "mb-1" }, [_vm._v("Followed channels")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-37f8dc79", module.exports)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
 });
 
@@ -124734,11 +125485,15 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 <<<<<<< ace432b9c9743b977ef02368cbd80eedbec5aeed
 Component.options.__file = "node_modules\\vue-datepicker\\vue-datepicker.vue"
 =======
 Component.options.__file = "node_modules/vue-datepicker/vue-datepicker.vue"
 >>>>>>> fixed bugs in dashboard.vue
+=======
+Component.options.__file = "resources/assets/js/components/dashboard.vue"
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 
 /* hot reload */
 if (false) {(function () {
@@ -124747,6 +125502,7 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 <<<<<<< ace432b9c9743b977ef02368cbd80eedbec5aeed
     hotAPI.createRecord("data-v-2537a1f8", Component.options)
   } else {
@@ -124756,6 +125512,11 @@ if (false) {(function () {
   } else {
     hotAPI.reload("data-v-3faef998", Component.options)
 >>>>>>> fixed bugs in dashboard.vue
+=======
+    hotAPI.createRecord("data-v-2073dee6", Component.options)
+  } else {
+    hotAPI.reload("data-v-2073dee6", Component.options)
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -128452,6 +129213,7 @@ var content = __webpack_require__(322);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
+<<<<<<< 6c9833e501c0af1e2c9a829cf7ab58db6f08c4de
 <<<<<<< 0497835bf8a69319580b941fc2c80e993537740b
 <<<<<<< ace432b9c9743b977ef02368cbd80eedbec5aeed
 var update = __webpack_require__(9)("22047796", content, false, {});
@@ -128461,6 +129223,9 @@ var update = __webpack_require__(9)("4b800605", content, false, {});
 =======
 var update = __webpack_require__(9)("4b800605", content, false, {});
 >>>>>>> fixed rebase issues
+=======
+var update = __webpack_require__(10)("4b800605", content, false, {});
+>>>>>>> fixed authenication in follow/unfollow function, subcribe/ubsubscribe is now working, no payment yet
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
