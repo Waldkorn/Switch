@@ -30,9 +30,8 @@ Route::get('/profilepage/{username}',"ViewController@profile");
 // Dashboards //
 ////////////////
 
+
 Route::get('/dashboard',"ViewController@dashboard");
-
-
 
 
 //////////////////
