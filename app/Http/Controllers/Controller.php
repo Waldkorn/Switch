@@ -19,7 +19,9 @@ class Controller extends BaseController
     //shows events from followed users that start within the next hour
     public function upcoming(){
       $user = Auth::user();
-      $followings_ids = $user->followings()->pluck('streamer_id');
+      $followings = $user->followings()->get();
+
+      $followings_ids = $followings->pluck('id');
       $games = Game::get();
       $streams= Schedule::
       whereIn('user_id', $followings_ids)
@@ -42,6 +44,8 @@ class Controller extends BaseController
             })
       ->get();
   foreach($streams as $stream){
+    $streamer_name = $followings->firstWhere('id', $stream->user_id)->name;
+    $stream->streamer = $streamer_name;
     if($stream->type != 'single'){
       $today = Carbon::now('Europe/Amsterdam')->toDateString();
       $start = $today." ".$stream->start_time;

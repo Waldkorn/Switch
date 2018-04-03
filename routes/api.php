@@ -29,7 +29,7 @@ Route::get('/allgames', 'API\GamesController@getall');
 Route::get('/listusers', "API\FrontpageController@listusers")->middleware('auth:api');
 Route::get('/followings', 'API\FrontpageController@getFollowings')->middleware('auth:api');
 Route::get('/listusersunauthenticated', "API\FrontpageController@listusers");
-
+Route::get('/upcomingstreams','API\FrontpageController@upcomingstreams')->middleware('auth:api');
 
 ///////////////////
 // Stream Routes //
