@@ -4,7 +4,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>Switch</title>
-	
+
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<style>
 	body {
@@ -47,6 +47,19 @@
 hr {
 	border-color:#dc3545;
 }
+.scheduledaily{
+
+
+}
+.scheduleweekly{
+background-color: #343a40;
+
+}
+.schedulesingle{
+background-color: rgb(23, 162, 184);
+
+
+}
 	</style>
 </head>
 <body>
@@ -63,7 +76,7 @@ hr {
 					<nowlivebar></nowlivebar>
 				@endif
 			</div>
-			@if (Auth::check()) 
+			@if (Auth::check())
 				<frontpagemain :user="{{ Auth::user() }}"></frontpagemain>
 			@else
 				<frontpagemain></frontpagemain>

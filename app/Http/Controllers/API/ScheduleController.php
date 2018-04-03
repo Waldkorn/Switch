@@ -36,11 +36,7 @@ class ScheduleController extends Controller
 
     //looping through all single stream objects to include the game name and add the individual ojects to the allstreams array.
     foreach ($singlestreams as $singlestream) {
-      $gameobjs = $games->where('id',$singlestream->game_id)->pluck('name');
-      $game_name = '';
-      foreach($gameobjs as $gameobj){
-        $game_name = $gameobj;
-      }
+      $gameobjs = $games->where('id',$singlestream->game_id)->pluck('name')->first();
       $singlestream->game = $game_name;
       $allstreams[] = $singlestream;
     };

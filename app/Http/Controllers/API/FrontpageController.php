@@ -93,13 +93,20 @@ class FrontpageController extends Controller
     foreach($streams as $stream){
       $streamer_name = $followings->firstWhere('id', $stream->user_id)->name;
       $stream->streamer = $streamer_name;
+      $gamename = $games->where('id',$stream->game_id)->pluck('name')->first();
+      $stream->game_name = $gamename;
+      $stream->class = "schedule".$stream->type;
         if($stream->type != 'single'){
           $today = Carbon::now('Europe/Amsterdam')->toDateString();
           $start = $today." ".$stream->start_time;
           $end = $today." ".$stream->end_time;
           $stream->start_date = $start;
           $stream->end_date = $end;
+        }else{
+          $stream->start_time = substr($stream->start_date, -8);
+          $stream->end_time = substr($stream->end_date, -8);
         }
+        $stream->starts_in =  Carbon::now('Europe/Amsterdam')->diffInMinutes($stream->start_date)." min";
     };
 
     return $streams;

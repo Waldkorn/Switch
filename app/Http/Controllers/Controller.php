@@ -46,6 +46,8 @@ class Controller extends BaseController
   foreach($streams as $stream){
     $streamer_name = $followings->firstWhere('id', $stream->user_id)->name;
     $stream->streamer = $streamer_name;
+    $gamename = $games->where('id',$stream->game_id)->pluck('name');
+    $stream->game_name = $gamename;
     if($stream->type != 'single'){
       $today = Carbon::now('Europe/Amsterdam')->toDateString();
       $start = $today." ".$stream->start_time;
