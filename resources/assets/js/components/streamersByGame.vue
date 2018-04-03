@@ -1,7 +1,7 @@
 <template>
-  <div class="col-md-10 d-flex flex-wrap px-5" style="padding-right:0;">
+  <div class="col-md-10 d-flex flex-wrap px-5" style="padding-right:0;" id="games-main">
     <div class="p-1" style="padding:0;margin:0;float:right;" v-for="streamer in streamers">
-      <div class="card" style="width: 175px;height:100%;">
+      <div class="card" style="width: 175px; height:100%;">
         <a v-bind:href="'/' + streamer.user.name">
           <img class="card-img-top" :src="streamer.user.profilecontent.img_url" :alt="streamer.name" height="150" width="150">
         </a>
@@ -25,7 +25,6 @@
     props: ['game', 'streamers'],
     data:function(){
       return{
-        imageLink : "/images/drdisrespect.jpeg",
         sortable : []
       }
     },
@@ -43,8 +42,15 @@
       }
 
       this.streamers = this.sortable.sort(compare).reverse();
-      console.log(this.streamers);
 
     }
   }
 </script>
+
+<style>
+
+  #games-main {
+    max-height: 1px;
+  }
+
+</style>
