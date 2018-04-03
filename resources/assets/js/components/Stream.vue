@@ -6,7 +6,7 @@
 			<div class="card-header">
 			    <ul class="nav nav-tabs card-header-tabs">
 			        <li class="nav-item px-1" v-on:click="showstream" v-bind:class="{ 'bg-dark': darkmode }">
-			        	<a class="nav-link active" href="#" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">{{ streamer.name}}</a>
+			        	<a class="nav-link active" href="#" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">Stream <small style="color:#dc3545;" v-if="streamer.now_live">live</small></a>
 			        </li>
 			    	<li class="nav-item px-1" v-on:click="showviewers" v-bind:class="{ 'bg-dark': darkmode }">
 			        	<a class="nav-link active" href="#" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">viewers <small class="text-muted">{{ viewers.length }}</small></a>
@@ -20,17 +20,30 @@
 			    </ul>
 			</div>
 			<div v-show="watchstream">
-				<div class="card-body" v-if="streamer.now_live">
-				 	<video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
-				    	<source :src="'http://10.0.0.61:8080/hls/' + streamer.stream_token + '.m3u8'" type='application/x-mpegURL'>
-					    <p class="vjs-no-js">
-					    	To view this video please enable JavaScript, and consider upgrading to a web browser that
-					    	<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-					    </p>
-					</video>
-				</div>
-				<div class="card-body" style="text-align:center" v-else>
-				 	<img src="/images/offline.png" alt="streamer offline" style="width:85%">
+				<div class="card">
+					<div class="row container-fluid pl-3">
+						<a :href="'/profilepage/' + streamer.name" class="m-2">
+							<img :src="streamer.profilecontent.img_url" width="75px">
+						</a>
+						<div>
+							<h2 class="card-title pt-2 pl-2 pb-0 mb-0">{{ streamer.stream.title }}</h2>
+							<a :href="'/profilepage/' + streamer.name" class="px-2">{{ streamer.name }}</a>
+						</div>
+					</div>
+					<div class="card-body">
+						<div v-if="streamer.now_live">
+						 	<video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
+						    	<source :src="'http://10.0.0.61:8080/hls/' + streamer.stream_token + '.m3u8'" type='application/x-mpegURL'>
+							    <p class="vjs-no-js">
+							    	To view this video please enable JavaScript, and consider upgrading to a web browser that
+							    	<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+							    </p>
+							</video>
+						</div>
+						<div style="text-align:center" v-else>
+						 	<img src="/images/offline.png" alt="streamer offline" style="width:85%">
+						</div>
+					</div>
 				</div>
 			</div>
 			<div v-show="watchviewers">

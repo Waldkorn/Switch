@@ -62,7 +62,7 @@ class ViewController extends Controller
 
   public function stream($username)
   {
-  	$streamer = User::where('name', $username)->with('stream.game')->first();
+  	$streamer = User::where('name', $username)->with('stream.game', 'profilecontent')->first();
   	$followers = $streamer->followers()->get();
     return view('streampage', compact('streamer', 'followers'));
   }
