@@ -1,9 +1,9 @@
 <template>
   <div class="col-md-10 d-flex flex-wrap px-5" style="padding-right:0;">
     <div class="p-1" style="padding:0;margin:0;float:right;" v-for="streamer in streamers">
-      <div class="card" style="width: 175px;">
+      <div class="card" style="width: 175px;height:100%;">
         <a v-bind:href="'/' + streamer.user.name">
-          <img class="card-img-top" :src="imageLink" :alt="streamer.name" height="150" width="150">
+          <img class="card-img-top" :src="streamer.user.profilecontent.img_url" :alt="streamer.name" height="150" width="150">
         </a>
 
         <div class="card-body">
@@ -43,6 +43,7 @@
       }
 
       this.streamers = this.sortable.sort(compare).reverse();
+      console.log(this.streamers);
 
     }
   }

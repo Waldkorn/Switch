@@ -7,14 +7,19 @@
 	
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #c6c8ca;">
 
   @include('layouts.navbar')
 
 	<div id="app">
 		<div class="row" style="width:100%;margin:0">
 			<div class="col-md-2">
-				<nowlivebar></nowlivebar>
+				@if (Auth::check())
+					<Followings></Followings>
+					<nowlivebar :user="{{ Auth::user() }}"></nowlivebar>
+				@else
+					<nowlivebar></nowlivebar>
+				@endif
 			</div>
 			<streams :game="{{json_encode($game)}}" :streamers="{{json_encode($streamers)}}"></streams>
 		</div>

@@ -74,7 +74,7 @@ class ViewController extends Controller
     $streamers = $game
     ->streams()
     ->with(['user' => function($user) {
-      $user->withCount('followers')->orderBy('followers_count');
+      $user->with('profilecontent')->withCount('followers')->orderBy('followers_count');
     }])
     ->get();
 
