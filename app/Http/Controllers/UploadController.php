@@ -36,18 +36,18 @@ class UploadController extends Controller
 
       $this->validate(request(), [
 
-      'title' => 'required',
-      'message' => 'required'
+        'title' => 'required',
+        'message' => 'required'
 
-    ]);
+      ]);
 
-    $announcement = Announcement::create([
+      $announcement = Announcement::create([
 
-      'user_id' => $user->id,
-      'title' => request('title'),
-      'message' => request('message')
+        'user_id' => $user->id,
+        'title' => request('title'),
+        'message' => request('message')
 
-    ]);
+      ]);
 
     return back();
       
