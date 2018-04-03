@@ -42,6 +42,7 @@
       }
 
       this.streamers = this.sortable.sort(compare).reverse();
+      console.log(this.streamers);
 
     }
   }
