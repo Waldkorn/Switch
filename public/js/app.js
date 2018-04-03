@@ -119742,13 +119742,7 @@ var render = function() {
                                 staticClass: "btn btn-info btn-lg",
                                 on: { click: _vm.togglesubscribe }
                               },
-                              [
-                                _vm._v(
-                                  " Want to subscribe to " +
-                                    _vm._s(_vm.user.name) +
-                                    "?"
-                                )
-                              ]
+                              [_vm._v("Subscribe")]
                             ),
                             _vm._v(" "),
                             _c(
@@ -126234,6 +126228,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(332)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(326)
@@ -126242,7 +126240,7 @@ var __vue_template__ = __webpack_require__(327)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -126309,7 +126307,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['game', 'streamers'],
   data: function data() {
     return {
-      imageLink: "/images/drdisrespect.jpeg",
       sortable: []
     };
   },
@@ -126325,7 +126322,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
 
     this.streamers = this.sortable.sort(compare).reverse();
-    console.log(this.streamers);
   }
 });
 
@@ -126341,7 +126337,8 @@ var render = function() {
     "div",
     {
       staticClass: "col-md-10 d-flex flex-wrap px-5",
-      staticStyle: { "padding-right": "0" }
+      staticStyle: { "padding-right": "0" },
+      attrs: { id: "games-main" }
     },
     _vm._l(_vm.streamers, function(streamer) {
       return _c(
@@ -126414,6 +126411,49 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(333);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("35bfb42a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-055ece30\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./streamersByGame.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-055ece30\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./streamersByGame.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 333 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#games-main {\n  max-height: 1px;\n}\n\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
