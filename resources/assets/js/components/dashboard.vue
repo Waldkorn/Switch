@@ -265,9 +265,26 @@
                 </div>
               </div>
 
+<<<<<<< HEAD
                 <div class="form-group">
                   <label for="scheduletag">tag</label>
                   <input type="text" class="form-control" id="scheduletag" placeholder="idk">
+=======
+              <button type="submit" class="btn btn-danger float-right">Submit</button>
+
+            </form>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
+
+            <div class="card mb-2" v-for="announcement in announcements">
+              <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
+                <div class="card-title">
+                  <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
+>>>>>>> schedules on dashboard improved
                 </div>
                 <div class="form-group">
                   <label for="schedulegame">Game:</label>
@@ -287,6 +304,11 @@
                 <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
               </form>
               </div>
+<<<<<<< HEAD
+=======
+            </div>
+
+>>>>>>> schedules on dashboard improved
           </div>
             </div>
           </div>
@@ -297,36 +319,89 @@
           <div class="col-7" style="padding:0px;padding-left:1rem">
             <div class="card">
             <div class="card-header">
-              <h5 class="card-title">scheduled streams</h5>
+
             </div>
             <div class="card-body" style="padding:0px">
-
+                <h5 class="card-title">Single streams</h5>
               <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
-  <thead>
-    <tr style="color:#dc3545">
-      <th scope="col">type</th>
-      <th scope="col">name</th>
-      <th scope="col">start</th>
-      <th scope="col">end</th>
-      <th scope="col">game</th>
-      <th scope="col">tag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="schedule in schedules">
-      <th scope="row">{{schedule.type}}</th>
-      <td>{{schedule.title}}</td>
-      <td>{{schedule.start_date}}</td>
-      <td>{{schedule.end_date}}</td>
-      <td>{{schedule.game}}</td>
-      <td>{{schedule.tag}}</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td></td>
-    </tr>
-
-  </tbody>
-</table>
+                <thead>
+                  <tr style="color:#dc3545">
+                    <th scope="col">type</th>
+                    <th scope="col">name</th>
+                    <th scope="col">start</th>
+                    <th scope="col">end</th>
+                    <th scope="col">game</th>
+                    <th scope="col">tag</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="singlestream in singlestreams">
+                    <th scope="row">{{singlestream.type}}</th>
+                    <td>{{singlestream.title}}</td>
+                    <td>{{singlestream.start_date}}</td>
+                    <td>{{singlestream.end_date}}</td>
+                    <td>{{singlestream.game}}</td>
+                    <td>{{singlestream.tag}}</td>
+                    <td><div class="btn btn-info">edit</div></td>
+                    <td><div class="btn btn-danger">delete</div></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                  <h5 class="card-title">Daily streams</h5>
+              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
+                <thead>
+                  <tr style="color:#dc3545">
+                    <th scope="col">type</th>
+                    <th scope="col">name</th>
+                    <th scope="col">start</th>
+                    <th scope="col">end</th>
+                    <th scope="col">game</th>
+                    <th scope="col">tag</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="dailystream in dailystreams">
+                    <th scope="row">{{dailystream.type}}</th>
+                    <td>{{dailystream.title}}</td>
+                    <td>{{dailystream.start_time}}</td>
+                    <td>{{dailystream.end_time}}</td>
+                    <td>{{dailystream.game}}</td>
+                    <td>{{dailystream.tag}}</td>
+                    <td><div class="btn btn-info">edit</div></td>
+                    <td><div class="btn btn-danger">delete</div></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+                  <h5 class="card-title">Weekly streams</h5>
+              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
+                <thead>
+                  <tr style="color:#dc3545">
+                    <th scope="col">type</th>
+                    <th scope="col">name</th>
+                    <th scope="col">day</th>
+                    <th scope="col">start</th>
+                    <th scope="col">end</th>
+                    <th scope="col">game</th>
+                    <th scope="col">tag</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="weeklystream in weeklystreams">
+                    <th scope="row">{{weeklystream.type}}</th>
+                    <td>{{weeklystream.title}}</td>
+                      <td>{{weeklystream.day}}</td>
+                    <td>{{weeklystream.start_time}}</td>
+                    <td>{{weeklystream.end_time}}</td>
+                    <td>{{weeklystream.game}}</td>
+                    <td>{{weeklystream.tag}}</td>
+                    <td><div class="btn btn-info">edit</div></td>
+                    <td><div class="btn btn-danger">delete</div></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
         </div>
         </div>
@@ -464,6 +539,9 @@ export default {
       return{
           profilecontent : [],
           schedules : [],
+          dailystreams : [],
+          weeklystreams: [],
+          singlestreams : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
           streamdash: true,
@@ -473,13 +551,15 @@ export default {
 <<<<<<< HEAD
 =======
           announcementsdash: false,
+<<<<<<< HEAD
           currentdate: null
 >>>>>>> solved merge conflicts
+=======
+
+>>>>>>> schedules on dashboard improved
       }
     },
-    components: {
-    'date-picker': myDatepicker
-    },
+
     props: ['user'],
     mounted() {
 <<<<<<< HEAD
@@ -496,10 +576,12 @@ export default {
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
       });
-      var scheduleurl = '/api/schedule/'+this.user.name;
-      axios.get(scheduleurl).then(response => {
-        this.schedules= JSON.parse(JSON.stringify(response.data));
-        console.log(this.schedules);
+        axios.get('/api/scheduleoverview').then(response => {
+        this.allschedules= JSON.parse(JSON.stringify(response.data));
+        console.log(this.allschedules.filter(x => x.type == 'daily'));
+        this.dailystreams = this.allschedules.filter(x => x.type == 'daily');
+        this.weeklystreams = this.allschedules.filter(x => x.type == 'weekly');
+        this.singlestreams = this.allschedules.filter(x => x.type == 'single');
       });
     },
     methods: {

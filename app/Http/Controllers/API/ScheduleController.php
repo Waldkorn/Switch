@@ -36,7 +36,7 @@ class ScheduleController extends Controller
 
     //looping through all single stream objects to include the game name and add the individual ojects to the allstreams array.
     foreach ($singlestreams as $singlestream) {
-      $gameobjs = $games->where('id',$singlestream->game_id)->pluck('name')->first();
+      $game_name = $games->where('id',$singlestream->game_id)->pluck('name')->first();
       $singlestream->game = $game_name;
       $allstreams[] = $singlestream;
     };
@@ -86,7 +86,27 @@ class ScheduleController extends Controller
 
    return $allstreams;
   }
+//shows an overview of the single, daily and weekly streams
+public function scheduleOverview(){
 
+
+      $user = Auth::user();
+      $games = Game::get();
+      $streams= Schedule::
+      where('user_id',$user->id)
+      ->orWhere('start_date', '>=', Carbon::now('Europe/Amsterdam'))
+      ->orWhere('type','daily')
+      ->orWhere('type','weekly')
+      ->get();
+      foreach ($streams as $stream) {
+        $game_name = $games->where('id',$stream->game_id)->pluck('name')->first();
+        $stream->game = $game_name;
+      };
+
+    return $streams;
+
+
+}
 
   //returns the current datetime in a format html can understand, used to limit options in the schedule form
   public function currentdate(){

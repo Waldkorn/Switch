@@ -56,7 +56,7 @@
       })
       axios.get('/api/upcomingstreams').then(response => {
         this.upcomingstreams = JSON.parse(JSON.stringify(response.data));
-        console.log(this.upcomingstreams);
+      
       })
     }
   }
