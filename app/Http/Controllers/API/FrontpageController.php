@@ -8,6 +8,7 @@ use App\User;
 use App\Game;
 use Auth;
 use Carbon\Carbon;
+use App\Schedule;
 
 class FrontpageController extends Controller
 {
@@ -19,7 +20,7 @@ class FrontpageController extends Controller
     } else {
         $followingsIds = [];
     }
-    
+
     $users = User::whereNotIn('id', $followingsIds)->withCount('followers')->where('last_online', '>=', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10)->get();
     foreach ($users as $user) {
     	$user['streaming'] = true;
@@ -60,4 +61,5 @@ class FrontpageController extends Controller
     return $followings;
 
   }
+
 }

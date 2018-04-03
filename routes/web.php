@@ -12,14 +12,8 @@
 */
 Auth::routes();
 
-<<<<<<< HEAD
-=======
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
-Route::post('/uploadimage','UploadController@updateimage');
 Route::post('/announcements/post', 'UploadController@create');
 
->>>>>>> users can now post announcements
 Route::get('/',"ViewController@frontpage");
 Route::get('/game/{gamename}', 'ViewController@game');
 Route::get('/profilepage/{username}',"ViewController@profile");
@@ -31,12 +25,6 @@ Route::get('/profilepage/{username}',"ViewController@profile");
 Route::get('/dashboard',"ViewController@dashboard");
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> solved merge conflicts
 //////////////////
 // Image upload //
 //////////////////
@@ -53,9 +41,7 @@ Route::get('/streaminglive/{streamtoken}', 'ViewController@streamingLive');
 
 Route::get('/profilepage/{username}', 'ViewController@profile');
 
-Route::get('/dashboard',"ViewController@dashboard");
-
-Route::get('/test', 'ViewController@test');
+Route::get('/test', 'Controller@upcoming');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/{username}', 'ViewController@stream');
