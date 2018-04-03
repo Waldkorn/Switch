@@ -41,7 +41,6 @@ Route::post('/uploadimage','UploadController@updateimage');
 
 Route::get('/test',"ViewController@test");
 
-
 Route::get('/streaminglive/{streamtoken}', 'ViewController@streamingLive');
 
 Route::get('/profilepage/{username}', 'ViewController@profile');

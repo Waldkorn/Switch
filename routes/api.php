@@ -88,3 +88,11 @@ Route::get('/personalannouncements', 'API\AnnouncementController@read')->middlew
 Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
+
+
+////////////////////
+// Comment routes //
+////////////////////
+
+Route::get('comments/{announcement}', 'API\CommentController@read');
+Route::post('/comment/{announcement}/create', 'API\CommentController@create')->middleware('auth:api');
