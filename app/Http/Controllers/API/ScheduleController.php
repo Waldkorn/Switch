@@ -90,6 +90,8 @@ class ScheduleController extends Controller
 
    return $allstreams;
   }
+
+
   //returns the current datetime in a format html can understand, used to limit options in the schedule form
   public function currentdate(){
     $now = Carbon::now();

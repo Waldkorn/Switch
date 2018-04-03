@@ -29,6 +29,7 @@ Route::get('/listusers', "API\FrontpageController@listusers")->middleware('auth:
 Route::get('/followings', 'API\FrontpageController@getFollowings')->middleware('auth:api');
 Route::get('/listusersunauthenticated', "API\FrontpageController@listusers");
 
+
 ///////////////////
 // Stream Routes //
 ///////////////////
