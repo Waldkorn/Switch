@@ -22,7 +22,7 @@
       <div class="container-fluid" v-if="loggedin == 1">
         <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
           <div  class="container-fluid" v-if="issubscribed == 0">
-          <div class="btn btn-info btn-lg" v-on:click="togglesubscribe"> Want to subscribe to {{user.name}}?</div>
+          <div class="btn btn-info btn-lg" v-on:click="togglesubscribe">Subscribe</div>
           <div  id="subscribe_btn" :value="user.id" style="display:none"  >
             <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
               <input type="hidden" name="cmd" value="_s-xclick">
