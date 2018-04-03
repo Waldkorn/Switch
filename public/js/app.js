@@ -118007,7 +118007,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     });
     axios.get('/api/upcomingstreams').then(function (response) {
       _this.upcomingstreams = JSON.parse(JSON.stringify(response.data));
-      console.log(_this.upcomingstreams);
     });
   }
 });
@@ -119438,6 +119437,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -119445,6 +119497,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       profilecontent: [],
       schedules: [],
+      dailystreams: [],
+      weeklystreams: [],
+      singlestreams: [],
       csrftoken: document.head.querySelector('meta[name="csrf-token"]').content,
       games: [],
       announcements: [],
@@ -119453,63 +119508,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       profiledash: false,
       channeldash: false,
       scheduledash: false,
-      announcementsdash: false,
-      startTime: {
-        time: ''
-      },
-      endtime: {
-        time: ''
-      },
-      option: {
-        type: 'day',
-        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: 'YYYY-MM-DD',
-        placeholder: 'when?',
-        inputStyle: {
-          'display': 'inline-block',
-          'padding': '6px',
-          'line-height': '22px',
-          'font-size': '16px',
-          'border': '2px solid #fff',
-          'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
-          'border-radius': '2px',
-          'color': '#5F5F5F'
-        },
-        color: {
-          header: '#ccc',
-          headerText: '#f00'
-        },
-        buttons: {
-          ok: 'Ok',
-          cancel: 'Cancel'
-        },
-        overlayOpacity: 0.5, // 0.5 as default
-        dismissible: true // as true as default
-      },
-      timeoption: {
-        type: 'min',
-        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: 'YYYY-MM-DD HH:mm'
-      },
-      multiOption: {
-        type: 'multi-day',
-        week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-        inputName: 'schedule_time',
-        month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        format: "YYYY-MM-DD HH:mm"
-      },
-      limit: [{
-        type: 'fromto',
-        from: '',
-        to: ''
-      }]
+      announcementsdash: false
+
     };
   },
-  components: {
-    'date-picker': __WEBPACK_IMPORTED_MODULE_0_vue_datepicker___default.a
-  },
+
   props: ['user'],
   mounted: function mounted() {
     var _this = this;
@@ -119524,10 +119527,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get('/api/currentdate').then(function (response) {
       _this.currentdate = JSON.parse(JSON.stringify(response.data));
     });
-    var scheduleurl = '/api/schedule/' + this.user.name;
-    axios.get(scheduleurl).then(function (response) {
-      _this.schedules = JSON.parse(JSON.stringify(response.data));
-      console.log(_this.schedules);
+    axios.get('/api/scheduleoverview').then(function (response) {
+      _this.allschedules = JSON.parse(JSON.stringify(response.data));
+      console.log(_this.allschedules.filter(function (x) {
+        return x.type == 'daily';
+      }));
+      _this.dailystreams = _this.allschedules.filter(function (x) {
+        return x.type == 'daily';
+      });
+      _this.weeklystreams = _this.allschedules.filter(function (x) {
+        return x.type == 'weekly';
+      });
+      _this.singlestreams = _this.allschedules.filter(function (x) {
+        return x.type == 'single';
+      });
     });
   },
 
@@ -121859,7 +121872,7 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "card" }, [
-                      _vm._m(8),
+                      _c("div", { staticClass: "card-header" }),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -121868,6 +121881,10 @@ var render = function() {
                           staticStyle: { padding: "0px" }
                         },
                         [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Single streams")
+                          ]),
+                          _vm._v(" "),
                           _c(
                             "table",
                             {
@@ -121878,33 +121895,155 @@ var render = function() {
                               }
                             },
                             [
-                              _vm._m(9),
+                              _vm._m(8),
                               _vm._v(" "),
                               _c(
                                 "tbody",
-                                _vm._l(_vm.schedules, function(schedule) {
+                                _vm._l(_vm.singlestreams, function(
+                                  singlestream
+                                ) {
                                   return _c("tr", [
                                     _c("th", { attrs: { scope: "row" } }, [
-                                      _vm._v(_vm._s(schedule.type))
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(schedule.title))]),
-                                    _vm._v(" "),
-                                    _c("td", [
-                                      _vm._v(_vm._s(schedule.start_date))
+                                      _vm._v(_vm._s(singlestream.type))
                                     ]),
                                     _vm._v(" "),
                                     _c("td", [
-                                      _vm._v(_vm._s(schedule.end_date))
+                                      _vm._v(_vm._s(singlestream.title))
                                     ]),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(schedule.game))]),
+                                    _c("td", [
+                                      _vm._v(_vm._s(singlestream.start_date))
+                                    ]),
                                     _vm._v(" "),
-                                    _c("td", [_vm._v(_vm._s(schedule.tag))]),
+                                    _c("td", [
+                                      _vm._v(_vm._s(singlestream.end_date))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(singlestream.game))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(singlestream.tag))
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(9, true),
                                     _vm._v(" "),
                                     _vm._m(10, true),
                                     _vm._v(" "),
-                                    _vm._m(11, true),
+                                    _c("td")
+                                  ])
+                                })
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Daily streams")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "table",
+                            {
+                              staticClass: "table table-striped table-dark",
+                              staticStyle: {
+                                margin: "0px",
+                                "background-color": "#343a40"
+                              }
+                            },
+                            [
+                              _vm._m(11),
+                              _vm._v(" "),
+                              _c(
+                                "tbody",
+                                _vm._l(_vm.dailystreams, function(dailystream) {
+                                  return _c("tr", [
+                                    _c("th", { attrs: { scope: "row" } }, [
+                                      _vm._v(_vm._s(dailystream.type))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(dailystream.title))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(dailystream.start_time))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(dailystream.end_time))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(dailystream.game))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(_vm._s(dailystream.tag))]),
+                                    _vm._v(" "),
+                                    _vm._m(12, true),
+                                    _vm._v(" "),
+                                    _vm._m(13, true),
+                                    _vm._v(" "),
+                                    _c("td")
+                                  ])
+                                })
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v("Weekly streams")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "table",
+                            {
+                              staticClass: "table table-striped table-dark",
+                              staticStyle: {
+                                margin: "0px",
+                                "background-color": "#343a40"
+                              }
+                            },
+                            [
+                              _vm._m(14),
+                              _vm._v(" "),
+                              _c(
+                                "tbody",
+                                _vm._l(_vm.weeklystreams, function(
+                                  weeklystream
+                                ) {
+                                  return _c("tr", [
+                                    _c("th", { attrs: { scope: "row" } }, [
+                                      _vm._v(_vm._s(weeklystream.type))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(weeklystream.title))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(weeklystream.day))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(weeklystream.start_time))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(weeklystream.end_time))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(weeklystream.game))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(weeklystream.tag))
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._m(15, true),
+                                    _vm._v(" "),
+                                    _vm._m(16, true),
                                     _vm._v(" "),
                                     _c("td")
                                   ])
@@ -121923,7 +122062,7 @@ var render = function() {
                   { staticClass: "col-5", staticStyle: { padding: "0px" } },
                   [
                     _c("div", { staticClass: "card" }, [
-                      _vm._m(12),
+                      _vm._m(17),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c(
@@ -121987,7 +122126,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(13),
+                              _vm._m(18),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-row" }, [
                                 _c("div", { staticClass: "col" }, [
@@ -122017,7 +122156,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _vm._m(14),
+                              _vm._m(19),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "single_game" } }, [
@@ -122075,11 +122214,11 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(15),
+                              _vm._m(20),
                               _vm._v(" "),
-                              _vm._m(16),
+                              _vm._m(21),
                               _vm._v(" "),
-                              _vm._m(17),
+                              _vm._m(22),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "daily_game" } }, [
@@ -122137,13 +122276,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(18),
+                              _vm._m(23),
                               _vm._v(" "),
-                              _vm._m(19),
+                              _vm._m(24),
                               _vm._v(" "),
-                              _vm._m(20),
+                              _vm._m(25),
                               _vm._v(" "),
-                              _vm._m(21),
+                              _vm._m(26),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "weekly_game" } }, [
@@ -122349,8 +122488,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title" }, [_vm._v("scheduled streams")])
+    return _c("thead", [
+      _c("tr", { staticStyle: { color: "#dc3545" } }, [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
     ])
   },
   function() {
@@ -122362,6 +122529,44 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("end")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("game")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticStyle: { color: "#dc3545" } }, [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("day")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("start")]),
         _vm._v(" "),
