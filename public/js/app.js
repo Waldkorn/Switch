@@ -119490,13 +119490,117 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       profilecontent: [],
-      schedules: [],
+      allschedules: [],
       dailystreams: [],
       weeklystreams: [],
       singlestreams: [],
@@ -119529,9 +119633,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     });
     axios.get('/api/scheduleoverview').then(function (response) {
       _this.allschedules = JSON.parse(JSON.stringify(response.data));
-      console.log(_this.allschedules.filter(function (x) {
-        return x.type == 'daily';
-      }));
+
       _this.dailystreams = _this.allschedules.filter(function (x) {
         return x.type == 'daily';
       });
@@ -119644,6 +119746,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         document.getElementById('schedule_form_single').style.display = "none";
         document.getElementById('schedule_form_weekly').style.display = "none";
         document.getElementById('schedule_form_daily').style.display = "none";
+      });
+    },
+    editsingle: function editsingle(id, value) {
+      this.editsingle = this.allschedules.filter(function (x) {
+        return x.id == id;
+      });
+    },
+    editdaily: function editdaily(id, value) {
+      this.editdailytemp = JSON.parse(JSON.stringify(this.allschedules.filter(function (x) {
+        return x.id == id;
+      })));
+      document.getElementById('editdailyschedule').style.display = "block";
+      document.getElementById('editdaily_title').value = this.editdailytemp[0].title;
+      document.getElementById('editdaily_start_time').value = this.editdailytemp[0].start_time;
+      document.getElementById('editdaily_end_time').value = this.editdailytemp[0].end_time;
+      document.getElementById('editdaily_game').value = this.editdailytemp[0].game;
+      document.getElementById('editdaily_tag').value = this.editdailytemp[0].tag;
+    },
+    editweekly: function editweekly(id, value) {
+      this.editweekly = this.allschedules.filter(function (x) {
+        return x.id == id;
       });
     },
     showstreamdash: function showstreamdash() {
@@ -121927,9 +122050,31 @@ var render = function() {
                                       _vm._v(_vm._s(singlestream.tag))
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(9, true),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "btn btn-info",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editsingle(singlestream.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("edit")]
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _vm._m(10, true),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          attrs: { id: singlestream.id }
+                                        },
+                                        [_vm._v("delete")]
+                                      )
+                                    ]),
                                     _vm._v(" "),
                                     _c("td")
                                   ])
@@ -121952,7 +122097,7 @@ var render = function() {
                               }
                             },
                             [
-                              _vm._m(11),
+                              _vm._m(9),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -121980,9 +122125,26 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("td", [_vm._v(_vm._s(dailystream.tag))]),
                                     _vm._v(" "),
-                                    _vm._m(12, true),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "btn btn-info",
+                                          attrs: { id: dailystream.id },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editdaily(
+                                                dailystream.id,
+                                                this
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("edit")]
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _vm._m(13, true),
+                                    _vm._m(10, true),
                                     _vm._v(" "),
                                     _c("td")
                                   ])
@@ -122005,7 +122167,7 @@ var render = function() {
                               }
                             },
                             [
-                              _vm._m(14),
+                              _vm._m(11),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -122041,9 +122203,27 @@ var render = function() {
                                       _vm._v(_vm._s(weeklystream.tag))
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(15, true),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "btn btn-info",
+                                          attrs: { id: weeklystream.id }
+                                        },
+                                        [_vm._v("edit")]
+                                      )
+                                    ]),
                                     _vm._v(" "),
-                                    _vm._m(16, true),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          attrs: { id: weeklystream.id }
+                                        },
+                                        [_vm._v("delete")]
+                                      )
+                                    ]),
                                     _vm._v(" "),
                                     _c("td")
                                   ])
@@ -122062,7 +122242,7 @@ var render = function() {
                   { staticClass: "col-5", staticStyle: { padding: "0px" } },
                   [
                     _c("div", { staticClass: "card" }, [
-                      _vm._m(17),
+                      _vm._m(12),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c(
@@ -122126,7 +122306,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(18),
+                              _vm._m(13),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-row" }, [
                                 _c("div", { staticClass: "col" }, [
@@ -122156,7 +122336,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _vm._m(19),
+                              _vm._m(14),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "single_game" } }, [
@@ -122214,11 +122394,11 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(20),
+                              _vm._m(15),
                               _vm._v(" "),
-                              _vm._m(21),
+                              _vm._m(16),
                               _vm._v(" "),
-                              _vm._m(22),
+                              _vm._m(17),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "daily_game" } }, [
@@ -122276,13 +122456,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(23),
+                              _vm._m(18),
                               _vm._v(" "),
-                              _vm._m(24),
+                              _vm._m(19),
                               _vm._v(" "),
-                              _vm._m(25),
+                              _vm._m(20),
                               _vm._v(" "),
-                              _vm._m(26),
+                              _vm._m(21),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "weekly_game" } }, [
@@ -122315,6 +122495,174 @@ var render = function() {
                                     "btn btn-danger btn-lg btn-block",
                                   attrs: { id: "submitschedulebtn" },
                                   on: { click: _vm.add_schedule_weekly }
+                                },
+                                [_vm._v("Add event")]
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "container-fluid",
+                            staticStyle: { display: "none" },
+                            attrs: { id: "editdailyschedule" }
+                          },
+                          [
+                            _c("h3", [_vm._v(" Update daily stream ")]),
+                            _vm._v(" "),
+                            _c("form", [
+                              _vm._m(22),
+                              _vm._v(" "),
+                              _vm._m(23),
+                              _vm._v(" "),
+                              _vm._m(24),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c("label", { attrs: { for: "daily_game" } }, [
+                                  _vm._v("Game:")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: "editdaily_game",
+                                      name: "editdaily_game"
+                                    }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-danger btn-lg btn-block",
+                                  attrs: { id: "submiteditdailybtn" }
+                                },
+                                [_vm._v("Add event")]
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "container-fluid",
+                            staticStyle: { display: "none" },
+                            attrs: { id: "editsingleschedule" }
+                          },
+                          [
+                            _c("h3", [_vm._v(" Update single stream ")]),
+                            _vm._v(" "),
+                            _c("form", [
+                              _vm._m(25),
+                              _vm._v(" "),
+                              _vm._m(26),
+                              _vm._v(" "),
+                              _vm._m(27),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  { attrs: { for: "editsingle_game" } },
+                                  [_vm._v("Game:")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: "editsingle_game",
+                                      name: "editsingle_game"
+                                    }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-danger btn-lg btn-block",
+                                  attrs: { id: "submiteditsinglebtn" }
+                                },
+                                [_vm._v("Add event")]
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "container-fluid",
+                            staticStyle: { display: "none" },
+                            attrs: { id: "editweeklyschedule" }
+                          },
+                          [
+                            _c("h3", [_vm._v(" Update weekly stream ")]),
+                            _vm._v(" "),
+                            _c("form", [
+                              _vm._m(28),
+                              _vm._v(" "),
+                              _vm._m(29),
+                              _vm._v(" "),
+                              _vm._m(30),
+                              _vm._v(" "),
+                              _vm._m(31),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  { attrs: { for: "editweekly_game" } },
+                                  [_vm._v("Game:")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      id: "editweekly_game",
+                                      name: "editweekly_game"
+                                    }
+                                  },
+                                  _vm._l(_vm.games, function(game) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: game.id } },
+                                      [_vm._v(_vm._s(game.name))]
+                                    )
+                                  })
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "btn btn-danger btn-lg btn-block",
+                                  attrs: { id: "submiteditweeklybtn" }
                                 },
                                 [_vm._v("Add event")]
                               )
@@ -122508,22 +122856,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", { staticStyle: { color: "#dc3545" } }, [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("type")]),
@@ -122538,14 +122870,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
     ])
   },
   function() {
@@ -122576,22 +122900,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-info" }, [_vm._v("edit")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
     ])
   },
   function() {
@@ -122782,6 +123090,237 @@ var staticRenderFns = [
           type: "text",
           id: "weekly_tag",
           name: "weekly_tag",
+          placeholder: "idk"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "editdaily_title" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "editdaily_title",
+          name: "editdaily_title",
+          placeholder: "Event Name"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("span", [_vm._v("Start：")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "time",
+            name: "editdaily_start_time",
+            id: "editdaily_start_time"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("span", [_vm._v("End：")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "time",
+            name: "editdaily_end_time",
+            id: "editdaily_end_time"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "daily_tag" } }, [_vm._v("tag")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "editdaily_tag",
+          name: "editdaily_tag",
+          placeholder: "idk"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "editsingle_title" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "editsingle_title",
+          name: "editsingle_title",
+          placeholder: "Event Name"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("span", [_vm._v("Start：")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "datetime-local",
+            name: "editsingle_start_date",
+            id: "editsingle_start_date"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("span", [_vm._v("End：")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "datetime-local",
+            name: "editsingle_end_date",
+            id: "editsingle_end_date"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "editsingle_tag" } }, [_vm._v("tag")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "editsingle_tag",
+          name: "editsingle_tag",
+          placeholder: "idk"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "editweekly_title" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "editweekly_title",
+          name: "editweekly_title",
+          placeholder: "Event Name"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "editweekly_day" } }, [_vm._v("Day:")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "form-control",
+          attrs: { id: "editweekly_day", name: "editweekly_day" }
+        },
+        [
+          _c("option", { attrs: { value: "monday" } }, [_vm._v("Monday")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Tuesday" } }, [_vm._v("Tuesday")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Wednesday" } }, [
+            _vm._v("Wednesday")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Thursday" } }, [_vm._v("Thursday")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Friday" } }, [_vm._v("Friday")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Saturday" } }, [_vm._v("Saturday")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Sunday" } }, [_vm._v("Sunday")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("span", [_vm._v("Start：")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "time",
+            name: "editweekly_start_time",
+            id: "editweekly_start_time"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("span", [_vm._v("End：")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "time",
+            name: "editweekly_end_time",
+            id: "editweekly_end_time"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "editweekly_tag" } }, [_vm._v("tag")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "editweekly_tag",
+          name: "editweekly_tag",
           placeholder: "idk"
         }
       })
