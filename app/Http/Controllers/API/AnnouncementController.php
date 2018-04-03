@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
     {
     	$user = Auth::user();
     	$followings = $user->followings()->pluck('streamer_id');
-    	$announcements = Announcement::whereIn('user_id', $followings)->with('user.profilecontent')->Latest()->limit(10)->get();
+    	$announcements = Announcement::whereIn('user_id', $followings)->with('user.profilecontent', 'comments.user')->withCount('comments')->Latest()->limit(10)->get();
     	return $announcements;
     }
 
