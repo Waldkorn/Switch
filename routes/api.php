@@ -42,8 +42,10 @@ Route::post('/stream/alive', 'API\StreamController@keepAlive');
 ////////////////////////
 
 Route::get('/profilepage/{name}', "API\ProfileController@get");
-Route::post('/profilepage/follow', 'API\ProfileController@follow_user');
-Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user');
+Route::post('/profilepage/follow', 'API\ProfileController@follow_user')->middleware('auth:api');
+Route::post('/profilepage/unfollow', 'API\ProfileController@unfollow_user')->middleware('auth:api');
+Route::post('/profilepage/subscribe', 'API\ProfileController@subscribe')->middleware('auth:api');
+Route::post('/profilepage/unsubscribe', 'API\ProfileController@unsubscribe')->middleware('auth:api');
 Route::get('/profilecontent/{username}', 'API\ProfileController@getcontent');
 Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');

@@ -19,6 +19,30 @@
         <div id="follow_unfollow" v-if="loggedin == 0" > Please log in or register to follow {{user.name}}</div>
       </div>
 
+      <div class="container-fluid" v-if="loggedin == 1">
+        <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
+          <div  class="container-fluid" v-if="issubscribed == 0">
+          <div class="btn btn-info btn-lg" v-on:click="togglesubscribe"> Want to subscribe to {{user.name}}?</div>
+          <div  id="subscribe_btn" :value="user.id" style="display:none"  >
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="Z9ASYGPTDUF7J">
+              <input  v-on:click="subscribe" type="image" src="https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </div>
+        </div>
+        <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU" v-on:click="unsubscribe"  v-if="issubscribed == 1">
+	<img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+</a>
+        
+          <div class="alert alert-info" id="subscribemsg" role="alert" style="display:none">You are now subscribed to {{user.name}}</div>
+          <div class="alert alert-danger" id="unsubscribemsg" role="alert" style="display:none"> You are no longer subscribed to {{user.name}}</div>
+        </div>
+        <div id="subscribe_unsubscribe" v-if="loggedin == 0" > Please log in or register to subscribe to {{user.name}}</div>
+
+    </div>
+
       <div class="card-body"><hr>
         <h3 class="card-title"> About: </h3>
         <h5 class="card-text">{{profilecontent.about}}</h5>
@@ -26,7 +50,7 @@
 
       <div class="list-group" id="followerslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
         <p class="list-group-item list-group-item-dark"><strong>Followers:</strong></p>
-        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">     
+        <div class="container-fluid" style="overflow-y:scroll;width:100%;height:100%;padding:0">
           <a v-for="follower in followers" :href="'/profilepage/' + follower.name" class="list-group-item list-group-item-action" > {{follower.name}}</a>
         </div>
       </div>
@@ -44,7 +68,7 @@
 
 <script>
 export default {
-  props: ['profile','loggedin','isfollowing'],
+  props: ['profile','loggedin','isfollowing','issubscribed'],
 
   data:function(){
     return{
@@ -53,6 +77,7 @@ export default {
       followers : [],
       followings : [],
       auth : [],
+      showsubscribeform : [],
     }
   },
 
@@ -78,10 +103,7 @@ export default {
 
     });
 
-    axios.get('/api/user').then(response => {
-    this.auth_user = response.data;
 
-    });
   },
 
   methods: {
@@ -89,7 +111,7 @@ export default {
       console.log(document.getElementById('follow_btn').value);
     axios.post('/api/profilepage/follow', {
        user_id: document.getElementById('follow_btn').value,
-       follower_id: this.auth_user.id
+
      })
      .then(function (response) {
         document.getElementById('follow_btn').style.display = "none";
@@ -101,10 +123,33 @@ export default {
 
       axios.post('/api/profilepage/unfollow', {
       user_id: document.getElementById('unfollow_btn').value,
-      unfollower_id: this.auth_user.id
+
       }).then(function (response) {
         document.getElementById('unfollowmsg').style.display = "block";
         document.getElementById('unfollow_btn').style.display = "none";
+      })
+    },
+    subscribe: function() {
+
+    axios.post('/api/profilepage/subscribe', {
+       user_id: this.user.id,
+
+     })
+     .then(function (response) {
+
+        document.getElementById('subscribe_btn').style.display = "none";
+        document.getElementById('subscribemsg').style.display = "block";
+      })
+  },
+
+    unsubscribe: function() {
+
+      axios.post('/api/profilepage/unsubscribe', {
+      user_id: this.user.id,
+
+      }).then(function (response) {
+        document.getElementById('unsubscribemsg').style.display = "block";
+        document.getElementById('unsubscribe_btn').style.display = "none";
       })
     },
 
@@ -125,6 +170,14 @@ export default {
            x.style.display = "none";
       }
     },
+    togglesubscribe: function() {
+      var x = document.getElementById("subscribe_btn");
+      if (x.style.display === "none") {
+           x.style.display = "block";
+      } else {
+           x.style.display = "none";
+      }
+    }
 
   },
 }
