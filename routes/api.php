@@ -96,5 +96,12 @@ Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->mi
 // Comment routes //
 ////////////////////
 
-Route::get('comments/{announcement}', 'API\CommentController@read');
+Route::get('/comments/{announcement}', 'API\CommentController@read');
 Route::post('/comment/{announcement}/create', 'API\CommentController@create')->middleware('auth:api');
+
+
+//////////////////
+// Dream routes //
+//////////////////
+
+Route::get('/games/all', 'API\GamesController@getall');
