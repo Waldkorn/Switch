@@ -120866,6 +120866,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'stream',
@@ -120935,7 +120948,14 @@ var render = function() {
                     },
                     attrs: { href: "#" }
                   },
-                  [_vm._v(_vm._s(_vm.streamer.name))]
+                  [
+                    _vm._v("Stream "),
+                    _vm.streamer.now_live
+                      ? _c("small", { staticStyle: { color: "#dc3545" } }, [
+                          _vm._v("live")
+                        ])
+                      : _vm._e()
+                  ]
                 )
               ]
             ),
@@ -121023,50 +121043,80 @@ var render = function() {
             ]
           },
           [
-            _vm.streamer.now_live
-              ? _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "video",
-                    {
-                      staticClass: "video-js",
-                      attrs: {
-                        id: "vid1",
-                        controls: "",
-                        preload: "auto",
-                        "data-setup": '{ "aspectRatio": "16:9" }'
-                      }
-                    },
-                    [
-                      _c("source", {
-                        attrs: {
-                          src:
-                            "http://10.0.0.61:8080/hls/" +
-                            _vm.streamer.stream_token +
-                            ".m3u8",
-                          type: "application/x-mpegURL"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ]
-                  )
-                ])
-              : _c(
-                  "div",
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "row container-fluid pl-3" }, [
+                _c(
+                  "a",
                   {
-                    staticClass: "card-body",
-                    staticStyle: { "text-align": "center" }
+                    staticClass: "m-2",
+                    attrs: { href: "/profilepage/" + _vm.streamer.name }
                   },
                   [
                     _c("img", {
-                      staticStyle: { width: "85%" },
                       attrs: {
-                        src: "/images/offline.png",
-                        alt: "streamer offline"
+                        src: _vm.streamer.profilecontent.img_url,
+                        width: "75px"
                       }
                     })
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", [
+                  _c("h2", { staticClass: "card-title pt-2 pl-2 pb-0 mb-0" }, [
+                    _vm._v(_vm._s(_vm.streamer.stream.title))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "px-2",
+                      attrs: { href: "/profilepage/" + _vm.streamer.name }
+                    },
+                    [_vm._v(_vm._s(_vm.streamer.name))]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.streamer.now_live
+                  ? _c("div", [
+                      _c(
+                        "video",
+                        {
+                          staticClass: "video-js",
+                          attrs: {
+                            id: "vid1",
+                            controls: "",
+                            preload: "auto",
+                            "data-setup": '{ "aspectRatio": "16:9" }'
+                          }
+                        },
+                        [
+                          _c("source", {
+                            attrs: {
+                              src:
+                                "http://10.0.0.61:8080/hls/" +
+                                _vm.streamer.stream_token +
+                                ".m3u8",
+                              type: "application/x-mpegURL"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ]
+                      )
+                    ])
+                  : _c("div", { staticStyle: { "text-align": "center" } }, [
+                      _c("img", {
+                        staticStyle: { width: "85%" },
+                        attrs: {
+                          src: "/images/offline.png",
+                          alt: "streamer offline"
+                        }
+                      })
+                    ])
+              ])
+            ])
           ]
         ),
         _vm._v(" "),
@@ -121172,7 +121222,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "vjs-no-js" }, [
       _vm._v(
-        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
+        "\n\t\t\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t\t\t    \t"
       ),
       _c(
         "a",
