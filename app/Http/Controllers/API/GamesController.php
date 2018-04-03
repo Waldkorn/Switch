@@ -12,12 +12,12 @@ class GamesController extends Controller
 {
 
     public function get(){
-	return Game::withCount(['users' => function($user) {
+		return Game::withCount(['users' => function($user) {
     		return $user->where('last_online', '>', Carbon::now()->subMinutes(1));
     	}])->orderBy('users_count', 'DESC')->orderBy('id', 'DESC')->get();
     }
 
     public function getall(){
-      echo Game::get();
+        return Game::get();
     }
 }
