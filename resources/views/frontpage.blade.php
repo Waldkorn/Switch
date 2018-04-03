@@ -9,34 +9,34 @@
 	<style>
 	body {
     background-color: #c6c8ca;
-}
-.navbar-toggler:hover {
-	border: 2px solid #dc3545;
-}
-.navbar-toggler:focus {
-	box-shadow: 0 0 3pt 2pt #dc3545;
-	outline: none;
-	border: none;
-}
-#navbar{
-	padding-right:0;
-	color:#f5f5dc;
-
-}
-
-#navbarToggleExternalContent{
-	margin-top:0.9rem;
-	background-color: #343a40;
-	right:0;left:auto;
-	border:0;
-	border-radius: 0px 0px 0.25rem 0.25rem;
-}
-
-#navbardropdown{
-	background-color: #343a40;
-	color: #f5f5dc;
-	border-top:1px;
 	}
+	.navbar-toggler:hover {
+		border: 2px solid #dc3545;
+	}
+	.navbar-toggler:focus {
+		box-shadow: 0 0 3pt 2pt #dc3545;
+		outline: none;
+		border: none;
+	}
+	#navbar{
+		padding-right:0;
+		color:#f5f5dc;
+
+	}
+
+	#navbarToggleExternalContent{
+		margin-top:0.9rem;
+		background-color: #343a40;
+		right:0;left:auto;
+		border:0;
+		border-radius: 0px 0px 0.25rem 0.25rem;
+	}
+
+	#navbardropdown{
+		background-color: #343a40;
+		color: #f5f5dc;
+		border-top:1px;
+		}
 	#navbardropdown:hover {
 	    text-decoration: underline;
 			background-color: #343a40;
@@ -44,10 +44,15 @@
 			border-top:1px;
 	}
 
-hr {
-	border-color:#dc3545;
-}
+	hr {
+		border-color:#dc3545;
+	}
+
+	#frontpagelink {
+		color: #dc3545;
+	}
 	</style>
+
 </head>
 <body>
 
@@ -66,7 +71,22 @@ hr {
 			@if (Auth::check()) 
 				<frontpagemain :user="{{ Auth::user() }}"></frontpagemain>
 			@else
-				<frontpagemain></frontpagemain>
+				 <div class="col-md-5 pt-1" >
+
+				    <div class="card mb-2">
+				    	<div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
+				    		<div class="card-body">
+				    			<h3 class="card-title">
+				    				Welcome to Switch!
+				    			</h3>
+				    			<hr>
+					    		<div class="card-text">
+					    			Please <a href="/login" id="frontpagelink">login</a> to get the full experience
+					    		</div>
+					    	</div>
+				    	</div>
+				    </div>
+				</div>
 			@endif
 			<games></games>
 		</div>
