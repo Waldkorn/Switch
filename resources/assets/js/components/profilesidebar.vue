@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="container-fluid" id="follow_unfollow" v-if="loggedin == 1" style="text-align:center">
           <button class="btn btn-success btn-lg" id="follow_btn" v-on:click="follow" :value="user.id" v-if="isfollowing == 0">follow</button>
-          <button class="btn btn-danger btn-lg"id="unfollow_btn" v-on:click="unfollow" :value="user.id" v-if="isfollowing == 1">unfollow</button><br>
+          <button class="btn btn-danger btn-lg" id="unfollow_btn" v-on:click="unfollow" :value="user.id" v-if="isfollowing == 1">unfollow</button><br>
           <div class="alert alert-success" id="followmsg" role="alert" style="display:none">You are now following {{user.name}}</div>
           <div class="alert alert-danger" id="unfollowmsg" role="alert" style="display:none"> You are no longer following {{user.name}}</div>
         </div>
@@ -22,7 +22,7 @@
       <div class="container-fluid" v-if="loggedin == 1">
         <div class="container-fluid" id="subscribe_unsubscribe" v-if="loggedin == 1" style="text-align:center">
           <div  class="container-fluid" v-if="issubscribed == 0">
-          <div class="btn btn-info btn-lg" v-on:click="togglesubscribe"> Want to subscribe to {{user.name}}?</div>
+          <div class="btn btn-info btn-lg" v-on:click="togglesubscribe">Subscribe</div>
           <div  id="subscribe_btn" :value="user.id" style="display:none"  >
             <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
               <input type="hidden" name="cmd" value="_s-xclick">
