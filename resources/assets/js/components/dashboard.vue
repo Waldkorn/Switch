@@ -607,21 +607,23 @@ export default {
     data:function(){
       return{
           profilecontent : [],
-          csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
-          games : [],
-          announcements : [],
-          currentdate :[],
           allschedules : [],
           dailystreams : [],
           weeklystreams: [],
           singlestreams : [],
+          csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
+          games : [],
+          announcements : [],
+          currentdate :[],
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
           announcementsdash: false,
-        }
+
+      }
     },
+
     props: ['user'],
     mounted() {
        var contenturl = 'api/profilecontent/'+this.user.name;
@@ -849,15 +851,14 @@ export default {
          document.getElementById('schedulemsg').style.display = "block";
          document.getElementById('schedulemsg').innerHTML = response.data;
          document.getElementById('editweeklyschedule').style.display="none";
-       })
 			},
       showstreamdash: function() {
-				this.streamdash = true;
-				this.profiledash = false;
-				this.channeldash = false;
-        this.scheduledash = false;
+        this.streamdash = true;
+        this.profiledash = false;
+        this.channeldash = false;
         this.announcementsdash = false;
-			},
+        this.scheduledash = false;
+      },
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
@@ -892,4 +893,5 @@ export default {
 
     }
   }
+
 </script>

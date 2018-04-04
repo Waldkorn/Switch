@@ -42,7 +42,7 @@
 						<div class="list-group-item" v-for="viewer in viewers" v-bind:class="{ 'bg-secondary': darkmode, 'border-secondary': darkmode }">
 							<a :href="'/profilepage/' + viewer.name">{{viewer.name}}</a>
 						</div>
-					</div>
+					</div>				
 				</div>
 			</div>
 			<div v-show="watchfollowers">

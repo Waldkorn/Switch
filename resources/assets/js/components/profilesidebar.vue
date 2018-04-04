@@ -35,7 +35,7 @@
         <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU" v-on:click="unsubscribe"  v-if="issubscribed == 1">
 	<img src="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
 </a>
-        
+
           <div class="alert alert-info" id="subscribemsg" role="alert" style="display:none">You are now subscribed to {{user.name}}</div>
           <div class="alert alert-danger" id="unsubscribemsg" role="alert" style="display:none"> You are no longer subscribed to {{user.name}}</div>
         </div>
@@ -85,7 +85,6 @@
           <a v-for="following in followings" :href="'/profilepage/' + following.name" class="list-group-item list-group-item-action" > {{following.name}}</a>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -115,13 +114,11 @@ export default {
     var url = '/api/profilepage/'+this.profile.name;
     axios.get(url).then(response => {
     this.user = JSON.parse(JSON.stringify(response.data));
-
     });
 
     var followersurl = '/api/followers/'+this.profile.name;
     axios.get(followersurl).then(response => {
     this.followers = JSON.parse(JSON.stringify(response.data));
-
     });
 
     var followingsurl = '/api/following/'+this.profile.name;

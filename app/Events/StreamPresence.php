@@ -22,7 +22,8 @@ class StreamPresence implements PresenceChannel
      *
      * @return void
      */
-    public function __construct(User $user, Streamer $streamer)
+
+    public function __construct(User $user)
     {
         $this->user = $user;
         $this->streamer = $streamer;

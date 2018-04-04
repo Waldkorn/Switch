@@ -13,7 +13,7 @@
           <a v-bind:href="'/profilepage/' + streamer.user.name">
             <h6>{{streamer.user.name}}</h6>
           </a>
-          <small class="text-danger" style="position: absolute; bottom:10px;">{{streamer.followers_count}} followers</small>
+          <small class="text-danger" style="position: absolute; bottom:10px;">{{streamer.user.followers_count}} followers</small>
         </div>
       </div>
     </div>
@@ -30,7 +30,6 @@
       }
     },
     mounted() {
-      console.log(this.streamers);
       function compare(a, b) {
         if (a.user.followers_count < b.user.followers_count)
           return -1;

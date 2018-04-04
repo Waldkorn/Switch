@@ -26,7 +26,6 @@ class StreamController extends Controller
     $stream_title = request('stream_title');
     $game_id = request('game_id');
 
-
     User::where('id', $user_id)->update([
       'now_live' => TRUE
     ]);

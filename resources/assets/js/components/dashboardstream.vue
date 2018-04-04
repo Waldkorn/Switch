@@ -1,5 +1,7 @@
 <template>
   <div class="row">
+
+    <div class="col-9">
       <div class="card" style="width:100%;margin-bottom:1rem;text-align:center">
         <h5 class="card-header">Stream Preview</h5>
         <video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
@@ -33,7 +35,7 @@
         </form>
       </div>
 
-
+    </div>
 
     <div class="col-3">
       <div class="card">

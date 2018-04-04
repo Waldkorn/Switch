@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
 Auth::routes();
 
 Route::get('/user', function (Request $request) {
@@ -51,8 +50,6 @@ Route::post('/profilepage/unsubscribe', 'API\ProfileController@unsubscribe')->mi
 Route::get('/profilecontent/{username}', 'API\ProfileController@getcontent');
 Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');
-Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
-
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
 
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
