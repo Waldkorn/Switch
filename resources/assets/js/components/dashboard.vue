@@ -2,7 +2,6 @@
 <div class="container-fluid" style="padding:0px">
 
   <ul class="nav nav-pills nav-fill navbar-dark bg-dark">
-<<<<<<< HEAD
       <li class="nav-item" v-on:click="showstreamdash">
         <a class="nav-link" href="#" >Stream</a>
       </li>
@@ -15,23 +14,9 @@
       <li class="nav-item" v-on:click="showscheduledash">
         <a class="nav-link" href="#">schedule</a>
       </li>
-=======
-    <li class="nav-item" v-on:click="showstreamdash">
-      <a class="nav-link" href="#" >Stream</a>
-    </li>
-    <li class="nav-item" v-on:click="showprofiledash">
-      <a class="nav-link" href="#" >Profile</a>
-    </li>
-    <li class="nav-item" v-on:click="showchanneldash">
-      <a class="nav-link" href="#" >Channel</a>
-    </li>
-    <li class="nav-item" v-on:click="showannouncementdash">
+      <li class="nav-item" v-on:click="showannouncementdash">
       <a class="nav-link" href="#" >Announcements</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#" v-on:click="showscheduledash">schedule</a>
-    </li>
->>>>>>> solved merge conflicts
   </ul>
 
 <div class="container-fluid" style="padding:0px">
@@ -264,12 +249,9 @@
              </div>
                 </div>
               </div>
-
-<<<<<<< HEAD
                 <div class="form-group">
                   <label for="scheduletag">tag</label>
                   <input type="text" class="form-control" id="scheduletag" placeholder="idk">
-=======
               <button type="submit" class="btn btn-danger float-right">Submit</button>
 
             </form>
@@ -284,7 +266,6 @@
               <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
                 <div class="card-title">
                   <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
->>>>>>> schedules on dashboard improved
                 </div>
                 <div class="form-group">
                   <label for="schedulegame">Game:</label>
@@ -304,11 +285,7 @@
                 <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
               </form>
               </div>
-<<<<<<< HEAD
-=======
             </div>
-
->>>>>>> schedules on dashboard improved
           </div>
             </div>
           </div>
@@ -646,6 +623,7 @@
       </div>
 </div>
 </div>
+</div>
 </template>
 
 <script>
@@ -664,24 +642,13 @@ export default {
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
-<<<<<<< HEAD
-=======
           announcementsdash: false,
-<<<<<<< HEAD
           currentdate: null
->>>>>>> solved merge conflicts
-=======
-
->>>>>>> schedules on dashboard improved
       }
     },
 
     props: ['user'],
     mounted() {
-<<<<<<< HEAD
-
-=======
->>>>>>> solved merge conflicts
        var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
@@ -735,11 +702,6 @@ export default {
          $('#collapseEdit').collapse("toggle");
        })
       },
-<<<<<<< HEAD
-      addschedule: function () {
-      console.log("button works");
-    },
-=======
       show_form_single: function(){
         document.getElementById('addschedulebuttons').style.display = "none";
         document.getElementById('schedule_form_single').style.display = "block";
@@ -807,9 +769,6 @@ export default {
          document.getElementById('schedule_form_daily').style.display = "none";
        })
       },
-<<<<<<< HEAD
->>>>>>> solved merge conflicts
-=======
       editsingle: function(id, value){
         this.editsingletemp = JSON.parse(JSON.stringify(this.allschedules.filter(x => x.id == id)));
         document.getElementById('addschedulebuttons').style.display="none";
@@ -880,16 +839,11 @@ export default {
         document.getElementById('editweekly_tag').value = this.editweeklytemp[0].tag;
         document.getElementById('editweekly_id').value = id;
       },
-<<<<<<< HEAD
->>>>>>> schedule edit forms"
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
 				this.channeldash = false;
-<<<<<<< HEAD
-=======
-=======
-      updateweekly:function(){
+      updateweekly: function(){
         axios.post('/api/editscheduleweekly', {
           weekly_id: document.getElementById('editweekly_id').value,
           weekly_title: document.getElementById('editweekly_title').value,
@@ -937,19 +891,14 @@ export default {
         this.streamdash = true;
         this.profiledash = false;
         this.channeldash = false;
->>>>>>> schedules can be edited and deleted
         this.announcementsdash = false;
->>>>>>> solved merge conflicts
         this.scheduledash = false;
       },
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
 				this.channeldash = false;
-<<<<<<< HEAD
-=======
         this.announcementsdash = false;
->>>>>>> solved merge conflicts
         this.scheduledash = false;
 			},
 			showchanneldash: function() {
@@ -957,22 +906,14 @@ export default {
 				this.profiledash = false;
 				this.channeldash = true;
         this.scheduledash = false;
-<<<<<<< HEAD
-=======
         this.announcementsdash = false;
->>>>>>> solved merge conflicts
 			},
       showscheduledash: function() {
         this.streamdash = false;
         this.profiledash = false;
         this.channeldash = false;
-<<<<<<< HEAD
         this.scheduledash = true;
       },
-
-
-
-=======
         this.announcementsdash = true;
         this.scheduledash = false;
         axios.get('/api/personalannouncements').then((response) => {
@@ -986,9 +927,8 @@ export default {
         this.scheduledash = true;
         this.announcementsdash = false;
       },
->>>>>>> solved merge conflicts
     }
   }
-  
+
 
 </script>
