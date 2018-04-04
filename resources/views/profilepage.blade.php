@@ -32,7 +32,7 @@
 	border:0;
 	border-radius: 0px 0px 0.25rem 0.25rem;
 	}
-
+c
 	#navbardropdown{
 	background-color: #343a40;
 	color: #f5f5dc;
