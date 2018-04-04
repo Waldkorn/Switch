@@ -312,6 +312,7 @@
           </div>
             </div>
           </div>
+        </div>
 
       <div v-show="announcementsdash">
         <div class="row px-2">
@@ -572,8 +573,9 @@
           </div>
 
         </div>
-
       </div>
+
+  </div>
 </div>
 </div>
 </template>
