@@ -2,20 +2,20 @@
 <div class="container-fluid" style="padding:0px">
 
   <ul class="nav nav-pills nav-fill navbar-dark bg-dark">
-      <li class="nav-item" v-on:click="showstreamdash">
-        <a class="nav-link" href="#" >Stream</a>
-      </li>
-    <li class="nav-item"v-on:click="showprofiledash">
-        <a class="nav-link" href="#" >Profile</a>
-      </li>
-      <li class="nav-item" v-on:click="showchanneldash">
-        <a class="nav-link" href="#" >Channel</a>
-      </li>
-      <li class="nav-item" v-on:click="showscheduledash">
-        <a class="nav-link" href="#">schedule</a>
-      </li>
-      <li class="nav-item" v-on:click="showannouncementdash">
+    <li class="nav-item" v-on:click="showstreamdash">
+      <a class="nav-link" href="#" >Stream</a>
+    </li>
+    <li class="nav-item" v-on:click="showprofiledash">
+      <a class="nav-link" href="#" >Profile</a>
+    </li>
+    <li class="nav-item" v-on:click="showchanneldash">
+      <a class="nav-link" href="#" >Channel</a>
+    </li>
+    <li class="nav-item" v-on:click="showannouncementdash">
       <a class="nav-link" href="#" >Announcements</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" v-on:click="showscheduledash">schedule</a>
     </li>
   </ul>
 
@@ -153,143 +153,55 @@
         </div>
       </div>
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
-      <div  id="nav-channel" v-show="scheduledash">
-        <div class="row">
-          <div class="col-8" style="padding:0px;padding-left:1rem">
-            <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">scheduled streams</h5>
-            </div>
-            <div class="card-body" style="padding:0px">
-              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
-  <thead>
-    <tr style="color:#dc3545">
-      <th scope="col">type</th>
-      <th scope="col">name</th>
-      <th scope="col">start</th>
-      <th scope="col">end</th>
-      <th scope="col">game</th>
-      <th scope="col">tag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">single</th>
-      <td>Dota 2: electric boogaloo</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>Dota2</td>
-      <td>subscriber games</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th scope="row">daily</th>
-      <td>Daily dose of minecraft</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>Minecraft</td>
-      <td>evening stream</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-    <tr>
-      <th scope="row">weekly</th>
-      <td>sunday streamtime</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>WoW</td>
-      <td>weekend streams</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-    <tr>
-      <th scope="row">monthly</th>
-      <td>Monthly subscriber stream</td>
-      <td>soon</td>
-      <td>1 hour after soon</td>
-      <td>PUBG</td>
-      <td>subscriber ama</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td><div class="btn btn-danger">delete all</div></td>
-    </tr>
-  </tbody>
-</table>
-          </div>
-        </div>
-        </div>
-            <div class="col-4" style="padding:0px">
-              <div class="card">
 
-              <div class="card-header">
-                <h5 class="card-title">Add a scheduled event</h5>
-              </div>
-              <div class="card-body">
-              <form>
+      <div v-show="announcementsdash">
+          <div class="row px-2">
+
+            <div class="col-md-6">
+
+              <h3 class="display-4" style="color: #343a40;">New announcement</h3>
+
+              <form action="/announcements/post" method="POST">
+
                 <div class="form-group">
-                  <label for="schedulename">Name</label>
-                  <input type="text" class="form-control" id="schedulename" placeholder="Event Name">
-                </div>
-
-                <div class="form-row">
-                <div class="col">
-                  <div class="form-group">
-                 <label for="schedulestart">Start:</label>
-                 <input type="datetime-local" id="schedulestart" name="bdaytime">
+                 <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
                </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-               <label for="scheduleend">End:</label>
-                <input type="datetime-local" id="scheduleend" name="bdaytime">
-             </div>
-                </div>
-              </div>
+
                 <div class="form-group">
-                  <label for="scheduletag">tag</label>
-                  <input type="text" class="form-control" id="scheduletag" placeholder="idk">
-              <button type="submit" class="btn btn-danger float-right">Submit</button>
-
-            </form>
-
-          </div>
-
-          <div class="col-md-6">
-
-            <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
-
-            <div class="card mb-2" v-for="announcement in announcements">
-              <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
-                <div class="card-title">
-                  <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
+                  <label for="Title">Title</label>
+                  <input type="text" class="form-control" name="title" placeholder="Enter title">
                 </div>
+
                 <div class="form-group">
-                  <label for="schedulegame">Game:</label>
-                  <select class="form-control" id="schedulegame">
-                    <option v-for="game in games" :value="game.id">{{game.name}}</option>
-                  </select>
+                  <textarea type="textarea" class="form-control" name="message" placeholder="Announcement" rows="5"></textarea>
                 </div>
-                <div class="form-group">
-                  <label for="scheduletype">type:</label>
-                  <select class="form-control" id="scheduletype">
-                    <option value="once">once</option>
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                  </select>
-                </div>
-                <div type="submit" class="btn danger" v-on:click="addschedule">Add event</div>
+
+                <button type="submit" class="btn btn-danger float-right">Submit</button>
+
               </form>
+
+            </div>
+
+            <div class="col-md-6">
+
+              <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
+
+              <div class="card mb-2" v-for="announcement in announcements">
+                <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
+                  <div class="card-title">
+                    <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
+                  </div>
+                  <hr>
+                  <div class="card-text">
+                    {{ announcement.message }}
+                  </div>
+                </div>
               </div>
+
             </div>
+
           </div>
-            </div>
-          </div>
-      </div>
+        </div>
 
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
@@ -623,11 +535,9 @@
       </div>
 </div>
 </div>
-</div>
 </template>
 
 <script>
-import myDatepicker from 'vue-datepicker'
 export default {
     data:function(){
       return{
@@ -638,6 +548,7 @@ export default {
           singlestreams : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
+          announcements : [],
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
@@ -675,7 +586,7 @@ export default {
             document.getElementById('streamkeymessage').style.display = "block";
             document.getElementById('streamkey_btn').style.display = "none";
             document.getElementById('hide_btn').style.display = "block";
-         document.getElementById('schedulemsg').style.display = "block";
+            document.getElementById('schedulemsg').style.display = "block";
             document.getElementById('streamkeymessage').innerHTML = response.data;
             })
           },
@@ -839,10 +750,6 @@ export default {
         document.getElementById('editweekly_tag').value = this.editweeklytemp[0].tag;
         document.getElementById('editweekly_id').value = id;
       },
-      showstreamdash: function() {
-				this.streamdash = true;
-				this.profiledash = false;
-				this.channeldash = false;
       updateweekly: function(){
         axios.post('/api/editscheduleweekly', {
           weekly_id: document.getElementById('editweekly_id').value,
@@ -857,18 +764,15 @@ export default {
          document.getElementById('schedulemsg').style.display = "block";
          document.getElementById('schedulemsg').innerHTML = response.data;
          document.getElementById('editweeklyschedule').style.display="none";
-
        })
      },
       cancel_editsingle: function() {
         document.getElementById('editsingleschedule').style.display="none";
         document.getElementById('addschedulebuttons').style.display="block";
-
 			},
       cancel_editdaily: function() {
         document.getElementById('editdailyschedule').style.display="none";
         document.getElementById('addschedulebuttons').style.display="block";
-
 			},
       cancel_editweekly: function() {
 			  document.getElementById('editweeklyschedule').style.display="none";
@@ -878,13 +782,11 @@ export default {
         console.log(id);
         axios.post('/api/deleteschedule', {
           delete_id: id,
-
        }).then(response => {
          document.getElementById('addschedulebuttons').style.display = "block";
          document.getElementById('schedulemsg').style.display = "block";
          document.getElementById('schedulemsg').innerHTML = response.data;
          document.getElementById('editweeklyschedule').style.display="none";
-
        })
 			},
       showstreamdash: function() {
@@ -914,12 +816,16 @@ export default {
         this.channeldash = false;
         this.scheduledash = true;
       },
+      showannouncementdash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.channeldash = false;
         this.announcementsdash = true;
         this.scheduledash = false;
         axios.get('/api/personalannouncements').then((response) => {
           this.announcements = response.data;
         })
-			},
+      },
       showscheduledash: function() {
         this.streamdash = false;
         this.profiledash = false;
