@@ -67,30 +67,16 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
-Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
-Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
-
-Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
-Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
-Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
-
-
-/////////////////
-// Auth Routes //
-/////////////////
-
 Route::get('/currentdate','API\ScheduleController@currentdate');
 
-Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
-Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
-Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
+Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
+Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 
 
 ////////////////////////
 // Annoucement routes //
 ////////////////////////
 
-Route::get('/announcements', 'API\AnnouncementController@get')->middleware('auth:api');
 Route::get('/announcements', 'API\AnnouncementController@readFollowerAnnouncements')->middleware('auth:api');
 Route::get('/personalannouncements', 'API\AnnouncementController@read')->middleware('auth:api');
 

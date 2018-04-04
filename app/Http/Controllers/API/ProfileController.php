@@ -45,20 +45,31 @@ class ProfileController extends Controller
     $user->followers()->attach($follower->id);
     $message = "you are now following " . $user->name;
     return $message;
+
   }
 
   public function unfollow_user(){
+
     $user = User::find(request('user_id'));
     $unfollower = Auth::user();
     $unfollower = User::find(request('unfollower_id'));
-
-    $user = User::find(request('user_id'));
-    $subscriber= Auth::user();
 
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');
     }
 
+    $user->followers()->detach($unfollower->id);
+    $message = "you unfollowed " . $user->name;
+    return $message;
+
+  }
+
+  //subscribing and unsubscribing
+  public function subscribe(){
+
+    $user = User::find(request('user_id'));
+    $subscriber= Auth::user();
+  
     $user->subscribers()->attach($subscriber->id);
     $message = "you are now subscribed to " . $user->name;
     return $message;

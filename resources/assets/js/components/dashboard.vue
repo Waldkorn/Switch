@@ -2,18 +2,21 @@
 <div class="container-fluid" style="padding:0px">
 
   <ul class="nav nav-pills nav-fill navbar-dark bg-dark">
-      <li class="nav-item" v-on:click="showstreamdash">
-        <a class="nav-link" href="#" >Stream</a>
-      </li>
-    <li class="nav-item"v-on:click="showprofiledash">
-        <a class="nav-link" href="#" >Profile</a>
-      </li>
-      <li class="nav-item" v-on:click="showchanneldash">
-        <a class="nav-link" href="#" >Channel</a>
-      </li>
-      <li class="nav-item" v-on:click="showscheduledash">
-        <a class="nav-link" href="#">schedule</a>
-      </li>
+    <li class="nav-item" v-on:click="showstreamdash">
+      <a class="nav-link" href="#" >Stream</a>
+    </li>
+    <li class="nav-item" v-on:click="showprofiledash">
+      <a class="nav-link" href="#" >Profile</a>
+    </li>
+    <li class="nav-item" v-on:click="showchanneldash">
+      <a class="nav-link" href="#" >Channel</a>
+    </li>
+    <li class="nav-item" v-on:click="showannouncementdash">
+      <a class="nav-link" href="#" >Announcements</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" v-on:click="showscheduledash">schedule</a>
+    </li>
   </ul>
 
 <div class="container-fluid" style="padding:0px">
@@ -311,7 +314,6 @@
             </div>
           </div>
 
-
       <div v-show="announcementsdash">
         <div class="row px-2">
 
@@ -536,6 +538,7 @@ export default {
           schedules : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
+          announcements : [],
           currentdate :[],
           streamdash: true,
   				profiledash: false,
@@ -722,7 +725,6 @@ export default {
 				this.channeldash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
-        this.scheduledash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
@@ -730,7 +732,6 @@ export default {
 				this.channeldash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
-        this.scheduledash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
@@ -750,7 +751,6 @@ export default {
         this.streamdash = false;
         this.profiledash = false;
         this.channeldash = false;
-        this.scheduledash = false;
         this.announcementsdash = true;
         this.scheduledash = false;
         axios.get('/api/personalannouncements').then((response) => {
@@ -766,6 +766,5 @@ export default {
       },
     }
   }
-  
 
 </script>
