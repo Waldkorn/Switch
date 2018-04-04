@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function profilecontent()
     {
-        return $this->hasOne(Profilecontent::class, 'user_id', 'id');
+        return $this->hasOne(Profilecontent::class);
     }
 
     public function announcements()
