@@ -74,6 +74,7 @@ class ScheduleController extends Controller
         $end_date = $date." ".$dailystream->end_time;
         $dailystream->start_date = $start_date;
         $dailystream->end_date = $end_date;
+
         $gameobjs = $games->where('id',$dailystream->game_id)->pluck('name');
         $game_name = '';
 
@@ -123,6 +124,7 @@ class ScheduleController extends Controller
 
       		]);
           return request('single_title')." saved";
+
     }
     //adds daily event to schedule tale
     public function createDailyEvent(){
@@ -158,6 +160,7 @@ class ScheduleController extends Controller
               'type' => $type
         ]);
         return "new daily stream added!";
+
       }
       //add weekly events to schedule table
       public function createWeeklyEvent(){

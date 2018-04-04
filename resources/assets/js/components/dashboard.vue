@@ -587,6 +587,7 @@ export default {
           schedules : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
           games : [],
+          announcements : [],
           currentdate :[],
           streamdash: true,
   				profiledash: false,
@@ -773,7 +774,6 @@ export default {
 				this.channeldash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
-        this.scheduledash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
@@ -781,7 +781,6 @@ export default {
 				this.channeldash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
-        this.scheduledash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
@@ -799,27 +798,16 @@ export default {
         axios.get('/api/personalannouncements').then((response) => {
           this.announcements = response.data;
         })
-      }
+      },
       showscheduledash: function() {
         this.streamdash = false;
         this.profiledash = false;
         this.channeldash = false;
         this.scheduledash = true;
         this.announcementsdash = false;
-			},
-      showannouncementdash: function() {
-        this.streamdash = false;
-        this.profiledash = false;
-        this.channeldash = false;
-        this.scheduledash = false;
-        this.announcementsdash = true;
-        this.scheduledash = false;
-        axios.get('/api/personalannouncements').then((response) => {
-          this.announcements = response.data;
-        })
 			}
+			
     }
   }
-  
 
 </script>

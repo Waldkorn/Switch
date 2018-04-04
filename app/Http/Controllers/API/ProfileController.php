@@ -45,9 +45,11 @@ class ProfileController extends Controller
     $user->followers()->attach($follower->id);
     $message = "you are now following " . $user->name;
     return $message;
+
   }
 
   public function unfollow_user(){
+
     $user = User::find(request('user_id'));
     $unfollower = Auth::user();
     $unfollower = User::find(request('unfollower_id'));
