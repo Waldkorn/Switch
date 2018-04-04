@@ -846,12 +846,13 @@ export default {
         console.log(id);
         axios.post('/api/deleteschedule', {
           delete_id: id,
-       }).then(response => {
-         document.getElementById('addschedulebuttons').style.display = "block";
-         document.getElementById('schedulemsg').style.display = "block";
-         document.getElementById('schedulemsg').innerHTML = response.data;
-         document.getElementById('editweeklyschedule').style.display="none";
-			},
+         }).then(response => {
+           document.getElementById('addschedulebuttons').style.display = "block";
+           document.getElementById('schedulemsg').style.display = "block";
+           document.getElementById('schedulemsg').innerHTML = response.data;
+           document.getElementById('editweeklyschedule').style.display="none";
+  			});
+      },
       showstreamdash: function() {
         this.streamdash = true;
         this.profiledash = false;
