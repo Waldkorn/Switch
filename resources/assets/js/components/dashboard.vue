@@ -8,9 +8,6 @@
     <li class="nav-item" v-on:click="showprofiledash">
       <a class="nav-link" href="#" >Profile</a>
     </li>
-    <li class="nav-item" v-on:click="showchanneldash">
-      <a class="nav-link" href="#" >Channel</a>
-    </li>
     <li class="nav-item" v-on:click="showannouncementdash">
       <a class="nav-link" href="#" >Announcements</a>
     </li>
@@ -152,167 +149,6 @@
           <div class="col-3"></div>
         </div>
       </div>
-      <div  id="nav-channel" v-show="channeldash">channel settings here</div>
-      <div  id="nav-channel" v-show="scheduledash">
-        <div class="row">
-          <div class="col-7" style="padding:0px;padding-left:1rem">
-            <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">scheduled streams</h5>
-            </div>
-            <div class="card-body" style="padding:0px">
-
-              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
-  <thead>
-    <tr style="color:#dc3545">
-      <th scope="col">type</th>
-      <th scope="col">name</th>
-      <th scope="col">start</th>
-      <th scope="col">end</th>
-      <th scope="col">game</th>
-      <th scope="col">tag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="schedule in schedules">
-      <th scope="row">{{schedule.type}}</th>
-      <td>{{schedule.title}}</td>
-      <td>{{schedule.start_date}}</td>
-      <td>{{schedule.end_date}}</td>
-      <td>{{schedule.game}}</td>
-      <td>{{schedule.tag}}</td>
-      <td><div class="btn btn-info">edit</div></td>
-      <td><div class="btn btn-danger">delete</div></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-          </div>
-        </div>
-        </div>
-            <div class="col-5" style="padding:0px">
-              <div class="card">
-
-              <div class="card-header">
-                <h5 class="card-title">Add a scheduled event</h5>
-              </div>
-              <div class="card-body">
-                <div class="container-fluid" id="addschedulebuttons">
-                  <div class="btn btn-warning btn-lg btn-block" v-on:click="show_form_single">Single event</div>
-                  <div class="btn btn-secondary btn-lg btn-block" v-on:click="show_form_daily">Daily stream</div>
-                  <div class="btn btn-info btn-lg btn-block" v-on:click="show_form_weekly">Weekly stream</div>
-                  <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
-
-                </div>
-              <div class="container-fluid" id="schedule_form_single" style="display:none">
-                  <div class="btn btn-danger" v-on:click="show_back" >Back</div>
-                <form>
-                <div class="form-group">
-                  <label for="single_title">Name</label>
-                  <input type="text" class="form-control" id="single_title" name="single_title" placeholder="Event Name">
-                </div>
-                <div class="form-row">
-                  <div class="col">
-                      <span>Start：</span>
-                      <input type="datetime-local" name="single_start" id="single_start" :min="currentdate">
-                </div>
-                <div class="col">
-                      <span>End：</span>
-                      <input type="datetime-local" name="single_end" id="single_end" :min="currentdate">
-                </div>
-                </div>
-                <div class="form-group">
-                  <label for="single_tag">tag</label>
-                  <input type="text" class="form-control" id="single_tag" name="single_tag" placeholder="idk">
-                </div>
-                <div class="form-group">
-                  <label for="single_game">Game:</label>
-                  <select class="form-control" id="single_game" name="single_game">
-                    <option v-for="game in games" :value="game.id">{{game.name}}</option>
-                  </select>
-                </div>
-                <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_single">Add event</div>
-              </form>
-            </div>
-
-            <div class="container-fluid" id="schedule_form_daily" style="display:none">
-                <div class="btn btn-danger" v-on:click="show_back" >Back</div>
-              <form>
-              <div class="form-group">
-                <label for="daily_title">Name</label>
-                <input type="text" class="form-control" id="daily_title" name="daily_title" placeholder="Event Name">
-              </div>
-              <div class="form-row">
-                <div class="col">
-                    <span>Start：</span>
-                    <input type="time" name="daily_start" id="daily_start">
-              </div>
-              <div class="col">
-                    <span>End：</span>
-                    <input type="time" name="daily_end" id="daily_end">
-              </div>
-              </div>
-              <div class="form-group">
-                <label for="daily_tag">tag</label>
-                <input type="text" class="form-control" id="daily_tag" name="daily_tag" placeholder="idk">
-              </div>
-              <div class="form-group">
-                <label for="daily_game">Game:</label>
-                <select class="form-control" id="daily_game" name="daily_game">
-                  <option v-for="game in games" :value="game.id">{{game.name}}</option>
-                </select>
-              </div>
-              <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_daily">Add event</div>
-            </form>
-          </div>
-
-          <div class="container-fluid" id="schedule_form_weekly" style="display:none">
-              <div class="btn btn-danger" v-on:click="show_back" >Back</div>
-            <form>
-            <div class="form-group">
-              <label for="weekly_title">Name</label>
-              <input type="text" class="form-control" id="weekly_title" name="weekly_title" placeholder="Stream Name">
-            </div>
-            <div class="form-group">
-              <label for="weekly_day">Day:</label>
-              <select class="form-control" id="weekly_day" name="weekly_day">
-                <option value="monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="col">
-                  <span>Start：</span>
-                  <input type="time" name="weekly_start" id="weekly_start">
-            </div>
-            <div class="col">
-                  <span>End：</span>
-                  <input type="time" name="weekly_end" id="weekly_end">
-            </div>
-            </div>
-            <div class="form-group">
-              <label for="weekly_tag">tag</label>
-              <input type="text" class="form-control" id="weekly_tag" name="weekly_tag" placeholder="idk">
-            </div>
-            <div class="form-group">
-              <label for="weekly_game">Game:</label>
-              <select class="form-control" id="weekly_game" name="weekly_game">
-                <option v-for="game in games" :value="game.id">{{game.name}}</option>
-              </select>
-            </div>
-            <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_weekly">Add event</div>
-          </form>
-        </div>
-      </div>
-          </div>
-            </div>
-          </div>
-        </div>
 
       <div v-show="announcementsdash">
 
@@ -777,8 +613,7 @@ export default {
           currentdate :[],
           streamdash: true,
   				profiledash: false,
-  				channeldash: false,
-          scheduledash: false,
+  			  scheduledash: false,
           announcementsdash: false,
 
       }
@@ -1016,28 +851,24 @@ export default {
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
-				this.channeldash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
-				this.channeldash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
 				this.profiledash = false;
-				this.channeldash = true;
         this.scheduledash = false;
         this.announcementsdash = false;
 			},
       showannouncementdash: function() {
         this.streamdash = false;
         this.profiledash = false;
-        this.channeldash = false;
         this.announcementsdash = true;
         this.scheduledash = false;
         axios.get('/api/personalannouncements').then((response) => {
@@ -1047,7 +878,6 @@ export default {
       showscheduledash: function() {
         this.streamdash = false;
         this.profiledash = false;
-        this.channeldash = false;
         this.scheduledash = true;
         this.announcementsdash = false;
 			}

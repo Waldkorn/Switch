@@ -24445,6 +24445,316 @@ module.exports = g;
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(155)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25032,316 +25342,6 @@ exports['default'] = {
   estimateSegmentRequestTime: estimateSegmentRequestTime,
   isLowestEnabledRendition: isLowestEnabledRendition
 };
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(155)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
 
 /***/ }),
 /* 9 */
@@ -34816,7 +34816,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _playlist = __webpack_require__(6);
+var _playlist = __webpack_require__(8);
 
 var _playlist2 = _interopRequireDefault(_playlist);
 
@@ -36214,7 +36214,7 @@ var _config = __webpack_require__(14);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _playlist = __webpack_require__(6);
+var _playlist = __webpack_require__(8);
 
 var _playlist2 = _interopRequireDefault(_playlist);
 
@@ -47566,7 +47566,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(52);
-module.exports = __webpack_require__(201);
+module.exports = __webpack_require__(203);
 
 
 /***/ }),
@@ -47605,21 +47605,21 @@ Vue.component('games', __webpack_require__(158));
 Vue.component('streams', __webpack_require__(163));
 
 //dashboard//
-Vue.component('dashboard', __webpack_require__(166));
-Vue.component('dashboardstream', __webpack_require__(169));
-Vue.component('dashboardprofile', __webpack_require__(172));
+Vue.component('dashboard', __webpack_require__(168));
+Vue.component('dashboardstream', __webpack_require__(171));
+Vue.component('dashboardprofile', __webpack_require__(174));
 
 //stream//
-Vue.component('chatroom', __webpack_require__(175));
-Vue.component('stream', __webpack_require__(180));
+Vue.component('chatroom', __webpack_require__(177));
+Vue.component('stream', __webpack_require__(182));
 
 //passport//
-Vue.component('passport-clients', __webpack_require__(183));
+Vue.component('passport-clients', __webpack_require__(185));
 
-Vue.component('passport-authorized-clients', __webpack_require__(188));
+Vue.component('passport-authorized-clients', __webpack_require__(190));
 
-Vue.component('passport-personal-access-tokens', __webpack_require__(193));
-Vue.component('test', __webpack_require__(198));
+Vue.component('passport-personal-access-tokens', __webpack_require__(195));
+Vue.component('test', __webpack_require__(200));
 
 var app = new Vue({
     el: '#app',
@@ -67148,7 +67148,7 @@ var _playlistLoader = __webpack_require__(15);
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
-var _playlist = __webpack_require__(6);
+var _playlist = __webpack_require__(8);
 
 var _playlist2 = _interopRequireDefault(_playlist);
 
@@ -73694,7 +73694,7 @@ var _playlistLoader = __webpack_require__(15);
 
 var _playlistLoader2 = _interopRequireDefault(_playlistLoader);
 
-var _playlistJs = __webpack_require__(6);
+var _playlistJs = __webpack_require__(8);
 
 var _segmentLoader = __webpack_require__(40);
 
@@ -76326,7 +76326,7 @@ var _muxJsLibMp4Probe2 = _interopRequireDefault(_muxJsLibMp4Probe);
 
 var _muxJsLibToolsTsInspectorJs = __webpack_require__(102);
 
-var _playlist = __webpack_require__(6);
+var _playlist = __webpack_require__(8);
 
 var _videoJs = __webpack_require__(0);
 
@@ -78855,7 +78855,7 @@ Object.defineProperty(exports, '__esModule', {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _playlistJs = __webpack_require__(6);
+var _playlistJs = __webpack_require__(8);
 
 /**
  * Returns a function that acts as the Enable/disable playlist function.
@@ -100689,6 +100689,78 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['profile', 'loggedin', 'isfollowing', 'issubscribed'],
@@ -100726,10 +100798,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get(followingsurl).then(function (response) {
       _this.followings = JSON.parse(JSON.stringify(response.data));
     });
-
-    axios.get('/api/user').then(function (response) {
-      _this.auth_user = JSON.parse(JSON.stringify(response.data));
-    });
   },
 
 
@@ -100759,7 +100827,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post('/api/profilepage/subscribe', {
         user_id: this.user.id
-
       }).then(function (response) {
 
         document.getElementById('subscribe_btn').style.display = "none";
@@ -100771,7 +100838,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.post('/api/profilepage/unsubscribe', {
         user_id: this.user.id
-
       }).then(function (response) {
         document.getElementById('unsubscribemsg').style.display = "block";
         document.getElementById('unsubscribe_btn').style.display = "none";
@@ -100972,6 +101038,474 @@ var render = function() {
               ])
             : _vm._e()
         ]),
+        _vm._v(" "),
+        _vm.loggedin == 1
+          ? _c("div", { staticClass: "container-fluid" }, [
+              _vm.loggedin == 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "container-fluid",
+                      staticStyle: { "text-align": "center" },
+                      attrs: { id: "subscribe_unsubscribe" }
+                    },
+                    [
+                      _vm.issubscribed == 0
+                        ? _c("div", { staticClass: "container-fluid" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-info btn-lg",
+                                on: { click: _vm.togglesubscribe }
+                              },
+                              [_vm._v("Subscribe")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  id: "subscribe_btn",
+                                  value: _vm.user.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      action:
+                                        "https://www.sandbox.paypal.com/cgi-bin/webscr",
+                                      method: "post",
+                                      target: "_top"
+                                    }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "cmd",
+                                        value: "_s-xclick"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "hosted_button_id",
+                                        value: "Z9ASYGPTDUF7J"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "image",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif",
+                                        border: "0",
+                                        name: "submit",
+                                        alt:
+                                          "PayPal - The safer, easier way to pay online!"
+                                      },
+                                      on: { click: _vm.subscribe }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      attrs: {
+                                        alt: "",
+                                        border: "0",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif",
+                                        width: "1",
+                                        height: "1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.issubscribed == 1
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
+                              },
+                              on: { click: _vm.unsubscribe }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
+                                  BORDER: "0"
+                                }
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-info",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "subscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "You are now subscribed to " + _vm._s(_vm.user.name)
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-danger",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "unsubscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            " You are no longer subscribed to " +
+                              _vm._s(_vm.user.name)
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loggedin == 0
+                ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
+                    _vm._v(
+                      " Please log in or register to subscribe to " +
+                        _vm._s(_vm.user.name)
+                    )
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.loggedin == 1
+          ? _c("div", { staticClass: "container-fluid" }, [
+              _vm.loggedin == 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "container-fluid",
+                      staticStyle: { "text-align": "center" },
+                      attrs: { id: "subscribe_unsubscribe" }
+                    },
+                    [
+                      _vm.issubscribed == 0
+                        ? _c("div", { staticClass: "container-fluid" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-info btn-lg",
+                                on: { click: _vm.togglesubscribe }
+                              },
+                              [
+                                _vm._v(
+                                  " Want to subscribe to " +
+                                    _vm._s(_vm.user.name) +
+                                    "?"
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  id: "subscribe_btn",
+                                  value: _vm.user.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      action:
+                                        "https://www.sandbox.paypal.com/cgi-bin/webscr",
+                                      method: "post",
+                                      target: "_top"
+                                    }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "cmd",
+                                        value: "_s-xclick"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "hosted_button_id",
+                                        value: "Z9ASYGPTDUF7J"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "image",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif",
+                                        border: "0",
+                                        name: "submit",
+                                        alt:
+                                          "PayPal - The safer, easier way to pay online!"
+                                      },
+                                      on: { click: _vm.subscribe }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      attrs: {
+                                        alt: "",
+                                        border: "0",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif",
+                                        width: "1",
+                                        height: "1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.issubscribed == 1
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
+                              },
+                              on: { click: _vm.unsubscribe }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
+                                  BORDER: "0"
+                                }
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-info",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "subscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "You are now subscribed to " + _vm._s(_vm.user.name)
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-danger",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "unsubscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            " You are no longer subscribed to " +
+                              _vm._s(_vm.user.name)
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loggedin == 0
+                ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
+                    _vm._v(
+                      " Please log in or register to subscribe to " +
+                        _vm._s(_vm.user.name)
+                    )
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.loggedin == 1
+          ? _c("div", { staticClass: "container-fluid" }, [
+              _vm.loggedin == 1
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "container-fluid",
+                      staticStyle: { "text-align": "center" },
+                      attrs: { id: "subscribe_unsubscribe" }
+                    },
+                    [
+                      _vm.issubscribed == 0
+                        ? _c("div", { staticClass: "container-fluid" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-info btn-lg",
+                                on: { click: _vm.togglesubscribe }
+                              },
+                              [_vm._v("Subscribe")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  id: "subscribe_btn",
+                                  value: _vm.user.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      action:
+                                        "https://www.sandbox.paypal.com/cgi-bin/webscr",
+                                      method: "post",
+                                      target: "_top"
+                                    }
+                                  },
+                                  [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "cmd",
+                                        value: "_s-xclick"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "hosted_button_id",
+                                        value: "Z9ASYGPTDUF7J"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "image",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif",
+                                        border: "0",
+                                        name: "submit",
+                                        alt:
+                                          "PayPal - The safer, easier way to pay online!"
+                                      },
+                                      on: { click: _vm.subscribe }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      attrs: {
+                                        alt: "",
+                                        border: "0",
+                                        src:
+                                          "https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif",
+                                        width: "1",
+                                        height: "1"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.issubscribed == 1
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU"
+                              },
+                              on: { click: _vm.unsubscribe }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif",
+                                  BORDER: "0"
+                                }
+                              })
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-info",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "subscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            "You are now subscribed to " + _vm._s(_vm.user.name)
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "alert alert-danger",
+                          staticStyle: { display: "none" },
+                          attrs: { id: "unsubscribemsg", role: "alert" }
+                        },
+                        [
+                          _vm._v(
+                            " You are no longer subscribed to " +
+                              _vm._s(_vm.user.name)
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.loggedin == 0
+                ? _c("div", { attrs: { id: "subscribe_unsubscribe" } }, [
+                    _vm._v(
+                      " Please log in or register to subscribe to " +
+                        _vm._s(_vm.user.name)
+                    )
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm.loggedin == 1
           ? _c("div", { staticClass: "container-fluid" }, [
@@ -101993,6 +102527,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -102010,6 +102561,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     axios.get('/api/upcomingstreams').then(function (response) {
       _this.upcomingstreams = JSON.parse(JSON.stringify(response.data));
     });
+  },
+
+  methods: {
+    postComment: function postComment(number) {
+      var _this2 = this;
+
+      var message = document.getElementById("commentfield" + number).value;
+      axios.post("/api/comment/" + number + "/create", {
+        body: message
+      }).then(function (response) {
+        _this2.announcements.find(function (announcement) {
+          return announcement.id === number;
+        }).comments.push(response.data);
+      });
+      document.getElementById("commentfield" + number).value = "";
+      return false;
+    }
   }
 });
 
@@ -102129,7 +102697,87 @@ var render = function() {
               _c("hr"),
               _vm._v(" "),
               _c("div", { staticClass: "card-text" }, [
-                _vm._v("\n  \t\t\t" + _vm._s(announcement.message) + "\n  \t\t")
+                _vm._v(
+                  "\n  \t\t\t" + _vm._s(announcement.message) + "\n        "
+                ),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: announcement.comments_count != 0,
+                        expression: "announcement.comments_count != 0"
+                      }
+                    ],
+                    staticClass: "btn btn-danger float-right mr-1 mb-1",
+                    attrs: {
+                      "data-toggle": "collapse",
+                      href: "#comments" + announcement.id,
+                      role: "button",
+                      "aria-expanded": "false",
+                      "aria-controls": "comments" + announcement.id,
+                      onclick: "this.style.display='none'"
+                    }
+                  },
+                  [_vm._v(_vm._s(announcement.comments_count) + " comments")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse",
+                    attrs: { id: "comments" + announcement.id }
+                  },
+                  _vm._l(announcement.comments, function(comment) {
+                    return _c("div", { staticClass: "card bg-secondary m-1" }, [
+                      _c("div", { staticClass: "card-body p-2" }, [
+                        _c("h6", { staticClass: "card-title px-2" }, [
+                          _c("span", { staticStyle: { color: "#dc3545" } }, [
+                            _vm._v(_vm._s(comment.user.name))
+                          ]),
+                          _vm._v(" wrote:")
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text text-right px-3" }, [
+                          _vm._v(_vm._s(comment.body))
+                        ])
+                      ])
+                    ])
+                  })
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    staticStyle: { "background-color": "rgb(245, 245, 220)" },
+                    attrs: {
+                      type: "text",
+                      id: "commentfield" + announcement.id,
+                      placeholder: "leave your comment..."
+                    },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        _vm.postComment(announcement.id)
+                      }
+                    }
+                  })
+                ])
               ])
             ]
           )
@@ -102442,7 +103090,7 @@ var content = __webpack_require__(154);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("d9082200", content, false, {});
+var update = __webpack_require__(7)("d9082200", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -102461,7 +103109,7 @@ if(false) {
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -102690,7 +103338,7 @@ var content = __webpack_require__(160);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("fe0d5e34", content, false, {});
+var update = __webpack_require__(7)("fe0d5e34", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -102709,7 +103357,7 @@ if(false) {
 /* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -102847,15 +103495,19 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(164)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(164)
+var __vue_script__ = __webpack_require__(166)
 /* template */
-var __vue_template__ = __webpack_require__(165)
+var __vue_template__ = __webpack_require__(167)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -102891,6 +103543,46 @@ module.exports = Component.exports
 
 /***/ }),
 /* 164 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(165);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("d2f4effa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2235ae28\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./streamersByGame.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2235ae28\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./streamersByGame.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#games-main {\n  max-height: 1px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 166 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -102922,7 +103614,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: ['game', 'streamers'],
   data: function data() {
     return {
-      imageLink: "/images/drdisrespect.jpeg",
       sortable: []
     };
   },
@@ -102942,7 +103633,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 165 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -102953,7 +103644,8 @@ var render = function() {
     "div",
     {
       staticClass: "col-md-10 d-flex flex-wrap px-5",
-      staticStyle: { "padding-right": "0" }
+      staticStyle: { "padding-right": "0" },
+      attrs: { id: "games-main" }
     },
     _vm._l(_vm.streamers, function(streamer) {
       return _c(
@@ -102963,42 +103655,49 @@ var render = function() {
           staticStyle: { padding: "0", margin: "0", float: "right" }
         },
         [
-          _c("div", { staticClass: "card", staticStyle: { width: "175px" } }, [
-            _c("a", { attrs: { href: "/" + streamer.user.name } }, [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: {
-                  src: _vm.imageLink,
-                  alt: streamer.name,
-                  height: "150",
-                  width: "150"
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card",
+              staticStyle: { width: "175px", height: "100%" }
+            },
+            [
               _c("a", { attrs: { href: "/" + streamer.user.name } }, [
-                _c("h6", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(streamer.title))
-                ])
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: {
+                    src: streamer.user.profilecontent.img_url,
+                    alt: streamer.name,
+                    height: "150",
+                    width: "150"
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c(
-                "a",
-                { attrs: { href: "/profilepage/" + streamer.user.name } },
-                [_c("h6", [_vm._v(_vm._s(streamer.user.name))])]
-              ),
-              _vm._v(" "),
-              _c(
-                "small",
-                {
-                  staticClass: "text-danger",
-                  staticStyle: { position: "absolute", bottom: "10px" }
-                },
-                [_vm._v(_vm._s(streamer.user.followers_count) + " followers")]
-              )
-            ])
-          ])
+              _c("div", { staticClass: "card-body" }, [
+                _c("a", { attrs: { href: "/" + streamer.user.name } }, [
+                  _c("h6", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(streamer.title))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { attrs: { href: "/profilepage/" + streamer.user.name } },
+                  [_c("h6", [_vm._v(_vm._s(streamer.user.name))])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "small",
+                  {
+                    staticClass: "text-danger",
+                    staticStyle: { position: "absolute", bottom: "10px" }
+                  },
+                  [_vm._v(_vm._s(streamer.user.followers_count) + " followers")]
+                )
+              ])
+            ]
+          )
         ]
       )
     })
@@ -103015,15 +103714,15 @@ if (false) {
 }
 
 /***/ }),
-/* 166 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(167)
+var __vue_script__ = __webpack_require__(169)
 /* template */
-var __vue_template__ = __webpack_require__(168)
+var __vue_template__ = __webpack_require__(170)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -103062,15 +103761,11 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 167 */
+/* 169 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -103686,7 +104381,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       currentdate: [],
       streamdash: true,
       profiledash: false,
-      channeldash: false,
       scheduledash: false,
       announcementsdash: false
 
@@ -103942,21 +104636,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     showstreamdash: function showstreamdash() {
       this.streamdash = true;
       this.profiledash = false;
-      this.channeldash = false;
-      this.announcementsdash = false;
       this.scheduledash = false;
+      this.announcementsdash = false;
     },
     showprofiledash: function showprofiledash() {
       this.streamdash = false;
       this.profiledash = true;
-      this.channeldash = false;
       this.scheduledash = false;
       this.announcementsdash = false;
     },
     showchanneldash: function showchanneldash() {
       this.streamdash = false;
       this.profiledash = false;
-      this.channeldash = true;
       this.scheduledash = false;
       this.announcementsdash = false;
     },
@@ -103965,7 +104656,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.streamdash = false;
       this.profiledash = false;
-      this.channeldash = false;
       this.announcementsdash = true;
       this.scheduledash = false;
       axios.get('/api/personalannouncements').then(function (response) {
@@ -103975,7 +104665,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     showscheduledash: function showscheduledash() {
       this.streamdash = false;
       this.profiledash = false;
-      this.channeldash = false;
       this.scheduledash = true;
       this.announcementsdash = false;
     }
@@ -103984,7 +104673,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 168 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104012,16 +104701,6 @@ var render = function() {
           [
             _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
               _vm._v("Profile")
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "nav-item", on: { click: _vm.showchanneldash } },
-          [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("Channel")
             ])
           ]
         ),
@@ -104473,22 +105152,6 @@ var render = function() {
                 _c("div", { staticClass: "col-3" })
               ])
             ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.channeldash,
-                  expression: "channeldash"
-                }
-              ],
-              attrs: { id: "nav-channel" }
-            },
-            [_vm._v("channel settings here")]
           ),
           _vm._v(" "),
           _c(
@@ -106064,15 +106727,15 @@ if (false) {
 }
 
 /***/ }),
-/* 169 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(170)
+var __vue_script__ = __webpack_require__(172)
 /* template */
-var __vue_template__ = __webpack_require__(171)
+var __vue_template__ = __webpack_require__(173)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106111,7 +106774,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 170 */
+/* 172 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106239,7 +106902,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 171 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106509,15 +107172,15 @@ if (false) {
 }
 
 /***/ }),
-/* 172 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(173)
+var __vue_script__ = __webpack_require__(175)
 /* template */
-var __vue_template__ = __webpack_require__(174)
+var __vue_template__ = __webpack_require__(176)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106556,7 +107219,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 173 */
+/* 175 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106721,7 +107384,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 174 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106941,19 +107604,19 @@ if (false) {
 }
 
 /***/ }),
-/* 175 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(176)
+  __webpack_require__(178)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(178)
+var __vue_script__ = __webpack_require__(180)
 /* template */
-var __vue_template__ = __webpack_require__(179)
+var __vue_template__ = __webpack_require__(181)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -106992,17 +107655,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 176 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(177);
+var content = __webpack_require__(179);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("4b800605", content, false, {});
+var update = __webpack_require__(7)("4b800605", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107018,10 +107681,10 @@ if(false) {
 }
 
 /***/ }),
-/* 177 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -107032,7 +107695,7 @@ exports.push([module.i, "\n.chatroom {\n\n    width: 100%;\n    height: 100%;\n\
 
 
 /***/ }),
-/* 178 */
+/* 180 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -107149,7 +107812,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 179 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -107258,15 +107921,15 @@ if (false) {
 }
 
 /***/ }),
-/* 180 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(181)
+var __vue_script__ = __webpack_require__(183)
 /* template */
-var __vue_template__ = __webpack_require__(182)
+var __vue_template__ = __webpack_require__(184)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -107305,11 +107968,24 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 181 */
+/* 183 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -107409,7 +108085,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 182 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -107444,7 +108120,14 @@ var render = function() {
                     },
                     attrs: { href: "#" }
                   },
-                  [_vm._v(_vm._s(_vm.streamer.name))]
+                  [
+                    _vm._v("Stream "),
+                    _vm.streamer.now_live
+                      ? _c("small", { staticStyle: { color: "#dc3545" } }, [
+                          _vm._v("live")
+                        ])
+                      : _vm._e()
+                  ]
                 )
               ]
             ),
@@ -107532,50 +108215,80 @@ var render = function() {
             ]
           },
           [
-            _vm.streamer.now_live
-              ? _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "video",
-                    {
-                      staticClass: "video-js",
-                      attrs: {
-                        id: "vid1",
-                        controls: "",
-                        preload: "auto",
-                        "data-setup": '{ "aspectRatio": "16:9" }'
-                      }
-                    },
-                    [
-                      _c("source", {
-                        attrs: {
-                          src:
-                            "http://10.0.0.61:8080/hls/" +
-                            _vm.streamer.stream_token +
-                            ".m3u8",
-                          type: "application/x-mpegURL"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ]
-                  )
-                ])
-              : _c(
-                  "div",
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "row container-fluid pl-3" }, [
+                _c(
+                  "a",
                   {
-                    staticClass: "card-body",
-                    staticStyle: { "text-align": "center" }
+                    staticClass: "m-2",
+                    attrs: { href: "/profilepage/" + _vm.streamer.name }
                   },
                   [
                     _c("img", {
-                      staticStyle: { width: "85%" },
                       attrs: {
-                        src: "/images/offline.png",
-                        alt: "streamer offline"
+                        src: _vm.streamer.profilecontent.img_url,
+                        width: "75px"
                       }
                     })
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("div", [
+                  _c("h2", { staticClass: "card-title pt-2 pl-2 pb-0 mb-0" }, [
+                    _vm._v(_vm._s(_vm.streamer.stream.title))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "px-2",
+                      attrs: { href: "/profilepage/" + _vm.streamer.name }
+                    },
+                    [_vm._v(_vm._s(_vm.streamer.name))]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _vm.streamer.now_live
+                  ? _c("div", [
+                      _c(
+                        "video",
+                        {
+                          staticClass: "video-js",
+                          attrs: {
+                            id: "vid1",
+                            controls: "",
+                            preload: "auto",
+                            "data-setup": '{ "aspectRatio": "16:9" }'
+                          }
+                        },
+                        [
+                          _c("source", {
+                            attrs: {
+                              src:
+                                "http://10.0.0.61:8080/hls/" +
+                                _vm.streamer.stream_token +
+                                ".m3u8",
+                              type: "application/x-mpegURL"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ]
+                      )
+                    ])
+                  : _c("div", { staticStyle: { "text-align": "center" } }, [
+                      _c("img", {
+                        staticStyle: { width: "85%" },
+                        attrs: {
+                          src: "/images/offline.png",
+                          alt: "streamer offline"
+                        }
+                      })
+                    ])
+              ])
+            ])
           ]
         ),
         _vm._v(" "),
@@ -107681,7 +108394,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "vjs-no-js" }, [
       _vm._v(
-        "\n\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t    \t"
+        "\n\t\t\t\t\t\t    \tTo view this video please enable JavaScript, and consider upgrading to a web browser that\n\t\t\t\t\t\t    \t"
       ),
       _c(
         "a",
@@ -107706,19 +108419,19 @@ if (false) {
 }
 
 /***/ }),
-/* 183 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(184)
+  __webpack_require__(186)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(186)
+var __vue_script__ = __webpack_require__(188)
 /* template */
-var __vue_template__ = __webpack_require__(187)
+var __vue_template__ = __webpack_require__(189)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -107757,17 +108470,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 184 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(185);
+var content = __webpack_require__(187);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("2a28cc49", content, false, {});
+var update = __webpack_require__(7)("2a28cc49", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -107783,10 +108496,10 @@ if(false) {
 }
 
 /***/ }),
-/* 185 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -107797,7 +108510,7 @@ exports.push([module.i, "\n.action-link[data-v-5d1d7d82] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 186 */
+/* 188 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108161,7 +108874,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 187 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108722,19 +109435,19 @@ if (false) {
 }
 
 /***/ }),
-/* 188 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(189)
+  __webpack_require__(191)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(191)
+var __vue_script__ = __webpack_require__(193)
 /* template */
-var __vue_template__ = __webpack_require__(192)
+var __vue_template__ = __webpack_require__(194)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -108773,17 +109486,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 189 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(190);
+var content = __webpack_require__(192);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("10846595", content, false, {});
+var update = __webpack_require__(7)("10846595", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -108799,10 +109512,10 @@ if(false) {
 }
 
 /***/ }),
-/* 190 */
+/* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -108813,7 +109526,7 @@ exports.push([module.i, "\n.action-link[data-v-2ee9fe67] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 191 */
+/* 193 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108934,7 +109647,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 192 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -109043,19 +109756,19 @@ if (false) {
 }
 
 /***/ }),
-/* 193 */
+/* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(194)
+  __webpack_require__(196)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(196)
+var __vue_script__ = __webpack_require__(198)
 /* template */
-var __vue_template__ = __webpack_require__(197)
+var __vue_template__ = __webpack_require__(199)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -109094,17 +109807,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 194 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(195);
+var content = __webpack_require__(197);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("4e7bd74e", content, false, {});
+var update = __webpack_require__(7)("4e7bd74e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -109120,10 +109833,10 @@ if(false) {
 }
 
 /***/ }),
-/* 195 */
+/* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(7)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -109134,7 +109847,7 @@ exports.push([module.i, "\n.action-link[data-v-89c53f18] {\n    cursor: pointer;
 
 
 /***/ }),
-/* 196 */
+/* 198 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109456,7 +110169,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 197 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -109834,15 +110547,15 @@ if (false) {
 }
 
 /***/ }),
-/* 198 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(199)
+var __vue_script__ = __webpack_require__(201)
 /* template */
-var __vue_template__ = __webpack_require__(200)
+var __vue_template__ = __webpack_require__(202)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -109881,7 +110594,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 199 */
+/* 201 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109907,7 +110620,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 200 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -109927,7 +110640,7 @@ if (false) {
 }
 
 /***/ }),
-/* 201 */
+/* 203 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
