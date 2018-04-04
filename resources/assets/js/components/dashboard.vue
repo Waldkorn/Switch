@@ -231,8 +231,8 @@
                     <td>{{singlestream.end_date}}</td>
                     <td>{{singlestream.game}}</td>
                     <td>{{singlestream.tag}}</td>
-                    <td><div class="btn btn-info"  v-on:click="editsingle(singlestream.id)">edit</div></td>
-                    <td><div class="btn btn-danger":id="singlestream.id">delete</div></td>
+                    <td><div class="btn btn-info"  v-on:click="editsingle(singlestream.id,this)">edit</div></td>
+                    <td><div class="btn btn-danger":id="singlestream.id" v-on:click="delete_schedule(singlestream.id,this)">delete</div></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -258,7 +258,7 @@
                     <td>{{dailystream.game}}</td>
                     <td>{{dailystream.tag}}</td>
                     <td><div class="btn btn-info":id="dailystream.id" v-on:click="editdaily(dailystream.id,this)">edit</div></td>
-                    <td><div class="btn btn-danger">delete</div></td>
+                    <td><div class="btn btn-danger"v-on:click="delete_schedule(dailytream.id,this)">delete</div></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -285,8 +285,8 @@
                     <td>{{weeklystream.end_time}}</td>
                     <td>{{weeklystream.game}}</td>
                     <td>{{weeklystream.tag}}</td>
-                    <td><div class="btn btn-info" :id="weeklystream.id">edit</div></td>
-                    <td><div class="btn btn-danger" :id="weeklystream.id">delete</div></td>
+                    <td><div class="btn btn-info" :id="weeklystream.id"v-on:click="editweekly(weeklystream.id,this)">edit</div></td>
+                    <td><div class="btn btn-danger" :id="weeklystream.id" v-on:click="delete_schedule(weeklystream.id,this)">delete</div></td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -308,8 +308,10 @@
                   <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
 
                 </div>
+                <!-- schedule creation forms  -->
               <div class="container-fluid" id="schedule_form_single" style="display:none">
                   <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+                  <!-- single stream -->
                 <form>
                 <div class="form-group">
                   <label for="single_title">Name</label>
@@ -341,6 +343,7 @@
 
             <div class="container-fluid" id="schedule_form_daily" style="display:none">
                 <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+                <!-- daily stream -->
               <form>
               <div class="form-group">
                 <label for="daily_title">Name</label>
@@ -367,6 +370,7 @@
                 </select>
               </div>
               <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_daily">Add event</div>
+                  <!-- weekly stream -->
             </form>
           </div>
 
@@ -412,9 +416,13 @@
             <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_weekly">Add event</div>
           </form>
         </div>
+            <!-- end creation forms -->
+            <!-- update forms -->
         <div class="container-fluid" id="editdailyschedule" style="display:none">
           <h3> Update daily stream </h3>
+            <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editdaily">Nevermind </div>
           <form>
+            <input type="hidden" id="editdaily_id">
           <div class="form-group">
             <label for="editdaily_title">Name</label>
             <input type="text" class="form-control" id="editdaily_title" name="editdaily_title" placeholder="Event Name">
@@ -439,13 +447,15 @@
               <option v-for="game in games" :value="game.id">{{game.name}}</option>
             </select>
           </div>
-          <div id="submiteditdailybtn" class="btn btn-danger btn-lg btn-block" >Add event</div>
+          <div id="submiteditdailybtn" class="btn btn-danger btn-lg btn-block" v-on:click="updatedaily">Update</div>
         </form>
       </div>
-
+  <!-- Edit forms  -->
       <div class="container-fluid" id="editsingleschedule" style="display:none">
         <h3> Update single stream </h3>
+          <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editsingle">Nevermind </div>
         <form>
+          <input type="hidden" id="editsingle_id">
         <div class="form-group">
           <label for="editsingle_title">Name</label>
           <input type="text" class="form-control" id="editsingle_title" name="editsingle_title" placeholder="Event Name">
@@ -470,13 +480,15 @@
             <option v-for="game in games" :value="game.id">{{game.name}}</option>
           </select>
         </div>
-        <div id="submiteditsinglebtn" class="btn btn-danger btn-lg btn-block" >Add event</div>
+        <div id="submiteditsinglebtn" class="btn btn-danger btn-lg btn-block"  v-on:click="updatesingle">Update</div>
       </form>
     </div>
 
     <div class="container-fluid" id="editweeklyschedule" style="display:none">
       <h3> Update weekly stream </h3>
+      <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editweekly">Nevermind </div>
       <form>
+        <input type="hidden" id="editweekly_id">
       <div class="form-group">
         <label for="editweekly_title">Name</label>
         <input type="text" class="form-control" id="editweekly_title" name="editweekly_title" placeholder="Event Name">
@@ -513,7 +525,7 @@
           <option v-for="game in games" :value="game.id">{{game.name}}</option>
         </select>
       </div>
-      <div id="submiteditweeklybtn" class="btn btn-danger btn-lg btn-block" >Add event</div>
+      <div id="submiteditweeklybtn" class="btn btn-danger btn-lg btn-block" v-on:click="updateweekly">Update</div>
     </form>
   </div>
       </div>
@@ -669,29 +681,126 @@ export default {
        })
       },
       editsingle: function(id, value){
-        this.editsingle = this.allschedules.filter(x => x.id == id);
-
-
+        this.editsingletemp = JSON.parse(JSON.stringify(this.allschedules.filter(x => x.id == id)));
+        document.getElementById('addschedulebuttons').style.display="none";
+        document.getElementById('editsingleschedule').style.display="block";
+        document.getElementById('editweeklyschedule').style.display="none";
+        document.getElementById('editdailyschedule').style.display="none";
+        document.getElementById('editsingle_title').value = this.editsingletemp[0].title;
+        document.getElementById('editsingle_game').value = this.editsingletemp[0].game;
+        document.getElementById('editsingle_tag').value = this.editsingletemp[0].tag;
+        document.getElementById('editsingle_id').value = id;
       },
+      updatesingle: function(){
+        axios.post('/api/editschedulesingle', {
+          single_id:document.getElementById('editsingle_id').value,
+          single_title: document.getElementById('editsingle_title').value,
+          single_start: document.getElementById('editsingle_start_date').value,
+          single_end: document.getElementById('editsingle_end_date').value,
+          single_tag: document.getElementById('editsingle_tag').value,
+          single_game: document.getElementById('editsingle_game').value,
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('editsingleschedule').style.display="none";
+       })
+     },
       editdaily: function(id, value){
         this.editdailytemp = JSON.parse(JSON.stringify(this.allschedules.filter(x => x.id == id)));
+        document.getElementById('addschedulebuttons').style.display="none";
+        document.getElementById('editsingleschedule').style.display="none";
         document.getElementById('editdailyschedule').style.display="block";
+        document.getElementById('editweeklyschedule').style.display="none";
         document.getElementById('editdaily_title').value = this.editdailytemp[0].title;
         document.getElementById('editdaily_start_time').value = this.editdailytemp[0].start_time;
         document.getElementById('editdaily_end_time').value = this.editdailytemp[0].end_time;
         document.getElementById('editdaily_game').value = this.editdailytemp[0].game;
         document.getElementById('editdaily_tag').value = this.editdailytemp[0].tag;
+        document.getElementById('editdaily_id').value = id;
       },
+      updatedaily: function(){
+        axios.post('/api/editscheduledaily', {
+          daily_id:document.getElementById('editdaily_id').value,
+          daily_title: document.getElementById('editdaily_title').value,
+          daily_start: document.getElementById('editdaily_start_time').value,
+          daily_end: document.getElementById('editdaily_end_time').value,
+          daily_tag: document.getElementById('editdaily_tag').value,
+          daily_game: document.getElementById('editdaily_game').value,
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('schedule_form_single').style.display = "none";
+         document.getElementById('schedule_form_weekly').style.display = "none";
+         document.getElementById('editdailyschedule').style.display="none";
+       })
+     },
       editweekly: function(id,value){
-        this.editweekly = this.allschedules.filter(x => x.id == id);
+        this.editweeklytemp = JSON.parse(JSON.stringify(this.allschedules.filter(x => x.id == id)));
+        document.getElementById('addschedulebuttons').style.display="none";
+        document.getElementById('editsingleschedule').style.display="none";
+        document.getElementById('editdailyschedule').style.display="none";
+        document.getElementById('editweeklyschedule').style.display="block";
+        document.getElementById('editweekly_title').value = this.editweeklytemp[0].title;
+        document.getElementById('editweekly_day').value = this.editweeklytemp[0].day;
+        document.getElementById('editweekly_start_time').value = this.editweeklytemp[0].start_time;
+        document.getElementById('editweekly_end_time').value = this.editweeklytemp[0].end_time;
+        document.getElementById('editweekly_game').value = this.editweeklytemp[0].game;
+        document.getElementById('editweekly_tag').value = this.editweeklytemp[0].tag;
+        document.getElementById('editweekly_id').value = id;
       },
+      updateweekly:function(){
+        axios.post('/api/editscheduleweekly', {
+          weekly_id: document.getElementById('editweekly_id').value,
+          weekly_title: document.getElementById('editweekly_title').value,
+          weekly_day: document.getElementById('editweekly_day').value,
+          weekly_start: document.getElementById('editweekly_start_time').value,
+          weekly_end: document.getElementById('editweekly_end_time').value,
+          weekly_tag: document.getElementById('editweekly_tag').value,
+          weekly_game: document.getElementById('editweekly_game').value,
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('editweeklyschedule').style.display="none";
+
+       })
+     },
+      cancel_editsingle: function() {
+        document.getElementById('editsingleschedule').style.display="none";
+        document.getElementById('addschedulebuttons').style.display="block";
+
+			},
+      cancel_editdaily: function() {
+        document.getElementById('editdailyschedule').style.display="none";
+        document.getElementById('addschedulebuttons').style.display="block";
+
+			},
+      cancel_editweekly: function() {
+			  document.getElementById('editweeklyschedule').style.display="none";
+        document.getElementById('addschedulebuttons').style.display="block";
+			},
+      delete_schedule: function(id,value) {
+        console.log(id);
+        axios.post('/api/deleteschedule', {
+          delete_id: id,
+
+       }).then(response => {
+         document.getElementById('addschedulebuttons').style.display = "block";
+         document.getElementById('schedulemsg').style.display = "block";
+         document.getElementById('schedulemsg').innerHTML = response.data;
+         document.getElementById('editweeklyschedule').style.display="none";
+
+       })
+			},
       showstreamdash: function() {
-				this.streamdash = true;
-				this.profiledash = false;
-				this.channeldash = false;
+        this.streamdash = true;
+        this.profiledash = false;
+        this.channeldash = false;
         this.announcementsdash = false;
         this.scheduledash = false;
-			},
+      },
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;

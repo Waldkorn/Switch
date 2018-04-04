@@ -119594,6 +119594,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -119749,24 +119761,119 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     editsingle: function editsingle(id, value) {
-      this.editsingle = this.allschedules.filter(function (x) {
+      this.editsingletemp = JSON.parse(JSON.stringify(this.allschedules.filter(function (x) {
         return x.id == id;
+      })));
+      document.getElementById('addschedulebuttons').style.display = "none";
+      document.getElementById('editsingleschedule').style.display = "block";
+      document.getElementById('editweeklyschedule').style.display = "none";
+      document.getElementById('editdailyschedule').style.display = "none";
+      document.getElementById('editsingle_title').value = this.editsingletemp[0].title;
+      document.getElementById('editsingle_game').value = this.editsingletemp[0].game;
+      document.getElementById('editsingle_tag').value = this.editsingletemp[0].tag;
+      document.getElementById('editsingle_id').value = id;
+    },
+    updatesingle: function updatesingle() {
+      axios.post('/api/editschedulesingle', {
+        single_id: document.getElementById('editsingle_id').value,
+        single_title: document.getElementById('editsingle_title').value,
+        single_start: document.getElementById('editsingle_start_date').value,
+        single_end: document.getElementById('editsingle_end_date').value,
+        single_tag: document.getElementById('editsingle_tag').value,
+        single_game: document.getElementById('editsingle_game').value
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('editsingleschedule').style.display = "none";
       });
     },
     editdaily: function editdaily(id, value) {
       this.editdailytemp = JSON.parse(JSON.stringify(this.allschedules.filter(function (x) {
         return x.id == id;
       })));
+      document.getElementById('addschedulebuttons').style.display = "none";
+      document.getElementById('editsingleschedule').style.display = "none";
       document.getElementById('editdailyschedule').style.display = "block";
+      document.getElementById('editweeklyschedule').style.display = "none";
       document.getElementById('editdaily_title').value = this.editdailytemp[0].title;
       document.getElementById('editdaily_start_time').value = this.editdailytemp[0].start_time;
       document.getElementById('editdaily_end_time').value = this.editdailytemp[0].end_time;
       document.getElementById('editdaily_game').value = this.editdailytemp[0].game;
       document.getElementById('editdaily_tag').value = this.editdailytemp[0].tag;
+      document.getElementById('editdaily_id').value = id;
+    },
+    updatedaily: function updatedaily() {
+      axios.post('/api/editscheduledaily', {
+        daily_id: document.getElementById('editdaily_id').value,
+        daily_title: document.getElementById('editdaily_title').value,
+        daily_start: document.getElementById('editdaily_start_time').value,
+        daily_end: document.getElementById('editdaily_end_time').value,
+        daily_tag: document.getElementById('editdaily_tag').value,
+        daily_game: document.getElementById('editdaily_game').value
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('schedule_form_single').style.display = "none";
+        document.getElementById('schedule_form_weekly').style.display = "none";
+        document.getElementById('editdailyschedule').style.display = "none";
+      });
     },
     editweekly: function editweekly(id, value) {
-      this.editweekly = this.allschedules.filter(function (x) {
+      this.editweeklytemp = JSON.parse(JSON.stringify(this.allschedules.filter(function (x) {
         return x.id == id;
+      })));
+      document.getElementById('addschedulebuttons').style.display = "none";
+      document.getElementById('editsingleschedule').style.display = "none";
+      document.getElementById('editdailyschedule').style.display = "none";
+      document.getElementById('editweeklyschedule').style.display = "block";
+      document.getElementById('editweekly_title').value = this.editweeklytemp[0].title;
+      document.getElementById('editweekly_day').value = this.editweeklytemp[0].day;
+      document.getElementById('editweekly_start_time').value = this.editweeklytemp[0].start_time;
+      document.getElementById('editweekly_end_time').value = this.editweeklytemp[0].end_time;
+      document.getElementById('editweekly_game').value = this.editweeklytemp[0].game;
+      document.getElementById('editweekly_tag').value = this.editweeklytemp[0].tag;
+      document.getElementById('editweekly_id').value = id;
+    },
+    updateweekly: function updateweekly() {
+      axios.post('/api/editscheduleweekly', {
+        weekly_id: document.getElementById('editweekly_id').value,
+        weekly_title: document.getElementById('editweekly_title').value,
+        weekly_day: document.getElementById('editweekly_day').value,
+        weekly_start: document.getElementById('editweekly_start_time').value,
+        weekly_end: document.getElementById('editweekly_end_time').value,
+        weekly_tag: document.getElementById('editweekly_tag').value,
+        weekly_game: document.getElementById('editweekly_game').value
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('editweeklyschedule').style.display = "none";
+      });
+    },
+    cancel_editsingle: function cancel_editsingle() {
+      document.getElementById('editsingleschedule').style.display = "none";
+      document.getElementById('addschedulebuttons').style.display = "block";
+    },
+    cancel_editdaily: function cancel_editdaily() {
+      document.getElementById('editdailyschedule').style.display = "none";
+      document.getElementById('addschedulebuttons').style.display = "block";
+    },
+    cancel_editweekly: function cancel_editweekly() {
+      document.getElementById('editweeklyschedule').style.display = "none";
+      document.getElementById('addschedulebuttons').style.display = "block";
+    },
+    delete_schedule: function delete_schedule(id, value) {
+      console.log(id);
+      axios.post('/api/deleteschedule', {
+        delete_id: id
+
+      }).then(function (response) {
+        document.getElementById('addschedulebuttons').style.display = "block";
+        document.getElementById('schedulemsg').style.display = "block";
+        document.getElementById('schedulemsg').innerHTML = response.data;
+        document.getElementById('editweeklyschedule').style.display = "none";
       });
     },
     showstreamdash: function showstreamdash() {
@@ -122057,7 +122164,10 @@ var render = function() {
                                           staticClass: "btn btn-info",
                                           on: {
                                             click: function($event) {
-                                              _vm.editsingle(singlestream.id)
+                                              _vm.editsingle(
+                                                singlestream.id,
+                                                this
+                                              )
                                             }
                                           }
                                         },
@@ -122070,7 +122180,15 @@ var render = function() {
                                         "div",
                                         {
                                           staticClass: "btn btn-danger",
-                                          attrs: { id: singlestream.id }
+                                          attrs: { id: singlestream.id },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.delete_schedule(
+                                                singlestream.id,
+                                                this
+                                              )
+                                            }
+                                          }
                                         },
                                         [_vm._v("delete")]
                                       )
@@ -122144,7 +122262,23 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _vm._m(10, true),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              _vm.delete_schedule(
+                                                _vm.dailytream.id,
+                                                this
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("delete")]
+                                      )
+                                    ]),
                                     _vm._v(" "),
                                     _c("td")
                                   ])
@@ -122167,7 +122301,7 @@ var render = function() {
                               }
                             },
                             [
-                              _vm._m(11),
+                              _vm._m(10),
                               _vm._v(" "),
                               _c(
                                 "tbody",
@@ -122208,7 +122342,15 @@ var render = function() {
                                         "div",
                                         {
                                           staticClass: "btn btn-info",
-                                          attrs: { id: weeklystream.id }
+                                          attrs: { id: weeklystream.id },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.editweekly(
+                                                weeklystream.id,
+                                                this
+                                              )
+                                            }
+                                          }
                                         },
                                         [_vm._v("edit")]
                                       )
@@ -122219,7 +122361,15 @@ var render = function() {
                                         "div",
                                         {
                                           staticClass: "btn btn-danger",
-                                          attrs: { id: weeklystream.id }
+                                          attrs: { id: weeklystream.id },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.delete_schedule(
+                                                weeklystream.id,
+                                                this
+                                              )
+                                            }
+                                          }
                                         },
                                         [_vm._v("delete")]
                                       )
@@ -122242,7 +122392,7 @@ var render = function() {
                   { staticClass: "col-5", staticStyle: { padding: "0px" } },
                   [
                     _c("div", { staticClass: "card" }, [
-                      _vm._m(12),
+                      _vm._m(11),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c(
@@ -122306,7 +122456,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
-                              _vm._m(13),
+                              _vm._m(12),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-row" }, [
                                 _c("div", { staticClass: "col" }, [
@@ -122336,7 +122486,7 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _vm._m(14),
+                              _vm._m(13),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "single_game" } }, [
@@ -122394,11 +122544,11 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
+                              _vm._m(14),
+                              _vm._v(" "),
                               _vm._m(15),
                               _vm._v(" "),
                               _vm._m(16),
-                              _vm._v(" "),
-                              _vm._m(17),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "daily_game" } }, [
@@ -122456,13 +122606,13 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("form", [
+                              _vm._m(17),
+                              _vm._v(" "),
                               _vm._m(18),
                               _vm._v(" "),
                               _vm._m(19),
                               _vm._v(" "),
                               _vm._m(20),
-                              _vm._v(" "),
-                              _vm._m(21),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "weekly_game" } }, [
@@ -122512,12 +122662,25 @@ var render = function() {
                           [
                             _c("h3", [_vm._v(" Update daily stream ")]),
                             _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-danger btn-lg btn-block",
+                                on: { click: _vm.cancel_editdaily }
+                              },
+                              [_vm._v("Nevermind ")]
+                            ),
+                            _vm._v(" "),
                             _c("form", [
+                              _c("input", {
+                                attrs: { type: "hidden", id: "editdaily_id" }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(21),
+                              _vm._v(" "),
                               _vm._m(22),
                               _vm._v(" "),
                               _vm._m(23),
-                              _vm._v(" "),
-                              _vm._m(24),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "daily_game" } }, [
@@ -122548,9 +122711,10 @@ var render = function() {
                                 {
                                   staticClass:
                                     "btn btn-danger btn-lg btn-block",
-                                  attrs: { id: "submiteditdailybtn" }
+                                  attrs: { id: "submiteditdailybtn" },
+                                  on: { click: _vm.updatedaily }
                                 },
-                                [_vm._v("Add event")]
+                                [_vm._v("Update")]
                               )
                             ])
                           ]
@@ -122566,12 +122730,25 @@ var render = function() {
                           [
                             _c("h3", [_vm._v(" Update single stream ")]),
                             _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-danger btn-lg btn-block",
+                                on: { click: _vm.cancel_editsingle }
+                              },
+                              [_vm._v("Nevermind ")]
+                            ),
+                            _vm._v(" "),
                             _c("form", [
+                              _c("input", {
+                                attrs: { type: "hidden", id: "editsingle_id" }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(24),
+                              _vm._v(" "),
                               _vm._m(25),
                               _vm._v(" "),
                               _vm._m(26),
-                              _vm._v(" "),
-                              _vm._m(27),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c(
@@ -122604,9 +122781,10 @@ var render = function() {
                                 {
                                   staticClass:
                                     "btn btn-danger btn-lg btn-block",
-                                  attrs: { id: "submiteditsinglebtn" }
+                                  attrs: { id: "submiteditsinglebtn" },
+                                  on: { click: _vm.updatesingle }
                                 },
-                                [_vm._v("Add event")]
+                                [_vm._v("Update")]
                               )
                             ])
                           ]
@@ -122622,14 +122800,27 @@ var render = function() {
                           [
                             _c("h3", [_vm._v(" Update weekly stream ")]),
                             _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "btn btn-danger btn-lg btn-block",
+                                on: { click: _vm.cancel_editweekly }
+                              },
+                              [_vm._v("Nevermind ")]
+                            ),
+                            _vm._v(" "),
                             _c("form", [
+                              _c("input", {
+                                attrs: { type: "hidden", id: "editweekly_id" }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(27),
+                              _vm._v(" "),
                               _vm._m(28),
                               _vm._v(" "),
                               _vm._m(29),
                               _vm._v(" "),
                               _vm._m(30),
-                              _vm._v(" "),
-                              _vm._m(31),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group" }, [
                                 _c(
@@ -122662,9 +122853,10 @@ var render = function() {
                                 {
                                   staticClass:
                                     "btn btn-danger btn-lg btn-block",
-                                  attrs: { id: "submiteditweeklybtn" }
+                                  attrs: { id: "submiteditweeklybtn" },
+                                  on: { click: _vm.updateweekly }
                                 },
-                                [_vm._v("Add event")]
+                                [_vm._v("Update")]
                               )
                             ])
                           ]
@@ -122870,14 +123062,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("tag")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "btn btn-danger" }, [_vm._v("delete")])
     ])
   },
   function() {
