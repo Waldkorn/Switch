@@ -21,9 +21,13 @@ class ScheduleController extends Controller
     $games = Game::get();
     $streams= Schedule::
     where('user_id',$user->id)
-    ->where('start_date', '>=', Carbon::now('Europe/Amsterdam'))
-    ->orWhere('type','daily')
-    ->orWhere('type','weekly')
+    ->where(function ($query)
+            {
+                $query->where('start_date', '>=', Carbon::now('Europe/Amsterdam'))
+                      ->orWhere('type','daily')
+                      ->orWhere('type','weekly');
+            })
+
     ->get();
 
     //separate weekly, daly and single streams into arrays.
@@ -95,9 +99,12 @@ class ScheduleController extends Controller
         $games = Game::get();
         $streams= Schedule::
         where('user_id',$user->id)
-        ->orWhere('start_date', '>=', Carbon::now('Europe/Amsterdam'))
-        ->orWhere('type','daily')
-        ->orWhere('type','weekly')
+        ->where(function ($query)
+                {
+                    $query->where('start_date', '>=', Carbon::now('Europe/Amsterdam'))
+                          ->orWhere('type','daily')
+                          ->orWhere('type','weekly');
+                })
         ->get();
 
         foreach ($streams as $stream) {
