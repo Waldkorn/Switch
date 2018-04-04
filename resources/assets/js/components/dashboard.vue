@@ -155,384 +155,449 @@
       <div  id="nav-channel" v-show="channeldash">channel settings here</div>
 
       <div v-show="announcementsdash">
-          <div class="row px-2">
 
-            <div class="col-md-6">
+        <div class="row px-2">
 
-              <h3 class="display-4" style="color: #343a40;">New announcement</h3>
+          <div class="col-md-6">
 
-              <form action="/announcements/post" method="POST">
+            <h3 class="display-4" style="color: #343a40;">New announcement</h3>
 
-                <div class="form-group">
-                 <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
-               </div>
+            <form action="/announcements/post" method="POST">
 
-                <div class="form-group">
-                  <label for="Title">Title</label>
-                  <input type="text" class="form-control" name="title" placeholder="Enter title">
-                </div>
+              <div class="form-group">
+               <input type="hidden" name="_token" id="csrf-token" :value="csrftoken" />
+             </div>
 
-                <div class="form-group">
-                  <textarea type="textarea" class="form-control" name="message" placeholder="Announcement" rows="5"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-danger float-right">Submit</button>
-
-              </form>
-
-            </div>
-
-            <div class="col-md-6">
-
-              <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
-
-              <div class="card mb-2" v-for="announcement in announcements">
-                <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
-                  <div class="card-title">
-                    <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
-                  </div>
-                  <hr>
-                  <div class="card-text">
-                    {{ announcement.message }}
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="Title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="Enter title">
               </div>
 
+              <div class="form-group">
+                <textarea type="textarea" class="form-control" name="message" placeholder="Announcement" rows="5"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-danger float-right">Submit</button>
+
+            </form>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <h3 class="display-4" style="color: #343a40;">Your recent announcements</h3>
+
+            <div class="card mb-2" v-for="announcement in announcements">
+              <div class="card-body bg-dark" style="color:rgb(245, 245, 220);">
+                <div class="card-title">
+                  <img height="32px" :src=announcement.user.profilecontent.img_url><span><a :href="'/profilepage/' + announcement.user.name"><h3 class="ml-2" style="display:inline">{{announcement.user.name}}</h3></a><br><h5 class="pt-1">{{ announcement.title }}</h5></span>
+                </div>
+                <hr>
+                <div class="card-text">
+                  {{ announcement.message }}
+                </div>
+              </div>
             </div>
 
           </div>
+
         </div>
+      </div>
 
       <div  id="nav-channel" v-show="scheduledash">
         <div class="row">
           <div class="col-7" style="padding:0px;padding-left:1rem">
+
             <div class="card">
-            <div class="card-header">
-
-            </div>
-            <div class="card-body" style="padding:0px">
+              <div class="card-body" style="padding:0px">
                 <h5 class="card-title">Single streams</h5>
-              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
-                <thead>
-                  <tr style="color:#dc3545">
-                    <th scope="col">type</th>
-                    <th scope="col">name</th>
-                    <th scope="col">start</th>
-                    <th scope="col">end</th>
-                    <th scope="col">game</th>
-                    <th scope="col">tag</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="singlestream in singlestreams">
-                    <th scope="row">{{singlestream.type}}</th>
-                    <td>{{singlestream.title}}</td>
-                    <td>{{singlestream.start_date}}</td>
-                    <td>{{singlestream.end_date}}</td>
-                    <td>{{singlestream.game}}</td>
-                    <td>{{singlestream.tag}}</td>
-                    <td><div class="btn btn-info"  v-on:click="editsingle(singlestream.id,this)">edit</div></td>
-                    <td><div class="btn btn-danger":id="singlestream.id" v-on:click="delete_schedule(singlestream.id,this)">delete</div></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-                  <h5 class="card-title">Daily streams</h5>
-              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
-                <thead>
-                  <tr style="color:#dc3545">
-                    <th scope="col">type</th>
-                    <th scope="col">name</th>
-                    <th scope="col">start</th>
-                    <th scope="col">end</th>
-                    <th scope="col">game</th>
-                    <th scope="col">tag</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="dailystream in dailystreams">
-                    <th scope="row">{{dailystream.type}}</th>
-                    <td>{{dailystream.title}}</td>
-                    <td>{{dailystream.start_time}}</td>
-                    <td>{{dailystream.end_time}}</td>
-                    <td>{{dailystream.game}}</td>
-                    <td>{{dailystream.tag}}</td>
-                    <td><div class="btn btn-info":id="dailystream.id" v-on:click="editdaily(dailystream.id,this)">edit</div></td>
-                    <td><div class="btn btn-danger"v-on:click="delete_schedule(dailytream.id,this)">delete</div></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-                  <h5 class="card-title">Weekly streams</h5>
-              <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
-                <thead>
-                  <tr style="color:#dc3545">
-                    <th scope="col">type</th>
-                    <th scope="col">name</th>
-                    <th scope="col">day</th>
-                    <th scope="col">start</th>
-                    <th scope="col">end</th>
-                    <th scope="col">game</th>
-                    <th scope="col">tag</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="weeklystream in weeklystreams">
-                    <th scope="row">{{weeklystream.type}}</th>
-                    <td>{{weeklystream.title}}</td>
-                      <td>{{weeklystream.day}}</td>
-                    <td>{{weeklystream.start_time}}</td>
-                    <td>{{weeklystream.end_time}}</td>
-                    <td>{{weeklystream.game}}</td>
-                    <td>{{weeklystream.tag}}</td>
-                    <td><div class="btn btn-info" :id="weeklystream.id"v-on:click="editweekly(weeklystream.id,this)">edit</div></td>
-                    <td><div class="btn btn-danger" :id="weeklystream.id" v-on:click="delete_schedule(weeklystream.id,this)">delete</div></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-        </div>
-        </div>
-            <div class="col-5" style="padding:0px">
-              <div class="card">
+                <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
+                  <thead>
+                    <tr style="color:#dc3545">
+                      <th scope="col">type</th>
+                      <th scope="col">name</th>
+                      <th scope="col">start</th>
+                      <th scope="col">end</th>
+                      <th scope="col">game</th>
+                      <th scope="col">tag</th>
+                    </tr>
+                  </thead>
 
+                  <tbody>
+                    <tr v-for="singlestream in singlestreams">
+                      <th scope="row">{{singlestream.type}}</th>
+                      <td>{{singlestream.title}}</td>
+                      <td>{{singlestream.start_date}}</td>
+                      <td>{{singlestream.end_date}}</td>
+                      <td>{{singlestream.game}}</td>
+                      <td>{{singlestream.tag}}</td>
+                      <td><div class="btn btn-info"  v-on:click="editsingle(singlestream.id,this)">edit</div></td>
+                      <td><div class="btn btn-danger":id="singlestream.id" v-on:click="delete_schedule(singlestream.id,this)">delete</div></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h5 class="card-title">Daily streams</h5>
+                <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
+                  <thead>
+                    <tr style="color:#dc3545">
+                      <th scope="col">type</th>
+                      <th scope="col">name</th>
+                      <th scope="col">start</th>
+                      <th scope="col">end</th>
+                      <th scope="col">game</th>
+                      <th scope="col">tag</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr v-for="dailystream in dailystreams">
+                      <th scope="row">{{dailystream.type}}</th>
+                      <td>{{dailystream.title}}</td>
+                      <td>{{dailystream.start_time}}</td>
+                      <td>{{dailystream.end_time}}</td>
+                      <td>{{dailystream.game}}</td>
+                      <td>{{dailystream.tag}}</td>
+                      <td><div class="btn btn-info":id="dailystream.id" v-on:click="editdaily(dailystream.id,this)">edit</div></td>
+                      <td><div class="btn btn-danger"v-on:click="delete_schedule(dailytream.id,this)">delete</div></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h5 class="card-title">Weekly streams</h5>
+                <table class="table table-striped table-dark" style="margin:0px;background-color:#343a40">
+                  <thead>
+                    <tr style="color:#dc3545">
+                      <th scope="col">type</th>
+                      <th scope="col">name</th>
+                      <th scope="col">day</th>
+                      <th scope="col">start</th>
+                      <th scope="col">end</th>
+                      <th scope="col">game</th>
+                      <th scope="col">tag</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr v-for="weeklystream in weeklystreams">
+                      <th scope="row">{{weeklystream.type}}</th>
+                      <td>{{weeklystream.title}}</td>
+                        <td>{{weeklystream.day}}</td>
+                      <td>{{weeklystream.start_time}}</td>
+                      <td>{{weeklystream.end_time}}</td>
+                      <td>{{weeklystream.game}}</td>
+                      <td>{{weeklystream.tag}}</td>
+                      <td><div class="btn btn-info" :id="weeklystream.id"v-on:click="editweekly(weeklystream.id,this)">edit</div></td>
+                      <td><div class="btn btn-danger" :id="weeklystream.id" v-on:click="delete_schedule(weeklystream.id,this)">delete</div></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-5" style="padding:0px">
+            <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Add a scheduled event</h5>
               </div>
+
               <div class="card-body">
+
                 <div class="container-fluid" id="addschedulebuttons">
                   <div class="btn btn-warning btn-lg btn-block" v-on:click="show_form_single">Single event</div>
                   <div class="btn btn-secondary btn-lg btn-block" v-on:click="show_form_daily">Daily stream</div>
                   <div class="btn btn-info btn-lg btn-block" v-on:click="show_form_weekly">Weekly stream</div>
                   <div class="alert alert-success" id="schedulemsg" style="display:none"></div>
+                </div>
 
-                </div>
-                <!-- schedule creation forms  -->
-              <div class="container-fluid" id="schedule_form_single" style="display:none">
-                  <div class="btn btn-danger" v-on:click="show_back" >Back</div>
-                  <!-- single stream -->
-                <form>
-                <div class="form-group">
-                  <label for="single_title">Name</label>
-                  <input type="text" class="form-control" id="single_title" name="single_title" placeholder="Event Name">
-                </div>
-                <div class="form-row">
-                  <div class="col">
-                      <span>Start：</span>
-                      <input type="datetime-local" name="single_start" id="single_start" :min="currentdate">
-                </div>
-                <div class="col">
-                      <span>End：</span>
-                      <input type="datetime-local" name="single_end" id="single_end" :min="currentdate">
-                </div>
-                </div>
-                <div class="form-group">
-                  <label for="single_tag">tag</label>
-                  <input type="text" class="form-control" id="single_tag" name="single_tag" placeholder="idk">
-                </div>
-                <div class="form-group">
-                  <label for="single_game">Game:</label>
-                  <select class="form-control" id="single_game" name="single_game">
-                    <option v-for="game in games" :value="game.id">{{game.name}}</option>
-                  </select>
-                </div>
-                <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_single">Add event</div>
-              </form>
-            </div>
+                  <!-- schedule creation forms  -->
+                  <div class="container-fluid" id="schedule_form_single" style="display:none">
+                    <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+                    <!-- single stream -->
+                    <form>
 
-            <div class="container-fluid" id="schedule_form_daily" style="display:none">
-                <div class="btn btn-danger" v-on:click="show_back" >Back</div>
-                <!-- daily stream -->
-              <form>
-              <div class="form-group">
-                <label for="daily_title">Name</label>
-                <input type="text" class="form-control" id="daily_title" name="daily_title" placeholder="Event Name">
-              </div>
-              <div class="form-row">
-                <div class="col">
-                    <span>Start：</span>
-                    <input type="time" name="daily_start" id="daily_start">
-              </div>
-              <div class="col">
-                    <span>End：</span>
-                    <input type="time" name="daily_end" id="daily_end">
-              </div>
-              </div>
-              <div class="form-group">
-                <label for="daily_tag">tag</label>
-                <input type="text" class="form-control" id="daily_tag" name="daily_tag" placeholder="idk">
-              </div>
-              <div class="form-group">
-                <label for="daily_game">Game:</label>
-                <select class="form-control" id="daily_game" name="daily_game">
-                  <option v-for="game in games" :value="game.id">{{game.name}}</option>
-                </select>
-              </div>
-              <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_daily">Add event</div>
+                      <div class="form-group">
+                        <label for="single_title">Name</label>
+                        <input type="text" class="form-control" id="single_title" name="single_title" placeholder="Event Name">
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <span>Start：</span>
+                          <input type="datetime-local" name="single_start" id="single_start" :min="currentdate">
+                        </div>
+
+                        <div class="col">
+                          <span>End：</span>
+                          <input type="datetime-local" name="single_end" id="single_end" :min="currentdate">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="single_tag">tag</label>
+                        <input type="text" class="form-control" id="single_tag" name="single_tag" placeholder="idk">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="single_game">Game:</label>
+                        <select class="form-control" id="single_game" name="single_game">
+                          <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                        </select>
+                      </div>
+
+                      <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_single">Add event</div>
+
+                    </form>
+                  </div>
+
+                  <!-- daily stream -->
+                  <div class="container-fluid" id="schedule_form_daily" style="display:none">
+                    <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+
+                    <form>
+                      <div class="form-group">
+                        <label for="daily_title">Name</label>
+                        <input type="text" class="form-control" id="daily_title" name="daily_title" placeholder="Event Name">
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <span>Start：</span>
+                          <input type="time" name="daily_start" id="daily_start">
+                        </div>
+
+                        <div class="col">
+                          <span>End：</span>
+                          <input type="time" name="daily_end" id="daily_end">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="daily_tag">tag</label>
+                        <input type="text" class="form-control" id="daily_tag" name="daily_tag" placeholder="idk">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="daily_game">Game:</label>
+                        <select class="form-control" id="daily_game" name="daily_game">
+                          <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                        </select>
+                      </div>
+
+                      <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_daily">Add event</div>
+
+                    </form>
+                  </div>
+
                   <!-- weekly stream -->
-            </form>
+                  <div class="container-fluid" id="schedule_form_weekly" style="display:none">
+                      <div class="btn btn-danger" v-on:click="show_back" >Back</div>
+
+                    <form>
+
+                      <div class="form-group">
+                        <label for="weekly_title">Name</label>
+                        <input type="text" class="form-control" id="weekly_title" name="weekly_title" placeholder="Stream Name">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="weekly_day">Day:</label>
+                        <select class="form-control" id="weekly_day" name="weekly_day">
+                          <option value="monday">Monday</option>
+                          <option value="Tuesday">Tuesday</option>
+                          <option value="Wednesday">Wednesday</option>
+                          <option value="Thursday">Thursday</option>
+                          <option value="Friday">Friday</option>
+                          <option value="Saturday">Saturday</option>
+                          <option value="Sunday">Sunday</option>
+                        </select>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <span>Start：</span>
+                          <input type="time" name="weekly_start" id="weekly_start">
+                        </div>
+                        <div class="col">
+                          <span>End：</span>
+                          <input type="time" name="weekly_end" id="weekly_end">
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="weekly_tag">tag</label>
+                        <input type="text" class="form-control" id="weekly_tag" name="weekly_tag" placeholder="idk">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="weekly_game">Game:</label>
+                        <select class="form-control" id="weekly_game" name="weekly_game">
+                          <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                        </select>
+                      </div>
+
+                      <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_weekly">Add event</div>
+                    </form>
+                  </div>
+                  <!-- end creation forms -->
+
+                  <!-- update forms -->
+                  <!-- edit daily stream  -->
+                  <div class="container-fluid" id="editdailyschedule" style="display:none">
+                    <h3> Update daily stream </h3>
+                    <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editdaily">Never mind </div>
+
+                    <form>
+
+                      <input type="hidden" id="editdaily_id">
+
+                      <div class="form-group">
+                        <label for="editdaily_title">Name</label>
+                        <input type="text" class="form-control" id="editdaily_title" name="editdaily_title" placeholder="Event Name">
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <span>Start：</span>
+                          <input type="time" name="editdaily_start_time" id="editdaily_start_time">
+                        </div>
+
+                        <div class="col">
+                          <span>End：</span>
+                          <input type="time" name="editdaily_end_time" id="editdaily_end_time">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="daily_tag">tag</label>
+                        <input type="text" class="form-control" id="editdaily_tag" name="editdaily_tag" placeholder="idk">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="daily_game">Game:</label>
+                        <select class="form-control" id="editdaily_game" name="editdaily_game">
+                          <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                        </select>
+                      </div>
+
+                      <div id="submiteditdailybtn" class="btn btn-danger btn-lg btn-block" v-on:click="updatedaily">Update</div>
+
+                    </form>
+                  </div>
+                  <!-- edit single stream  -->
+                  <div class="container-fluid" id="editsingleschedule" style="display:none">
+                    <h3> Update single stream </h3>
+                    <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editsingle">Never mind </div>
+
+                    <form>
+
+                      <input type="hidden" id="editsingle_id">
+
+                      <div class="form-group">
+                        <label for="editsingle_title">Name</label>
+                        <input type="text" class="form-control" id="editsingle_title" name="editsingle_title" placeholder="Event Name">
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <span>Start：</span>
+                          <input type="datetime-local" name="editsingle_start_date" id="editsingle_start_date">
+                        </div>
+
+                        <div class="col">
+                            <span>End：</span>
+                            <input type="datetime-local" name="editsingle_end_date" id="editsingle_end_date">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="editsingle_tag">tag</label>
+                        <input type="text" class="form-control" id="editsingle_tag" name="editsingle_tag" placeholder="idk">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="editsingle_game">Game:</label>
+                        <select class="form-control" id="editsingle_game" name="editsingle_game">
+                          <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                        </select>
+                      </div>
+
+                      <div id="submiteditsinglebtn" class="btn btn-danger btn-lg btn-block"  v-on:click="updatesingle">Update</div>
+
+                  </form>
+                </div>
+                <!-- edit weekly stream  -->
+                <div class="container-fluid" id="editweeklyschedule" style="display:none">
+
+                  <h3> Update weekly stream </h3>
+                  <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editweekly">Never mind </div>
+
+                  <form>
+
+                    <input type="hidden" id="editweekly_id">
+
+                    <div class="form-group">
+                      <label for="editweekly_title">Name</label>
+                      <input type="text" class="form-control" id="editweekly_title" name="editweekly_title" placeholder="Event Name">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="editweekly_day">Day:</label>
+                      <select class="form-control" id="editweekly_day" name="editweekly_day">
+                        <option value="monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                      </select>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col">
+                        <span>Start：</span>
+                        <input type="time" name="editweekly_start_time" id="editweekly_start_time">
+                      </div>
+
+                      <div class="col">
+                          <span>End：</span>
+                          <input type="time" name="editweekly_end_time" id="editweekly_end_time">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="editweekly_tag">tag</label>
+                      <input type="text" class="form-control" id="editweekly_tag" name="editweekly_tag" placeholder="idk">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="editweekly_game">Game:</label>
+                      <select class="form-control" id="editweekly_game" name="editweekly_game">
+                        <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                      </select>
+                    </div>
+
+                    <div id="submiteditweeklybtn" class="btn btn-danger btn-lg btn-block" v-on:click="updateweekly">Update</div>
+
+                  </form>
+                </div>
+                <!-- end edit forms  -->
+
+              </div>
+
+            </div>
           </div>
 
-          <div class="container-fluid" id="schedule_form_weekly" style="display:none">
-              <div class="btn btn-danger" v-on:click="show_back" >Back</div>
-            <form>
-            <div class="form-group">
-              <label for="weekly_title">Name</label>
-              <input type="text" class="form-control" id="weekly_title" name="weekly_title" placeholder="Stream Name">
-            </div>
-            <div class="form-group">
-              <label for="weekly_day">Day:</label>
-              <select class="form-control" id="weekly_day" name="weekly_day">
-                <option value="monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="col">
-                  <span>Start：</span>
-                  <input type="time" name="weekly_start" id="weekly_start">
-            </div>
-            <div class="col">
-                  <span>End：</span>
-                  <input type="time" name="weekly_end" id="weekly_end">
-            </div>
-            </div>
-            <div class="form-group">
-              <label for="weekly_tag">tag</label>
-              <input type="text" class="form-control" id="weekly_tag" name="weekly_tag" placeholder="idk">
-            </div>
-            <div class="form-group">
-              <label for="weekly_game">Game:</label>
-              <select class="form-control" id="weekly_game" name="weekly_game">
-                <option v-for="game in games" :value="game.id">{{game.name}}</option>
-              </select>
-            </div>
-            <div id="submitschedulebtn" class="btn btn-danger btn-lg btn-block" v-on:click="add_schedule_weekly">Add event</div>
-          </form>
         </div>
-            <!-- end creation forms -->
-            <!-- update forms -->
-        <div class="container-fluid" id="editdailyschedule" style="display:none">
-          <h3> Update daily stream </h3>
-            <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editdaily">Nevermind </div>
-          <form>
-            <input type="hidden" id="editdaily_id">
-          <div class="form-group">
-            <label for="editdaily_title">Name</label>
-            <input type="text" class="form-control" id="editdaily_title" name="editdaily_title" placeholder="Event Name">
-          </div>
-          <div class="form-row">
-            <div class="col">
-                <span>Start：</span>
-                <input type="time" name="editdaily_start_time" id="editdaily_start_time">
-          </div>
-          <div class="col">
-                <span>End：</span>
-                <input type="time" name="editdaily_end_time" id="editdaily_end_time">
-          </div>
-          </div>
-          <div class="form-group">
-            <label for="daily_tag">tag</label>
-            <input type="text" class="form-control" id="editdaily_tag" name="editdaily_tag" placeholder="idk">
-          </div>
-          <div class="form-group">
-            <label for="daily_game">Game:</label>
-            <select class="form-control" id="editdaily_game" name="editdaily_game">
-              <option v-for="game in games" :value="game.id">{{game.name}}</option>
-            </select>
-          </div>
-          <div id="submiteditdailybtn" class="btn btn-danger btn-lg btn-block" v-on:click="updatedaily">Update</div>
-        </form>
       </div>
-  <!-- Edit forms  -->
-      <div class="container-fluid" id="editsingleschedule" style="display:none">
-        <h3> Update single stream </h3>
-          <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editsingle">Nevermind </div>
-        <form>
-          <input type="hidden" id="editsingle_id">
-        <div class="form-group">
-          <label for="editsingle_title">Name</label>
-          <input type="text" class="form-control" id="editsingle_title" name="editsingle_title" placeholder="Event Name">
-        </div>
-        <div class="form-row">
-          <div class="col">
-              <span>Start：</span>
-              <input type="datetime-local" name="editsingle_start_date" id="editsingle_start_date">
-        </div>
-        <div class="col">
-              <span>End：</span>
-              <input type="datetime-local" name="editsingle_end_date" id="editsingle_end_date">
-        </div>
-        </div>
-        <div class="form-group">
-          <label for="editsingle_tag">tag</label>
-          <input type="text" class="form-control" id="editsingle_tag" name="editsingle_tag" placeholder="idk">
-        </div>
-        <div class="form-group">
-          <label for="editsingle_game">Game:</label>
-          <select class="form-control" id="editsingle_game" name="editsingle_game">
-            <option v-for="game in games" :value="game.id">{{game.name}}</option>
-          </select>
-        </div>
-        <div id="submiteditsinglebtn" class="btn btn-danger btn-lg btn-block"  v-on:click="updatesingle">Update</div>
-      </form>
-    </div>
 
-    <div class="container-fluid" id="editweeklyschedule" style="display:none">
-      <h3> Update weekly stream </h3>
-      <div class="btn btn-danger btn-lg btn-block" v-on:click="cancel_editweekly">Nevermind </div>
-      <form>
-        <input type="hidden" id="editweekly_id">
-      <div class="form-group">
-        <label for="editweekly_title">Name</label>
-        <input type="text" class="form-control" id="editweekly_title" name="editweekly_title" placeholder="Event Name">
-      </div>
-      <div class="form-group">
-        <label for="editweekly_day">Day:</label>
-        <select class="form-control" id="editweekly_day" name="editweekly_day">
-          <option value="monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-          <option value="Sunday">Sunday</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <div class="col">
-            <span>Start：</span>
-            <input type="time" name="editweekly_start_time" id="editweekly_start_time">
-      </div>
-      <div class="col">
-            <span>End：</span>
-            <input type="time" name="editweekly_end_time" id="editweekly_end_time">
-      </div>
-      </div>
-      <div class="form-group">
-        <label for="editweekly_tag">tag</label>
-        <input type="text" class="form-control" id="editweekly_tag" name="editweekly_tag" placeholder="idk">
-      </div>
-      <div class="form-group">
-        <label for="editweekly_game">Game:</label>
-        <select class="form-control" id="editweekly_game" name="editweekly_game">
-          <option v-for="game in games" :value="game.id">{{game.name}}</option>
-        </select>
-      </div>
-      <div id="submiteditweeklybtn" class="btn btn-danger btn-lg btn-block" v-on:click="updateweekly">Update</div>
-    </form>
   </div>
-      </div>
-          </div>
-            </div>
-          </div>
-      </div>
 </div>
 </div>
 </template>
@@ -542,22 +607,21 @@ export default {
     data:function(){
       return{
           profilecontent : [],
+          csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
+          games : [],
+          announcements : [],
+          currentdate :[],
           allschedules : [],
           dailystreams : [],
           weeklystreams: [],
           singlestreams : [],
-          csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
-          games : [],
-          announcements : [],
           streamdash: true,
   				profiledash: false,
   				channeldash: false,
           scheduledash: false,
           announcementsdash: false,
-          currentdate: null
-      }
+        }
     },
-
     props: ['user'],
     mounted() {
        var contenturl = 'api/profilecontent/'+this.user.name;
@@ -570,7 +634,7 @@ export default {
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
       });
-        axios.get('/api/scheduleoverview').then(response => {
+      axios.get('/api/scheduleoverview').then(response => {
         this.allschedules= JSON.parse(JSON.stringify(response.data));
 
         this.dailystreams = this.allschedules.filter(x => x.type == 'daily');
@@ -603,9 +667,7 @@ export default {
           game_id:  document.getElementById('gameselect').value,
        })
       },
-
       updateAbout: function() {
-
         axios.post('/api/profilecontentabout', {
           about: document.getElementById('aboutinput').value,
        }).then(response => {
@@ -790,18 +852,18 @@ export default {
        })
 			},
       showstreamdash: function() {
-        this.streamdash = true;
-        this.profiledash = false;
-        this.channeldash = false;
-        this.announcementsdash = false;
+				this.streamdash = true;
+				this.profiledash = false;
+				this.channeldash = false;
         this.scheduledash = false;
-      },
+        this.announcementsdash = false;
+			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
 				this.channeldash = false;
-        this.announcementsdash = false;
         this.scheduledash = false;
+        this.announcementsdash = false;
 			},
 			showchanneldash: function() {
 				this.streamdash = false;
@@ -810,12 +872,6 @@ export default {
         this.scheduledash = false;
         this.announcementsdash = false;
 			},
-      showscheduledash: function() {
-        this.streamdash = false;
-        this.profiledash = false;
-        this.channeldash = false;
-        this.scheduledash = true;
-      },
       showannouncementdash: function() {
         this.streamdash = false;
         this.profiledash = false;
@@ -832,9 +888,8 @@ export default {
         this.channeldash = false;
         this.scheduledash = true;
         this.announcementsdash = false;
-      },
+			}
+
     }
   }
-
-
 </script>
