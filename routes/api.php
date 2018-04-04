@@ -95,3 +95,9 @@ Route::get('/personalannouncements', 'API\AnnouncementController@read')->middlew
 Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->middleware('auth:api');
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
+
+Route::post('/editschedulesingle','API\ScheduleController@editSingleEvent')->middleware('auth:api');
+Route::post('/editscheduledaily','API\ScheduleController@editDailyEvent')->middleware('auth:api');
+Route::post('/editscheduleweekly','API\ScheduleController@editWeeklyEvent')->middleware('auth:api');
+
+Route::post('/deleteschedule','API\ScheduleController@delete')->middleware('auth:api');
