@@ -28,6 +28,7 @@ Route::get('/allgames', 'API\GamesController@getall');
 Route::get('/listusers', "API\FrontpageController@listusers")->middleware('auth:api');
 Route::get('/followings', 'API\FrontpageController@getFollowings')->middleware('auth:api');
 Route::get('/listusersunauthenticated', "API\FrontpageController@listusers");
+Route::get('/upcomingstreams','API\FrontpageController@upcomingstreams')->middleware('auth:api');
 
 ///////////////////
 // Stream Routes //
@@ -73,6 +74,7 @@ Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('
 Route::post('/stream', 'API\StreamController@golive');
 Route::get('/currentdate','API\ScheduleController@currentdate');
 
+Route::get('/scheduleoverview','API\ScheduleController@scheduleOverview')->middleware('auth:api');
 Route::get('/profilecontent', 'API\DashboardController@getcontent')->middleware('auth:api');
 Route::post('/profilecontentabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 
@@ -97,6 +99,11 @@ Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->mi
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
 
+Route::post('/editschedulesingle','API\ScheduleController@editSingleEvent')->middleware('auth:api');
+Route::post('/editscheduledaily','API\ScheduleController@editDailyEvent')->middleware('auth:api');
+Route::post('/editscheduleweekly','API\ScheduleController@editWeeklyEvent')->middleware('auth:api');
+
+Route::post('/deleteschedule','API\ScheduleController@delete')->middleware('auth:api');
 
 ////////////////////
 // Comment routes //

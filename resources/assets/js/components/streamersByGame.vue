@@ -36,7 +36,7 @@
           return 1;
         return 0;
       }
-      
+
       for (var streamer in this.streamers) {
         this.sortable.push(this.streamers[streamer]);
       }

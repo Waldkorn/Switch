@@ -14,6 +14,34 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+
+
+
+//profilepage//
+Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
+Vue.component('profileschedule', require('./components/profileschedule.vue'));
+Vue.component('profilepagemain', require('./components/profilepagemain.vue'));
+
+//frontpage//
+Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
+Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
+Vue.component('followings', require('./components/Followings.vue'));
+Vue.component('upcomingschedule', require('./components/upcomingschedule.vue'))
+
+Vue.component('games', require('./components/games.vue'));
+Vue.component('streams', require('./components/streamersByGame.vue'))
+
+
+//dashboard//
+Vue.component('dashboard', require('./components/dashboard.vue'));
+Vue.component('dashboardstream', require('./components/dashboardstream.vue'));
+Vue.component('dashboardprofile', require('./components/dashboardprofile.vue'));
+
+//stream//
+Vue.component('chatroom', require('./components/Chatroom.vue'));
+Vue.component('stream', require('./components/Stream.vue'));
+
 //passport//
 Vue.component(
     'passport-clients',
@@ -30,27 +58,6 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue')
 );
 Vue.component('test', require('./components/test.vue'));
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('games', require('./components/games.vue'));
-Vue.component('profilesidebar', require('./components/profilesidebar.vue'));
-Vue.component('profileschedule', require('./components/profileschedule.vue'));
-Vue.component('nowlivebar', require('./components/nowlivebar.vue'));
-Vue.component('frontpagemain', require('./components/frontpagemain.vue'));
-Vue.component('profilepagemain', require('./components/profilepagemain.vue'));
-Vue.component('stream', require('./components/Stream.vue'));
-Vue.component('followings', require('./components/Followings.vue'));
-
-//dashboard//
-Vue.component('dashboard', require('./components/dashboard.vue'));
-Vue.component('dashboardstream', require('./components/dashboardstream.vue'));
-Vue.component('dashboardprofile', require('./components/dashboardprofile.vue'));
-
-
-Vue.component('chatroom', require('./components/Chatroom.vue'));
-
-Vue.component('streams', require('./components/streamersByGame.vue'))
-
 
 const app = new Vue({
     el: '#app',

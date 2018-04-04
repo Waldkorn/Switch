@@ -50,6 +50,7 @@ class ViewController extends Controller
     return view('profilepage', compact('user','loggedin','isfollowing','issubscribed'));
   }
 
+
   public function dashboard() {
     $user = Auth::user();
     return view('dashboard', compact('user'));

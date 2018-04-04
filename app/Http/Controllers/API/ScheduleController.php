@@ -36,11 +36,7 @@ class ScheduleController extends Controller
 
     //looping through all single stream objects to include the game name and add the individual ojects to the allstreams array.
     foreach ($singlestreams as $singlestream) {
-      $gameobjs = $games->where('id',$singlestream->game_id)->pluck('name');
-      $game_name = '';
-      foreach($gameobjs as $gameobj){
-        $game_name = $gameobj;
-      }
+      $game_name = $games->where('id',$singlestream->game_id)->pluck('name')->first();
       $singlestream->game = $game_name;
       $allstreams[] = $singlestream;
     };
@@ -90,6 +86,28 @@ class ScheduleController extends Controller
 
    return $allstreams;
   }
+
+//shows an overview of the single, daily and weekly streams of followed streams for the next hour
+  public function scheduleOverview(){
+
+
+        $user = Auth::user();
+        $games = Game::get();
+        $streams= Schedule::
+        where('user_id',$user->id)
+        ->orWhere('start_date', '>=', Carbon::now('Europe/Amsterdam'))
+        ->orWhere('type','daily')
+        ->orWhere('type','weekly')
+        ->get();
+
+        foreach ($streams as $stream) {
+          $game_name = $games->where('id',$stream->game_id)->pluck('name')->first();
+          $stream->game = $game_name;
+        };
+
+      return $streams;
+  }
+
   //returns the current datetime in a format html can understand, used to limit options in the schedule form
   public function currentdate(){
     $now = Carbon::now();
@@ -124,81 +142,168 @@ class ScheduleController extends Controller
 
       		]);
           return request('single_title')." saved";
+  }
+    //adds daily event to schedule tale
+  public function createDailyEvent(){
+
+      $this->validate(request(), [
+        'daily_title' => 'required',
+        'daily_start' => 'required',
+        'daily_end' => 'required',
+        'daily_tag' => 'required',
+        'daily_game' => 'required'
+      ]);
+
+      $user = Auth::user();
+      $type = 'daily';
+
+      //time string has to be altered from raw html input: hours and minutes are separated into strings.
+      //carbon is used to recombine hours, minutes, and seconds
+      $start_hours =   substr(request('daily_start'), 0, 2);
+      $start_minutes =   substr(request('daily_start'), 3, 2);
+      $end_hours = substr(request('daily_end'), 0, 2);
+      $end_minutes = substr(request('daily_end'), 3, 2);
+
+      $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
+      $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
+
+      Schedule::create([
+            'title' => request('daily_title'),
+            'user_id' =>$user->id,
+            'start_time' => $start,
+            'end_time' => $end,
+            'tag' => request('daily_tag'),
+            'game_id' =>request('daily_game'),
+            'type' => $type
+      ]);
+      return "new daily stream added!";
+
 
     }
-    //adds daily event to schedule tale
-    public function createDailyEvent(){
-
-        $this->validate(request(), [
-          'daily_title' => 'required',
-          'daily_start' => 'required',
-          'daily_end' => 'required',
-          'daily_tag' => 'required',
-          'daily_game' => 'required'
-        ]);
-
-        $user = Auth::user();
-        $type = 'daily';
-
-        //time string has to be altered from raw html input: hours and minutes are separated into strings.
-        //carbon is used to recombine hours, minutes, and seconds
-        $start_hours =   substr(request('daily_start'), 0, 2);
-        $start_minutes =   substr(request('daily_start'), 3, 2);
-        $end_hours = substr(request('daily_end'), 0, 2);
-        $end_minutes = substr(request('daily_end'), 3, 2);
-
-        $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
-        $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
-
-        Schedule::create([
-              'title' => request('daily_title'),
-              'user_id' =>$user->id,
-              'start_time' => $start,
-              'end_time' => $end,
-              'tag' => request('daily_tag'),
-              'game_id' =>request('daily_game'),
-              'type' => $type
-        ]);
-        return "new daily stream added!";
-
-      }
       //add weekly events to schedule table
-      public function createWeeklyEvent(){
+  public function createWeeklyEvent(){
 
-          $this->validate(request(), [
-            'weekly_title' => 'required',
-            'weekly_day' => 'required',
-            'weekly_start' => 'required',
-            'weekly_end' => 'required',
-            'weekly_tag' => 'required',
-            'weekly_game' => 'required'
-          ]);
+      $this->validate(request(), [
+        'weekly_title' => 'required',
+        'weekly_day' => 'required',
+        'weekly_start' => 'required',
+        'weekly_end' => 'required',
+        'weekly_tag' => 'required',
+        'weekly_game' => 'required'
+      ]);
 
-          $user = Auth::user();
-          $type = 'weekly';
+      $user = Auth::user();
+      $type = 'weekly';
+      //time string has to be altered from raw html input: hours and minutes are separated into strings.
+      //carbon is used to recombine hours, minutes, and seconds
+      $start_hours =   substr(request('weekly_start'), 0, 2);
+      $start_minutes =   substr(request('weekly_start'), 3, 2);
+      $end_hours = substr(request('weekly_end'), 0, 2);
+      $end_minutes = substr(request('weekly_end'), 3, 2);
 
-          //time string has to be altered from raw html input: hours and minutes are separated into strings.
-          //carbon is used to recombine hours, minutes, and seconds
-          $start_hours =   substr(request('weekly_start'), 0, 2);
-          $start_minutes =   substr(request('weekly_start'), 3, 2);
-          $end_hours = substr(request('weekly_end'), 0, 2);
-          $end_minutes = substr(request('weekly_end'), 3, 2);
+      $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
+      $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
 
-          $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
-          $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
+      Schedule::create([
+            'title' => request('weekly_title'),
+            'user_id' =>$user->id,
+            'day'=>request('weekly_day'),
+            'start_time' => $start,
+            'end_time' => $end,
+            'tag' => request('weekly_tag'),
+            'game_id' =>request('weekly_game'),
+            'type' => $type
+      ]);
 
-          Schedule::create([
-                'title' => request('weekly_title'),
-                'user_id' =>$user->id,
-                'day'=>request('weekly_day'),
-                'start_time' => $start,
-                'end_time' => $end,
-                'tag' => request('weekly_tag'),
-                'game_id' =>request('weekly_game'),
-                'type' => $type
-          ]);
+      return "weekly stream saved";
+  }
 
-          return "weekly stream saved";
+  public function delete(){
 
-      }
+    $id = request('delete_id');
+    Schedule::find($id)->delete();
+    return "stream deleted";
+  }
+
+  public function editSingleEvent(){
+    $this->validate(request(), [
+      'single_id' =>'required',
+      'single_title' => 'required',
+      'single_start' => 'required',
+      'single_end' => 'required',
+      'single_tag' => 'required',
+      'single_game' => 'required'
+    ]);
+
+    $start = Carbon::parse(request('single_start'));
+    $end = Carbon::parse(request('single_end'));
+
+    $id = request('single_id');
+    $schedule = Schedule::find($id);
+
+    $schedule->title = request('single_title');
+    $schedule->tag = request('single_tag');
+    $schedule->game_id = request('single_game');
+    $schedule->start_date = $start;
+    $schedule->end_date = $end;
+    $schedule->save();
+    return "stream updated";
+  }
+  public function editDailyEvent(){
+    $this->validate(request(), [
+      'daily_id' => 'required',
+      'daily_title' => 'required',
+      'daily_start' => 'required',
+      'daily_end' => 'required',
+      'daily_tag' => 'required',
+      'daily_game' => 'required'
+    ]);
+    $start_hours =   substr(request('daily_start'), 0, 2);
+    $start_minutes =   substr(request('daily_start'), 3, 2);
+    $end_hours = substr(request('daily_end'), 0, 2);
+    $end_minutes = substr(request('daily_end'), 3, 2);
+
+    $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
+    $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
+
+    $id = request('daily_id');
+    $schedule = Schedule::find($id);
+    $schedule->title = request('daily_title');
+    $schedule->tag = request('daily_tag');
+    $schedule->game_id = request('daily_game');
+    $schedule->start_time = $start;
+    $schedule->end_time = $end;
+    $schedule->save();
+    return "stream updated";
+  }
+  public function editWeeklyEvent(){
+    $this->validate(request(), [
+      'weekly_id' =>'required',
+      'weekly_title' => 'required',
+      'weekly_day' => 'required',
+      'weekly_start' => 'required',
+      'weekly_end' => 'required',
+      'weekly_tag' => 'required',
+      'weekly_game' => 'required'
+    ]);
+    $start_hours =   substr(request('weekly_start'), 0, 2);
+    $start_minutes =   substr(request('weekly_start'), 3, 2);
+    $end_hours = substr(request('weekly_end'), 0, 2);
+    $end_minutes = substr(request('weekly_end'), 3, 2);
+
+    $start = Carbon::createFromTime($start_hours, $start_minutes, 00)->toTimeString();
+    $end = Carbon::createFromTime($end_hours, $end_minutes, 00)->toTimeString();
+
+    $id = request('weekly_id');
+    $schedule = Schedule::find($id);
+    $schedule->title = request('weekly_title');
+    $schedule->tag = request('weekly_tag');
+    $schedule->game_id = request('weekly_game');
+    $schedule->start_time = $start;
+    $schedule->end_time = $end;
+    $schedule->save();
+    return "stream updated";
+  }
+
+
 }
