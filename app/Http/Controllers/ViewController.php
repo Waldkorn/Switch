@@ -24,6 +24,11 @@ class ViewController extends Controller
     $isfollowing = 0;
     $issubscribed = 0;
 
+    if ($user == null)
+    {
+      return view('error');
+    }
+
     if (Auth::check()){
       $loggedin=1;
       $loggedin=1;
@@ -39,6 +44,7 @@ class ViewController extends Controller
       if (in_array($user->id, $followed)) {
         $isfollowing=1;
       }
+
       foreach ($subscriptions as $subscription){
         $subscribed[]=$subscription;
       }
@@ -64,6 +70,10 @@ class ViewController extends Controller
   public function stream($username)
   {
   	$streamer = User::where('name', $username)->with('stream.game', 'profilecontent')->first();
+    if ($streamer == null) 
+    {
+      return view('error');
+    }
   	$followers = $streamer->followers()->get();
     return view('streampage', compact('streamer', 'followers'));
   }

@@ -5,6 +5,7 @@
     <title>Switch dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" type="image/x-icon" href="/images/Switch-logo.png" />
   	<link href="{{ asset('css/videojs.css') }}" rel="stylesheet">
   	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>

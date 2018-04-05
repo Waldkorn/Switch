@@ -4,6 +4,8 @@
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
+	<link rel="shortcut icon" type="image/x-icon" href="/images/Switch-logo.png" />
+
 	<title>Switch</title>
 
 	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">

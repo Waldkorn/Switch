@@ -5,6 +5,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Switch - {{$user->name}}</title>
 
+	<link rel="shortcut icon" type="image/x-icon" href="/images/Switch-logo.png" />
 	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<style>
