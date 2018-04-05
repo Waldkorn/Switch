@@ -1,11 +1,94 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-@section('content')
+	<title>Switch</title>
+
+	<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #c6c8ca;
+    }
+    .navbar-toggler:hover {
+  		border: 2px solid #dc3545;
+  	}
+  	.navbar-toggler:focus {
+  		box-shadow: 0 0 3pt 2pt #dc3545;
+  		outline: none;
+  		border: none;
+  	}
+  	#navbar{
+  		padding-right:0;
+  		color:#f5f5dc;
+
+  	}
+
+  	#navbarToggleExternalContent{
+  		margin-top:0.9rem;
+  		background-color: #343a40;
+  		right:0;left:auto;
+  		border:0;
+  		border-radius: 0px 0px 0.25rem 0.25rem;
+  	}
+
+  	#navbardropdown{
+  		background-color: #343a40;
+  		color: #f5f5dc;
+  		border-top:1px;
+  		}
+  	#navbardropdown:hover {
+  	    text-decoration: underline;
+  			background-color: #343a40;
+  			color: #f5f5dc;
+  			border-top:1px;
+  	}
+    #email:hover {
+      border: 2px solid #dc3545;
+    }
+    #email:focus {
+      box-shadow: 0 0 3pt 2pt #dc3545;
+      outline: none;
+      border: none;
+    }
+    #password-confirm:hover {
+      border: 2px solid #dc3545;
+    }
+    #password-confirm:focus {
+      box-shadow: 0 0 3pt 2pt #dc3545;
+      outline: none;
+      border: none;
+    }
+    #password:hover {
+      border: 2px solid #dc3545;
+    }
+    #password:focus {
+      box-shadow: 0 0 3pt 2pt #dc3545;
+      outline: none;
+      border: none;
+    }
+    .card-body{
+      background-color:white;
+      color: #343a40;
+    }
+    .card-header{
+      text-align: center;
+      background-color:#343a40;
+      color: #f5f5dc;
+    }
+  </style>
+</head>
+<body>
+
+    @include('layouts.navbar')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+            <div class="card" style="margin-top:1rem">
+                <div class="card-header"><h3 class="mb-1" >{{ __('Reset Password') }}</h3></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}">
@@ -56,7 +139,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-danger">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
@@ -67,4 +150,6 @@
         </div>
     </div>
 </div>
-@endsection
+<script src="{{ asset('js/app.js') }}"></script>
+</body>
+</html>
