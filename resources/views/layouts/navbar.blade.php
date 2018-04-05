@@ -13,6 +13,7 @@
 		    <div class="collapse dropdown-menu pull-menu-right dropdown-menu-right" id="navbarToggleExternalContent">
 		    	@if(Auth::check())
 					<a class="dropdown-item" id="navbardropdown" href="/dashboard">Dashboard</a><hr>
+					<a class="dropdown-item" id="navbardropdown" href="/messenger">Messenger</a><hr>
 		    		<a class="dropdown-item" id="navbardropdown" href="/logout">Logout</a>
 		    	@else
 			    	<a class="dropdown-item" id="navbardropdown" href="/login">Login</a><hr>

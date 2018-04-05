@@ -32,6 +32,7 @@ Route::get('/profilepage/{username}',"ViewController@profile");
 
 
 Route::get('/dashboard',"ViewController@dashboard");
+Route::get('/messenger', "ViewController@messenger");
 
 
 //////////////////

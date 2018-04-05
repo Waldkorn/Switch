@@ -100,5 +100,18 @@ class ViewController extends Controller
 
   }
 
+  public function messenger()
+  {
+
+    $user = Auth::user();
+
+    if ($user == null)
+    {
+      return redirect('/login');
+    }
+
+    return view('messenger', compact('user'));
+
+  }
 
 }
