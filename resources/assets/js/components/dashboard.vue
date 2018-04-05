@@ -63,6 +63,7 @@
               <div class="card-body">
                 <h5 class="card-title">Step one: Streaming software</h5>
                 <p class="card-text">To start streaming, you will first need streaming software. Open Broadcaster Software (OBS) is a free, open source client that is easy to set up and use.</p>
+
                 <h5 class="card-title">Step Two: setting up a stream</h5>
                 <p class="card-text">Once your streaming software is installed and running, it'll have to stream to our server.</p>
                 <p class="card-text">In the settings menu, enter your url: rtmp://10.0.0.61:1935/hls/</p>
@@ -75,10 +76,16 @@
                 </div>
 
                 <p class="alert alert-danger">(This is your personal streamkey, never show it to anyone!)</p>
-                <h5 class="card-title">Step Three: connect to the server</h5>
+
+                <h5 class="card-title">Step Three: ensure your followers know you're live</h5>
+                <p class="card-text">You're all set to stream, but ofcourse you want your followers to be able to see that you're live. Switch has a handy built in feature that helps you do this.</p>
+                <p class="card-text">To let Switch know that you're live, add a BrowserSource to your scene with the url switch.vps.codegorilla.nl/streaminglive/{STREAM_KEY}. That's it! We'll handle the rest.</p>
+
+                <h5 class="card-title">Step Four: connect to the server</h5>
                 <p class="card-text">After you've entered your url and streamkey, you can start streaming to our server</p>
                 <p class="card-text">You should see a preview of your stream on this page</p>
-                <h5 class="card-title">Step Four: Start streaming! </h5>
+
+                <h5 class="card-title">Step Five: Start streaming! </h5>
                 <p class="card-text">finally, choose a title and game, and go live! Your viewers can find your stream on your profile.</p>
               </div>
             </div>
