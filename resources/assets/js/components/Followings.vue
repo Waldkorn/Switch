@@ -8,7 +8,8 @@
 
       <div class="streamer list-group-item" v-for="user in users" v-bind:class="{ 'list-group-item': user.now_live, 'list-group-item-secondary': !user.now_live }"style="background-color:#343a40;border-radius: 0px 0px 0rem 0rem;">
         <div class="d-flex w-100 justify-content-between">
-          <a :href="'/' + user.name" style="color:#f5f5dc">{{ user.name }}</a>
+          <a v-if="user.streaming" :href="'/' + user.name" style="color:#f5f5dc">{{ user.name }}</a>
+          <a v-else :href="'/profilepage/' + user.name" style="color:#f5f5dc">{{ user.name }}</a>
           <small class="text-danger" v-show="user.streaming">live &nbsp; &nbsp; <img width="16px" src="/images/viewingIcon.png"> {{ user.viewer_count }}</small>
         </div>
       </div>
