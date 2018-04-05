@@ -82,12 +82,19 @@ class ViewController extends Controller
 
     $game = Game::where('name', $gamename)->first();
 
+    if ($game == null)
+    {
+      return view('error');
+    }
+
     $streamers = $game
     ->streams()
     ->with(['user' => function($user) {
       $user->with('profilecontent')->withCount('followers')->orderBy('followers_count');
     }])
     ->get();
+
+    $streamers = $streamers->where('user.last_online', '>', Carbon::now()->subMinutes(1));
 
     return view('gamepage', compact('game', 'streamers'));
 

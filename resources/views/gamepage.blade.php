@@ -14,7 +14,7 @@
   @include('layouts.navbar')
 
 	<div id="app">
-		<div class="row" style="width:100%;margin:0">
+		<div class="row" style="width:100%;margin:0;">
 			<div class="col-md-2">
 				@if (Auth::check())
 					<Followings></Followings>
