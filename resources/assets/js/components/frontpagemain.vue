@@ -83,6 +83,7 @@
           body: message
         }).then((response) => {
           this.announcements.find(announcement => announcement.id === number).comments.push(response.data);
+          this.announcements.find(announcement => announcement.id === number).comments_count++;
         });
         document.getElementById("commentfield" + number).value = "";
         return false;
