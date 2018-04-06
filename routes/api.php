@@ -72,6 +72,7 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
+Route::post('/streamoff', 'API\StreamController@setOffline');
 Route::get('/currentdate','API\ScheduleController@currentdate');
 
 Route::get('/scheduleoverview','API\ScheduleController@scheduleOverview')->middleware('auth:api');

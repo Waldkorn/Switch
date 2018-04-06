@@ -34,6 +34,7 @@
             </div>
 
             <div class="card" style="width:100%;text-align:center">
+              <div class="container-fluid" v-if="Now_Live == 0" >
               <h5 class="card-header">Start streaming?</h5>
               <form style="text-align:left">
 
@@ -54,6 +55,13 @@
                 </div>
               </form>
             </div>
+              <div  class="container" id="you_are_live"  v-if="Now_Live == 1">
+              <div class="alert alert-success" role="alert" id="you_are_live_alert" style="margin-top:1rem;margin-bottom:0px"><strong>You are now Live!!</strong><a class="nav-link" :href="'/'+ user.name" >To stream page!</a></div>
+                <div class="btn btn-danger" v-on:click="gooffline" style="margin:1rem">Stop streaming</div>
+            </div>
+                </div>
+
+
 
           </div>
 
@@ -611,6 +619,7 @@ export default {
     data:function(){
       return{
           profilecontent : [],
+          Now_Live: 0,
           allschedules : [],
           dailystreams : [],
           weeklystreams: [],
@@ -629,9 +638,10 @@ export default {
       }
     },
 
-    props: ['user'],
+    props: ['user','now_live'],
     mounted() {
-       var contenturl = 'api/profilecontent/'+this.user.name;
+      this.Now_Live = this.now_live;
+     var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
@@ -672,7 +682,16 @@ export default {
           user_id: this.user.id,
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
+       }).then(response => {
+         this.Now_Live = 1;
        })
+      },
+      gooffline: function() {
+        axios.post('/api/streamoff', {
+          user_id: this.user.id,
+        }).then(response => {
+          this.Now_Live = 0;
+        })
       },
       updateAbout: function() {
         axios.post('/api/profilecontentabout', {

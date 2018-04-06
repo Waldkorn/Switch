@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Stream;
 use App\User;
@@ -49,7 +49,16 @@ class StreamController extends Controller
       $user->stream()->update(['now_live' => FALSE]);
 
     }
+  }
 
+  public function setOffline(){
+    $user = Auth::user()->first();
+    $user->now_live = 0;
+    $user->save;
+    $id = request('user_id');
+    $stream = Stream::where('user_id',$id)->first();
+    $stream->now_live = 0;
+    $stream->save();
   }
 
   public function keepAlive() {
@@ -59,10 +68,10 @@ class StreamController extends Controller
 
     $streamToken = request('stream_token');
     $viewerCount = request('viewer_count');
-    
+
     User::where('stream_token', $streamToken)->update([
       'last_online' => Carbon::now(),
-      'viewer_count' => $viewerCount    
+      'viewer_count' => $viewerCount
     ]);
   }
 }
