@@ -85,5 +85,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    
+    public function featured_games()
+    {
+        return $this->hasMany(FeaturedGame::class);
+    }
+
+
 }

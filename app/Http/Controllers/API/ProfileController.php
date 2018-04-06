@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Game;
 use App\User;
 use App\Profilecontent;
+use App\FeaturedGame;
 
 
 class ProfileController extends Controller
@@ -32,6 +33,10 @@ class ProfileController extends Controller
       $user = User::where('name',$username)->first();
       return $user->followings()->withCount('followings')->get();
   }
+  public function getfeaturedgames($username){
+      $user = User::where('name',$username)->first();
+      return $user->featured_games()->get();
+  }
 
 //following and unfollowing users
   public function follow_user(){
@@ -51,7 +56,7 @@ class ProfileController extends Controller
 
     $user = User::find(request('user_id'));
     $unfollower = Auth::user();
-    
+
 
     if(! $user) {
       return redirect()->back()->with('error', 'User does not exist.');
