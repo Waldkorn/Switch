@@ -28,7 +28,8 @@
 		props: ['messages', 'user', 'chatter'],
 		data: {
 			channel: null,
-			newChannel: false
+			newChannel: false,
+			unknownMessages: null
 		},
 		methods: {
 			sendPersonalMessage : function()
@@ -72,6 +73,12 @@
                 });
                 this.newChannel = false;
             }
+        },
+        mounted() {
+        	axios.get('/api/personalmessages/unknownMessages')
+        	.then((response) => {
+        		console.log(response.data);
+        	})
         }
 	}	
 
