@@ -42,6 +42,10 @@ Vue.component('dashboardprofile', require('./components/dashboardprofile.vue'));
 Vue.component('chatroom', require('./components/Chatroom.vue'));
 Vue.component('stream', require('./components/Stream.vue'));
 
+//messenger//
+Vue.component('userlist', require('./components/messengerusers.vue'));
+Vue.component('messenger', require('./components/messenger.vue'));
+
 //passport//
 Vue.component(
     'passport-clients',
@@ -63,7 +67,9 @@ const app = new Vue({
     el: '#app',
     data: {
     	viewers: [],
-        darkmode: false
+        darkmode: false,
+        messages: null,
+        chatter: null
     },
     methods: {
     	setUsers: function(users) {
@@ -81,6 +87,11 @@ const app = new Vue({
     	},
         toggleDarkMode: function() {
             this.darkmode = !this.darkmode;
+        },
+        setMessages: function(messages, id)
+        {
+            this.chatter = id;
+            this.messages = messages;
         }
     }
 });

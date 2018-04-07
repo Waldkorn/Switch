@@ -118,3 +118,10 @@ Route::post('/comment/{announcement}/create', 'API\CommentController@create')->m
 //////////////////
 
 Route::get('/games/all', 'API\GamesController@getall');
+
+/////////////////////////////
+// Personal message routes //
+/////////////////////////////
+
+Route::get('/personalmessages/{id}', 'API\personalMessageController@read')->middleware('auth:api');
+Route::post('/personalmessages/create', 'API\personalMessageController@create')->middleware('auth:api');

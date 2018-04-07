@@ -104,13 +104,14 @@ class ViewController extends Controller
   {
 
     $user = Auth::user();
+    $followings = $user->followings()->get();
 
     if ($user == null)
     {
       return redirect('/login');
     }
 
-    return view('messenger', compact('user'));
+    return view('messenger', compact('user', 'followings'));
 
   }
 
