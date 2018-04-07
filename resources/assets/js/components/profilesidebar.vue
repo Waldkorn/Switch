@@ -47,6 +47,9 @@
       <div class="card-body"><hr>
         <h3 class="card-title"> About: </h3>
         <h5 class="card-text">{{profilecontent.about}}</h5>
+        <hr>
+          <h3 class="card-title"> Featured Games: </h3>
+          <h5 class="card-text"><span v-for="featuredgame in featuredgames" :class="featuredgame.label" style="margin:1px">{{featuredgame.name}}</span></h5>
       </div>
 
       <div class="list-group" id="followerslist" style="width:100%;max-height:500px;overflow:hidden;display:none">
@@ -75,6 +78,7 @@ export default {
     return{
       user : [],
       profilecontent : [],
+      featuredgames : [],
       followers : [],
       followings : [],
       auth : [],
@@ -103,6 +107,10 @@ export default {
     this.followings = JSON.parse(JSON.stringify(response.data));
 
     });
+    var featuredgamesurl = "/api/featuredgames/" + this.profile.name;
+    axios.get(featuredgamesurl).then((response) => {
+      this.featuredgames = JSON.parse(JSON.stringify(response.data));
+    })
   },
 
   methods: {

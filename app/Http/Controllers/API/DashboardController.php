@@ -43,15 +43,27 @@ class DashboardController extends Controller
       ]);
       return $newAbout;
     }
-    
-    public function addFeaturedGame(){
+
+    public function createFeaturedGame(){
       $user = Auth::user();
       FeaturedGame::create([
-      			'name' => request('name'),
+      			'name' => request('game'),
+            'label' =>request('label'),
             'user_id' =>$user->id,
       			]);
-          return request('name')." saved";
 
+      $featuredgames = FeaturedGame::where('user_id', $user->id)->get();
+      return $featuredgames;
+
+    }
+    public function deleteFeaturedGame(){
+      $user = Auth::user();
+      $id = request('delete_id');
+
+      FeaturedGame::find($id)->delete();
+
+      $featuredgames = FeaturedGame::where('user_id', $user->id)->get();
+     return $featuredgames;
     }
 
 }

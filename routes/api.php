@@ -54,7 +54,7 @@ Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
 
-Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
+Route::get('/featuredgames/{username}','API\ProfileController@getfeaturedgames');
 
 
 ////////////////////////
@@ -83,6 +83,8 @@ Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->mi
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
 
+Route::post('/addfeaturedgame','API\DashboardController@createFeaturedGame')->middleware('auth:api');
+Route::post('/deletefeaturedgame','API\DashboardController@deleteFeaturedGame')->middleware('auth:api');
 
 ////////////////////////
 // Annoucement routes //

@@ -17,6 +17,7 @@ class CreateFeaturedGamesTable extends Migration
           $table->increments('id');
           $table->integer('user_id')->unsigned();
           $table->text('name');
+          $table->text('label');
           $table->timestamps();
 
           $table->foreign('user_id')->references('id')->on('users');
