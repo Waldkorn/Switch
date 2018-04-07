@@ -49,4 +49,4 @@ Route::get('/profilepage/{username}', 'ViewController@profile');
 
 Route::get('/test', 'Controller@upcoming');
 
-Route::get('/{username}', 'ViewController@stream');
+Route::get('/stream/{username}', 'ViewController@stream');

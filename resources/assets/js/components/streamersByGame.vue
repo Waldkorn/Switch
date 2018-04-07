@@ -10,7 +10,7 @@
         </a>
 
         <div class="card-body">
-          <a v-bind:href="'/' + streamer.user.name">
+          <a v-bind:href="'/stream/' + streamer.user.name">
             <h6 class="card-title">{{streamer.title}}</h6>
           </a>
           <a v-bind:href="'/profilepage/' + streamer.user.name">
