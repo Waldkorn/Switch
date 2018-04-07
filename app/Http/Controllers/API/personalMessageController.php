@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 use App\personal_message;
+use App\Events\newPersonalMessage;
 
 class personalMessageController extends Controller
 {
@@ -43,6 +44,10 @@ class personalMessageController extends Controller
 
         ]);
 
-        return personal_message::where('id', $personal_message->id)->with('sender')->first();
+        $message = personal_message::where('id', $personal_message->id)->with('sender')->first();
+
+        broadcast(new newPersonalMessage($message))->toOthers();
+
+        return $message;
     }
 }

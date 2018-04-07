@@ -26,6 +26,10 @@
 
 	export default {
 		props: ['messages', 'user', 'chatter'],
+		data: {
+			channel: null,
+			newChannel: false
+		},
 		methods: {
 			sendPersonalMessage : function()
 			{
@@ -43,7 +47,31 @@
             this.$nextTick( function() {
                 var div = document.getElementById("chatbox");
                 div.scrollTop = div.scrollHeight - div.clientHeight;
-            })
+            });
+            if (this.user.id < this.chatter)
+            {
+            	if (this.channel != 'messenger' + this.user.id + 'to' + this.chatter)
+            	{
+            		Echo.leave(this.channel);
+            		this.newChannel = true;
+            		this.channel = 'messenger' + this.user.id + 'to' + this.chatter;
+            	}
+            } else {
+            	if (this.channel != 'messenger' + this.chatter + 'to' + this.user.id)
+            	{
+            		Echo.leave(this.channel)
+            		this.newChannel = true;
+            		this.channel = 'messenger' + this.chatter + 'to' + this.user.id;
+            	}
+            }
+            if (this.newChannel == true)
+            {
+	            Echo.channel(this.channel)
+                .listen('newPersonalMessage', (message) => {
+                   	this.messages = this.messages.concat(message['message']);
+                });
+                this.newChannel = false;
+            }
         }
 	}	
 
