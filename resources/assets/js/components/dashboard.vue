@@ -56,7 +56,7 @@
               </form>
             </div>
               <div  class="container" id="you_are_live"  v-if="Now_Live == 1">
-              <div class="alert alert-success" role="alert" id="you_are_live_alert" style="margin-top:1rem;margin-bottom:0px"><strong>You are now Live!!</strong><a class="nav-link" :href="'/'+ user.name" >To stream page!</a></div>
+              <div class="alert alert-success" role="alert" id="you_are_live_alert" style="margin-top:1rem;margin-bottom:0px"><strong>You are now Live!!</strong><a class="nav-link" :href="'/stream/'+ user.name" >To stream page!</a></div>
                 <div class="btn btn-danger" v-on:click="gooffline" style="margin:1rem">Stop streaming</div>
             </div>
                 </div>
