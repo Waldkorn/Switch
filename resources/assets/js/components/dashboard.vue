@@ -34,6 +34,7 @@
             </div>
 
             <div class="card" style="width:100%;text-align:center">
+              <div class="container-fluid" v-if="Now_Live == 0" >
               <h5 class="card-header">Start streaming?</h5>
               <form style="text-align:left">
 
@@ -54,6 +55,13 @@
                 </div>
               </form>
             </div>
+              <div  class="container" id="you_are_live"  v-if="Now_Live == 1">
+              <div class="alert alert-success" role="alert" id="you_are_live_alert" style="margin-top:1rem;margin-bottom:0px"><strong>You are now Live!!</strong><a class="nav-link" :href="'/'+ user.name" >To stream page!</a></div>
+                <div class="btn btn-danger" v-on:click="gooffline" style="margin:1rem">Stop streaming</div>
+            </div>
+                </div>
+
+
 
           </div>
 
@@ -96,7 +104,7 @@
       </div>
       <div  id="nav-profile" v-show="profiledash">
         <div class="row">
-          <div class="col-3">
+          <div class="col-md-6">
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" :src="profilecontent.img_url" alt="Card image cap">
                 <div class="card-img-overlay"><h5 class="card-title" ></h5></div>
@@ -152,7 +160,48 @@
                 </div>
             </div>
           </div>
-          <div class="col-3"></div>
+          <div class="col-md-6">
+              <div class="card">
+                <div class="card-header" id="headingEdit">
+                  <h5 class="mb-0">
+                    Featured games:
+                  </h5>
+                </div>
+                <div class="card-body">
+                <span v-for="featuredgame in featuredgames" :class="featuredgame.label" style="padding:2px;margin:1px">{{featuredgame.name}}<div class="btn btn-danger btn-sm" style="border: 1px solid white;margin:2px;padding:1px;padding-bottom:2px;font-size: 8px; width:15px;height:15px;text-align:center" v-on:click="deletefeaturedgame(featuredgame.id,this)">X</div></span>
+                </div>
+                <div class="card-header" id="headingEdit">
+                  <h5 class="mb-0">
+                    Add new game?
+                  </h5>
+                </div>
+                <div class="card-body">
+                  <form>
+
+                    <div class="form-group">
+                      <label for="featured_game_name">Game:</label>
+                      <input type="text" class="form-control" id="featured_game_name">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="featured_game_color">Color</label>
+                      <select class="form-control" id="featured_game_color" name="featured_game_color">
+                        <option value="badge badge-primary">Blue</option>
+                        <option value="badge badge-info">Teal</option>
+                        <option value="badge badge-success">Green</option>
+                        <option value="badge badge-warning">Yellow</option>
+                          <option value="badge badge-danger">Red</option>
+                        <option value="badge badge-light">Light Grey</option>
+                        <option value="badge badge-secondary">Grey</option>
+                        <option value="badge badge-dark">Dark Grey</option>
+                      </select>
+                    </div>
+
+                    <div class="btn btn-primary" v-on:click="addfeaturedgame">Add</div>
+                  </form>
+                </div>
+              </div>
+          </div>
           <div class="col-3"></div>
         </div>
       </div>
@@ -611,6 +660,8 @@ export default {
     data:function(){
       return{
           profilecontent : [],
+          featuredgames : [],
+          Now_Live: 0,
           allschedules : [],
           dailystreams : [],
           weeklystreams: [],
@@ -629,9 +680,10 @@ export default {
       }
     },
 
-    props: ['user'],
+    props: ['user','now_live'],
     mounted() {
-       var contenturl = 'api/profilecontent/'+this.user.name;
+      this.Now_Live = this.now_live;
+     var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
       });
@@ -672,7 +724,16 @@ export default {
           user_id: this.user.id,
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
+       }).then(response => {
+         this.Now_Live = 1;
        })
+      },
+      gooffline: function() {
+        axios.post('/api/streamoff', {
+          user_id: this.user.id,
+        }).then(response => {
+          this.Now_Live = 0;
+        })
       },
       updateAbout: function() {
         axios.post('/api/profilecontentabout', {
@@ -681,6 +742,21 @@ export default {
          this.profilecontent.about = response.data;
          $('#collapseEdit').collapse("toggle");
        })
+      },
+      addfeaturedgame: function() {
+        axios.post('/api/addfeaturedgame', {
+          game: document.getElementById('featured_game_name').value,
+          label: document.getElementById('featured_game_color').value,
+       }).then(response => {
+         this.featuredgames = JSON.parse(JSON.stringify(response.data));
+       })
+      },
+      deletefeaturedgame: function(id, value) {
+         axios.post('/api/deletefeaturedgame', {
+           delete_id : id,
+         }).then(response => {
+          this.featuredgames = JSON.parse(JSON.stringify(response.data));
+         })
       },
       show_form_single: function(){
         document.getElementById('addschedulebuttons').style.display = "none";
@@ -927,7 +1003,6 @@ export default {
         document.getElementById('addschedulebuttons').style.display="block";
 			},
       delete_schedule: function(id,value) {
-        console.log(id);
         axios.post('/api/deleteschedule', {
           delete_id: id,
          }).then(response => {
@@ -948,6 +1023,10 @@ export default {
 				this.profiledash = true;
         this.scheduledash = false;
         this.announcementsdash = false;
+        var featuredgamesurl = "/api/featuredgames/" + this.user.name;
+        axios.get(featuredgamesurl).then((response) => {
+          this.featuredgames = JSON.parse(JSON.stringify(response.data));
+        })
 			},
 			showchanneldash: function() {
 				this.streamdash = false;

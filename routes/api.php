@@ -54,7 +54,7 @@ Route::get('/followers/{username}', 'API\ProfileController@followers');
 Route::get('/following/{username}', 'API\ProfileController@following');
 Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
 
-Route::get('/schedule/{username}','API\ScheduleController@showuserschedule');
+Route::get('/featuredgames/{username}','API\ProfileController@getfeaturedgames');
 
 
 ////////////////////////
@@ -72,6 +72,7 @@ Route::post('/dashboardstream', 'API\DashboardController@stream');
 Route::post('/streamkey', 'API\DashboardController@streamkey');
 Route::post('/updateabout', 'API\DashboardController@updateAbout')->middleware('auth:api');
 Route::post('/stream', 'API\StreamController@golive');
+Route::post('/streamoff', 'API\StreamController@setOffline');
 Route::get('/currentdate','API\ScheduleController@currentdate');
 
 Route::get('/scheduleoverview','API\ScheduleController@scheduleOverview')->middleware('auth:api');
@@ -82,6 +83,8 @@ Route::post('/addschedulesingle','API\ScheduleController@createSingleEvent')->mi
 Route::post('/addscheduledaily','API\ScheduleController@createDailyEvent')->middleware('auth:api');
 Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->middleware('auth:api');
 
+Route::post('/addfeaturedgame','API\DashboardController@createFeaturedGame')->middleware('auth:api');
+Route::post('/deletefeaturedgame','API\DashboardController@deleteFeaturedGame')->middleware('auth:api');
 
 ////////////////////////
 // Annoucement routes //

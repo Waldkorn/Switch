@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Game;
 use App\Profilecontent;
+use App\FeaturedGame;
 
 
 class DashboardController extends Controller
@@ -41,6 +42,28 @@ class DashboardController extends Controller
         'about' =>  $newAbout,
       ]);
       return $newAbout;
+    }
+
+    public function createFeaturedGame(){
+      $user = Auth::user();
+      FeaturedGame::create([
+      			'name' => request('game'),
+            'label' =>request('label'),
+            'user_id' =>$user->id,
+      			]);
+
+      $featuredgames = FeaturedGame::where('user_id', $user->id)->get();
+      return $featuredgames;
+
+    }
+    public function deleteFeaturedGame(){
+      $user = Auth::user();
+      $id = request('delete_id');
+
+      FeaturedGame::find($id)->delete();
+
+      $featuredgames = FeaturedGame::where('user_id', $user->id)->get();
+     return $featuredgames;
     }
 
 }

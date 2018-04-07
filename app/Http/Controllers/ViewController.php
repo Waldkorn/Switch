@@ -59,7 +59,8 @@ class ViewController extends Controller
 
   public function dashboard() {
     $user = Auth::user();
-    return view('dashboard', compact('user'));
+    $now_live = $user->stream()->first()->now_live;
+    return view('dashboard', compact('user','now_live'));
   }
 
   public function streamingLive($streamToken) {
@@ -70,7 +71,7 @@ class ViewController extends Controller
   public function stream($username)
   {
   	$streamer = User::where('name', $username)->with('stream.game', 'profilecontent')->first();
-    if ($streamer == null) 
+    if ($streamer == null)
     {
       return view('error');
     }

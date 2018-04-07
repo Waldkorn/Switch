@@ -95,4 +95,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(personal_message::class, 'receiver_id', 'id');
     }
+
+    public function featured_games()
+    {
+        return $this->hasMany(FeaturedGame::class);
+    }
+
 }
