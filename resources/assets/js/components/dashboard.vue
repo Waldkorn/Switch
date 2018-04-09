@@ -1,21 +1,22 @@
 <template>
 <div class="container-fluid" style="padding:0px">
 
-  <ul class="nav nav-pills nav-fill navbar-dark bg-dark">
+  <ul class="nav nav-pills nav-fill navbar-dark bg-dark" style="border-top: 1px solid;border-color:rgb(220, 53, 69);color:rgb(245, 245, 220)
+;">
     <li class="nav-item" v-on:click="showstreamdash">
-      <a class="nav-link" href="#" >Stream</a>
+      <strong><a class="nav-link" href="#" >Stream</a></strong>
     </li>
     <li class="nav-item" v-on:click="showprofiledash">
-      <a class="nav-link" href="#" >Profile</a>
+      <strong><a class="nav-link" href="#" >Profile</a></strong>
     </li>
     <li class="nav-item" v-on:click="showannouncementdash">
-      <a class="nav-link" href="#" >Announcements</a>
+      <strong><a class="nav-link" href="#" >Announcements</a></strong>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" v-on:click="showscheduledash">Schedule</a>
+      <strong><a class="nav-link" href="#" v-on:click="showscheduledash">Schedule</a></strong>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" v-on:click="showsubscribedash">Account status</a>
+      <strong><a class="nav-link" href="#" v-on:click="showsubscribedash">Account status</a></strong>
     </li>
   </ul>
 

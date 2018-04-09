@@ -74,6 +74,11 @@
       axios.get('/api/upcomingstreams').then(response => {
         this.upcomingstreams = JSON.parse(JSON.stringify(response.data));
       })
+      setInterval(function(){
+          axios.get('/api/upcomingstreams').then(response => {
+            this.upcomingstreams = response.data;
+          })
+        }.bind(this), 300000);
     },
     methods: {
       postComment : function(number)
