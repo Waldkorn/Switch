@@ -42,7 +42,7 @@ class ViewController extends Controller
         $isfollowing=1;
       }
     }
-    
+
     return view('profilepage', compact('user','loggedin','isfollowing'));
   }
 
