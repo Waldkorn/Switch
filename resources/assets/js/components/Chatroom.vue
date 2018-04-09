@@ -41,6 +41,11 @@
                     { shortcut: "smileyFace", replacement: "<img height='16px' src='/images/emoticons/smiling_face.png'>" },
                     { shortcut: "laughingFace", replacement: "<img height='16px' src=/images/emoticons/laughing_face.png>"},
                     { shortcut: "tongueFace", replacement: "<img height='16px' src='/images/emoticons/tongue_face.png'>" }
+                ],
+                subscriberEmotes: [
+                    { shortcut: "cashEmoticon", replacement: "<img height='16px' src='/images/emoticons/cash.png'>" },
+                    { shortcut: "specialEmoticon", replacement: "<img height='16px' src='/images/emoticons/special.png'>" },
+                    { shortcut: "wewEmoticon", replacement: "<img height='16px' src='/images/emoticons/wew.png'>" },
                 ]
             }
         },
@@ -101,6 +106,10 @@
             expandText(text){
                for (var i = 0; i < this.emotes.length; i++){
                     text = text.replace(new RegExp("\\b" + this.emotes[i].shortcut + "\\b", 'g'), this.emotes[i].replacement);
+                    if (this.user.subscriber_status == "premium")
+                    {
+                        text = text.replace(new RegExp("\\b" + this.subscriberEmotes[i].shortcut + "\\b", 'g'), this.subscriberEmotes[i].replacement);
+                    }
                 }
 
                 return text;

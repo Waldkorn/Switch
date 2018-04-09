@@ -1,5 +1,5 @@
-<footer style="background-color:rgb(52, 58, 64);padding:0.5rem;margin-top:1rem">
-  <div class="row">
+<footer style="background-color:rgb(52, 58, 64);padding:0.5rem;margin:0px;margin-top:1rem;">
+  <div class="row mx-0">
 
     <div class="col-md" style="color:rgb(245, 245, 220);border-right: 1px solid rgb(245, 245, 220);border-color:rgb(220, 53, 69)
 ;">
@@ -9,7 +9,7 @@
           <h5 class="card-title">Contact Us</h5>
         </div>
         <div class="card-body"  style="background-color:inherit">
-                <p class="card-text">social media links here</p>
+          <p class="card-text">social media links here</p>
         </div>
       </div>
     </div>

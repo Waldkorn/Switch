@@ -26,7 +26,8 @@
 			<streams :game="{{json_encode($game)}}" :streamers="{{json_encode($streamers)}}"></streams>
 		</div>
 	</div>
-@include('layouts.footer')
+
+	@include('layouts.footer')
 
 	<script src="{{ asset('js/app.js') }}"></script>
 
