@@ -42,6 +42,7 @@ class ScheduleController extends Controller
     foreach ($singlestreams as $singlestream) {
       $game_name = $games->where('id',$singlestream->game_id)->pluck('name')->first();
       $singlestream->game = $game_name;
+      $singlestream->class = "schedule".$singlestream->type;
       $allstreams[] = $singlestream;
     };
     /*looping through weekly streams. the day string is used to find the date.
@@ -54,6 +55,7 @@ class ScheduleController extends Controller
        $end_date = $date." ".$weeklystream->end_time;
        $weeklystream->start_date = $start_date;
        $weeklystream->end_date = $end_date;
+       $weeklystream->class = "schedule".$weeklystream->type;
        $gameobjs = $games->where('id',$weeklystream->game_id)->pluck('name');
        $game_name = '';
        foreach($gameobjs as $gameobj){
@@ -74,6 +76,7 @@ class ScheduleController extends Controller
         $end_date = $date." ".$dailystream->end_time;
         $dailystream->start_date = $start_date;
         $dailystream->end_date = $end_date;
+        $dailystream->class = "schedule".$dailystream->type;
 
         $gameobjs = $games->where('id',$dailystream->game_id)->pluck('name');
         $game_name = '';

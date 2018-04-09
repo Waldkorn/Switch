@@ -86,6 +86,8 @@ Route::post('/addscheduleweekly','API\ScheduleController@createWeeklyEvent')->mi
 Route::post('/addfeaturedgame','API\DashboardController@createFeaturedGame')->middleware('auth:api');
 Route::post('/deletefeaturedgame','API\DashboardController@deleteFeaturedGame')->middleware('auth:api');
 
+Route::get('/subscriptioncancelled', 'API\DashboardController@unsubscribe')->middleware('auth:api');
+
 ////////////////////////
 // Annoucement routes //
 ////////////////////////

@@ -43,19 +43,6 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'streamer_id');
     }
 
-    //subscriptionss
-    public function subscribers()
-    {
-        return $this->belongsToMany(User::class, 'subscribers', 'leader_id', 'subscriber_id');
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function subscriptions()
-    {
-        return $this->belongsToMany(User::class, 'subscribers', 'subscriber_id', 'leader_id')->withTimestamps();
-    }
-
     public function chatmessages()
     {
         return $this->hasMany(Chatmessage::class);

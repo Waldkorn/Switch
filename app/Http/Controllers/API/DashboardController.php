@@ -66,4 +66,19 @@ class DashboardController extends Controller
      return $featuredgames;
     }
 
+    public function subscribe($auth){
+       $user= Auth::user();
+       $user->subscriber_status = 'premium';
+       $user->subscriber_token = $auth;
+       $user->save();
+       
+       $now_live = $user->stream()->first()->now_live;
+       return view('dashboard', compact('user','now_live'));
+    }
+
+    public function unsubscribe(){
+      $user= Auth::user();
+      $user->subscriber_status = 'free';
+      $user->save();
+    }
 }
