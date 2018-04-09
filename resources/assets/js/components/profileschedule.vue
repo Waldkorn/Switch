@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="schedule in schedules">
+    <tr v-for="schedule in schedules" :class="schedule.class">
     <th scope="row">{{schedule.type}}</th>
     <td>{{schedule.title}}</td>
     <td>{{schedule.start_date}}</td>

@@ -12,7 +12,10 @@
       <a class="nav-link" href="#" >Announcements</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" v-on:click="showscheduledash">schedule</a>
+      <a class="nav-link" href="#" v-on:click="showscheduledash">Schedule</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" v-on:click="showsubscribedash">Account status</a>
     </li>
   </ul>
 
@@ -650,6 +653,39 @@
         </div>
       </div>
 
+      <div  class="container-fluid" id="nav-subscribe" v-show="subscribedash" style="text-align:center;margin-top:1rem">
+
+          <div class="card" v-if="user.subscriber_status == 'free'">
+            <div class="card-header">
+              <h3 class="card-title">Want to support our website?</h3>
+            </div>
+            <div class="card-body">
+
+              <p class="card-text">For 4,99/month you get special emoticons, and no more ads on the site!</p>
+              <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="QPXCZFBGRZ2UY">
+                <button name="submit" class="btn btn-danger btn-lg">To paypal</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="card"v-if="user.subscriber_status == 'premium'">
+            <div class="card-header">
+              <h3 class="card-title">cancel your subscription?</h3>
+            </div>
+            <div class="card-body">
+              <p class="card-text">You can cancel your subscription anytime.</p>
+
+              <div name="submit" class="btn btn-danger btn-lg" v-on:click="unsubscribe">
+                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU" v-on:click="unsubscribe" >
+                  To paypal</a>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
   </div>
 </div>
 </div>
@@ -676,6 +712,7 @@ export default {
   				profiledash: false,
   			  scheduledash: false,
           announcementsdash: false,
+          subscribedash: false,
 
       }
     },
@@ -1012,17 +1049,25 @@ export default {
            document.getElementById('editweeklyschedule').style.display="none";
   			});
       },
+      unsubscribe: function() {
+        axios.get('/api/subscriptioncancelled', {
+         }).then(response => {
+           this.user.subscriber_status="free";
+  			});
+      },
       showstreamdash: function() {
 				this.streamdash = true;
 				this.profiledash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
+        this.subscribedash = false;
 			},
 			showprofiledash: function() {
 				this.streamdash = false;
 				this.profiledash = true;
         this.scheduledash = false;
         this.announcementsdash = false;
+        this.subscribedash = false;
         var featuredgamesurl = "/api/featuredgames/" + this.user.name;
         axios.get(featuredgamesurl).then((response) => {
           this.featuredgames = JSON.parse(JSON.stringify(response.data));
@@ -1033,12 +1078,14 @@ export default {
 				this.profiledash = false;
         this.scheduledash = false;
         this.announcementsdash = false;
+        this.subscribedash = false;
 			},
       showannouncementdash: function() {
         this.streamdash = false;
         this.profiledash = false;
         this.announcementsdash = true;
         this.scheduledash = false;
+        this.subscribedash = false;
         axios.get('/api/personalannouncements').then((response) => {
           this.announcements = response.data;
         })
@@ -1048,6 +1095,14 @@ export default {
         this.profiledash = false;
         this.scheduledash = true;
         this.announcementsdash = false;
+        this.subscribedash = false;
+			},
+      showsubscribedash: function() {
+        this.streamdash = false;
+        this.profiledash = false;
+        this.scheduledash = false;
+        this.announcementsdash = false;
+        this.subscribedash = true;
 			}
 
     }

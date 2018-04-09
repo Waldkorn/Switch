@@ -67,15 +67,4 @@ class ProfileController extends Controller
     return $message;
   }
 
-  public function unsubscribe(){
-    $user = User::find(request('user_id'));
-    $unsubscriber = Auth::user();
-    if(! $user) {
-      return redirect()->back()->with('error', 'User does not exist.');
-    }
-    $user->subscribers()->detach($unsubscriber->id);
-    $message = "you unsubscribed to " . $user->name;
-    return $message;
-  }
-
 }

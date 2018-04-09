@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('stream_token')->unique();
             $table->boolean('now_live')->default(false);
+            $table->string('subscriber_status')->default('free');
+            $table->string('subscriber_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

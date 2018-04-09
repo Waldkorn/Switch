@@ -34,6 +34,9 @@ Route::get('/profilepage/{username}',"ViewController@profile");
 Route::get('/dashboard',"ViewController@dashboard");
 Route::get('/messenger', "ViewController@messenger");
 
+Route::get('/subscriptionapproved/{auth}', 'API\DashboardController@subscribe');
+
+Route::get('/subscriptioncancelled', 'API\DashboardController@unsubscribe');
 
 //////////////////
 // Image upload //
