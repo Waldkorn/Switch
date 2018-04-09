@@ -56,6 +56,7 @@
 
                 <div class="form-group" style="text-align:center">
                   <div type="submit" class="btn btn-success" v-on:click="golive">GO LIVE!</div>
+                  <div class="alert alert-danger" role="alert" id="streamerror" style="display:none;margin-top:1rem">Please enter a title and select a game.</div>
                 </div>
               </form>
             </div>
@@ -662,7 +663,7 @@
             </div>
             <div class="card-body">
 
-              <p class="card-text">For 4,99/month you get special emoticons, and no more ads on the site!</p>
+              <p class="card-text">For € 4,99 per month you get special emoticons, and no more ads on the site!</p>
               <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input type="hidden" name="hosted_button_id" value="QPXCZFBGRZ2UY">
@@ -751,12 +752,15 @@ export default {
           document.getElementById('streamkeymessage').innerHTML = "";
       },
       golive: function() {
+        document.getElementById('streamerror').style.display="none";
         axios.post('/api/stream', {
           user_id: this.user.id,
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
        }).then(response => {
          this.now_live = 1;
+       }).catch(error => {
+         document.getElementById('streamerror').style.display="block";
        })
       },
       gooffline: function() {
