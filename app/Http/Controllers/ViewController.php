@@ -51,8 +51,10 @@ class ViewController extends Controller
 
   public function dashboard() {
     $user = Auth::user();
+    $user = User::where('id',$user->id)->with('stream')->first();
     $now_live = $user->stream()->first()->now_live;
-    return view('dashboard', compact('user','now_live'));
+    $games = Game::get();
+    return view('dashboard', compact('user','now_live', 'games'));
   }
 
   public function streamingLive($streamToken) {
