@@ -56,6 +56,7 @@
 
                 <div class="form-group" style="text-align:center">
                   <div type="submit" class="btn btn-success" v-on:click="golive">GO LIVE!</div>
+                  <div class="alert alert-danger" role="alert" id="streamerror" style="display:none;margin-top:1rem">Please enter a title and select a game.</div>
                 </div>
               </form>
             </div>
@@ -751,12 +752,15 @@ export default {
           document.getElementById('streamkeymessage').innerHTML = "";
       },
       golive: function() {
+        document.getElementById('streamerror').style.display="none";
         axios.post('/api/stream', {
           user_id: this.user.id,
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
        }).then(response => {
          this.now_live = 1;
+       }).catch(error => {
+         document.getElementById('streamerror').style.display="block";
        })
       },
       gooffline: function() {
