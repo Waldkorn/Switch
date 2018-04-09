@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="card" style="width: 100%;border-radius: 0px 0px 0.25rem 0rem;border:0px">
-      <h3 class="card-title" style="margin:0;padding:0.5rem">{{ user.name }}</h3>
-      <img class="card-img-top" :src="profilecontent.img_url" alt="hardcoded example">
+      <h3 class="card-title" style="margin:0;padding:0.5rem">{{ profile.name }}</h3>
+      <img class="card-img-top" :src="profile.profilecontent.img_url" alt="hardcoded example">
 
       <div class="btn-group" style="padding:0;width:100%;border:0px;border-radius:0px">
-        <button type="button" class="btn btn-danger" v-on:click="togglefollowers" style="width:50%;border-right:1px;border-radius:0px;margin-right:1px">Followers<br> <span class="badge badge-light"> {{followers.length}}</span></button>
-        <button type="button" class="btn btn-danger" v-on:click="togglefollowings" style="width:50%;border:0px;border-radius:0px">Following<br><span class="badge badge-light"> {{followings.length}}</span></button>
+        <button type="button" class="btn btn-danger" v-on:click="togglefollowers" style="width:50%;border-right:1px;border-radius:0px;margin-right:1px">Followers<br> <span class="badge badge-light">{{profile.followers_count}}</span></button>
+        <button type="button" class="btn btn-danger" v-on:click="togglefollowings" style="width:50%;border:0px;border-radius:0px">Following<br><span class="badge badge-light">{{profile.followings_count}}</span></button>
       </div>
       <br>
       <div class="container-fluid">
@@ -21,7 +21,7 @@
 
       <div class="card-body"><hr>
         <h3 class="card-title"> About: </h3>
-        <h5 class="card-text">{{profilecontent.about}}</h5>
+        <h5 class="card-text">{{profile.profilecontent.about}}</h5>
         <hr>
           <h3 class="card-title"> Featured Games: </h3>
           <h5 class="card-text"><span v-for="featuredgame in featuredgames" :class="featuredgame.label" style="margin:1px">{{featuredgame.name}}</span></h5>
@@ -52,7 +52,6 @@ export default {
   data:function(){
     return{
       user : [],
-      profilecontent : [],
       featuredgames : [],
       followers : [],
       followings : [],
@@ -62,30 +61,12 @@ export default {
   },
 
   mounted() {
-    var contenturl = '/api/profilecontent/'+this.profile.name;
-    axios.get(contenturl).then(response => {
-    this.profilecontent = JSON.parse(JSON.stringify(response.data));
-    });
 
-    var url = '/api/profilepage/'+this.profile.name;
-    axios.get(url).then(response => {
-    this.user = JSON.parse(JSON.stringify(response.data));
-    });
+    this.user = this.profile;
+    this.followers = this.profile.followers;
+    this.followings = this.profile.followings;
+    this.featuredgames = this.profile.featured_games;
 
-    var followersurl = '/api/followers/'+this.profile.name;
-    axios.get(followersurl).then(response => {
-    this.followers = JSON.parse(JSON.stringify(response.data));
-    });
-
-    var followingsurl = '/api/following/'+this.profile.name;
-    axios.get(followingsurl).then(response => {
-    this.followings = JSON.parse(JSON.stringify(response.data));
-
-    });
-    var featuredgamesurl = "/api/featuredgames/" + this.profile.name;
-    axios.get(featuredgamesurl).then((response) => {
-      this.featuredgames = JSON.parse(JSON.stringify(response.data));
-    })
   },
 
   methods: {
