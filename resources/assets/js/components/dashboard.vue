@@ -663,7 +663,7 @@
             </div>
             <div class="card-body">
 
-              <p class="card-text">For 4,99/month you get special emoticons, and no more ads on the site!</p>
+              <p class="card-text">For € 4,99 per month you get special emoticons, and no more ads on the site!</p>
               <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input type="hidden" name="hosted_button_id" value="QPXCZFBGRZ2UY">
