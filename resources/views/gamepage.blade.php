@@ -6,7 +6,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/images/Switch-logo.png" />
 
 	<title>Switch</title>
-	
+
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body style="background-color: #c6c8ca;">
@@ -26,6 +26,7 @@
 			<streams :game="{{json_encode($game)}}" :streamers="{{json_encode($streamers)}}"></streams>
 		</div>
 	</div>
+@include('layouts.footer')
 
 	<script src="{{ asset('js/app.js') }}"></script>
 
