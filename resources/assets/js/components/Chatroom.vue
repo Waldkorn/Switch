@@ -43,9 +43,9 @@
                     { shortcut: "tongueFace", replacement: "<img height='16px' src='/images/emoticons/tongue_face.png'>" }
                 ],
                 subscriberEmotes: [
-                    { shortcut: "cashEmoticon", replacement: "<img height='16px' src='/images/emoticons/cash.png'>" },
-                    { shortcut: "specialEmoticon", replacement: "<img height='16px' src='/images/emoticons/special.png'>" },
-                    { shortcut: "wewEmoticon", replacement: "<img height='16px' src='/images/emoticons/wew.png'>" },
+                    { shortcut: "cashEmoticon", replacement: "<img height='32px' src='/images/emoticons/cash.png'>" },
+                    { shortcut: "specialEmoticon", replacement: "<img height='32px' src='/images/emoticons/special.png'>" },
+                    { shortcut: "wewEmoticon", replacement: "<img height='32px' src='/images/emoticons/wew.png'>" },
                 ]
             }
         },
