@@ -15,6 +15,13 @@ class GamesTableSeeder extends Seeder
       DB::table('games')->insert([
 
                 [
+                    'name' => 'Other',
+                    'description' => 'Any game that\'s not on the list',
+                    'image_source' => '/images/games/other.png',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],            
+                [
                     'name' => 'Minecraft',
                     'description' => 'Minecraft is a game about placing blocks and going on adventures.',
                     'image_source' => '/images/games/minecraft.png',

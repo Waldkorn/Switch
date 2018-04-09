@@ -1,9 +1,15 @@
 <template>
-  <div class="col-md-10 d-flex flex-wrap px-5 mt-3" style="padding-right:0;" id="games-main">
-    <div class="jumbotron" v-show="no_streamers" style="height:200px">
-      <h1>Sorry! No one is currently streaming this game</h1>
+  <div class="col-md-10 d-flex flex-wrap px-5 mt-3 mb-auto" style="padding-right:0; min-height:0px;" id="games-main">
+    <div style="width:100%">
+      <div class="d-flex m-2">
+        <img height="64px" :src="game.image_source" />
+        <h1 class="my-auto mx-1" style="color:#dc3545;">{{ game.name }}</h1>
+      </div>
     </div>
-    <div class="p-1" style="padding:0;margin:0;float:right;" v-for="streamer in streamers">
+    <div v-show="no_streamers" class="jumbotron p-2" style="width:100%;min-height:0px;">
+      <h3>Sorry! No one is currently streaming this game</h3>
+    </div>
+    <div class="mb-auto float-top" style="padding:0;margin:0;float:right;" v-for="streamer in streamers">
       <div class="card" style="width: 175px;">
         <a v-bind:href="'/' + streamer.user.name">
           <img class="card-img-top" :src="streamer.user.profilecontent.img_url" :alt="streamer.name" height="150" width="150">
@@ -20,7 +26,7 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -29,7 +35,8 @@
     data:function(){
       return{
         sortable : [],
-        no_streamers: false
+        no_streamers: false,
+        viewer_count: 0
       }
     },
     mounted() {
@@ -47,6 +54,7 @@
 
       for (var streamer in this.streamers) {
         this.sortable.push(this.streamers[streamer]);
+        this.viewer_count += this.streamers[streamer].user.viewer_count;
       }
 
       this.streamers = this.sortable.sort(compare).reverse();
@@ -56,5 +64,4 @@
 </script>
   
 <style>
-
 </style>
