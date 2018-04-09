@@ -56,11 +56,13 @@
     </style>
   </head>
   <body>
-@include('layouts.navbar')
 
-<div  class="container-fluid" id="app" style="padding:0px">
-  <dashboard :user="{{$user}}" :now_live={{$now_live}}></dashboard>
-</div>
+    @include('layouts.navbar')
+
+    <div  class="container-fluid" id="app" style="padding:0px">
+      <dashboard :user="{{ $user }}" :now_live="{{ $now_live }}" :games="{{ $games }}"></dashboard>
+    </div>
+
     <script src="{{ asset('js/app.js') }}"></script>
   </body>
 </html>

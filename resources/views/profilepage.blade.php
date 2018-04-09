@@ -57,19 +57,19 @@
 
 <div id="app">
   <div class="row" style="width:100%">
-  	<div class="col-3">
+  	<div class="col-3 mt-1">
 			@if (auth::check())
-			<profilesidebar :profile="{{$user}}":loggedin="{{$loggedin}}" :isfollowing="{{$isfollowing}}" ></profilesidebar>
+				<profilesidebar :profile="{{$user}}":loggedin="{{$loggedin}}" :isfollowing="{{$isfollowing}}" ></profilesidebar>
 			@else
-			<profilesidebar  :profile="{{$user}}" v-bind:loggedin="{{$loggedin}}"></profilesidebar>
+				<profilesidebar  :profile="{{$user}}" v-bind:loggedin="{{$loggedin}}"></profilesidebar>
 			@endif
 		</div>
 
     <div class="col-9">
-			<div class="row">
-      <profilepagemain></profilepagemain>
-    </div>
-		<div class="row">
+		<!-- <div class="row">
+    		<profilepagemain></profilepagemain>
+    	</div> -->
+		<div class="row mt-1">
 			<profileschedule :profile="{{$user}}"></profileschedule>
 		</div>
 	</div>

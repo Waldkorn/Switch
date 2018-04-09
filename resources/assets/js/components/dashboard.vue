@@ -37,19 +37,19 @@
             </div>
 
             <div class="card" style="width:100%;text-align:center">
-              <div class="container-fluid" v-if="Now_Live == 0" >
+              <div class="container-fluid" v-if="now_live == 0" >
               <h5 class="card-header">Start streaming?</h5>
               <form style="text-align:left">
 
                 <div class="form-group">
                   <label for="streamtitle">Title:</label>
-                  <input type="text" class="form-control" id="streamtitle" placeholder="Enter stream title" >
+                  <input type="text" class="form-control" id="streamtitle" :value="user.stream.title" placeholder="Enter stream title" >
                 </div>
 
                 <div class="form-group">
                   <label for="gameselect">Game:</label>
                   <select class="form-control" id="gameselect">
-                    <option v-for="game in games" :value="game.id">{{game.name}}</option>
+                    <option v-for="game in games" :value="game.id" :selected="game.id == user.stream.game_id">{{game.name}}</option>
                   </select>
                 </div>
 
@@ -58,7 +58,7 @@
                 </div>
               </form>
             </div>
-              <div  class="container" id="you_are_live"  v-if="Now_Live == 1">
+              <div  class="container" id="you_are_live"  v-show="now_live == 1">
               <div class="alert alert-success" role="alert" id="you_are_live_alert" style="margin-top:1rem;margin-bottom:0px"><strong>You are now Live!!</strong><a class="nav-link" :href="'/stream/'+ user.name" >To stream page!</a></div>
                 <div class="btn btn-danger" v-on:click="gooffline" style="margin:1rem">Stop streaming</div>
             </div>
@@ -697,13 +697,11 @@ export default {
       return{
           profilecontent : [],
           featuredgames : [],
-          Now_Live: 0,
           allschedules : [],
           dailystreams : [],
           weeklystreams: [],
           singlestreams : [],
           csrftoken : document.head.querySelector('meta[name="csrf-token"]').content,
-          games : [],
           announcements : [],
           currentdate : [],
           errors : [],
@@ -717,22 +715,17 @@ export default {
       }
     },
 
-    props: ['user','now_live'],
+    props: ['user','now_live', 'games'],
     mounted() {
-      this.Now_Live = this.now_live;
-     var contenturl = 'api/profilecontent/'+this.user.name;
+      var contenturl = 'api/profilecontent/'+this.user.name;
       axios.get(contenturl).then(response => {
         this.profilecontent = JSON.parse(JSON.stringify(response.data));
-      });
-      axios.get('/api/allgames').then(response => {
-        this.games = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/currentdate').then(response => {
         this.currentdate = JSON.parse(JSON.stringify(response.data));
       });
       axios.get('/api/scheduleoverview').then(response => {
         this.allschedules= JSON.parse(JSON.stringify(response.data));
-
         this.dailystreams = this.allschedules.filter(x => x.type == 'daily');
         this.weeklystreams = this.allschedules.filter(x => x.type == 'weekly');
         this.singlestreams = this.allschedules.filter(x => x.type == 'single');
@@ -762,14 +755,14 @@ export default {
           stream_title: document.getElementById('streamtitle').value,
           game_id:  document.getElementById('gameselect').value,
        }).then(response => {
-         this.Now_Live = 1;
+         this.now_live = 1;
        })
       },
       gooffline: function() {
         axios.post('/api/streamoff', {
           user_id: this.user.id,
         }).then(response => {
-          this.Now_Live = 0;
+          this.now_live = 0;
         })
       },
       updateAbout: function() {

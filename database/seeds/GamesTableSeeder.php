@@ -62,6 +62,41 @@ class GamesTableSeeder extends Seeder
                     'image_source' => '/images/games/pubg.png',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Floppy Bird',
+                    'description' => '',
+                    'image_source' => '/images/games/Floppy_Bird.png',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Go bananas',
+                    'description' => '',
+                    'image_source' => '/images/games/gobananas.png',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Hattrick',
+                    'description' => '',
+                    'image_source' => '/images/games/Hattrick.png',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Pong',
+                    'description' => '',
+                    'image_source' => '/images/games/Pong.png',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'name' => 'Space Invaders',
+                    'description' => '',
+                    'image_source' => '/images/games/Space_Invaders.png',
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s'),
                 ]
 
             ]);

@@ -18,11 +18,10 @@ class ViewController extends Controller
 
   public function profile($name){
 
-    $user = User::where('name',$name)->first();
+    $user = User::where('name',$name)->withCount('followers', 'followings')->with('profilecontent', 'followings', 'followers', 'featured_games')->first();
     $authuser = Auth::user();
     $loggedin = 0;
     $isfollowing = 0;
-
 
     if ($user == null)
     {
@@ -30,7 +29,6 @@ class ViewController extends Controller
     }
 
     if (Auth::check()){
-      $loggedin=1;
       $loggedin=1;
       $followings = $authuser->followings()->pluck('streamer_id');
 
@@ -51,8 +49,10 @@ class ViewController extends Controller
 
   public function dashboard() {
     $user = Auth::user();
+    $user = User::where('id',$user->id)->with('stream')->first();
     $now_live = $user->stream()->first()->now_live;
-    return view('dashboard', compact('user','now_live'));
+    $games = Game::get();
+    return view('dashboard', compact('user','now_live', 'games'));
   }
 
   public function streamingLive($streamToken) {
