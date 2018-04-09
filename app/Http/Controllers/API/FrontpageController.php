@@ -21,7 +21,7 @@ class FrontpageController extends Controller
         $followingsIds = [];
     }
 
-    $users = User::whereNotIn('id', $followingsIds)->withCount('followers')->where('last_online', '>=', Carbon::now()->subMinutes(1))->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10)->get();
+    $users = User::whereNotIn('id', $followingsIds)->withCount('followers')->where('last_online', '>=', Carbon::now()->subMinutes(1))->where('now_live', true)->orderBy('followers_count', 'DESC')->orderBy('id', 'DESC')->limit(10)->get();
     foreach ($users as $user) {
     	$user['streaming'] = true;
     }

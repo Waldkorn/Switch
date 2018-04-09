@@ -15,7 +15,7 @@
 
 	<div id="app">
 		<div class="row" style="width:100%;margin:0;">
-			<div class="col-md-2">
+			<div class="col-md-2 mt-1">
 				@if (Auth::check())
 					<Followings></Followings>
 					<nowlivebar :user="{{ Auth::user() }}"></nowlivebar>

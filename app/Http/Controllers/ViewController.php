@@ -95,7 +95,7 @@ class ViewController extends Controller
     }])
     ->get();
 
-    $streamers = $streamers->where('user.last_online', '>', Carbon::now()->subMinutes(1));
+    $streamers = $streamers->where('user.last_online', '>', Carbon::now()->subMinutes(1))->where('user.now_live', true);
 
     return view('gamepage', compact('game', 'streamers'));
 

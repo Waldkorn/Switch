@@ -13,7 +13,7 @@ class GamesController extends Controller
 
     public function get(){
     	return Game::withCount(['users' => function($user) {
-    		return $user->where('last_online', '>', Carbon::now()->subMinutes(1));
+    		return $user->where('last_online', '>', Carbon::now()->subMinutes(1))->where('users.now_live', true);
     	}])->orderBy('users_count', 'DESC')->orderBy('id', 'DESC')->get();
     }
 

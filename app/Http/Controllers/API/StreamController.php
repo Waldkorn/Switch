@@ -52,13 +52,13 @@ class StreamController extends Controller
   }
 
   public function setOffline(){
-    $user = Auth::user()->first();
-    $user->now_live = 0;
-    $user->save;
-    $id = request('user_id');
-    $stream = Stream::where('user_id',$id)->first();
-    $stream->now_live = 0;
-    $stream->save();
+    $user = Auth::user();
+    User::where('id', $user->id)->update([
+      'now_live' => FALSE
+    ]);
+    Stream::where('user_id', $user->id)->update([
+      'now_live' => FALSE
+    ]);
   }
 
   public function keepAlive() {

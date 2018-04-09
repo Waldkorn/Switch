@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-10 d-flex flex-wrap px-5" style="padding-right:0;" id="games-main">
+  <div class="col-md-10 d-flex flex-wrap px-5 mt-3" style="padding-right:0;" id="games-main">
     <div class="jumbotron" v-show="no_streamers" style="height:200px">
       <h1>Sorry! No one is currently streaming this game</h1>
     </div>
@@ -9,10 +9,11 @@
           <img class="card-img-top" :src="streamer.user.profilecontent.img_url" :alt="streamer.name" height="150" width="150">
         </a>
 
-        <div class="card-body">
-          <a v-bind:href="'/stream/' + streamer.user.name">
-            <h6 class="card-title">{{streamer.title}}</h6>
-          </a>
+        <div class="card-body">     
+          <div class="d-flex w-100 justify-content-between">
+             <a v-bind:href="'/stream/' + streamer.user.name"><h6 class="card-title">{{streamer.title}}</h6></a>
+            <small><img width="16px" src="/images/viewingIcon.png"> {{ streamer.user.viewer_count }}</small>
+          </div>
           <a v-bind:href="'/profilepage/' + streamer.user.name">
             <h6>{{streamer.user.name}}</h6>
           </a>
