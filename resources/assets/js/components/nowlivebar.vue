@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="container-fluid px-0">
+    <div class="container-fluid px-0" >
+      <div class="card" style="margin-bottom:4px" v-if="subscriber_status !='premium'">
+        <img class="card-img-top" src="/images/ads/1.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">hi there, I'm an ad!</h5>
+        </div>
+      </div>
+
       <div class="list-group-item" style="background-color:#f5f5dc;border-radius: 0px 0px 0rem 0rem;border:0px">
         <h4 class="mb-1" >Popular streamers</h4>
       </div>
@@ -25,12 +32,15 @@ export default {
   data:function(){
     return{
       games : null,
-      users : []
+      users : [],
+      subscriber_status:"free",
     }
   },
   props: ['user'],
   mounted() {
     if(this.user != undefined) {
+      console.log(this.user.subscriber_status);
+      this.subscriber_status = this.user.subscriber_status;
       axios.get('/api/listusers').then(response => {
           this.users = response.data;
       })
@@ -42,6 +52,7 @@ export default {
     } else {
       axios.get('/api/listusersunauthenticated').then(response => {
             this.users = response.data;
+
         })
         setInterval(function(){
           axios.get('/api/listusersunauthenticated').then(response => {
