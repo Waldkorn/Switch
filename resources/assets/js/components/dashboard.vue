@@ -666,8 +666,9 @@
               <p class="card-text">For € 4,99 per month you get special emoticons, and no more ads on the site!</p>
               <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="QPXCZFBGRZ2UY">
-                <button name="submit" class="btn btn-danger btn-lg">To paypal</button>
+                <input type="hidden" name="hosted_button_id" value="Z9ASYGPTDUF7J">
+                <input type="image" src="https://www.sandbox.paypal.com/en_US/NL/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
               </form>
             </div>
           </div>
@@ -680,7 +681,7 @@
               <p class="card-text">You can cancel your subscription anytime.</p>
 
               <div name="submit" class="btn btn-danger btn-lg" v-on:click="unsubscribe">
-                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU" v-on:click="unsubscribe" >
+                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=ZN4K8YPC3E6JU" v-on:click="unsubscribe" style="color:white">
                   To paypal</a>
               </div>
             </div>
