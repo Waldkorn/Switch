@@ -29,7 +29,7 @@
             <div class="card" style="width:100%;margin-bottom:1rem;text-align:center">
               <h5 class="card-header">Stream Preview</h5>
               <video id="vid1" class="video-js" controls preload="auto" data-setup='{ "aspectRatio": "16:9" }'>
-      				    <source :src="'http://10.0.0.61:8080/hls/'  + user.stream_token + '.m3u8'" type='application/x-mpegURL'>
+      				    <source :src="'http://10.11.13.218:8080/hls/'  + user.stream_token + '.m3u8'" type='application/x-mpegURL'>
       				    <p class="vjs-no-js">
       				    	To view this video please enable JavaScript, and consider upgrading to a web browser that
       				    	<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
