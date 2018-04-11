@@ -238,7 +238,7 @@ class ScheduleController extends Controller
   public function editSingleEvent(){
     $this->validate(request(), [
       'id' =>'required',
-      'title' => 'required',
+      'name' => 'required',
       'start' => 'required',
       'end' => 'required',
       'tag' => 'required',
@@ -262,7 +262,7 @@ class ScheduleController extends Controller
   public function editDailyEvent(){
     $this->validate(request(), [
       'id' => 'required',
-      'title' => 'required',
+      'name' => 'required',
       'start' => 'required',
       'end' => 'required',
       'tag' => 'required',
@@ -278,7 +278,7 @@ class ScheduleController extends Controller
 
     $id = request('id');
     $schedule = Schedule::find($id);
-    $schedule->title = request('title');
+    $schedule->title = request('name');
     $schedule->tag = request('tag');
     $schedule->game_id = request('game');
     $schedule->start_time = $start;
@@ -289,7 +289,7 @@ class ScheduleController extends Controller
   public function editWeeklyEvent(){
     $this->validate(request(), [
       'id' =>'required',
-      'title' => 'required',
+      'name' => 'required',
       'day' => 'required',
       'start' => 'required',
       'end' => 'required',
@@ -306,7 +306,7 @@ class ScheduleController extends Controller
 
     $id = request('id');
     $schedule = Schedule::find($id);
-    $schedule->title = request('title');
+    $schedule->title = request('name');
     $schedule->tag = request('tag');
     $schedule->game_id = request('game');
     $schedule->start_time = $start;

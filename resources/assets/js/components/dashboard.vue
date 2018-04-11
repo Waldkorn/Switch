@@ -317,7 +317,7 @@
                       <td>{{dailystream.game}}</td>
                       <td>{{dailystream.tag}}</td>
                       <td><div class="btn btn-info":id="dailystream.id" v-on:click="editdaily(dailystream.id,this)">edit</div></td>
-                      <td><div class="btn btn-danger"v-on:click="delete_schedule(dailytream.id,this)">delete</div></td>
+                      <td><div class="btn btn-danger"v-on:click="delete_schedule(dailystream.id,this)">delete</div></td>
                       <td></td>
                     </tr>
                   </tbody>
@@ -926,17 +926,6 @@ export default {
          document.getElementById('schedulemsg').style.display = "block";
          document.getElementById('schedulemsg').innerHTML = response.data;
         document.getElementById('editsingleschedule').style.display="none";
-       }).catch(error => {
-         this.error_response = JSON.parse(JSON.stringify(error.response.data));
-         this.errors = this.error_response.errors;
-         this.errormessage = [];
-         if(this.errors.name) {this.errormessage.push(this.errors.name[0]+"<br>")};
-         if(this.errors.start) {this.errormessage.push(this.errors.start[0]+"<br>")};
-         if(this.errors.end) {this.errormessage.push(this.errors.end[0]+"<br>")};
-         if(this.errors.tag) {this.errormessage.push(this.errors.tag[0]+"<br>")};
-         if(this.errors.game) {this.errormessage.push(this.errors.game[0]+"<br>")};
-         document.getElementById('single_edit_errors').style.display="block";
-         document.getElementById('single_edit_errors').innerHTML = this.errormessage;
        })
      },
       editdaily: function(id, value){
@@ -969,17 +958,6 @@ export default {
          document.getElementById('schedule_form_single').style.display = "none";
          document.getElementById('schedule_form_weekly').style.display = "none";
          document.getElementById('editdailyschedule').style.display="none";
-       }).catch(error => {
-         this.error_response = JSON.parse(JSON.stringify(error.response.data));
-         this.errors = this.error_response.errors;
-         this.errormessage = [];
-         if(this.errors.name) {this.errormessage.push(this.errors.name[0]+"<br>")};
-         if(this.errors.start) {this.errormessage.push(this.errors.start[0]+"<br>")};
-         if(this.errors.end) {this.errormessage.push(this.errors.end[0]+"<br>")};
-         if(this.errors.tag) {this.errormessage.push(this.errors.tag[0]+"<br>")};
-         if(this.errors.game) {this.errormessage.push(this.errors.game[0]+"<br>")};
-         document.getElementById('daily_edit_errors').style.display="block";
-         document.getElementById('daily_edit_errors').innerHTML = this.errormessage;
        })
      },
       editweekly: function(id,value){
@@ -1000,30 +978,18 @@ export default {
         document.getElementById('weekly_edit_errors').style.display="none";
         document.getElementById('weekly_edit_errors').innerHTML = "";
         axios.post('/api/editscheduleweekly', {
-          weekly_id: document.getElementById('editweekly_id').value,
-          weekly_title: document.getElementById('editweekly_title').value,
-          weekly_day: document.getElementById('editweekly_day').value,
-          weekly_start: document.getElementById('editweekly_start_time').value,
-          weekly_end: document.getElementById('editweekly_end_time').value,
-          weekly_tag: document.getElementById('editweekly_tag').value,
-          weekly_game: document.getElementById('editweekly_game').value,
+          id: document.getElementById('editweekly_id').value,
+          name: document.getElementById('editweekly_title').value,
+          day: document.getElementById('editweekly_day').value,
+          start: document.getElementById('editweekly_start_time').value,
+          end: document.getElementById('editweekly_end_time').value,
+          tag: document.getElementById('editweekly_tag').value,
+          game: document.getElementById('editweekly_game').value,
        }).then(response => {
          document.getElementById('addschedulebuttons').style.display = "block";
          document.getElementById('schedulemsg').style.display = "block";
          document.getElementById('schedulemsg').innerHTML = response.data;
          document.getElementById('editweeklyschedule').style.display="none";
-       }).catch(error => {
-         this.error_response = JSON.parse(JSON.stringify(error.response.data));
-         this.errors = this.error_response.errors;
-         this.errormessage = [];
-         if(this.errors.name) {this.errormessage.push(this.errors.name[0]+"<br>")};
-         if(this.errors.day) {this.errormessage.push(this.errors.day[0]+"<br>")};
-         if(this.errors.start) {this.errormessage.push(this.errors.start[0]+"<br>")};
-         if(this.errors.end) {this.errormessage.push(this.errors.end[0]+"<br>")};
-         if(this.errors.tag) {this.errormessage.push(this.errors.tag[0]+"<br>")};
-         if(this.errors.game) {this.errormessage.push(this.errors.game[0]+"<br>")};
-         document.getElementById('weekly_edit_errors').style.display="block";
-         document.getElementById('weekly_edit_errors').innerHTML = this.errormessage;
        })
      },
       cancel_editsingle: function() {
@@ -1039,14 +1005,10 @@ export default {
         document.getElementById('addschedulebuttons').style.display="block";
 			},
       delete_schedule: function(id,value) {
+
         axios.post('/api/deleteschedule', {
           delete_id: id,
-         }).then(response => {
-           document.getElementById('addschedulebuttons').style.display = "block";
-           document.getElementById('schedulemsg').style.display = "block";
-           document.getElementById('schedulemsg').innerHTML = response.data;
-           document.getElementById('editweeklyschedule').style.display="none";
-  			});
+         })
       },
       unsubscribe: function() {
         axios.get('/api/subscriptioncancelled', {
