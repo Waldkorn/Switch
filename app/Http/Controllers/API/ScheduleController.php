@@ -251,7 +251,7 @@ class ScheduleController extends Controller
     $id = request('id');
     $schedule = Schedule::find($id);
 
-    $schedule->title = request('title');
+    $schedule->title = request('name');
     $schedule->tag = request('tag');
     $schedule->game_id = request('game');
     $schedule->start_date = $start;

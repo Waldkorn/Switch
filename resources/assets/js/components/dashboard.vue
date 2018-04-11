@@ -1005,7 +1005,6 @@ export default {
         document.getElementById('addschedulebuttons').style.display="block";
 			},
       delete_schedule: function(id,value) {
-
         axios.post('/api/deleteschedule', {
           delete_id: id,
          })
